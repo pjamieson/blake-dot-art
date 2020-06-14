@@ -4,12 +4,12 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import { MDBCard } from "mdbreact";
 
-const GalleryGrid = () => {
+const HomeGrid = () => {
   const data = useStaticQuery(graphql`
     query imageQuery {
       allFile(
         filter: {
-          relativeDirectory: { eq: "front-page" }
+          relativeDirectory: { eq: "home" }
         }
       ) {
         edges {
@@ -41,4 +41,4 @@ const GalleryGrid = () => {
   );
 }
 
-export default GalleryGrid;
+export default HomeGrid;

@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
-        siteMetadata {
+        info: siteMetadata {
           title
         }
       }
@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
     <>
       <Seo />
       <div className="site">
-        <Navbar siteTitle={data.site.siteMetadata.title} />
+        <Navbar siteTitle={data.site.info.title} />
         <main className="site-content">{children}</main>
         <Footer />
       </div>

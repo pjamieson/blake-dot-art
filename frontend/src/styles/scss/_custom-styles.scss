@@ -57,8 +57,7 @@
 
 // Jumbotron
 .jumbotron {
-  margin-top: 2px;
-  height: 500px;
+  margin-top: 4rem;
   text-align: center;
   max-width: 1200px;
   overflow:hidden;
@@ -66,24 +65,24 @@
   -webkit-perspective: 1000;
   -webkit-transform: translate3d(0,0,0);
   h1 {
-    margin: 0;
-    padding-top: 30px;
+    height: 6rem;
+    padding-top: 1rem;
     margin-bottom: 0;
     font-family:'Roboto';
     font-weight:700;
-    font-size:64px;
+    font-size:4rem;
     letter-spacing: -0.05em;
   }
   h2 {
     display:inline-block;
-    margin-top: -16px;
+    margin: 0;
     letter-spacing: -0.05em;
     color: #555;
   }
   .bg-img {
     background-image: url("../../images/blake-mask-35.png");
-    background-repeat: no-repeat;
-    height: 500px;
+    background-size: cover;
+    height: 30rem;
   }
   .blake-title {
     display:inline-block;
@@ -117,8 +116,8 @@
   }
   .featured-link {
     position: absolute;
-    left: 0;
-    top: 430px;
+    left: 20px;
+    bottom: 20px;
   }
 }
 
@@ -163,17 +162,17 @@
   86% { opacity: 1; }
 }
 
-.front-portfolio {
-  padding-left: 0;
-  padding-right: 0;
-  h3 {
-    margin: 0 0 10px 0;
-  }
-  p {
-    line-height: 1.3;
-    margin: 0;
-    //padding-top: 4px;
-    padding-bottom: 10px;
+.front-content {
+  padding: 0;
+  .intro-content {
+    padding: 0 0 20px 0;
+    h3 {
+      margin-top: 20px;
+    }
+    p {
+      line-height: 1.3;
+      margin: 10px 0;
+    }
   }
 }
 

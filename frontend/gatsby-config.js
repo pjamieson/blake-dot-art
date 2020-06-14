@@ -11,7 +11,32 @@ module.exports = {
     person: { name: "Peter", age: 68 },
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: "blake-dot-art",
+        short_name: "blake",
+        start_url: "/",
+        background_color: "#663399",
+        theme_color: "#663399",
+        display: "minimal-ui",
+        icon: "src/images/blake-logo-104x104.png",
+      },
+    },
+    "gatsby-plugin-offline",
     "gatsby-plugin-react-helmet",
+    "gatsby-plugin-sass",
+    "gatsby-plugin-sharp",
+    // You can have multiple instances of gatsby-source-filesystem
+    // to read source nodes from different locations on the filesystem.
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/src/data`,
+        ignore: [`**/\.*`], // ignore files starting with a dot
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -31,20 +56,6 @@ module.exports = {
         queryLimit: 1000,
       },
     },
-    "gatsby-plugin-sass",
     "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: "blake-dot-art",
-        short_name: "blake",
-        start_url: "/",
-        background_color: "#663399",
-        theme_color: "#663399",
-        display: "minimal-ui",
-      },
-    },
-    "gatsby-plugin-offline",
   ],
 }
