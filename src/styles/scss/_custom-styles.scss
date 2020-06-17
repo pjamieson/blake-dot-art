@@ -54,6 +54,22 @@
   }
 }
 
+.social-links {
+   list-style: none;
+   display: flex;
+   justify-content: space-between;
+   .social-link {
+     //font-size: 1.5rem;
+     //color: var(--clr-grey-1);
+     //transition: var(--transition);
+   }
+ }
+
+.footer-links {
+  width: 240px;
+  margin: 0 auto;
+}
+
 // Jumbotron
 .jumbotron {
   margin-top: 4rem;
@@ -82,8 +98,6 @@
     background-image: url("../../images/blake-mask-35.png");
     background-size: cover;
     min-height: 30rem;
-    //height: auto;
-    //width: 100%;
   }
   .blake-title {
     display:inline-block;

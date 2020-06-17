@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 import { Link } from "gatsby"
+import SocialLinks from "../constants/sociallinks"
+
 import {
   MDBCollapse,
   MDBContainer,
@@ -82,6 +84,9 @@ class Navbar extends Component {
                         <Link className="menu-link" to="/gallery-other-portraits/">Other Portraits</Link>
                       </MDBDropdownItem>
                       <MDBDropdownItem>
+                        <Link className="menu-link" to="/gallery-other-subjects/">Other Subjects</Link>
+                      </MDBDropdownItem>
+                      <MDBDropdownItem>
                         <Link className="menu-link" to="/gallery-felix/">Felix the Cat Series</Link>
                       </MDBDropdownItem>
                       <MDBDropdownItem>
@@ -122,6 +127,9 @@ class Navbar extends Component {
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
                   <MDBDropdownItem>
+                    <Link className="menu-link" to="/mailing-list-signup/">Newsletter Signup</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
                     <Link className="menu-link" to="/ask-a-question/">Ask a Question</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
@@ -129,9 +137,6 @@ class Navbar extends Component {
                   </MDBDropdownItem>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/start-a-project/">Start a Project</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/mailing-list-signup/">Mailing List Signup</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/autograph-request/">Autograph Request</Link>
@@ -146,30 +151,13 @@ class Navbar extends Component {
               </MDBNavItem>
               <MDBNavItem>
                 <Link to="/team/" className="nav-link" activeClassName="active">
-                  #TeamBlake
+                  Team
                 </Link>
               </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right>
               <MDBNavItem>
-                <a href="https://www.youtube.com/user/BlakeJamieson" target="_blank" rel="noreferrer" class="nav-link waves-effect waves-light">
-                  <i class="fab fa-youtube fa-lg" aria-hidden="true"></i>
-                </a>
-              </MDBNavItem>
-              <MDBNavItem>
-                <a href="https://www.instagram.com/athlete.portraits/" target="_blank" rel="noreferrer" class="nav-link waves-effect waves-light">
-                  <i class="fab fa-instagram fa-lg" aria-hidden="true"></i>
-                </a>
-              </MDBNavItem>
-              <MDBNavItem>
-                <a href="https://twitter.com/blakejamieson" target="_blank" rel="noreferrer" class="nav-link waves-effect waves-light">
-                  <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
-                </a>
-              </MDBNavItem>
-              <MDBNavItem>
-                <a href="https://www.linkedin.com/in/blakejamieson/" target="_blank" rel="noreferrer" class="nav-link waves-effect waves-light">
-                  <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
-                </a>
+                <SocialLinks />
               </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>

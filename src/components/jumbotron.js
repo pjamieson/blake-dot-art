@@ -1,7 +1,6 @@
 import React from "react"
-import { Link } from "gatsby"
-//import { Link, graphql, useStaticQuery } from "gatsby"
-//import Img from "gatsby-image"
+import Image from "gatsby-image"
+import { Link, graphql, useStaticQuery } from "gatsby"
 
 import {
   MDBBtn,
@@ -15,22 +14,23 @@ import logo from "../images/blake-logo-108x70.png"
 /*
 const getImages = graphql`
   {
-    heroImage: file(relativePath: { eq: "blake-mask-35.png" }) {
+    hero: file(relativePath: { eq: "blake-mask-35.png" }) {
       childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
         }
       }
     }
-    introImage: file(relativePath: { eq: "Blake-Jamieson-In-CA-Studio.jpg" }) {
+    logo: file(relativePath: { eq: "blake-logo-108x70.png" }) {
       childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
         }
-      }
+      }                     <Image fluid={data.logo.childImageSharp.fluid}
     }
-  }
+  }                         const data = useStaticQuery(getImages)
 `
+
 */
 const Jumbotron = () => {
   return (
