@@ -9,6 +9,7 @@ const Painting = ({
   data: {
     painting: {
       title,
+      date,
       price,
       medium,
       size,
@@ -28,7 +29,7 @@ const Painting = ({
             </div>
             <div className="col-sm-12 col-md-6">
               <h2>{title}</h2>
-              <p>{medium}</p>
+              <p>{date} - {medium}</p>
               <p>{size}</p>
               <p>{description}</p>
               <h3>${price}</h3>
@@ -44,18 +45,21 @@ const Painting = ({
 export const query = graphql`
   query GetSinglePainting($slug: String) {
     painting: contentfulPainting(slug: {eq: $slug}) {
-      title
-      description {
-        description
-      }
-      price
-      medium
-      size
+      identifier
       image {
         fluid {
           ...GatsbyContentfulFluid
         }
       }
+      title
+      date
+      medium
+      size
+      description {
+        description
+      }
+      price
+      sold
     }
   }
 `

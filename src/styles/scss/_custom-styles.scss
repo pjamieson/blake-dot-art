@@ -194,6 +194,9 @@
 // page
 .page-container {
   margin-top: 4rem;
+  h1 {
+    //text-transform: capitalize; // Prefer cms user to have control
+  }
   .lead {
     text-align: center;
   }
