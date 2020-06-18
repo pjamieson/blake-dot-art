@@ -50,22 +50,22 @@ class Navbar extends Component {
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portraits-baseball/">Baseball</Link>
+                      <Link className="menu-link" to="/athlete-portraits/baseball/">Baseball</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portraits-basketball/">Basketball</Link>
+                      <Link className="menu-link" to="/athlete-portraits/basketball/">Basketball</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portraits-football/">Football</Link>
+                      <Link className="menu-link" to="/athlete-portraits/football/">Football</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portraits-hockey/">Hockey</Link>
+                      <Link className="menu-link" to="/athlete-portraits/hockey/">Hockey</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portraits-soccer/">Soccer</Link>
+                      <Link className="menu-link" to="/athlete-portraits/soccer/">Soccer</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portraits-other-sports/">Other Sports</Link>
+                      <Link className="menu-link" to="/athlete-portraits/other-sports/">Other Sports</Link>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
@@ -92,10 +92,6 @@ class Navbar extends Component {
                       <MDBDropdownItem>
                         <Link className="menu-link" to="/gallery/abstracts/">Abstracts</Link>
                       </MDBDropdownItem>
-                      <div class="dropdown-divider"></div>
-                      <MDBDropdownItem>
-                        <Link className="menu-link" to="/clients/">Clients & Collectors</Link>
-                      </MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown>
               </MDBNavItem>
@@ -106,16 +102,16 @@ class Navbar extends Component {
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/topps2020/">Topps Project 2020</Link>
+                      <Link className="menu-link" to="/merch/topps2020/">Topps Project 2020</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
                       <a className="menu-link" href="https://blakespuzzles.com" target="_blank" rel="noopener noreferrer">Jigsaw Puzzles</a>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/fannie-packs/">Fannie Packs</Link>
+                      <Link className="menu-link" to="/merch/fannie-packs/">Fannie Packs</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/card-art/">Card Art</Link>
+                      <Link className="menu-link" to="/merch/card-art/">Card Art</Link>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
@@ -127,32 +123,41 @@ class Navbar extends Component {
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/mailing-list-signup/">Newsletter Signup</Link>
+                    <Link className="menu-link" to="/contact/newsletter/">Newsletter Signup</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/ask-a-question/">Ask a Question</Link>
+                    <Link className="menu-link" to="/contact/question/">Ask a Question</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/make-a-comment/">Make a Comment</Link>
+                    <Link className="menu-link" to="/contact/comment/">Make a Comment</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/start-a-project/">Start a Project</Link>
+                    <Link className="menu-link" to="/project/">Start a Project</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/autograph-request/">Autograph Request</Link>
+                    <Link className="menu-link" to="/autograph/">Autograph Request</Link>
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
               </MDBNavItem>
+
               <MDBNavItem>
-                <Link to="/press/" className="nav-link" activeClassName="active">
-                  Press
-                </Link>
-              </MDBNavItem>
-              <MDBNavItem>
-                <Link to="/team/" className="nav-link" activeClassName="active">
-                  Team
-                </Link>
+                <MDBDropdown>
+                  <MDBDropdownToggle nav caret>
+                    <div className="d-none d-md-inline">About</div>
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu className="dropdown-default">
+                    <MDBDropdownItem>
+                      <Link className="menu-link" to="/about/team/">#TeamBlake</Link>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem>
+                      <Link className="menu-link" to="/about/press/">Press</Link>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem>
+                      <Link className="menu-link" to="/about/Clients/">Clients & Collectorj</Link>
+                    </MDBDropdownItem>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
               </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right>

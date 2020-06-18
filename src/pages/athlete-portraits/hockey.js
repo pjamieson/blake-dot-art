@@ -1,10 +1,10 @@
 import React from "react"
 
 import { MDBContainer } from "mdbreact"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import HomeBtn from "../components/home-btn"
-import PortraitsHockeyGrid from "../components/portraits-hockey-grid"
+import Layout from "../../components/layout"
+import SEO from "../../components/seo"
+import HomeBtn from "../../components/home-btn"
+import PortraitsHockeyGrid from "../../components/portraits-hockey-grid"
 
 const ProHockeyPage = () => (
   <Layout>

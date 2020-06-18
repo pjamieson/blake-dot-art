@@ -4,7 +4,7 @@ import { MDBContainer } from "mdbreact"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import HomeBtn from "../components/home-btn"
-import Project2020Grid from "../components/project2020-grid"
+import Project2020Grid from "../../components/project2020-grid"
 
 const ToppsPage = () => (
   <Layout>
