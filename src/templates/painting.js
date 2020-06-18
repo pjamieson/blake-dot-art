@@ -1,6 +1,6 @@
 import React from "react"
 import Image from "gatsby-image"
-import { MDBContainer } from "mdbreact"
+import { MDBCard, MDBContainer } from "mdbreact"
 import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
@@ -8,13 +8,13 @@ import Layout from "../components/layout"
 const Painting = ({
   data: {
     painting: {
-      title,
-      date,
-      price,
-      medium,
-      size,
       image: { fluid },
-      description: { description },
+      title,
+      date = {},
+      price = {},
+      medium = {},
+      size = {},
+      desc = {},
     },
   },
 }) => {
@@ -22,18 +22,22 @@ const Painting = ({
     <Layout>
       <MDBContainer className="page-container">
         <h1>{title}</h1>
-        <div className="container">
+        <div className="gallery-container">
           <div className="row">
             <div className="col-sm-12 col-md-6">
-              <Image fluid={fluid} alt={title} />
+              <MDBCard>
+                <Image fluid={fluid} alt={title} />
+              </MDBCard>
             </div>
             <div className="col-sm-12 col-md-6">
-              <h2>{title}</h2>
-              <p>{date} - {medium}</p>
+              { (date && medium) && <p>{date} - {medium}</p> }
+              { (!(date && medium) && date) && <p>{date}</p> }
+              { (!(date && medium) && medium) && <p>{medium}</p> }
               <p>{size}</p>
-              <p>{description}</p>
-              <h3>${price}</h3>
-              <button>Buy Now</button>
+              { desc && <p>{desc.description}</p> }
+              { (price > 100) && <h3>${price}</h3> }
+              { (price > 100) && <button>Buy Now</button> }
+              { (price <= 100) && <button>Inquire for Price</button> }
             </div>
           </div>
         </div>
@@ -55,11 +59,10 @@ export const query = graphql`
       date
       medium
       size
-      description {
+      desc: description {
         description
       }
       price
-      sold
     }
   }
 `

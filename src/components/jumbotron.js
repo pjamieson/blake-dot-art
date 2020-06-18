@@ -1,6 +1,7 @@
 import React from "react"
-import Image from "gatsby-image"
-import { Link, graphql, useStaticQuery } from "gatsby"
+//import Image from "gatsby-image"
+//import { Link, graphql, useStaticQuery } from "gatsby"
+import { Link } from "gatsby"
 
 import {
   MDBBtn,
