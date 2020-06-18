@@ -191,42 +191,38 @@
   }
 }
 
-// page
 .page-container {
   margin-top: 4rem;
-  h1 {
-    //text-transform: capitalize; // Prefer cms user to have control
-  }
   .lead {
     text-align: center;
   }
 }
 
-// gallery card
-.card {
-  margin-bottom: 1rem;
-  .btn-action {
-    position: absolute;
-    right: 0;
-    margin-bottom: 0;
-  }
-  .card-body {
-    padding: .8rem .8rem 0 .8rem;
+.gallery {
+  .card {
+    margin-bottom: 1rem;
+    .btn-action {
+      position: absolute;
+      right: 0;
+      margin-bottom: 0;
+    }
+    .card-body {
+      padding: .8rem .8rem 0 .8rem;
+    }
   }
 }
 
-// Card display grids
-.card-columns {
-  //display: flex;
-  //flex-wrap: wrap;
+.painting-detail {
   .card {
-    margin-bottom: 1rem;
-  }
-  img {
-    //width: 100% !important;
-    //height: auto !important;
+    margin-bottom: 64px;
+    .btn-action {
+      position: absolute;
+      left: -10px;
+      bottom: -2rem;
+    }
   }
 }
+
 //@include media-breakpoint-up(sm) {
 @media (min-width: 576px) {
   .card-columns {

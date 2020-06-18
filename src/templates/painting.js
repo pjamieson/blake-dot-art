@@ -1,13 +1,15 @@
 import React from "react"
 import Image from "gatsby-image"
-import { MDBCard, MDBContainer } from "mdbreact"
-import { graphql } from "gatsby"
+import { MDBContainer } from "mdbreact"
+import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 
 const Painting = ({
   data: {
     painting: {
+      identifier,
+      subcategory,
       image: { fluid },
       title,
       date = {},
@@ -22,12 +24,17 @@ const Painting = ({
     <Layout>
       <MDBContainer className="page-container">
         <h1>{title}</h1>
-        <div className="gallery-container">
+        <div className="painting-detail">
           <div className="row">
             <div className="col-sm-12 col-md-6">
-              <MDBCard>
-                <Image fluid={fluid} alt={title} />
-              </MDBCard>
+              <article className="card" key={identifier}>
+                <div className="view overlay">
+                  <Image className="card-img-top" fluid={fluid} alt={title} />
+                </div>
+                <Link to={`/${subcategory.category.slug}/${subcategory.slug}`} className="btn-floating btn-action mdb-color lighten-3">
+                  <i className="fas fa-chevron-left"></i>
+                </Link>
+              </article>
             </div>
             <div className="col-sm-12 col-md-6">
               { (date && medium) && <p>{date} - {medium}</p> }
@@ -50,6 +57,12 @@ export const query = graphql`
   query GetSinglePainting($slug: String) {
     painting: contentfulPainting(slug: {eq: $slug}) {
       identifier
+      subcategory {
+        category {
+          slug
+        }
+        slug
+      }
       image {
         fluid {
           ...GatsbyContentfulFluid

@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import Image from "gatsby-image"
 
 import { MDBContainer } from "mdbreact"
-import Layout from "../components/layout"
+import Layout from "../../components/layout"
 
 const AthletePortraitsGalleryPage = ({ data }) => {
   const {
@@ -19,11 +19,11 @@ const AthletePortraitsGalleryPage = ({ data }) => {
             return <article className="card" key={painting.identifier}>
               <div className="view overlay">
                 <Image className="card-img-top" fluid={painting.image.fluid} alt={painting.title} />
-                <Link to={`/gallery/${painting.slug}`}>
+                <Link to={`/${painting.subcategory.category.slug}/${painting.subcategory.slug}/${painting.slug}`}>
                   <div className="mask rgba-white-slight"></div>
                 </Link>
               </div>
-              <Link to={`/gallery/${painting.slug}`} className="btn-floating btn-action mdb-color lighten-3">
+              <Link to={`/${painting.subcategory.category.slug}/${painting.subcategory.slug}/${painting.slug}`} className="btn-floating btn-action mdb-color lighten-3">
                 <i className="fas fa-chevron-right pl-1"></i>
               </Link>
               <div className="card-body">
@@ -47,10 +47,12 @@ export const query = graphql`
       nodes {
         identifier
         subcategory {
+          name
+          slug
           category {
             name
+            slug
           }
-          name
         }
         title
         image {

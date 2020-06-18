@@ -5,7 +5,13 @@ exports.createPages = async ({ graphql, actions }) => {
     query GetPaintings {
       paintings: allContentfulPainting {
         nodes {
-           slug
+          slug
+          subcategory {
+            slug
+            category {
+              slug
+            }
+          }
         }
       }
     }
@@ -22,7 +28,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create painting detail pages.
   paintings.forEach((painting) => {
     createPage({
-      path: `/gallery/${painting.slug}`,
+      path: `/${painting.subcategory.category.slug}/${painting.subcategory.slug}/${painting.slug}`,
       component: path.resolve(`./src/templates/painting.js`),
       context: {
         slug: painting.slug,

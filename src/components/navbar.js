@@ -78,19 +78,19 @@ class Navbar extends Component {
                     </MDBDropdownToggle>
                     <MDBDropdownMenu className="dropdown-default">
                       <MDBDropdownItem>
-                        <Link className="menu-link" to="/gallery-athlete-portraits/">Athlete Portraits</Link>
+                        <Link className="menu-link" to="/gallery/athlete-portraits/">Athlete Portraits</Link>
                       </MDBDropdownItem>
                       <MDBDropdownItem>
-                        <Link className="menu-link" to="/gallery-other-portraits/">Other Portraits</Link>
+                        <Link className="menu-link" to="/gallery/other-portraits/">Other Portraits</Link>
                       </MDBDropdownItem>
                       <MDBDropdownItem>
-                        <Link className="menu-link" to="/gallery-other-subjects/">Other Subjects</Link>
+                        <Link className="menu-link" to="/gallery/other-subjects/">Other Subjects</Link>
                       </MDBDropdownItem>
                       <MDBDropdownItem>
-                        <Link className="menu-link" to="/gallery-felix/">Felix the Cat Series</Link>
+                        <Link className="menu-link" to="/gallery/felix-series/">Felix the Cat Series</Link>
                       </MDBDropdownItem>
                       <MDBDropdownItem>
-                        <Link className="menu-link" to="/gallery-abstracts/">Abstracts</Link>
+                        <Link className="menu-link" to="/gallery/abstracts/">Abstracts</Link>
                       </MDBDropdownItem>
                       <div class="dropdown-divider"></div>
                       <MDBDropdownItem>
