@@ -198,16 +198,44 @@
   }
 }
 
-.gallery {
+.card-columns {
+  display: inline-block;
   .card {
-    margin-bottom: 1rem;
+    margin: .5rem; // Needed for card-columns on Safari
     .btn-action {
       position: absolute;
+    }
+  }
+}
+
+.gallery {
+  .card {
+    .btn-action {
       right: 0;
-      margin-bottom: 0;
     }
     .card-body {
       padding: .8rem .8rem 0 .8rem;
+    }
+  }
+}
+
+.merch {
+  .card {
+    .view {
+      //min-height: 100%;
+      //padding: 10px;
+      //margin: 10px;
+      .card-image-top {
+        //min-height: 100%;
+      }
+    }
+    .btn-action {
+      right: 0;
+      bottom: 32px;
+    }
+    .card-body {
+      padding: 0 .8rem 0 1.8rem;
+      //margin: .5rem; // not helping Safari issue
     }
   }
 }
@@ -216,7 +244,6 @@
   .card {
     margin-bottom: 64px;
     .btn-action {
-      position: absolute;
       left: -10px;
       bottom: -2rem;
     }
@@ -228,6 +255,9 @@
   .card-columns {
     column-count: 1;
     column-gap: 1rem;
+    .card {
+      //width: auto;
+    }
   }
 }
 //@include media-breakpoint-up(md) {

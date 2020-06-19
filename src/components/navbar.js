@@ -154,7 +154,7 @@ class Navbar extends Component {
                       <Link className="menu-link" to="/about/press/">Press</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/about/Clients/">Clients & Collectorj</Link>
+                      <Link className="menu-link" to="/about/Clients/">Clients & Collectors</Link>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>

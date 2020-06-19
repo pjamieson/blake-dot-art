@@ -1,22 +1,59 @@
 import React from "react"
+import { graphql } from "gatsby"
 
-import { MDBContainer } from "mdbreact"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import HomeBtn from "../components/home-btn"
-import Project2020Grid from "../../components/project2020-grid"
+import Layout from "../../components/layout"
+import CardTitleLink from "../../components/card-title-link"
 
-const ToppsPage = () => (
-  <Layout>
-    <MDBContainer className="py-5 page-container">
-      <SEO title="Topps Project 2020" />
-      <h1 className="page-head">Topps Project 2020</h1>
+const Topps2020Page = ({ data }) => {
+  const {
+    allContentfulTradingCard: { nodes: cards },
+  } = data
 
-      <Project2020Grid />
+  return (
+    <Layout>
+      <div className="container page-container">
+        <h1>{cards[0].subcategory.category.name} - {cards[0].subcategory.name}</h1>
+        <section className="merch">
+          <div className="card-columns">
+            {cards.map(card => {
+              return <div>
+                <CardTitleLink card={card} />
+              </div>
+            })}
+          </div>
+        </section>
+      </div>
+    </Layout>
+  )
+}
 
-      <HomeBtn />
-    </MDBContainer>
-  </Layout>
-)
+export const query = graphql`
+  {
+    allContentfulTradingCard(
+      filter: {
+        subcategory: {name: {eq: "Topps Project 2020"}}
+      }
+    ) {
+      nodes {
+        identifier
+        title
+        image {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
+        }
+        slug
+        subcategory {
+          name
+          slug
+          category {
+            name
+            slug
+          }
+        }
+      }
+    }
+  }
+`
 
-export default ToppsPage
+export default Topps2020Page
