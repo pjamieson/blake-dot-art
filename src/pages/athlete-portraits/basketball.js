@@ -1,22 +1,60 @@
 import React from "react"
+import { graphql } from "gatsby"
 
-import { MDBContainer } from "mdbreact"
 import Layout from "../../components/layout"
-import SEO from "../../components/seo"
-import HomeBtn from "../../components/home-btn"
-import PortraitsBasketballGrid from "../../components/portraits-basketball-grid"
+import CardTitle from "../../components/card-title"
 
-const ProBasketballPage = () => (
-  <Layout>
-    <MDBContainer className="py-5 page-container">
-      <SEO title="Professional Athlete Portraits - Basketball" />
-      <h1 className="page-head">Professional Athlete Portraits - Basketball</h1>
+const ProBasketballPage = ({ data }) => {
+  const {
+    allContentfulPainting: { nodes: paintings },
+  } = data
 
-      <PortraitsBasketballGrid />
+  return (
+    <Layout>
+      <div className="container page-container">
+        <h1>{paintings[0].subcategory.category.name} - {paintings[0].subcategory.name}</h1>
+        <h4 className="nfs">(Sold or Not for Sale)</h4>
+        <section className="gallery">
+          <div className="card-columns">
+            {paintings.map(card => {
+              return <div>
+                <CardTitle card={card} />
+              </div>
+            })}
+          </div>
+        </section>
+      </div>
+    </Layout>
+  )
+}
 
-      <HomeBtn />
-    </MDBContainer>
-  </Layout>
-)
+export const query = graphql`
+  {
+    allContentfulPainting(
+      filter: {
+        subcategory: {name: {eq: "Basketball"}}
+      }
+    ) {
+      nodes {
+        identifier
+        subcategory {
+          name
+          slug
+          category {
+            name
+            slug
+          }
+        }
+        title
+        image {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
+        }
+        slug
+      }
+    }
+  }
+`
 
 export default ProBasketballPage

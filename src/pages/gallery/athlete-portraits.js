@@ -1,9 +1,8 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
-import Image from "gatsby-image"
+import { graphql } from "gatsby"
 
-import { MDBContainer } from "mdbreact"
 import Layout from "../../components/layout"
+import CardTitleLink from "../../components/card-title-link"
 
 const AthletePortraitsGalleryPage = ({ data }) => {
   const {
@@ -12,27 +11,18 @@ const AthletePortraitsGalleryPage = ({ data }) => {
 
   return (
     <Layout>
-      <MDBContainer className="page-container">
+      <div className="container page-container">
         <h1>{paintings[0].subcategory.category.name} - {paintings[0].subcategory.name}</h1>
-        <section className="gallery card-columns">
-          {paintings.map(painting => {
-            return <article className="card" key={painting.identifier}>
-              <div className="view overlay">
-                <Image className="card-img-top" fluid={painting.image.fluid} alt={painting.title} />
-                <Link to={`/${painting.subcategory.category.slug}/${painting.subcategory.slug}/${painting.slug}`}>
-                  <div className="mask rgba-white-slight"></div>
-                </Link>
+        <section className="gallery">
+          <div className="card-columns">
+            {paintings.map(card => {
+              return <div>
+                <CardTitleLink card={card} />
               </div>
-              <Link to={`/${painting.subcategory.category.slug}/${painting.subcategory.slug}/${painting.slug}`} className="btn-floating btn-action mdb-color lighten-3">
-                <i className="fas fa-chevron-right pl-1"></i>
-              </Link>
-              <div className="card-body">
-                <h4 className="card-title">{painting.title}</h4>
-              </div>
-            </article>
-          })}
+            })}
+          </div>
         </section>
-      </MDBContainer>
+      </div>
     </Layout>
   )
 }

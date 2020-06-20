@@ -13,13 +13,14 @@ const CardTitleLink = ({ card }) => {
             <div className="mask rgba-white-slight"></div>
           </Link>
         </div>
-        <div>
-          <Link to={`/${card.subcategory.category.slug}/${card.subcategory.slug}/${card.slug}`} className="btn-floating btn-action mdb-color lighten-3">
-            <i className="fas fa-chevron-right pl-1"></i>
-          </Link>
-        </div>
       </div>
 
+      <div>
+        <Link to={`/${card.subcategory.category.slug}/${card.subcategory.slug}/${card.slug}`} className="btn-floating btn-action mdb-color lighten-3">
+          <i className="fas fa-chevron-right pl-1"></i>
+        </Link>
+      </div>
+      
       <div className="card-body">
         <h4 className="card-title">{card.title}</h4>
       </div>

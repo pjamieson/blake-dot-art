@@ -193,13 +193,17 @@
 
 .page-container {
   margin-top: 4rem;
+  .nfs {
+    margin-top: -1rem;
+  }
   .lead {
     text-align: center;
   }
 }
 
 .card-columns {
-  display: inline-block;
+   display: inline-block;
+   width: 100%;
   .card {
     margin: .5rem; // Needed for card-columns on Safari
     .btn-action {
@@ -212,6 +216,7 @@
   .card {
     .btn-action {
       right: 0;
+      margin-top: -1.5rem; // adjusts vertical position
     }
     .card-body {
       padding: .8rem .8rem 0 .8rem;
@@ -221,17 +226,9 @@
 
 .merch {
   .card {
-    .view {
-      //min-height: 100%;
-      //padding: 10px;
-      //margin: 10px;
-      .card-image-top {
-        //min-height: 100%;
-      }
-    }
     .btn-action {
       right: 0;
-      bottom: 32px;
+      margin-top: -3rem; // adjusts vertical position
     }
     .card-body {
       padding: 0 .8rem 0 1.8rem;
@@ -242,10 +239,10 @@
 
 .painting-detail {
   .card {
-    margin-bottom: 64px;
+    //margin-bottom: 64px;
     .btn-action {
       left: -10px;
-      bottom: -2rem;
+      bottom: -4rem;
     }
   }
 }

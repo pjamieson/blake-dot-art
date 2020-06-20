@@ -1,22 +1,47 @@
 import React from "react"
+import { graphql } from "gatsby"
 
-import { MDBContainer } from "mdbreact"
 import Layout from "../../components/layout"
-import SEO from "../../components/seo"
-import HomeBtn from "../../components/home-btn"
-import ClientsGrid from "../../components/clients-grid"
+import CardTitle from "../../components/card-title"
 
-const ClientsPage = () => (
-  <Layout>
-    <MDBContainer className="py-5 page-container">
-      <SEO title="Clients & Collectors" />
-      <h1 className="page-head">Clients & Collectors</h1>
+const ClientsPage = ({ data }) => {
+  const {
+    allContentfulClient: { nodes: clients },
+  } = data
 
-      <ClientsGrid />
+  return (
+    <Layout>
+      <div className="container page-container">
+        <h1>Clients & Collectors</h1>
+        <section className="gallery">
+          <div className="card-columns">
+            {clients.map(card => {
+              return <div>
+                <CardTitle card={card} />
+              </div>
+            })}
+          </div>
+        </section>
+      </div>
+    </Layout>
+  )
+}
 
-      <HomeBtn />
-    </MDBContainer>
-  </Layout>
-)
+export const query = graphql`
+  {
+    allContentfulClient {
+      nodes {
+        identifier: id
+        image {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
+        }
+        title: caption
+        order
+      }
+    }
+  }
+`
 
 export default ClientsPage
