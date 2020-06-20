@@ -32,8 +32,8 @@ export const query = graphql`
   {
     allContentfulPainting(
       filter: {
-        subcategory: {name: {eq: "Soccer"}},
-        sold: {eq: false}}
+        subcategory: {name: {eq: "Soccer"}}
+      }
     ) {
       nodes {
         identifier

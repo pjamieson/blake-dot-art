@@ -1,32 +1,20 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-} from "mdbreact"
+import { MDBCol, MDBContainer, MDBRow } from "mdbreact"
 
 import Layout from "../components/layout"
 import Jumbotron from "../components/jumbotron"
 import SEO from "../components/seo"
-import HomeGrid from "../components/home-grid"
+import CardImagelink from "../components/card-imagelink"
 
-const getImage = graphql`
-  {
-    introImage: file(relativePath: { eq: "Blake-Jamieson-In-CA-Studio.jpg" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-  }
-`
+const IndexPage = ({ data }) => {
+  const {
+    allContentfulAsset: { nodes: image },
+    allContentfulPainting: { nodes: paintings },
+  } = data
 
-const IndexPage = () => {
-  const data = useStaticQuery(getImage)
   return (
     <Layout>
       <SEO title="Home" />
@@ -46,14 +34,60 @@ const IndexPage = () => {
               <h3>Thanks for stopping by.</h3>
             </MDBCol>
             <MDBCol size="auto" md="3" className="d-none d-md-block">
-              <Img fluid={data.introImage.childImageSharp.fluid} />
+              <Img fluid={image[0].fluid} />
             </MDBCol>
           </MDBRow>
-          <HomeGrid />
+
+          <section className="gallery">
+            <div className="card-columns">
+              {paintings.map(card => {
+                return <div>
+                  <CardImagelink card={card} />
+                </div>
+              })}
+            </div>
+          </section>
+
         </MDBContainer>
       </MDBContainer>
     </Layout>
   )
 }
+
+export const query = graphql`
+  {
+    allContentfulAsset(
+      filter: {
+        title: {eq: "Blake in Novato Studio"}}
+    ) {
+      nodes {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
+      }
+    },
+    allContentfulPainting(
+      filter: {
+        portfolio: {eq: true}}
+    ) {
+      nodes {
+        identifier
+        subcategory {
+          name
+          slug
+          category {
+            name
+            slug
+          }
+        }
+        image {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage
