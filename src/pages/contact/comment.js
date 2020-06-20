@@ -9,7 +9,7 @@ const MakeACommentPage = () => (
   <Layout>
     <MDBContainer className="py-5 page-container">
       <SEO title="MakeACommentPage" />
-      <h1 className="page-head">MakeACommentPage</h1>
+      <h1 className="page-head">Make a Comment</h1>
       <p className="lead">Page Under Construction</p>
       <HomeBtn />
     </MDBContainer>

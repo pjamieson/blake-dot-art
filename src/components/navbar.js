@@ -132,10 +132,10 @@ class Navbar extends Component {
                     <Link className="menu-link" to="/contact/comment/">Make a Comment</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/project/">Start a Project</Link>
+                    <Link className="menu-link" to="/contact/project/">Start a Project</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/autograph/">Autograph Request</Link>
+                    <Link className="menu-link" to="/contact/autograph/">Autograph Request</Link>
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
