@@ -9,14 +9,14 @@ const Painting = ({
   data: {
     painting: {
       identifier,
-      subcategory,
-      image: { fluid },
       title,
+      image: { fluid },
+      subgenre,
       date = {},
-      price = {},
-      medium = {},
       size = {},
+      medium = {},
       desc = {},
+      price,
     },
   },
 }) => {
@@ -31,16 +31,16 @@ const Painting = ({
                 <div className="view overlay">
                   <Image className="card-img-top" fluid={fluid} alt={title} />
                 </div>
-                <Link to={`/${subcategory.category.slug}/${subcategory.slug}`} className="btn-floating btn-action mdb-color lighten-3">
+                <Link to={`/gallery/${subgenre}`} className="btn-floating btn-action mdb-color lighten-3">
                   <i className="fas fa-chevron-left"></i>
                 </Link>
               </article>
             </div>
             <div className="col-sm-12 col-md-6">
-              { (date && medium) && <p>{date} - {medium}</p> }
-              { (!(date && medium) && date) && <p>{date}</p> }
-              { (!(date && medium) && medium) && <p>{medium}</p> }
-              <p>{size}</p>
+              { (date && size) && <p>{date} - {size}</p> }
+              { (!(date && size) && date) && <p>{date}</p> }
+              { (!(date && size) && size) && <p>{size}</p> }
+              { medium && <p>{medium}</p> }
               { desc && <p>{desc.description}</p> }
               { (price > 100) && <h3>${price}</h3> }
               { (price > 100) && <button>Buy Now</button> }
@@ -57,21 +57,18 @@ export const query = graphql`
   query GetSinglePainting($slug: String) {
     painting: contentfulPainting(slug: {eq: $slug}) {
       identifier
-      subcategory {
-        category {
-          slug
-        }
-        slug
-      }
+      title
       image {
         fluid {
           ...GatsbyContentfulFluid
         }
       }
-      title
+      subgenre {
+        slug
+      }
       date
-      medium
       size
+      medium
       desc: description {
         description
       }

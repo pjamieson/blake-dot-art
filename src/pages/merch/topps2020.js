@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
-import CardTitleLink from "../../components/card-title-link"
+import CardTitle from "../../components/card-title"
 
 const Topps2020Page = ({ data }) => {
   const {
@@ -12,12 +12,12 @@ const Topps2020Page = ({ data }) => {
   return (
     <Layout>
       <div className="container page-container">
-        <h1>{cards[0].subcategory.category.name} - {cards[0].subcategory.name}</h1>
+        <h1>Merch - Topps Project 2020</h1>
         <section className="merch">
           <div className="card-columns">
             {cards.map(card => {
               return <div>
-                <CardTitleLink card={card} />
+                <CardTitle card={card} />
               </div>
             })}
           </div>
@@ -29,11 +29,7 @@ const Topps2020Page = ({ data }) => {
 
 export const query = graphql`
   {
-    allContentfulTradingCard(
-      filter: {
-        subcategory: {name: {eq: "Topps Project 2020"}}
-      }
-    ) {
+    allContentfulTradingCard {
       nodes {
         identifier
         title
@@ -43,14 +39,6 @@ export const query = graphql`
           }
         }
         slug
-        subcategory {
-          name
-          slug
-          category {
-            name
-            slug
-          }
-        }
       }
     }
   }

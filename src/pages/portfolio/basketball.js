@@ -12,7 +12,7 @@ const ProBasketballPage = ({ data }) => {
   return (
     <Layout>
       <div className="container page-container">
-        <h1>{paintings[0].subcategory.category.name} - {paintings[0].subcategory.name}</h1>
+        <h1>Portfolio - {paintings[0].subgenre.name}</h1>
         <h4 className="nfs">(Sold or Not for Sale)</h4>
         <section className="gallery">
           <div className="card-columns">
@@ -32,18 +32,17 @@ export const query = graphql`
   {
     allContentfulPainting(
       filter: {
-        subcategory: {name: {eq: "Basketball"}}
+        subgenre: {name: {eq: "Athlete Portraits"}},
+        sport: {name: {eq: "Basketball"}},
+        available: {eq: false},
+        portfolio: {eq: true}
       }
     ) {
       nodes {
         identifier
-        subcategory {
+        subgenre {
           name
           slug
-          category {
-            name
-            slug
-          }
         }
         title
         image {

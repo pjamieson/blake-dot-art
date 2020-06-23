@@ -58,7 +58,7 @@ export const query = graphql`
   {
     allContentfulAsset(
       filter: {
-        title: {eq: "Blake in Novato Studio"}}
+        title: {eq: "Blake Jamieson - Crown & Mask"}}
     ) {
       nodes {
         fluid {
@@ -68,23 +68,20 @@ export const query = graphql`
     },
     allContentfulPainting(
       filter: {
-        portfolio: {eq: true}}
+        feature: {eq: true}}
     ) {
       nodes {
         identifier
-        subcategory {
+        subgenre {
           name
           slug
-          category {
-            name
-            slug
-          }
         }
         image {
           fluid {
             ...GatsbyContentfulFluid
           }
         }
+        available
       }
     }
   }

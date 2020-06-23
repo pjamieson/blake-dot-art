@@ -12,7 +12,7 @@ const AbstractsGalleryPage = ({ data }) => {
   return (
     <Layout>
       <div className="container page-container">
-        <h1>{paintings[0].subcategory.category.name} - {paintings[0].subcategory.name}</h1>
+        <h1>Gallery - {paintings[0].subgenre.name}</h1>
         <section className="gallery">
           <div className="card-columns">
             {paintings.map(card => {
@@ -31,18 +31,14 @@ export const query = graphql`
   {
     allContentfulPainting(
       filter: {
-        subcategory: {name: {eq: "Abstracts"}},
-        sold: {eq: false}}
+        subgenre: {name: {eq: "Abstracts"}},
+        available: {eq: true}}
     ) {
       nodes {
         identifier
-        subcategory {
+        subgenre {
           name
           slug
-          category {
-            name
-            slug
-          }
         }
         title
         image {
@@ -51,6 +47,7 @@ export const query = graphql`
           }
         }
         slug
+        available
       }
     }
   }

@@ -46,26 +46,26 @@ class Navbar extends Component {
               <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
-                    <div className="d-none d-md-inline">Pro Athlete Portraits</div>
+                    <div className="d-none d-md-inline">Portfolio</div>
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/athlete-portraits/baseball/">Baseball</Link>
+                      <Link className="menu-link" to="/portfolio/baseball/">Baseball</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/athlete-portraits/basketball/">Basketball</Link>
+                      <Link className="menu-link" to="/portfolio/basketball/">Basketball</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/athlete-portraits/football/">Football</Link>
+                      <Link className="menu-link" to="/portfolio/football/">Football</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/athlete-portraits/hockey/">Hockey</Link>
+                      <Link className="menu-link" to="/portfolio/hockey/">Hockey</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/athlete-portraits/soccer/">Soccer</Link>
+                      <Link className="menu-link" to="/portfolio/soccer/">Soccer</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/athlete-portraits/other-sports/">Other Sports</Link>
+                      <Link className="menu-link" to="/portfolio/other-sports/">Other Sports</Link>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
