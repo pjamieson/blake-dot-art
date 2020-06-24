@@ -50,22 +50,19 @@ class Navbar extends Component {
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portfolio/baseball/">Baseball</Link>
+                      <Link className="menu-link" to="/portfolio/athlete-portraits/">Athlete Portraits</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portfolio/basketball/">Basketball</Link>
+                      <Link className="menu-link" to="/portfolio/other-portraits/">Other Portraits</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portfolio/football/">Football</Link>
+                      <Link className="menu-link" to="/portfolio/other-subjects/">Other Subjects</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portfolio/hockey/">Hockey</Link>
+                      <Link className="menu-link" to="/portfolio/felix-series/">Felix the Cat Series</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/portfolio/soccer/">Soccer</Link>
-                    </MDBDropdownItem>
-                    <MDBDropdownItem>
-                      <Link className="menu-link" to="/portfolio/other-sports/">Other Sports</Link>
+                      <Link className="menu-link" to="/portfolio/abstracts/">Abstracts</Link>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>

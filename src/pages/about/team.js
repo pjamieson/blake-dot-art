@@ -55,7 +55,7 @@ const TeamPage = ({ data }) => {
 
             <article className="content-container">
               <div className="img-container">
-                  <Img fluid={image.fluid} />
+                  <Img fluid={image.fluid} className="card" />
                   { imageCredit && <p>{imageCredit}</p> }
               </div>
               <div>

@@ -2,8 +2,6 @@ import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
-import { MDBCol, MDBContainer, MDBRow } from "mdbreact"
-
 import Layout from "../components/layout"
 import Jumbotron from "../components/jumbotron"
 import SEO from "../components/seo"
@@ -18,28 +16,30 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <MDBContainer>
+      <div className="container">
         <Jumbotron />
-        <MDBContainer className="front-content">
-          <MDBRow className="intro-content">
-            <MDBCol size="auto" md="9">
-              <h2>Welcome!</h2>
-              <h3>My name is Blake. I paint.</h3>
-              <p className="lead grey-text">
-                Scroll down to see a selection of pieces I painted over the past several years.
-              </p>
-              <p className="lead grey-text">
-                Explore the menu links above to see more of my <strong>Pro Athlete Portraits</strong>, visit my online <strong>Gallery</strong> of available paintings or pick up some <strong>Merch</strong>andise I designed. You can also check out some of my <strong>Press</strong> coverage and learn about <strong>#TeamBlake</strong>.
-              </p>
-              <h3>Thanks for stopping by.</h3>
-            </MDBCol>
-            <MDBCol size="auto" md="3" className="d-none d-md-block">
-              <Img fluid={image[0].fluid} />
-            </MDBCol>
-          </MDBRow>
+        <div className="container front-content">
+
+          <section className="intro-content">
+            <div className="image-container">
+              <Img fluid={image[0].fluid} className="card" />
+            </div>
+            <h2>Welcome to blake [dot] art!</h2>
+            <h3>My name is Blake. I paint. Mostly.</h3>
+            <p className="lead dark-grey-text">
+              Scroll down for a quick look at representative examples of my work. Tap or click on an image on this page to go directly to the <strong>Portfolio</strong> or <strong>Gallery</strong> that piece comes from.
+            </p>
+            <p className="lead dark-grey-text">
+              Explore the menu links above for a more granular breakdown of my subjects and styles, with each linked page offering more examples.
+            </p>
+            <p className="lead dark-grey-text">
+              <strong><em>Please note:</em></strong> Pieces shown in the <strong>Portfolio</strong> section have already been sold or are not for sale. Only pieces and items shown in the <strong>Gallery</strong> and <strong>Merch</strong> sections are available for purchase.
+            </p>
+            <h3>Thanks for stopping by.</h3>
+          </section>
 
           <section className="gallery">
-            <div className="card-columns">
+            <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
               {paintings.map(card => {
                 return <div>
                   <CardImagelink card={card} />
@@ -48,8 +48,8 @@ const IndexPage = ({ data }) => {
             </div>
           </section>
 
-        </MDBContainer>
-      </MDBContainer>
+        </div>
+      </div>
     </Layout>
   )
 }

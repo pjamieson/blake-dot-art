@@ -14,7 +14,7 @@ const Topps2020Page = ({ data }) => {
       <div className="container page-container">
         <h1>Merch - Topps Project 2020</h1>
         <section className="merch">
-          <div className="card-columns">
+          <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {cards.map(card => {
               return <div>
                 <CardTitle card={card} />

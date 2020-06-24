@@ -14,7 +14,7 @@ const FelixGalleryPage = ({ data }) => {
       <div className="container page-container">
         <h1>Gallery - {paintings[0].subgenre.name}</h1>
         <section className="gallery">
-          <div className="card-columns">
+          <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {paintings.map(card => {
               return <div>
                 <CardTitleLink card={card} />
