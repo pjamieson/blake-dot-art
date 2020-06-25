@@ -3,21 +3,21 @@ import { Link } from "gatsby"
 import Image from "gatsby-image"
 
 const CardTitleLink = ({ card }) => {
-  const category = `${card.available} ? "gallery" : "portfolio"`
+  const link = `/${(card.available ? 'gallery' : 'portfolio')}/${card.subgenre.slug}/${card.slug}`
   return (
     <div className="card" key={card.identifier}>
 
       <div className="view overlay">
         <div>
           <Image className="card-img-top" fluid={card.image.fluid} alt={card.title} />
-          <Link to={`/${category}/${card.subgenre.slug}/${card.slug}`}>
+          <Link to={link}>
             <div className="mask rgba-white-slight"></div>
           </Link>
         </div>
       </div>
 
       <div>
-        <Link to={`/${category}/${card.subgenre.slug}/${card.slug}`} className="btn-floating btn-action mdb-color lighten-3">
+        <Link to={link} className="btn-floating btn-action mdb-color lighten-3">
           <i className="fas fa-chevron-right pl-1"></i>
         </Link>
       </div>

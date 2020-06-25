@@ -2,13 +2,17 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const result = await graphql(
     `
-    query GetPaintings {
-      paintings: allContentfulPainting {
+    query GetGalleryPaintings {
+      paintings: allContentfulPainting(
+        filter: {
+          available: {eq: true}
+        }
+      ) {
         nodes {
-          slug
           subgenre {
             slug
           }
+          slug
         }
       }
     }

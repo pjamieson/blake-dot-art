@@ -12,7 +12,7 @@ const OtherSubjectsPortfolioPage = ({ data }) => {
   return (
     <Layout>
       <div className="container page-container">
-        <h1>Portfolio - Other Sublects</h1>
+        <h1>Portfolio - Other Subjects</h1>
         <h4 className="nfs">(Sold or Not for Sale)</h4>
         <section className="gallery">
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">

@@ -4,7 +4,6 @@ import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import Jumbotron from "../components/jumbotron"
-import SEO from "../components/seo"
 import CardImagelink from "../components/card-imagelink"
 
 const IndexPage = ({ data }) => {
@@ -15,7 +14,6 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Home" />
       <div className="container">
         <Jumbotron />
         <div className="container front-content">
@@ -41,7 +39,7 @@ const IndexPage = ({ data }) => {
           <section className="gallery">
             <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
               {paintings.map(card => {
-                return <div>
+                return <div key={card.identifier}>
                   <CardImagelink card={card} />
                 </div>
               })}
@@ -68,13 +66,17 @@ export const query = graphql`
     },
     allContentfulPainting(
       filter: {
-        feature: {eq: true}}
+        feature: {eq: true}
+      }
     ) {
       nodes {
         identifier
         subgenre {
           name
           slug
+        }
+        sport {
+          name
         }
         image {
           fluid {

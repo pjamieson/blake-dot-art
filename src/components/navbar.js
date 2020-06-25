@@ -105,9 +105,6 @@ class Navbar extends Component {
                       <a className="menu-link" href="https://blakespuzzles.com" target="_blank" rel="noopener noreferrer">Jigsaw Puzzles</a>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/merch/fannie-packs/">Fannie Packs</Link>
-                    </MDBDropdownItem>
-                    <MDBDropdownItem>
                       <Link className="menu-link" to="/merch/card-art/">Card Art</Link>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>

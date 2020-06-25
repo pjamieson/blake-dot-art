@@ -199,11 +199,19 @@
   }
 }
 
-.gallery, .sports {
+.gallery, .p2020 {
   padding-bottom: .5rem;
   .card {
     .btn-action {
+      position: absolute;
       right: 0;
+    }
+  }
+}
+
+.gallery {
+  .card {
+    .btn-action {
       margin-top: -1.5rem; // adjusts vertical position
     }
     .card-body {
@@ -212,31 +220,49 @@
   }
 }
 
-.merch {
-  padding-bottom: .5rem;
+.p2020 {
+  margin-bottom: 1rem;
   .card {
-    .btn-action {
+    padding-bottom: .5rem;
+    height: 100%;
+    .btn-sold {
+      position: absolute;
+      top: 0;
       right: 0;
+    }
+    .btn-action {
       margin-top: -3rem; // adjusts vertical position
     }
     .card-body {
-      padding: 0 .8rem 0 1.8rem;
+      text-align: center;
+      padding: 0 .5rem;
+      margin: 0;
+      h4 {
+        padding: 0;
+        margin: -.2rem 0 0 0;
+        line-height: 1.2;
+      }
+      h5 {
+        padding: 0;
+        margin: .25rem 0;
+        line-height: 1.2;
+      }
+      p {
+        margin: .25rem 0;
+        line-height: 1.2;
+      }
     }
   }
 }
 
 .painting-detail {
-  .card {
-    //margin-bottom: 64px;
-    .btn-action {
-      left: -10px;
-      bottom: -4rem;
-    }
+  .btn-action {
+    left: -1rem;
   }
 }
 
 // #TeamBlake
-.members, .sports {
+.members, .sports, .topps {
   display: flex;
   .btn-container {
     display: flex;

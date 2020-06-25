@@ -2,25 +2,44 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
-import CardTitle from "../../components/card-title"
+import CardTopps2020 from "../../components/card-topps2020"
 
-const Topps2020Page = ({ data }) => {
+const ToppsProject2020Page = ({ location, data }) => {
   const {
-    allContentfulTradingCard: { nodes: cards },
+    allContentfulProject2020Player: { nodes: players },
+    allContentfulToppsP2020Card: { nodes: cards }
   } = data
+
+  // If passed a player, open to that player. Otherwise open first player on list.
+  const [value, setValue] = React.useState(location.state.player ?
+    players.findIndex(s => s.name === location.state.player) : 0)
 
   return (
     <Layout>
       <div className="container page-container">
-        <h1>Merch - Topps Project 2020</h1>
-        <section className="merch">
-          <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
-            {cards.map(card => {
-              return <div>
-                <CardTitle card={card} />
-              </div>
+        <h1 className="page-head">Topps Project 2020 Cards by Blake Jamieson</h1>
+        <section className="topps">
+
+          <div className="btn-container">
+            <hr/>
+            {players.map((player, index) => {
+              return (
+                <button className={`std-btn ${index === value && "active-btn"}`} onClick={() => setValue(index)}>{player.name}</button>
+              )
             })}
           </div>
+
+          <article className="content-container">
+            <div className="uk-grid-small uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid="masonry: true">
+              {cards.map((card) => {
+                return (
+                  card.player && card.player.name === players[value].name ?
+                   <div className="p2020"><CardTopps2020 card={card} /></div> : null
+                )
+              })}
+            </div>
+          </article>
+
         </section>
       </div>
     </Layout>
@@ -29,19 +48,37 @@ const Topps2020Page = ({ data }) => {
 
 export const query = graphql`
   {
-    allContentfulTradingCard {
+    allContentfulProject2020Player(
+      sort: {
+        order: DESC, fields: order
+      }
+    ) {
+      nodes {
+        name
+      }
+    },
+    allContentfulToppsP2020Card(
+      sort: {
+        order: ASC, fields: order
+      }
+    ) {
       nodes {
         identifier
-        title
+        player {
+          name
+        }
         image {
           fluid {
             ...GatsbyContentfulFluid
           }
         }
-        slug
+        title
+        subtitle
+        limitation
+        qtyAvail
       }
     }
   }
 `
 
-export default Topps2020Page
+export default ToppsProject2020Page

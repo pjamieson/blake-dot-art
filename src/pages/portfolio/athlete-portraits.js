@@ -4,18 +4,21 @@ import { graphql } from "gatsby"
 import Layout from "../../components/layout"
 import CardTitle from "../../components/card-title"
 
-const AthletePortraitsPortfolioPage = ({ data }) => {
+const AthletePortraitsPortfolioPage = ({ location, data }) => {
   const {
     allContentfulSport: { nodes: sports },
     allContentfulPainting: { nodes: paintings },
   } = data
 
-  const [value, setValue] = React.useState(0)
+  // If passed a sport, open to that sport. Otherwise open first sport on list.
+  const [value, setValue] = React.useState(location.state.sport ?
+    sports.findIndex(s => s.name === location.state.sport) : 0)
 
   return (
     <Layout>
       <div className="container page-container">
         <h1 className="page-head">Portfolio - Athlete Portraits</h1>
+        <h4 className="nfs">(Sold or Not for Sale)</h4>
         <section className="sports">
 
           <div className="btn-container">

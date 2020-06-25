@@ -1,6 +1,5 @@
 import React from "react"
 import Image from "gatsby-image"
-import { MDBContainer } from "mdbreact"
 import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
@@ -22,19 +21,19 @@ const Painting = ({
 }) => {
   return (
     <Layout>
-      <MDBContainer className="page-container">
+      <div className="container page-container">
         <h1>{title}</h1>
         <div className="painting-detail">
           <div className="row">
             <div className="col-sm-12 col-md-6">
               <article className="card" key={identifier}>
                 <div className="view overlay">
-                  <Image className="card-img-top" fluid={fluid} alt={title} />
+                  <Image className="card card-img-top" fluid={fluid} alt={title} />
                 </div>
-                <Link to={`/gallery/${subgenre}`} className="btn-floating btn-action mdb-color lighten-3">
-                  <i className="fas fa-chevron-left"></i>
-                </Link>
               </article>
+              <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action mdb-color lighten-3">
+                <i className="fas fa-chevron-left"></i>
+              </Link>
             </div>
             <div className="col-sm-12 col-md-6">
               { (date && size) && <p>{date} - {size}</p> }
@@ -48,7 +47,7 @@ const Painting = ({
             </div>
           </div>
         </div>
-      </MDBContainer>
+      </div>
     </Layout>
   )
 }
