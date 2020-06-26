@@ -227,8 +227,10 @@
     height: 100%;
     .btn-sold {
       position: absolute;
-      top: 0;
+      bottom: 0;
       right: 0;
+      padding: .5rem 1rem;
+      cursor: default;
     }
     .btn-action {
       margin-top: -3rem; // adjusts vertical position

@@ -17,7 +17,7 @@ const CardTitleLink = ({ card }) => {
       </div>
 
       <div>
-        <Link to={link} className="btn-floating btn-action mdb-color lighten-3">
+        <Link to={link} className="btn-floating btn-action btn-success">
           <i className="fas fa-chevron-right pl-1"></i>
         </Link>
       </div>

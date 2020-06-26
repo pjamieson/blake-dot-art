@@ -14,7 +14,7 @@ const ClientsPage = ({ data }) => {
       <div className="container page-container">
         <h1>Clients & Collectors</h1>
         <section className="gallery">
-          <div className="card-columns">
+          <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {clients.map(card => {
               return <div>
                 <CardTitle card={card} />
@@ -29,7 +29,11 @@ const ClientsPage = ({ data }) => {
 
 export const query = graphql`
   {
-    allContentfulClient {
+    allContentfulClient(
+      sort: {
+        order: ASC, fields: order
+      }
+    ) {
       nodes {
         identifier: id
         image {
@@ -38,7 +42,6 @@ export const query = graphql`
           }
         }
         title: caption
-        order
       }
     }
   }

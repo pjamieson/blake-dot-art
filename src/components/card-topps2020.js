@@ -17,13 +17,13 @@ const CardTopps2020 = ({ card }) => {
           }
         </div>
         { (card.qtyAvail === 0 && card.qtyAvail !== -1) &&
-          <button type="button" className="btn btn-sold btn-default btn-rounded">Sold Out</button>
+          <button type="button" className="btn btn-sold btn-danger btn-rounded">Sold Out</button>
         }
       </div>
 
       { (card.qtyAvail > 0) &&
         <div>
-          <Link to={link} className="btn-floating btn-action mdb-color lighten-3">
+          <Link to={link} className="btn-floating btn-action btn-success">
             <i className="fas fa-chevron-right pl-1"></i>
           </Link>
         </div>
