@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Seo />
+      <Seo title="Home" />
       <div className="site">
         <Navbar siteTitle={data.site.info.title} />
         <main className="site-content">{children}</main>

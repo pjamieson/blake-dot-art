@@ -11,7 +11,7 @@ const AthletePortraitsPortfolioPage = ({ location, data }) => {
   } = data
 
   // If passed a sport, open to that sport. Otherwise open first sport on list.
-  const [value, setValue] = React.useState(location.state.sport ?
+  const [value, setValue] = React.useState(location.state && location.state.sport ?
     sports.findIndex(s => s.name === location.state.sport) : 0)
 
   return (
@@ -25,12 +25,14 @@ const AthletePortraitsPortfolioPage = ({ location, data }) => {
             <hr/>
             {sports.map((sport, index) => {
               return (
-                <button className={`std-btn ${index === value && "active-btn"}`} onClick={() => setValue(index)}>{sport.name}</button>
+                <div key={index}>
+                  <button className={`std-btn ${index === value && "active-btn"}`} onClick={() => setValue(index)}>{sport.name}</button>
+                </div>
               )
             })}
           </div>
 
-          <article className="content-container">
+          <article className="content-container gallery">
             <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
               {paintings.map((card) => {
                 return (

@@ -17,7 +17,7 @@ const AbstractsPortfolioPage = ({ data }) => {
         <section className="gallery">
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {paintings.map(card => {
-              return <div>
+              return <div key={card.identifier}>
                 <CardTitle card={card} />
               </div>
             })}
@@ -38,6 +38,7 @@ export const query = graphql`
       }
     ) {
       nodes {
+        identifier
         title
         image {
           fluid {

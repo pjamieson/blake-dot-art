@@ -48,7 +48,9 @@ const TeamPage = ({ data }) => {
               <hr/>
               {members.map((member, index) => {
                 return (
-                  <button className={`std-btn ${index === value && "active-btn"}`} onClick={() => setValue(index)}>{member.name}</button>
+                  <div key={index}>
+                    <button className={`std-btn ${index === value && "active-btn"}`} onClick={() => setValue(index)}>{member.name}</button>
+                  </div>
                 )
               })}
             </div>

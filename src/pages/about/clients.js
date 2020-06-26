@@ -16,7 +16,7 @@ const ClientsPage = ({ data }) => {
         <section className="gallery">
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {clients.map(card => {
-              return <div>
+              return <div key={card.id}>
                 <CardTitle card={card} />
               </div>
             })}

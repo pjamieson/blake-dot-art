@@ -11,7 +11,7 @@ const ToppsProject2020Page = ({ location, data }) => {
   } = data
 
   // If passed a player, open to that player. Otherwise open first player on list.
-  const [value, setValue] = React.useState(location.state.player ?
+  const [value, setValue] = React.useState(location.state && location.state.player ?
     players.findIndex(s => s.name === location.state.player) : 0)
 
   return (
@@ -24,7 +24,9 @@ const ToppsProject2020Page = ({ location, data }) => {
             <hr/>
             {players.map((player, index) => {
               return (
-                <button className={`std-btn ${index === value && "active-btn"}`} onClick={() => setValue(index)}>{player.name}</button>
+                <div key={index}>
+                  <button className={`std-btn ${index === value && "active-btn"}`} onClick={() => setValue(index)}>{player.name}</button>
+                </div>
               )
             })}
           </div>
