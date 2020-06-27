@@ -22,31 +22,40 @@ const Painting = ({
   return (
     <Layout>
       <div className="container page-container">
-        <h1>{title}</h1>
-        <div className="painting-detail">
+        <article className="painting-details">
+          <h1>{title}</h1>
           <div className="row">
-            <div className="col-sm-12 col-md-6">
-              <article className="card" key={identifier}>
+            <div className="col col-sm-12 col-md-6">
+              <div className="card" key={identifier}>
                 <div className="view overlay">
                   <Image className="card card-img-top" fluid={fluid} alt={title} />
                 </div>
-              </article>
-              <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action mdb-color lighten-3">
-                <i className="fas fa-chevron-left"></i>
-              </Link>
+              </div>
             </div>
-            <div className="col-sm-12 col-md-6">
+
+            <div className="col col-sm-12 col-md-6">
               { (date && size) && <p>{date} - {size}</p> }
               { (!(date && size) && date) && <p>{date}</p> }
               { (!(date && size) && size) && <p>{size}</p> }
+
               { medium && <p>{medium}</p> }
+
               { desc && <p>{desc.description}</p> }
-              { (price > 100) && <h3>${price}</h3> }
-              { (price > 100) && <button>Buy Now</button> }
-              { (price <= 100) && <button>Inquire for Price</button> }
+
+              { (price > 100) && <div className="buy-now">
+                <h3 className="price">${price}</h3><button type="button" className="btn btn-buy-now btn-success btn-rounded">Buy Now <i className="fas fa-chevron-right"></i></button></div> }
+
+              { (price <= 100) && <div className="inquire">
+                <button type="button" className="btn btn-inquire btn-info btn-rounded">Inquire</button></div> }
+
+              <div className="back-btn">
+                <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action btn-danger">
+                  <i className="fas fa-chevron-left"></i>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </Layout>
   )

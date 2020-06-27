@@ -7,7 +7,7 @@ import CardTopps2020 from "../../components/card-topps2020"
 const ToppsProject2020Page = ({ location, data }) => {
   const {
     allContentfulProject2020Player: { nodes: players },
-    allContentfulToppsP2020Card: { nodes: cards }
+    allContentfulToppsP2020Card: { nodes: p2020cards }
   } = data
 
   // If passed a player, open to that player. Otherwise open first player on list.
@@ -33,7 +33,7 @@ const ToppsProject2020Page = ({ location, data }) => {
 
           <article className="content-container">
             <div className="uk-grid-small uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid="masonry: true">
-              {cards.map((card) => {
+              {p2020cards.map((card) => {
                 return (
                   card.player && card.player.name === players[value].name ?
                    <div className="p2020"><CardTopps2020 card={card} /></div> : null

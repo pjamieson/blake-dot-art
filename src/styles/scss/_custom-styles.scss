@@ -263,6 +263,40 @@
   }
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.painting-details,
+.p2020-card-details {
+    height: 100%;
+    .card-details {
+      padding: 1rem 3rem;
+    }
+    .buy-now {
+      display: flex;
+      flex-direction: row;
+      justify-content:flex-start;
+      i {
+        padding-left: .5rem;
+      }
+      .price {
+        margin: 0 1rem 0 0;
+        font-size: 2rem;
+      }
+      .btn-inquire, .btn-buy-now {
+        padding: .5rem 1rem;
+      }
+    }
+    .inquire {
+      margin-left: -.5rem;
+    }
+    .btn-action {
+      top: 2rem;
+      left: -1rem;
+    }
+}
+
 // #TeamBlake
 .members, .sports, .topps {
   display: flex;
