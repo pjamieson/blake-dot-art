@@ -3,13 +3,13 @@ phases:
     install:        
         commands:            
             - 'touch .npmignore'            
-            - 'npm install -g gatsby'    
+            - 'yarn global add gatsby'    
     pre_build:        
         commands:            
-            - 'npm install'    
+            - 'yarn'    
     build:        
         commands:            
-            - 'npm run build'    
+            - 'gatsby build'    
     post_build:        
         commands:            
             - 'aws s3 sync "public/" "s3://blake.art" --delete --acl "public-read"'
