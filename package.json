@@ -18,7 +18,6 @@
     "gatsby-plugin-sharp": "^2.6.3",
     "gatsby-source-contentful": "^2.3.15",
     "gatsby-source-filesystem": "^2.3.3",
-    "gatsby-source-strapi": "^0.0.12",
     "gatsby-transformer-sharp": "^2.5.2",
     "mdbreact": "git+https://oauth2:yayBkZHbysdtkJvvF5sK@git.mdbootstrap.com/mdb/react/re-pro.git",
     "moment": "^2.25.3",
@@ -43,7 +42,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
+    "start": "yarn run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
