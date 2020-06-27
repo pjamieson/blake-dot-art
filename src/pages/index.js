@@ -9,6 +9,7 @@ import CardImagelink from "../components/card-imagelink"
 const IndexPage = ({ data }) => {
   const {
     allContentfulAsset: { nodes: image },
+    allContentfulToppsP2020Card: { nodes: p2020cards },
     allContentfulPainting: { nodes: paintings },
   } = data
 
@@ -38,6 +39,11 @@ const IndexPage = ({ data }) => {
 
           <section className="gallery">
             <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
+              {p2020cards.map(p2020card => {
+                return <div key={p2020card.identifier}>
+                  <CardImagelink card={p2020card} />
+                </div>
+              })}
               {paintings.map(card => {
                 return <div key={card.identifier}>
                   <CardImagelink card={card} />
@@ -61,6 +67,23 @@ export const query = graphql`
       nodes {
         fluid {
           ...GatsbyContentfulFluid
+        }
+      }
+    },
+    allContentfulToppsP2020Card(
+      filter: {
+        feature: {eq: true}
+      }
+    ) {
+      nodes {
+        identifier
+        player {
+          name
+        }
+        image {
+          fluid {
+            ...GatsbyContentfulFluid
+          }
         }
       }
     },

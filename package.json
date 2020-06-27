@@ -1,7 +1,7 @@
 {
   "name": "blake-dot-art",
   "private": true,
-  "description": "A gallery website built with Gatsby and Strapi",
+  "description": "A Portfolio/Gallery website built with Gatsby",
   "version": "0.1.0",
   "author": "Patrick Jamieson <patrick@patrickjamieson.com>",
   "dependencies": {
