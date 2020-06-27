@@ -12,7 +12,7 @@ phases:
       - "gatsby build"
   post_build:
     commands:
-      - 'aws s3 sync "public/" "s3://blake.art" --delete --acl "public-read" && aws cloudfront create-invalidation --distribution-id DISTRIBUTION_ID --paths "/*"'
+      - 'aws s3 sync "public/" "s3://blake.art" --delete --acl "public-read"
 artifacts:
   base-directory: public
   files:
