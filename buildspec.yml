@@ -12,9 +12,9 @@ phases:
             - 'npm run build'    
     post_build:        
         commands:            
-            - 'aws s3 sync "public/" "s3://blake.art" --delete --acl "public-read"
-'artifacts:    
-    base-directory: public    
-    files:        
-        - '**/*'    
-    discard-paths: yes
+            - 'aws s3 sync "public/" "s3://blake.art" --delete --acl "public-read"'
+    artifacts:    
+        base-directory: public    
+        files:        
+            - '**/*'    
+        discard-paths: yes
