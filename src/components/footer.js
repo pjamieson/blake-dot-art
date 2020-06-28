@@ -4,7 +4,7 @@ import SocialLinks from "../constants/sociallinks"
 
 const Footer = () => {
   return (
-    <MDBFooter color="grey" className="font-small mt-4">
+    <MDBFooter color="grey" className="font-small mt-2">
       <div className="footer-copyright text-center py-3">
         <MDBContainer>
           <div>

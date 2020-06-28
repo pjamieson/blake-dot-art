@@ -5,6 +5,10 @@
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  .container {
+    width: 100%;
+    max-width: 1100px;
+  }
 }
 .site-content {
   flex-grow: 1;
@@ -13,8 +17,11 @@
 
 // navbar
 .navbar {
-  background-color: white;
-    opacity: 0.9;
+  padding: 0 1rem;
+  opacity: 0.9;
+  @media (min-width: 768px) {
+    padding: 0;
+  }
   .navbar-brand {
     margin-right: .5rem;
     a {
@@ -50,19 +57,6 @@
     margin-top: 2px;
   }
 }
-
-@media (min-width: 768px) {
-  .navbar.container {
-    max-width: 738px;
-  }
-}
-@media (min-width: 992px) {
-  .navbar.container {
-    max-width: 100%;
-    padding-left: 2rem;
-  }
-}
-
 .social-links {
    list-style: none;
    display: flex;
@@ -76,7 +70,8 @@
 
 // Jumbotron
 .jumbotron {
-  margin-top: 6rem;
+  min-height: 15rem;
+  margin-top: 5rem;
   text-align: center;
   overflow:hidden;
   -webkit-backface-visibility: hidden;
@@ -86,26 +81,41 @@
   border-radius: $border-radius-base;
   background-color: $white-base;
   h1 {
-    height: 5rem;
-    margin-top: 6rem;
+    height: 4rem;
+    margin-top: 2rem;
     margin-bottom: 0;
     font-family: 'Roboto';
-    font-weight: 700;
-    font-size: 3rem;
+    font-weight: 500;
+    font-size: 2.5rem;
     letter-spacing: -0.05em;
+    @media (min-width: 576px) {
+      font-size: 3rem;
+    }
+    @media (min-width: 640px) {
+      height: 4.5rem;
+      margin-top: 2.5rem;
+      font-size: 3.5rem;
+    }
     @media (min-width: 768px) {
       font-size: 4rem;
     }
   }
   h2 {
     margin: 0;
+    font-size: 1.5rem;
     letter-spacing: -0.05em;
     color: #555;
+    @media (min-width: 640px) {
+      font-size: 1.8rem;
+    }
+    @media (min-width: 640px) {
+      font-size: 2rem;
+    }
   }
   .bg-img {
     background-image: url("../../images/Cans-Banner2.png");
     background-size: cover;
-    min-height: 24rem;
+    min-height: 15rem;
   }
   .blake-title {
     display:inline-block;
@@ -116,7 +126,9 @@
     animation: blake 1s;
   }
   .logo {
-    margin-right: -10px;
+    height: 4rem;
+    width: auto;
+    margin: 0 -10px 0 0;
     animation: logoreveal 50s infinite;
   }
   .tag1 {
@@ -131,8 +143,8 @@
   }
   .featured-link {
     position: absolute;
-    right: 20px;
-    bottom: 20px;
+    right: 1rem;
+    bottom: 1rem;
     animation: featuredreveal3 5s;
   }
 }
@@ -191,16 +203,24 @@
       margin: 10px 0;
     }
     .image-container {
-      padding: 0 0 1rem 2rem;
-      width: 25%;
-      min-width: 25%;
+      padding: 0 0 1rem 1rem;
+      width: 50%;
       float: right;
+      @media (min-width: 576px) {
+        width: 45%;
+      }
+      @media (min-width: 768px) {
+        width: 40%;
+      }
+      @media (min-width: 960px) {
+        width: 350px;
+      }
     }
   }
 }
 
 .page-container {
-  margin-top: 6rem;
+  margin-top: 5rem;
   margin-bottom: .5rem;
   .nfs {
     margin-top: -1rem;

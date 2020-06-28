@@ -32,7 +32,7 @@ const ToppsProject2020Page = ({ location, data }) => {
           </div>
 
           <article className="content-container">
-            <div className="uk-grid-small uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid="masonry: true">
+            <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
               {p2020cards.map((card) => {
                 return (
                   card.player && card.player.name === players[value].name ?
