@@ -1,19 +1,16 @@
 import React, { Component } from "react"
-import PropTypes from "prop-types"
 
 import { Link } from "gatsby"
 import SocialLinks from "../constants/sociallinks"
 
 import {
   MDBCollapse,
-  MDBContainer,
   MDBDropdown,
   MDBDropdownItem,
   MDBDropdownMenu,
   MDBDropdownToggle,
-  MDBNavbar,
-  MDBNavbarBrand,
   MDBNavbarNav,
+  MDBNavbarBrand,
   MDBNavbarToggler,
   MDBNavItem,
 } from "mdbreact"
@@ -31,23 +28,28 @@ class Navbar extends Component {
 
   render() {
     return (
-      <MDBNavbar color="faded" light fixed="top" expand="md">
-        <MDBContainer>
+      <div className="navbar fixed-top navbar-expand-md navbar-light bg-light">
+        <div className="container">
+
           <MDBNavbarBrand>
-            <Link to="/">
+            <Link to="/" className="navbar-brand">
               <img src={logo} className="logo" alt="Logo"/>
-              <strong>{this.props.siteTitle}</strong>
+              <strong>blake [dot] art</strong>
             </Link>
           </MDBNavbarBrand>
+
           <MDBNavbarToggler onClick={this.toggleCollapse} />
+
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
             <MDBNavbarNav left>
 
               <MDBNavItem>
                 <MDBDropdown>
+
                   <MDBDropdownToggle nav caret>
-                    <div className="d-none d-md-inline">Portfolio</div>
+                    <div className="d-inline">Portfolio</div>
                   </MDBDropdownToggle>
+
                   <MDBDropdownMenu className="dropdown-default">
                     <MDBDropdownItem>
                       <Link className="menu-link" to="/portfolio/athlete-portraits/">Athlete Portraits</Link>
@@ -71,7 +73,7 @@ class Navbar extends Component {
                 <MDBNavItem>
                   <MDBDropdown>
                     <MDBDropdownToggle nav caret>
-                      <div className="d-none d-md-inline">Gallery</div>
+                      <div className="d-inline">Gallery</div>
                     </MDBDropdownToggle>
                     <MDBDropdownMenu className="dropdown-default">
                       <MDBDropdownItem>
@@ -95,7 +97,7 @@ class Navbar extends Component {
               <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
-                    <div className="d-none d-md-inline">Merch</div>
+                    <div className="d-inline">Merch</div>
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">
                     <MDBDropdownItem>
@@ -113,7 +115,7 @@ class Navbar extends Component {
               <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
-                  <div className="d-none d-md-inline">Contact</div>
+                  <div className="d-inline">Contact</div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
                   <MDBDropdownItem>
@@ -138,7 +140,7 @@ class Navbar extends Component {
               <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
-                    <div className="d-none d-md-inline">About</div>
+                    <div className="d-inline">About</div>
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">
                     <MDBDropdownItem>
@@ -154,23 +156,17 @@ class Navbar extends Component {
                 </MDBDropdown>
               </MDBNavItem>
             </MDBNavbarNav>
+
             <MDBNavbarNav right>
               <MDBNavItem>
                 <SocialLinks />
               </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>
-        </MDBContainer>
-      </MDBNavbar>
+        </div>
+      </div>
     )
   }
-}
-Navbar.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Navbar.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Navbar

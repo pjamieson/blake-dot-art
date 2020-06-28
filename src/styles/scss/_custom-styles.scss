@@ -14,16 +14,14 @@
 // navbar
 .navbar {
   background-color: white;
-  height: 50px;
-  opacity: 0.9;
-  Link {
-    width: 100%;
-  }
+    opacity: 0.9;
   .navbar-brand {
+    margin-right: .5rem;
     a {
       text-decoration: none;
     }
     .logo {
+      margin-right: -.25rem;
       max-height: 40px;
     }
     strong {
@@ -41,6 +39,16 @@
     text-decoration: none;
     white-space: nowrap;
   }
+  .social-links {
+    justify-content: flex-start;
+    padding: 0;
+    .social-link {
+      margin-right: .2rem;
+    }
+  }
+  .navbar-collapse {
+    margin-top: 2px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -51,6 +59,7 @@
 @media (min-width: 992px) {
   .navbar.container {
     max-width: 100%;
+    padding-left: 2rem;
   }
 }
 
@@ -58,8 +67,6 @@
    list-style: none;
    display: flex;
    justify-content: space-between;
-   .social-link {
-   }
  }
 
 .footer-links {
@@ -69,7 +76,7 @@
 
 // Jumbotron
 .jumbotron {
-  margin-top: 4rem;
+  margin-top: 6rem;
   text-align: center;
   overflow:hidden;
   -webkit-backface-visibility: hidden;
@@ -84,8 +91,11 @@
     margin-bottom: 0;
     font-family: 'Roboto';
     font-weight: 700;
-    font-size: 4rem;
+    font-size: 3rem;
     letter-spacing: -0.05em;
+    @media (min-width: 768px) {
+      font-size: 4rem;
+    }
   }
   h2 {
     margin: 0;
@@ -190,7 +200,8 @@
 }
 
 .page-container {
-  margin-top: 4rem;
+  margin-top: 6rem;
+  margin-bottom: .5rem;
   .nfs {
     margin-top: -1rem;
   }
