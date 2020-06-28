@@ -24,16 +24,22 @@ const Painting = ({
       <div className="container page-container">
         <article className="painting-details">
           <h1>{title}</h1>
-          <div className="row">
-            <div className="col col-sm-12 col-md-6">
+          <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
+
+            <div>
               <div className="card" key={identifier}>
                 <div className="view overlay">
                   <Image className="card card-img-top" fluid={fluid} alt={title} />
                 </div>
+                <div className="back-btn">
+                  <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action btn-danger">
+                    <i className="fas fa-chevron-left"></i>
+                  </Link>
+                </div>
               </div>
             </div>
 
-            <div className="col col-sm-12 col-md-6">
+            <div className="buy-or-inquire">
               { (date && size) && <p>{date} - {size}</p> }
               { (!(date && size) && date) && <p>{date}</p> }
               { (!(date && size) && size) && <p>{size}</p> }
@@ -48,12 +54,8 @@ const Painting = ({
               { (price <= 100) && <div className="inquire">
                 <button type="button" className="btn btn-inquire btn-info btn-rounded">Inquire</button></div> }
 
-              <div className="back-btn">
-                <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action btn-danger">
-                  <i className="fas fa-chevron-left"></i>
-                </Link>
-              </div>
             </div>
+
           </div>
         </article>
       </div>

@@ -42,11 +42,17 @@ const Project2020Card = ({
       <div className="container page-container">
         <article className="p2020-card-details">
           <h1>{title} : Artist-Autographed Card</h1>
-          <div className="row">
-            <div className="col col-sm-12 col-md-6">
+          <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
+
+            <div>
               <div className="card" key={identifier}>
                 <div className="view overlay">
                   <Image className="card card-img-top" fluid={fluid} alt={title} />
+                </div>
+                <div className="back-btn">
+                  <Link to={`/merch/topps2020/`} state={{ player: player.name }} className="btn-floating btn-action btn-danger">
+                    <i className="fas fa-chevron-left"></i>
+                  </Link>
                 </div>
               </div>
               <aside className="card-details">
@@ -54,7 +60,7 @@ const Project2020Card = ({
               </aside>
             </div>
 
-            <div className="col col-sm-12 col-md-6">
+            <div className="buy-or-inquire">
               <h2>{subtitle}</h2>
               <div className="card-description">
                 {documentToReactComponents(desc.json, options)}
@@ -66,12 +72,8 @@ const Project2020Card = ({
               { (price <= 10) && <div className="inquire">
                 <button type="button" className="btn btn-inquire btn-info btn-rounded">Inquire</button></div> }
 
-              <div className="back-btn">
-                <Link to={`/merch/topps2020/`} state={{ player: player.name }} className="btn-floating btn-action btn-danger">
-                  <i className="fas fa-chevron-left"></i>
-                </Link>
-              </div>
             </div>
+
           </div>
         </article>
       </div>
