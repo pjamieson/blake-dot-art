@@ -27,14 +27,6 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sass",
     "gatsby-plugin-sharp",
-    {
-      resolve: `gatsby-source-contentful`,
-      options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        // Learn about environment variables: https://gatsby.dev/env-vars
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-      },
-    },
     // You can have multiple instances of gatsby-source-filesystem
     // to read source nodes from different locations on the filesystem.
     {
@@ -44,18 +36,22 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    /*{
+    {
       resolve: "gatsby-source-strapi",
       options: {
         apiURL: process.env.API_URL || "http://localhost:1337",
         contentTypes: [
-          // List of the Content Types you want to be able to request from Gatsby.
-          "article",
-          "category",
+          "client",
+          "painting",
+          "project-2020-card",
+          "project-2020-player",
+          "sport",
+          "subgenre",
+          "team-member",
         ],
         queryLimit: 1000,
       },
-    },*/
+    },
     "gatsby-transformer-sharp",
   ],
 }

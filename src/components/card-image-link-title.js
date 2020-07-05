@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from "gatsby"
 import Image from "gatsby-image"
 
-const CardTitleLink = ({ card }) => {
+const CardImageLinkTitle = ({ card }) => {
   const link = `/${(card.available ? 'gallery' : 'portfolio')}/${card.subgenre.slug}/${card.slug}`
   return (
     <div className="card" key={card.identifier}>
 
       <div className="view overlay">
         <div>
-          <Image className="card-img-top" fluid={card.image.fluid} alt={card.title} />
+          <Image className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
           <Link to={link}>
             <div className="mask rgba-white-slight"></div>
           </Link>
@@ -30,4 +30,4 @@ const CardTitleLink = ({ card }) => {
   )
 }
 
-export default CardTitleLink;
+export default CardImageLinkTitle;

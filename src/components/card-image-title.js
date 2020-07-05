@@ -1,13 +1,13 @@
 import React from 'react';
 import Image from "gatsby-image"
 
-const CardTitle = ({ card }) => {
+const CardImageTitle = ({ card }) => {
   return (
-    <div className="card" key={card.identifier}>
+    <div className="card">
 
       <div className="view overlay">
         <div>
-          <Image className="card-img-top" fluid={card.image.fluid} alt={card.title} />
+          <Image className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
         </div>
       </div>
 
@@ -19,4 +19,4 @@ const CardTitle = ({ card }) => {
   )
 }
 
-export default CardTitle;
+export default CardImageTitle;

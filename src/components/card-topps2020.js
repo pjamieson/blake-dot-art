@@ -9,19 +9,19 @@ const CardTopps2020 = ({ card }) => {
 
       <div className="view overlay">
         <div>
-          <Image className="card-img-top" fluid={card.image.fluid} alt={card.title} />
-          { (card.qtyAvail > 0) &&
+          <Image className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
+          { (card.qty > 0) &&
             <Link to={link}>
               <div className="mask rgba-white-slight"></div>
             </Link>
           }
         </div>
-        { (card.qtyAvail === 0 && card.qtyAvail !== -1) &&
+        { (card.qty === 0 && card.qty !== -1) &&
           <button type="button" className="btn btn-sold btn-danger btn-rounded">Sold Out</button>
         }
       </div>
 
-      { (card.qtyAvail > 0) &&
+      { (card.qty > 0) &&
         <div>
           <Link to={link} className="btn-floating btn-action btn-success">
             <i className="fas fa-chevron-right pl-1"></i>

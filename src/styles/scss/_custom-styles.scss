@@ -9,6 +9,9 @@
     width: 100%;
     max-width: 1100px;
   }
+  .team {
+    max-width: 960px;
+  }
 }
 .site-content {
   flex-grow: 1;
@@ -70,7 +73,7 @@
 
 // Jumbotron
 .jumbotron {
-  min-height: 15rem;
+  //min-height: 15rem;
   margin-top: 5rem;
   text-align: center;
   overflow:hidden;
@@ -108,7 +111,7 @@
     @media (min-width: 640px) {
       font-size: 1.8rem;
     }
-    @media (min-width: 640px) {
+    @media (min-width: 768px) {
       font-size: 2rem;
     }
   }
@@ -141,11 +144,40 @@
   .tag3 {
     animation: tagreveal3 5s;
   }
-  .featured-link {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
+  .actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     animation: featuredreveal3 5s;
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .you-tube-plug {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      a {
+        padding-left: 0;
+      }
+      .pitch {
+        margin-top: 1rem;
+        h4 {
+          margin: .5rem 0 0 0;
+        }
+        p {
+          margin: 0;
+        }
+      }
+    }
+    .featured-link {
+      margin-bottom: 1rem 0;
+      height: fit-content;
+    }
   }
 }
 
@@ -186,6 +218,11 @@
 
 .front-content {
   padding: 0px;
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 1s; /* Firefox < 16 */
+      -ms-animation: fadein 1s; /* Internet Explorer */
+       -o-animation: fadein 1s; /* Opera < 12.1 */
+          animation: fadein 1s;
   .intro-content {
     margin: -1rem 0 1rem 0;
     padding: 1.5rem 1.5rem .75rem 1.5rem;
@@ -222,12 +259,46 @@
 .page-container {
   margin-top: 5rem;
   margin-bottom: .5rem;
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 1s; /* Firefox < 16 */
+      -ms-animation: fadein 1s; /* Internet Explorer */
+       -o-animation: fadein 1s; /* Opera < 12.1 */
+          animation: fadein 1s;
   .nfs {
     margin-top: -1rem;
   }
   .lead {
     text-align: center;
   }
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .gallery, .p2020 {
@@ -314,7 +385,9 @@
     padding: 1rem 1rem 0 1rem;
   }
   .buy-or-inquire {
-    padding-right: 2rem;
+    @media (min-width: 640px) {
+      padding-right: 2rem;
+    }
     .card-description {
       padding: 0 1rem;
     }
@@ -396,7 +469,7 @@
       }
     }
     p {
-      margin: .8rem 0;
+      margin: .8rem 0 0 0;
     }
     .img-container {
       padding: 0 2rem 1rem 0;
@@ -407,6 +480,15 @@
         margin: 2px 0;
         font-size: .8rem;
         color: grey;
+      }
+    }
+    .team-card {
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: row;
+      .img-container {
+        padding-bottom: 0;
       }
     }
   }

@@ -2,11 +2,11 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
-import CardTitle from "../../components/card-title"
+import CardImageTitle from "../../components/card-image-title"
 
 const OtherPortraitsPortfolioPage = ({ data }) => {
   const {
-    allContentfulPainting: { nodes: paintings },
+    allStrapiPainting: { nodes: paintings },
   } = data
 
   return (
@@ -18,7 +18,7 @@ const OtherPortraitsPortfolioPage = ({ data }) => {
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {paintings.map(card => {
               return <div key={card.identifier}>
-                <CardTitle card={card} />
+                <CardImageTitle card={card} />
               </div>
             })}
           </div>
@@ -30,19 +30,24 @@ const OtherPortraitsPortfolioPage = ({ data }) => {
 
 export const query = graphql`
   {
-    allContentfulPainting(
+    allStrapiPainting(
       filter: {
         subgenre: {name: {eq: "Other Portraits"}},
         portfolio: {eq: true},
         available: {eq: false}
+      },
+      sort: {
+        fields: order, order: ASC
       }
     ) {
       nodes {
         identifier
         title
         image {
-          fluid {
-            ...GatsbyContentfulFluid
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
       }

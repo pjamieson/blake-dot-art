@@ -6,8 +6,8 @@ import CardTopps2020 from "../../components/card-topps2020"
 
 const ToppsProject2020Page = ({ location, data }) => {
   const {
-    allContentfulProject2020Player: { nodes: players },
-    allContentfulToppsP2020Card: { nodes: p2020cards }
+    allStrapiProject2020Player: { nodes: players },
+    allStrapiProject2020Card: { nodes: p2020cards }
   } = data
 
   // If passed a player, open to that player. Otherwise open first player on list.
@@ -35,7 +35,7 @@ const ToppsProject2020Page = ({ location, data }) => {
             <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
               {p2020cards.map((card) => {
                 return (
-                  card.player && card.player.name === players[value].name ?
+                  card.project_2020_player && card.project_2020_player.name === players[value].name ?
                    <div className="p2020"><CardTopps2020 card={card} /></div> : null
                 )
               })}
@@ -50,7 +50,7 @@ const ToppsProject2020Page = ({ location, data }) => {
 
 export const query = graphql`
   {
-    allContentfulProject2020Player(
+    allStrapiProject2020Player(
       sort: {
         order: DESC, fields: order
       }
@@ -59,25 +59,27 @@ export const query = graphql`
         name
       }
     },
-    allContentfulToppsP2020Card(
+    allStrapiProject2020Card(
       sort: {
         order: ASC, fields: order
       }
     ) {
       nodes {
         identifier
-        player {
+        project_2020_player {
           name
         }
         image {
-          fluid {
-            ...GatsbyContentfulFluid
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
         title
         subtitle
         limitation
-        qtyAvail
+        qty
       }
     }
   }

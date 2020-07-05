@@ -1,100 +1,67 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
-
-import Layout from "../../components/layout"
+import ReactMarkdown from "react-markdown";
 import { FaTwitter } from "react-icons/fa"
 
-// Begin needed for Rich Text
-import { BLOCKS, MARKS } from "@contentful/rich-text-types"
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-
-const Bold = ({ children }) => <span className="bold">{children}</span>
-const Text = ({ children }) => <p className="align-center">{children}</p>
-
-const options = {
-  renderMark: {
-    [MARKS.BOLD]: text => <Bold>{text}</Bold>,
-  },
-  renderNode: {
-    [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
-  },
-}
-// End needed for Rich Text
+import Layout from "../../components/layout"
 
 const TeamPage = ({ data }) => {
   const {
-    allContentfulTeamMember: { nodes: members }
+    allStrapiTeamMember: { nodes: members }
   } = data
-
-  const [value, setValue] = React.useState(0)
-
-  const {
-    name,
-    image,
-    imageCredit = {},
-    bio,
-    twitter = {}
-  } = members[value]
 
   return (
     <Layout>
-      <div className="container page-container">
+      <div className="container page-container team">
         <h1 className="page-head">#TeamBlake</h1>
-
         <section className="members">
-
-            <div className="btn-container">
-              <hr/>
-              {members.map((member, index) => {
-                return (
-                  <div key={index}>
-                    <button className={`std-btn ${index === value && "active-btn"}`} onClick={() => setValue(index)}>{member.name}</button>
-                  </div>
-                )
-              })}
-            </div>
-
-            <article className="content-container">
-              <div className="img-container">
-                  <Img fluid={image.fluid} className="card" />
-                  { imageCredit && <p>{imageCredit}</p> }
-              </div>
-              <div>
-                <h2>
-                  {name}
-                  { twitter &&
-                    <a href={twitter} className="social-link nav-link waves-effect waves-light" target="_blank" rel="noreferrer">
-                      <FaTwitter className="social-icon fa-sm"></FaTwitter>
-                    </a>
+          <article className="content-container">
+            {members.map(member => {
+              return <div className="card team-card" key={member.id}>
+                <div className="img-container">
+                  <Img fluid={member.image.childImageSharp.fluid} className="card" />
+                  { member.image_credit && <p>{member.image_credit}</p> }
+                </div>
+                <div>
+                  <h2>
+                    {member.name}
+                    { member.twitter_url &&
+                      <a href={member.twitter_url} className="social-link nav-link waves-effect waves-light" target="_blank" rel="noreferrer">
+                        <FaTwitter className="social-icon fa-sm"></FaTwitter>
+                      </a>
                     }
-                </h2>
-                {documentToReactComponents(bio.json, options)}
+                  </h2>
+                  <ReactMarkdown source={member.bio} />
+                </div>
               </div>
-            </article>
-
+            })}
+          </article>
         </section>
       </div>
-
     </Layout>
   )
 }
 
 export const query = graphql`
   {
-    allContentfulTeamMember(sort: {fields: order}) {
+    allStrapiTeamMember(
+      sort: {fields: order},
+      filter: {name: {ne: "Blake Jamieson"}}
+    ) {
       nodes {
+        id
         name
         image {
-          fluid {
-            ...GatsbyContentfulFluid
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
-        imageCredit
-        bio {
-          json
-        }
-        twitter
+        image_credit
+        twitter_url
+        bio
       }
     }
   }

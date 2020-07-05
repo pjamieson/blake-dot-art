@@ -1,16 +1,17 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import Jumbotron from "../components/jumbotron"
-import CardImagelink from "../components/card-imagelink"
+import CardImagelink from "../components/card-image-link"
+
+import blake from "../images/BlakeCrownMask.jpg"
+
 
 const IndexPage = ({ data }) => {
   const {
-    allContentfulAsset: { nodes: image },
-    allContentfulToppsP2020Card: { nodes: p2020cards },
-    allContentfulPainting: { nodes: paintings },
+    allStrapiProject2020Card: { nodes: p2020cards },
+    allStrapiPainting: { nodes: paintings },
   } = data
 
   return (
@@ -21,7 +22,7 @@ const IndexPage = ({ data }) => {
 
           <section className="intro-content">
             <div className="image-container">
-              <Img fluid={image[0].fluid} className="card" />
+              <img className="card" src={blake} alt="Blake wearing crown and mask" />
             </div>
             <h2>Welcome to blake [dot] art!</h2>
             <h3>My name is Blake. I paint. Mostly.</h3>
@@ -32,7 +33,7 @@ const IndexPage = ({ data }) => {
               Explore the menu links above for a more granular breakdown of my subjects and styles, with each linked page offering more examples.
             </p>
             <p className="lead dark-grey-text">
-              <strong><em>Please note:</em></strong> Pieces shown in the <strong>Portfolio</strong> section have already been sold or are not for sale. Only pieces and items shown in the <strong>Gallery</strong> and <strong>Merch</strong> sections are available for purchase.
+              <strong><em>Please note:</em></strong> Works shown in the <strong>Portfolio</strong> section have already been sold or are not for sale. Only items shown in the <strong>Gallery</strong> and <strong>Merch</strong> sections are available for purchase.
             </p>
             <h3>Thanks for stopping by.</h3>
           </section>
@@ -60,36 +61,31 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   {
-    allContentfulAsset(
-      filter: {
-        title: {eq: "Blake Jamieson - Crown & Mask"}}
-    ) {
-      nodes {
-        fluid {
-          ...GatsbyContentfulFluid
-        }
-      }
-    },
-    allContentfulToppsP2020Card(
+    allStrapiProject2020Card(
       filter: {
         feature: {eq: true}
       }
     ) {
       nodes {
         identifier
-        player {
+        player: project_2020_player {
           name
         }
         image {
-          fluid {
-            ...GatsbyContentfulFluid
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
       }
     },
-    allContentfulPainting(
+    allStrapiPainting(
       filter: {
         feature: {eq: true}
+      },
+      sort: {
+        fields: order, order: ASC
       }
     ) {
       nodes {
@@ -102,8 +98,10 @@ export const query = graphql`
           name
         }
         image {
-          fluid {
-            ...GatsbyContentfulFluid
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
         available

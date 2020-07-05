@@ -2,11 +2,11 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
-import CardTitle from "../../components/card-title"
+import CardImageTitle from "../../components/card-image-title"
 
 const ClientsPage = ({ data }) => {
   const {
-    allContentfulClient: { nodes: clients },
+    allStrapiClient: { nodes: clients },
   } = data
 
   return (
@@ -17,7 +17,7 @@ const ClientsPage = ({ data }) => {
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {clients.map(card => {
               return <div key={card.id}>
-                <CardTitle card={card} />
+                <CardImageTitle card={card} />
               </div>
             })}
           </div>
@@ -29,16 +29,18 @@ const ClientsPage = ({ data }) => {
 
 export const query = graphql`
   {
-    allContentfulClient(
+    allStrapiClient(
       sort: {
         order: ASC, fields: order
       }
     ) {
       nodes {
-        identifier: id
+        id
         image {
-          fluid {
-            ...GatsbyContentfulFluid
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
         title: caption

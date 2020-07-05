@@ -2,12 +2,12 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
-import CardTitle from "../../components/card-title"
+import CardImageTitle from "../../components/card-image-title"
 
 const AthletePortraitsPortfolioPage = ({ location, data }) => {
   const {
-    allContentfulSport: { nodes: sports },
-    allContentfulPainting: { nodes: paintings },
+    allStrapiSport: { nodes: sports },
+    allStrapiPainting: { nodes: paintings },
   } = data
 
   // If passed a sport, open to that sport. Otherwise open first sport on list.
@@ -37,7 +37,7 @@ const AthletePortraitsPortfolioPage = ({ location, data }) => {
               {paintings.map((card) => {
                 return (
                   card.sport && card.sport.name === sports[value].name ?
-                   <div key={card.identifier}><CardTitle card={card} /></div> : null
+                   <div key={card.identifier}><CardImageTitle card={card} /></div> : null
                 )
               })}
             </div>
@@ -51,7 +51,7 @@ const AthletePortraitsPortfolioPage = ({ location, data }) => {
 
 export const query = graphql`
   {
-    allContentfulSport(
+    allStrapiSport(
       sort: {
         order: ASC, fields: order
       }
@@ -60,19 +60,24 @@ export const query = graphql`
         name
       }
     },
-    allContentfulPainting(
+    allStrapiPainting(
       filter: {
         subgenre: {name: {eq: "Athlete Portraits"}},
         portfolio: {eq: true},
         available: {eq: false}
+      },
+      sort: {
+        fields: order, order: ASC
       }
     ) {
       nodes {
         identifier
         title
         image {
-          fluid {
-            ...GatsbyContentfulFluid
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
         sport {

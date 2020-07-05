@@ -1,38 +1,22 @@
 import React from "react"
 import Image from "gatsby-image"
 import { Link, graphql } from "gatsby"
+import ReactMarkdown from "react-markdown";
 
 import Layout from "../components/layout"
-
-// Begin needed for Rich Text
-import { BLOCKS, MARKS } from "@contentful/rich-text-types"
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-
-const Bold = ({ children }) => <span className="bold">{children}</span>
-const Text = ({ children }) => <p className="align-center">{children}</p>
-
-const options = {
-  renderMark: {
-    [MARKS.BOLD]: text => <Bold>{text}</Bold>,
-  },
-  renderNode: {
-    [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
-  },
-}
-// End needed for Rich Text
 
 const Project2020Card = ({
   data: {
     p2020card: {
       identifier,
-      player,
+      project_2020_player: player,
       title,
       subtitle = {},
       limitation = {},
-      image: { fluid },
-      desc = {},
-      det = {},
-      qtyAvail,
+      image: { childImageSharp: { fluid }},
+      description = {},
+      details = {},
+      qty,
       price,
     },
   },
@@ -56,14 +40,14 @@ const Project2020Card = ({
                 </div>
               </div>
               <aside className="card-details">
-                {documentToReactComponents(det.json, options)}
+                <ReactMarkdown source={details} />
               </aside>
             </div>
 
             <div className="buy-or-inquire">
               <h2>{subtitle}</h2>
               <div className="card-description">
-                {documentToReactComponents(desc.json, options)}
+                <ReactMarkdown source={description} />
               </div>
 
               { (price > 10) && <div className="buy-now">
@@ -83,26 +67,24 @@ const Project2020Card = ({
 
 export const query = graphql`
   query GetSingle2020Card($slug: String) {
-    p2020card: contentfulToppsP2020Card(identifier: {eq: $slug}) {
+    p2020card: strapiProject2020Card(identifier: {eq: $slug}) {
       identifier
-      player {
+      project_2020_player {
         name
       }
       title
       subtitle
       limitation
       image {
-        fluid {
-          ...GatsbyContentfulFluid
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
         }
       }
-      desc: description {
-        json
-      }
-      det: details {
-        json
-      }
-      qtyAvail
+      description
+      details
+      qty
       price
     }
   }

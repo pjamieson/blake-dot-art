@@ -9,7 +9,7 @@ const CardImagelink = ({ location, card }) => {
     <div className="card" key={card.identifier}>
       <div className="view overlay">
         <div>
-          <Image className="card-img-top" fluid={card.image.fluid} alt={card.title} />
+          <Image className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
           {(!card.sport && !card.player) && <Link to={link}>
             <div className="mask rgba-white-slight"></div></Link>}
           {(card.sport) && <Link to={link} state={{ sport: card.sport.name }}>

@@ -3,7 +3,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
     query GetAvailableItems {
-      paintings: allContentfulPainting(
+      paintings: allStrapiPainting(
         filter: {available: {eq: true}}) {
         nodes {
           subgenre {
@@ -12,8 +12,8 @@ exports.createPages = async ({ graphql, actions }) => {
           slug
         }
       },
-      p2020cards: allContentfulToppsP2020Card(
-        filter: {qtyAvail: {gt: 0}}) {
+      p2020cards: allStrapiProject2020Card(
+        filter: {qty: {gt: 0}}) {
         nodes {
           slug: identifier
         }

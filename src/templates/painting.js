@@ -1,6 +1,7 @@
 import React from "react"
 import Image from "gatsby-image"
 import { Link, graphql } from "gatsby"
+import ReactMarkdown from "react-markdown";
 
 import Layout from "../components/layout"
 
@@ -9,12 +10,12 @@ const Painting = ({
     painting: {
       identifier,
       title,
-      image: { fluid },
+      image: { childImageSharp: { fluid }},
       subgenre,
       date = {},
       size = {},
       medium = {},
-      desc = {},
+      description = {},
       price,
     },
   },
@@ -46,7 +47,7 @@ const Painting = ({
 
               { medium && <p>{medium}</p> }
 
-              { desc && <p>{desc.description}</p> }
+              { description && <ReactMarkdown source={description} /> }
 
               { (price > 100) && <div className="buy-now">
                 <h3 className="price">${price}</h3><button type="button" className="btn btn-buy-now btn-success btn-rounded">Buy Now <i className="fas fa-chevron-right"></i></button></div> }
@@ -65,12 +66,14 @@ const Painting = ({
 
 export const query = graphql`
   query GetSinglePainting($slug: String) {
-    painting: contentfulPainting(slug: {eq: $slug}) {
+    painting: strapiPainting(slug: {eq: $slug}) {
       identifier
       title
       image {
-        fluid {
-          ...GatsbyContentfulFluid
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
         }
       }
       subgenre {
@@ -79,9 +82,7 @@ export const query = graphql`
       date
       size
       medium
-      desc: description {
-        description
-      }
+      description
       price
     }
   }

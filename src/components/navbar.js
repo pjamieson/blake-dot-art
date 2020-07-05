@@ -144,6 +144,9 @@ class Navbar extends Component {
                   </MDBDropdownToggle>
                   <MDBDropdownMenu className="dropdown-default">
                     <MDBDropdownItem>
+                      <Link className="menu-link" to="/about/blake/">Blake</Link>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem>
                       <Link className="menu-link" to="/about/team/">#TeamBlake</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
