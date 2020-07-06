@@ -39,7 +39,7 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: process.env.STRAPI_API_URL || "http://localhost:1337",
+        apiURL: "http://ec2-18-188-152-90.us-east-2.compute.amazonaws.com:1337",
         contentTypes: [
           "client",
           "painting",
