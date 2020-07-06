@@ -394,14 +394,14 @@
     .buy-now {
       display: flex;
       flex-direction: row;
-      justify-content:flex-end;
+      justify-content:flex-start;
       align-items: center;
       padding-top: 1rem;
       i {
         padding-left: .5rem;
       }
       .price {
-        margin: 0 1rem;
+        margin: 0 1rem 0 0;
         font-size: 2rem;
       }
       .btn-inquire, .btn-buy-now {
@@ -411,14 +411,13 @@
     .inquire {
       display: flex;
       flex-direction: row;
-      justify-content:flex-end;
+      justify-content: flex-start;
       align-items: center;
       padding-top: 1rem;
     }
   }
 }
 
-// #TeamBlake
 .members, .sports, .topps {
   display: flex;
   .btn-container {

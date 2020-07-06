@@ -41,20 +41,21 @@ const Painting = ({
             </div>
 
             <div className="buy-or-inquire">
-              { (date && size) && <p>{date} - {size}</p> }
-              { (!(date && size) && date) && <p>{date}</p> }
-              { (!(date && size) && size) && <p>{size}</p> }
+              <div className="card-description">
+                { (date && size) && <p>{date} - {size}</p> }
+                { (!(date && size) && date) && <p>{date}</p> }
+                { (!(date && size) && size) && <p>{size}</p> }
 
-              { medium && <p>{medium}</p> }
+                { medium && <p>{medium}</p> }
 
-              { description && <ReactMarkdown source={description} /> }
+                { description && <ReactMarkdown source={description} /> }
 
-              { (price > 100) && <div className="buy-now">
-                <h3 className="price">${price}</h3><button type="button" className="btn btn-buy-now btn-success btn-rounded">Buy Now <i className="fas fa-chevron-right"></i></button></div> }
+                { (price > 100) && <div className="buy-now">
+                  <h3 className="price">${price}</h3><button type="button" className="btn btn-buy-now btn-success btn-rounded">Buy Now <i className="fas fa-chevron-right"></i></button></div> }
 
-              { (price <= 100) && <div className="inquire">
-                <button type="button" className="btn btn-inquire btn-info btn-rounded">Inquire</button></div> }
-
+                { (price <= 100) && <div className="inquire">
+                  <button type="button" className="btn btn-inquire btn-info btn-rounded">Inquire</button></div> }
+              </div>
             </div>
 
           </div>
