@@ -36,7 +36,8 @@ const ToppsProject2020Page = ({ location, data }) => {
               {p2020cards.map((card) => {
                 return (
                   card.project_2020_player && card.project_2020_player.name === players[value].name ?
-                   <div className="p2020"><CardTopps2020 card={card} /></div> : null
+                   <div className="p2020" key={card.identifier}>
+                    <CardTopps2020 card={card} /></div> : null
                 )
               })}
             </div>

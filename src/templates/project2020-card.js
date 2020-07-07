@@ -5,6 +5,8 @@ import ReactMarkdown from "react-markdown";
 
 import Layout from "../components/layout"
 
+import { addToCart } from "../utils/cart"
+
 const Project2020Card = ({
   data: {
     p2020card: {
@@ -16,7 +18,7 @@ const Project2020Card = ({
       image: { childImageSharp: { fluid }},
       description = {},
       details = {},
-      qty,
+      qty: qtyAvail,
       price,
     },
   },
@@ -27,7 +29,6 @@ const Project2020Card = ({
         <article className="p2020-card-details">
           <h1>{title} : Artist-Autographed Card</h1>
           <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
-
             <div>
               <div className="card" key={identifier}>
                 <div className="view overlay">
@@ -43,21 +44,25 @@ const Project2020Card = ({
                 <ReactMarkdown source={details} />
               </aside>
             </div>
-
             <div className="buy-or-inquire">
-              <h2>{subtitle}</h2>
               <div className="card-description">
+                <h2>{subtitle}</h2>
                 <ReactMarkdown source={description} />
+                { (price > 10) && <div className="buy-now">
+                    <h3 className="price">${price}</h3>
+                    <button type="button" className="btn btn-buy-now btn-success btn-rounded" onClick={() => addToCart('p2020card', identifier)}>
+                      <i className="fas fa-cart-plus"></i>Add to Cart
+                    </button>
+                  </div>
+                }
+                { (price <= 10) && <div className="inquire">
+                    <button type="button" className="btn btn-inquire btn-info btn-rounded">
+                      Inquire
+                    </button>
+                  </div>
+                }
               </div>
-
-              { (price > 10) && <div className="buy-now">
-                <h3 className="price">${price}</h3><button type="button" className="btn btn-buy-now btn-success btn-rounded">Buy Now <i className="fas fa-chevron-right"></i></button></div> }
-
-              { (price <= 10) && <div className="inquire">
-                <button type="button" className="btn btn-inquire btn-info btn-rounded">Inquire</button></div> }
-
             </div>
-
           </div>
         </article>
       </div>
