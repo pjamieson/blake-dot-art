@@ -9,7 +9,7 @@
     width: 100%;
     max-width: 1100px;
   }
-  .team {
+  .team, .cart {
     max-width: 960px;
   }
 }
@@ -391,7 +391,7 @@
     .card-description {
       padding: 0 1rem;
     }
-    .buy-now {
+    .add-to-cart {
       display: flex;
       flex-direction: row;
       justify-content:flex-start;
@@ -404,7 +404,7 @@
         margin: 0 1rem 0 0;
         font-size: 2rem;
       }
-      .btn-inquire, .btn-buy-now {
+      .btn-inquire, .btn-add-to-cart {
         padding: .8rem 1rem;
       }
     }
@@ -493,8 +493,135 @@
   }
 }
 
-.sports {
-  .btn-container {
-    width: 12rem;
+.cart {
+  .product-table {
+    margin-bottom: 0;
+    .table-head {
+      border-radius: 10px;
+      font-weight: 500;
+      color: #fafafa;
+    }
+    th {
+      color: #fafafa;
+      &:first-of-type {
+        border-radius: 4px 0 0 0;
+      }
+      &:last-of-type {
+        border-radius: 0 4px 0 0;
+      }
+    }
   }
+  .card-body {
+    padding-bottom: 0;
+  }
+  .btn.btn-md {
+    padding: .5rem;
+    margin: 0 0 0 2rem;
+  }
+}
+
+.img-cell {
+  width: 5rem;
+  .cart-image {
+    min-width: 80px;
+  }
+}
+.item-cell {
+  padding-left: 0;
+  .cart-item {
+    h4, p {
+      margin: 0 10px 4px 0;
+    }
+  }
+}
+.item-price {
+  width: 6rem;
+  margin: 0 1rem;
+  font-size: 1rem;
+  font-weight: normal;
+}
+.qty-cell {
+  width: 122px;
+  .qty {
+    margin: 0;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: normal;
+  }
+  .number-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 122px;
+    height: 32px;
+    margin: 0 1.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    input[type="number"] {
+      width: 60px;
+      height: 30px;
+      margin: 0;
+      border: 1px solid #ced4da;
+      border-width: 0 1px;
+      font-size: 1rem;
+      text-align: center;
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+    button {
+      width: 30px;
+      height: 30px;
+      border: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin: 0;
+    }
+    button.minus {
+      border-radius: 8px 0 0 8px;
+    }
+    button.plus {
+      border-radius: 0 8px 8px 0;
+    }
+  }
+}
+.remove-cell {
+  width: 2rem;
+  margin: 0 1rem;
+}
+
+.checkout-open {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: -22px;
+}
+
+
+.StripeElement {
+  height: 40px;
+  padding: 10px 12px;
+  width: 100%;
+  color: #32325d;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }

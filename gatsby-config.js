@@ -39,15 +39,15 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: "http://ec2-18-188-152-90.us-east-2.compute.amazonaws.com:1337",
+        apiURL: "http://localhost:1337",
         contentTypes: [
           "client",
           "painting",
-          "project-2020-card",
           "project-2020-player",
           "sport",
           "subgenre",
           "team-member",
+          "tradingcard",
         ],
         queryLimit: 1000,
       },
@@ -55,3 +55,5 @@ module.exports = {
     "gatsby-transformer-sharp",
   ],
 }
+
+// http://ec2-18-188-152-90.us-east-2.compute.amazonaws.com:1337

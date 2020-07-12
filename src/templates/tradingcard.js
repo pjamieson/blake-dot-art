@@ -7,9 +7,10 @@ import Layout from "../components/layout"
 
 import { addToCart } from "../utils/cart"
 
-const Project2020Card = ({
+const Tradingcard = ({
   data: {
     p2020card: {
+      id,
       identifier,
       project_2020_player: player,
       title,
@@ -23,6 +24,19 @@ const Project2020Card = ({
     },
   },
 }) => {
+  const strapiServiceName = "tradingcard"
+  const qty = 1 //initialize with 1 of item
+  const cartItem = {
+    strapiServiceName,
+    id,
+    identifier,
+    title,
+    subtitle,
+    fluid,
+    qty,
+    qtyAvail,
+    price
+  }
   return (
     <Layout>
       <div className="container page-container">
@@ -30,7 +44,7 @@ const Project2020Card = ({
           <h1>{title} : Artist-Autographed Card</h1>
           <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
             <div>
-              <div className="card" key={identifier}>
+              <div className="card" key={id}>
                 <div className="view overlay">
                   <Image className="card card-img-top" fluid={fluid} alt={title} />
                 </div>
@@ -48,9 +62,10 @@ const Project2020Card = ({
               <div className="card-description">
                 <h2>{subtitle}</h2>
                 <ReactMarkdown source={description} />
-                { (price > 10) && <div className="buy-now">
+                { (price > 10) &&
+                  <div className="buy-now">
                     <h3 className="price">${price}</h3>
-                    <button type="button" className="btn btn-buy-now btn-success btn-rounded" onClick={() => addToCart('p2020card', identifier)}>
+                    <button type="button" className="btn btn-add-to-cart btn-success btn-rounded" onClick={() => addToCart(cartItem)}>
                       <i className="fas fa-cart-plus"></i>Add to Cart
                     </button>
                   </div>
@@ -70,9 +85,12 @@ const Project2020Card = ({
   )
 }
 
+export default Tradingcard
+
 export const query = graphql`
-  query GetSingle2020Card($slug: String) {
-    p2020card: strapiProject2020Card(identifier: {eq: $slug}) {
+  query GetSingleTradingcard($slug: String) {
+    p2020card: strapiTradingcard(identifier: {eq: $slug}) {
+      id: strapiId
       identifier
       project_2020_player {
         name
@@ -94,5 +112,3 @@ export const query = graphql`
     }
   }
 `
-
-export default Project2020Card

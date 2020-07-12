@@ -12,7 +12,7 @@ exports.createPages = async ({ graphql, actions }) => {
           slug
         }
       },
-      p2020cards: allStrapiProject2020Card(
+      p2020cards: allStrapiTradingcard(
         filter: {qty: {gt: 0}}) {
         nodes {
           slug: identifier
@@ -45,7 +45,7 @@ exports.createPages = async ({ graphql, actions }) => {
   p2020cards.forEach((p2020card) => {
     createPage({
       path: `/merch/topps2020/${p2020card.slug}`,
-      component: path.resolve(`./src/templates/project2020-card.js`),
+      component: path.resolve(`./src/templates/tradingcard.js`),
       context: {
         slug: p2020card.slug,
       },

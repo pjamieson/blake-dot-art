@@ -5,9 +5,12 @@ import ReactMarkdown from "react-markdown";
 
 import Layout from "../components/layout"
 
+import { addToCart } from "../utils/cart"
+
 const Painting = ({
   data: {
     painting: {
+      id,
       identifier,
       title,
       image: { childImageSharp: { fluid }},
@@ -20,6 +23,21 @@ const Painting = ({
     },
   },
 }) => {
+  const strapiServiceName = "painting"
+  const subtitle = "Origial Painting by Blake Jamieson"
+  const qty = 1 //initialize with 1 of item
+  const qtyAvail = 1 // there's only one of each painting available
+  const cartItem = {
+    strapiServiceName,
+    id,
+    identifier,
+    title,
+    subtitle,
+    fluid,
+    qty,
+    qtyAvail,
+    price
+  }
   return (
     <Layout>
       <div className="container page-container">
@@ -50,11 +68,20 @@ const Painting = ({
 
                 { description && <ReactMarkdown source={description} /> }
 
-                { (price > 100) && <div className="buy-now">
-                  <h3 className="price">${price}</h3><button type="button" className="btn btn-buy-now btn-success btn-rounded">Buy Now <i className="fas fa-chevron-right"></i></button></div> }
+                { (price > 100) &&
+                  <div className="add-to-cart">
+                    <h3 className="price">${price}</h3>
+                    <button type="button" className="btn btn-add-to-cart btn-success btn-rounded" onClick={() => addToCart(cartItem)}>
+                      <i className="fas fa-cart-plus"></i>Add to Cart
+                    </button>
+                  </div>
+                }
 
-                { (price <= 100) && <div className="inquire">
-                  <button type="button" className="btn btn-inquire btn-info btn-rounded">Inquire</button></div> }
+                { (price <= 100) &&
+                  <div className="inquire">
+                    <button type="button" className="btn btn-inquire btn-info btn-rounded">Inquire</button>
+                  </div>
+                }
               </div>
             </div>
 
@@ -65,9 +92,12 @@ const Painting = ({
   )
 }
 
+export default Painting
+
 export const query = graphql`
   query GetSinglePainting($slug: String) {
     painting: strapiPainting(slug: {eq: $slug}) {
+      id: strapiId
       identifier
       title
       image {
@@ -88,5 +118,3 @@ export const query = graphql`
     }
   }
 `
-
-export default Painting

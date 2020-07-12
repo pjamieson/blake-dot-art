@@ -10,7 +10,7 @@ import blake from "../images/BlakeCrownMask.jpg"
 
 const IndexPage = ({ data }) => {
   const {
-    allStrapiProject2020Card: { nodes: p2020cards },
+    allStrapiTradingcard: { nodes: p2020cards },
     allStrapiPainting: { nodes: paintings },
   } = data
 
@@ -61,7 +61,7 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   {
-    allStrapiProject2020Card(
+    allStrapiTradingcard(
       filter: {
         feature: {eq: true}
       }
