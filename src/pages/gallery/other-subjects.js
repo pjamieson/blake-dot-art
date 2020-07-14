@@ -17,7 +17,7 @@ const OtherSubjectsGalleryPage = ({ data }) => {
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {paintings.map(card => {
               return <div key={card.identifier}>
-                <CardImageLinkTitle card={card} />
+                {card.image && <CardImageLinkTitle card={card} /> }
               </div>
             })}
           </div>

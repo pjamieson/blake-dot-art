@@ -60,9 +60,9 @@ export default () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          cart: [
-            { id: 22, qty: 2 }
-          ]
+          cart: cart.map(item => (
+            {...item, ...{id: item.id}}
+          ))
         })
       })
       const data = await response.json()

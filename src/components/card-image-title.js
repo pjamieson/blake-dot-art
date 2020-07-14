@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from "gatsby-image"
+import Img from "gatsby-image"
 
 const CardImageTitle = ({ card }) => {
   return (
@@ -7,7 +7,7 @@ const CardImageTitle = ({ card }) => {
 
       <div className="view overlay">
         <div>
-          <Image className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
+          <Img className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
         </div>
       </div>
 

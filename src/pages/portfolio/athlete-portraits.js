@@ -37,7 +37,10 @@ const AthletePortraitsPortfolioPage = ({ location, data }) => {
               {paintings.map((card) => {
                 return (
                   card.sport && card.sport.name === sports[value].name ?
-                   <div key={card.identifier}><CardImageTitle card={card} /></div> : null
+                   <div key={card.identifier}>
+                    {card.image && <CardImageTitle card={card} /> }
+                  </div>
+                  : null
                 )
               })}
             </div>

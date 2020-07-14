@@ -60,6 +60,22 @@
     margin-top: 2px;
   }
 }
+.cart-link {
+  position: relative;
+  .cart-icon {
+    position: absolute;
+    top: .25rem;
+    right: 1rem;
+  }
+  .cart-count {
+    position: absolute;
+    top: -.75rem;
+    right: 1.65rem;
+    color: white;
+    font-size: .75rem;
+    font-weight: 500;
+  }
+}
 .social-links {
    list-style: none;
    display: flex;

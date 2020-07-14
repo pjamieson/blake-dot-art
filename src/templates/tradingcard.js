@@ -1,11 +1,15 @@
-import React from "react"
-import Image from "gatsby-image"
+import React, { useContext, useState } from "react"
+import Img from "gatsby-image"
 import { Link, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown";
 
+import { CartContext } from "../context/cart-context"
+
 import Layout from "../components/layout"
 
-import { addToCart } from "../utils/cart"
+import { formatPrice } from "../utils/format"
+
+import { MDBBadge } from "mdbreact"
 
 const Tradingcard = ({
   data: {
@@ -24,10 +28,12 @@ const Tradingcard = ({
     },
   },
 }) => {
-  const strapiServiceName = "tradingcard"
+  const { isInCart, addToCart } = useContext(CartContext)
+
+  const itemType = "tradingcard"
   const qty = 1 //initialize with 1 of item
   const cartItem = {
-    strapiServiceName,
+    itemType,
     id,
     identifier,
     title,
@@ -37,6 +43,7 @@ const Tradingcard = ({
     qtyAvail,
     price
   }
+  const [inCart, setInCart] = useState(isInCart(cartItem))
   return (
     <Layout>
       <div className="container page-container">
@@ -46,7 +53,7 @@ const Tradingcard = ({
             <div>
               <div className="card" key={id}>
                 <div className="view overlay">
-                  <Image className="card card-img-top" fluid={fluid} alt={title} />
+                  <Img className="card card-img-top" fluid={fluid} alt={title} />
                 </div>
                 <div className="back-btn">
                   <Link to={`/merch/topps2020/`} state={{ player: player.name }} className="btn-floating btn-action btn-danger">
@@ -62,14 +69,25 @@ const Tradingcard = ({
               <div className="card-description">
                 <h2>{subtitle}</h2>
                 <ReactMarkdown source={description} />
+
                 { (price > 10) &&
-                  <div className="buy-now">
-                    <h3 className="price">${price}</h3>
-                    <button type="button" className="btn btn-add-to-cart btn-success btn-rounded" onClick={() => addToCart(cartItem)}>
-                      <i className="fas fa-cart-plus"></i>Add to Cart
-                    </button>
+                  <div className="add-to-cart">
+                    <h3 className="price">{formatPrice(price)}</h3>
+                    {!inCart &&
+                      <button type="button" className="btn btn-add-to-cart btn-success btn-rounded" onClick={() => {
+                        addToCart(cartItem, qty)
+                        setInCart(true)
+                      }}>
+                        <i className="fas fa-cart-plus"></i>Add to Cart
+                      </button>
+                    }
                   </div>
                 }
+
+                {inCart &&
+                  <MDBBadge color="success">Added to Cart</MDBBadge>
+                }
+
                 { (price <= 10) && <div className="inquire">
                     <button type="button" className="btn btn-inquire btn-info btn-rounded">
                       Inquire

@@ -3,6 +3,10 @@ import Img from "gatsby-image"
 
 import { CartContext } from "../context/cart-context"
 
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import Checkout from "../components/checkout"
+
 import {
   MDBContainer,
   MDBRow,
@@ -15,22 +19,17 @@ import {
   MDBIcon
 } from 'mdbreact';
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Checkout from "../components/checkout"
-
-import { getCart, updateCart, cartSubtotal } from "../utils/cart"
+import { cartSubtotal } from "../utils/cart"
 import { formatPrice } from "../utils/format"
 
 const CartPage = () => {
-  const cart = getCart()
-
-  const cartctx = useContext(CartContext)
-  console.log("Cart.render context", cartctx)
+  const { cart, addToCart } = useContext(CartContext)
 
   const [, updateState] = useState()
   const forceUpdate = useCallback(() => updateState({}), [])
+
   const [showCheckout, setShowCheckout] = useState(false)
+
   return (
     <Layout>
       <SEO title="Cart" />
@@ -41,7 +40,7 @@ const CartPage = () => {
             <MDBCard className='w-100'>
               <MDBCardBody>
                 <div className="table-responsive">
-                  {cart.length > 0 &&
+                  {(cart && cart.length > 0) &&
                   <MDBTable className='product-table'>
                     <MDBTableHead color="default-color">
                       <tr>
@@ -78,7 +77,7 @@ const CartPage = () => {
                               <div className="number-input">
                                 <button type="button" className="minus"
                                   onClick={() => {
-                                    updateCart(item, -1)
+                                    addToCart(item, -1)
                                     forceUpdate()
                                   }}>
                                   <i className="fa fa-chevron-down" aria-hidden="true"> </i>
@@ -86,7 +85,7 @@ const CartPage = () => {
                                 <input type="number" value={item.qty} />
                                 <button type="button" className="plus"
                                   onClick={() => {
-                                    updateCart(item, 1)
+                                    addToCart(item, 1)
                                     forceUpdate()
                                   }}>
                                   <i className="fa fa-chevron-up" aria-hidden="true"></i>
@@ -101,7 +100,7 @@ const CartPage = () => {
                             <MDBBtn size="md">
                               <MDBIcon icon="trash-alt" size="lg" aria-hidden="true"
                                 onClick={() => {
-                                  updateCart(item, -(item.qty))
+                                  addToCart(item, -(item.qty))
                                   forceUpdate()
                                 }}>
                               </MDBIcon>
@@ -122,7 +121,7 @@ const CartPage = () => {
                     </MDBTableBody>
                   </MDBTable>
                   }
-                  {cart.length === 0 && <h3>Your cart is empty.</h3>}
+                  {(cart && cart.length === 0) && <h3>Your cart is empty.</h3>}
                 </div>
               </MDBCardBody>
             </MDBCard>
@@ -134,9 +133,9 @@ const CartPage = () => {
               </button>
             }
           </div>
-          {showCheckout &&
+          {/*showCheckout &&
             <Checkout />
-          }
+          */}
         </MDBContainer>
       </div>
     </Layout>

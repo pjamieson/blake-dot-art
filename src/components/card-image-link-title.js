@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "gatsby"
-import Image from "gatsby-image"
+import Img from "gatsby-image"
 
 const CardImageLinkTitle = ({ card }) => {
   const link = `/${(card.available ? 'gallery' : 'portfolio')}/${card.subgenre.slug}/${card.slug}`
@@ -9,7 +9,7 @@ const CardImageLinkTitle = ({ card }) => {
 
       <div className="view overlay">
         <div>
-          <Image className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
+          <Img className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
           <Link to={link}>
             <div className="mask rgba-white-slight"></div>
           </Link>

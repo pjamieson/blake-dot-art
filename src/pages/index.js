@@ -47,7 +47,7 @@ const IndexPage = ({ data }) => {
               })}
               {paintings.map(card => {
                 return <div key={card.identifier}>
-                  <CardImagelink card={card} />
+                  {card.image && <CardImagelink card={card} />}
                 </div>
               })}
             </div>

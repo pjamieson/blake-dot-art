@@ -18,7 +18,7 @@ const OtherPortraitsPortfolioPage = ({ data }) => {
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {paintings.map(card => {
               return <div key={card.identifier}>
-                <CardImageTitle card={card} />
+                {card.image && <CardImageTitle card={card} /> }
               </div>
             })}
           </div>

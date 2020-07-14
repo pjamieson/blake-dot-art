@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "gatsby"
-import Image from "gatsby-image"
+import Img from "gatsby-image"
 
 const CardTopps2020 = ({ card }) => {
   const link = `/merch/topps2020/${card.identifier}`
@@ -9,7 +9,7 @@ const CardTopps2020 = ({ card }) => {
 
       <div className="view overlay">
         <div>
-          <Image className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
+          <Img className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
           { (card.qty > 0) &&
             <Link to={link}>
               <div className="mask rgba-white-slight"></div>
