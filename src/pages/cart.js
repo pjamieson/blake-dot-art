@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useContext } from 'react';
+import { Link } from "gatsby"
 import Img from "gatsby-image"
 
 import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Checkout from "../components/checkout"
 
 import {
   MDBContainer,
@@ -28,15 +28,13 @@ const CartPage = () => {
   const [, updateState] = useState()
   const forceUpdate = useCallback(() => updateState({}), [])
 
-  const [showCheckout, setShowCheckout] = useState(false)
-
   return (
     <Layout>
       <SEO title="Cart" />
       <div className="container page-container">
         <MDBContainer className="cart">
-          <h1>Cart</h1>
-          <MDBRow className='my-2' center>
+          <h1 className="page-head">Cart</h1>
+          <MDBRow center>
             <MDBCard className='w-100'>
               <MDBCardBody>
                 <div className="table-responsive">
@@ -70,10 +68,10 @@ const CartPage = () => {
                             {formatPrice(item.price)}
                           </td>
                           <td className="qty-cell">
-                            {item.qty === item.qtyAvail &&
+                            {(item.qty === item.qtyAvail) &&
                               <p className="qty">{item.qty}</p>
                             }
-                            {item.qty < item.qtyAvail &&
+                            {(item.qty < item.qtyAvail) &&
                               <div className="number-input">
                                 <button type="button" className="minus"
                                   onClick={() => {
@@ -82,7 +80,7 @@ const CartPage = () => {
                                   }}>
                                   <i className="fa fa-chevron-down" aria-hidden="true"> </i>
                                 </button>
-                                <input type="number" value={item.qty} />
+                                <input type="number" value={item.qty} readOnly />
                                 <button type="button" className="plus"
                                   onClick={() => {
                                     addToCart(item, 1)
@@ -125,17 +123,16 @@ const CartPage = () => {
                 </div>
               </MDBCardBody>
             </MDBCard>
+
+            <div className="checkout-open">
+              {(cart && cart.length > 0) &&
+                <Link to="/checkout/" className="btn btn-success btn-rounded">
+                  Checkout<i className="fas fa-chevron-right"></i>
+                </Link>
+              }
+            </div>
+
           </MDBRow>
-          <div className="checkout-open">
-            {cart && cart.length > 0 &&
-              <button type="button" className="btn btn-success btn-rounded" onClick={() => setShowCheckout(true)}>
-                Checkout
-              </button>
-            }
-          </div>
-          {/*showCheckout &&
-            <Checkout />
-          */}
         </MDBContainer>
       </div>
     </Layout>

@@ -12,6 +12,9 @@
   .team, .cart {
     max-width: 960px;
   }
+  .success {
+    max-width: 550px;
+  }
 }
 .site-content {
   flex-grow: 1;
@@ -89,7 +92,6 @@
 
 // Jumbotron
 .jumbotron {
-  //min-height: 15rem;
   margin-top: 5rem;
   text-align: center;
   overflow:hidden;
@@ -609,35 +611,115 @@
 }
 
 .checkout-open {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin-right: -22px;
+  margin: .5rem 0;
+  i {
+    margin-left: .5rem;
+  }
 }
 
-
-.StripeElement {
-  height: 40px;
-  padding: 10px 12px;
-  width: 100%;
-  color: #32325d;
-  background-color: white;
-  border: 1px solid transparent;
-  border-radius: 4px;
-
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
+.cart, .checkout {
+  h1 {
+    margin-left: -15px;
+  }
 }
 
-.StripeElement--focus {
-  box-shadow: 0 1px 3px 0 #cfd7df;
-}
+.checkout {
+  select {
+    height: 41px;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0;
+    outline: none;
+    box-shadow: none;
+    transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+    font-family: 'Robato', sans-serif;
+  }
+  .md-form {
+    margin: 1.25rem 0;
+  }
+  .country-region-zip {
+    margin-top: -6px;
+    .zip {
+      margin: 24px 0px 8px;
+    }
+  }
+  .input-label {
+    margin: 0 0 6px 5px;
+    font-size: 13px;
+    font-weight: 300;
+    color: #757575;
+  }
+  .same-addr {
+    margin: -1rem 0 0 -1.5rem;
+    text-align: center;
+  }
+  .payment-panel {
+    padding: 0 6rem;
+    .email {
+      margin: 0 0 -1.25rem 0;
+    }
+    /**
+    * These classes are added to your Stripe Element by default.
+    * You can override these classNames by using the options passed
+    * to the CardElement component.
+    * https://stripe.com/docs/js/elements_object/create_element?type=card#elements_create-options-classes
+    */
+    .StripeElement {
+      height: 41px;
+      padding: 10px 12px;
+      width: 100%;
+      color: #32325d;
+      background-color: #e8f0fe;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      border: none;
+      border-bottom: 1px solid #ced4da;
+      border-radius: 0;
+      outline: none;
+      box-shadow: none;
+      transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+    }
 
-.StripeElement--invalid {
-  border-color: #fa755a;
-}
+    .StripeElement--focus {
+      box-shadow: 0 1px 3px 0 #cfd7df;
+    }
 
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
+    .StripeElement--invalid {
+      border-color: #fa755a;
+    }
+
+    .StripeElement--webkit-autofill {
+      background-color: #fefde5 !important;
+    }
+  }
+  .steps-form {
+    h4 {
+      margin-bottom: 12px;
+    }
+  }
+  .item {
+    display: flex;
+    p {
+      margin: 0;
+      width: 80%;
+    }
+  }
+  .price {
+    margin: 0;
+    text-align: right;
+  }
+  .summary-totals {
+    display: flex;
+    p {
+      width: 50%;
+      padding: 0;
+      margin: 0;
+      text-align: right;
+    }
+  }
 }

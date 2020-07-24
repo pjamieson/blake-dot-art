@@ -27,9 +27,22 @@ export const cartSubtotal = (cart) => {
   return subtotal
 }
 
+export const cartSalesTax = (cart) => {
+  const subtotal = cartSubtotal(cart)
+  const cartSalesTax = (subtotal * SALES_TAX_RATE)
+
+  return cartSalesTax
+}
+
+export const cartShipping = (cart) => {
+  return 0.00 // For now, all shipping is free
+}
+
 export const cartTotal = (cart) => {
   const subtotal = cartSubtotal(cart)
-  const total = subtotal + (subtotal * SALES_TAX_RATE)
+  const salestax = cartSalesTax(cart)
+  const shipping = cartShipping(cart)
+  const total = subtotal + salestax + shipping
 
   return total
 }

@@ -1,15 +1,16 @@
 import React from 'react';
-import { CardElement } from '@stripe/react-stripe-js';
+import {CardElement} from '@stripe/react-stripe-js';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
     base: {
-      color: "#32325d",
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      color: "#212529",
+      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, sans-serif',
       fontSmoothing: "antialiased",
       fontSize: "16px",
+      fontWeight: "500",
       "::placeholder": {
-        color: "#aab7c4",
+        color: "#32325d",
       },
     },
     invalid: {
@@ -21,10 +22,12 @@ const CARD_ELEMENT_OPTIONS = {
 
 function CardSection() {
   return (
-    <label>
-      Card details
+    <>
+      <label className="input-label mt-0">
+        Credit card details
+      </label>
       <CardElement options={CARD_ELEMENT_OPTIONS} />
-    </label>
+    </>
   );
 };
 
