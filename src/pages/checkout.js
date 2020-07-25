@@ -9,7 +9,9 @@ import CheckoutComponent from "../components/checkout"
 
 import { MDBContainer, MDBRow } from 'mdbreact'
 
-const promise = loadStripe(process.env.STRIPE_PK)
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(process.env.STRIPE_PK)
 
 const CheckoutPage = () => {
   return (
@@ -19,7 +21,7 @@ const CheckoutPage = () => {
         <MDBContainer>
           <h1 className="page-head">Checkout</h1>
           <MDBRow center>
-            <Elements stripe={promise}>
+            <Elements stripe={stripePromise}>
               <CheckoutComponent />
             </Elements>
           </MDBRow>

@@ -22,14 +22,14 @@ import { cartSubtotal, cartSalesTax, cartShipping, cartTotal } from "../utils/ca
 import { formatPrice } from "../utils/format"
 
 const CheckoutComponent = () => {
+  const stripe = useStripe()
+  const elements = useElements()
+
   const [processing, setProcessing] = useState(false)
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
   const [disabled, setDisabled] = useState(false)
   const [clientSecret, setClientSecret] = useState('')
-
-  const stripe = useStripe()
-  const elements = useElements()
 
   const { cart, clearCart } = useContext(CartContext)
 
@@ -117,7 +117,7 @@ const CheckoutComponent = () => {
 
     setProcessing(true)
 
-    // Pre-payment vaildation (price correct & item still available)
+/*    // Pre-payment vaildation (price correct & item still available)
     const preCheck = await fetch(process.env.VALIDATE_PAYMENT_URL, {
       method: "POST",
       headers: {
@@ -129,53 +129,55 @@ const CheckoutComponent = () => {
     if (preCheck) {
 
     }
-
+*/
     // Submit Payment
-    const payload = await stripe.confirmCardPayment(clientSecret, {
+    const paymentResult = await stripe.confirmCardPayment(clientSecret, {
       receipt_email: email,
       payment_method: {
         card: elements.getElement(CardElement)
       }
     })
 
-    if (payload.error) {
+    if (paymentResult.error) {
       // Show error to buyer (e.g., insufficient funds)
-      setError(`Payment failed ${payload.error.message}`)
+      setError(`Payment failed ${paymentResult.error.message}`)
     } else {
       // The payment has been processed
-      setError(null)
-      setSucceeded(true)
+      if (paymentResult.paymentIntent.status === 'succeeded') {
+        setError(null)
+        setSucceeded(true)
 
-      // Post order and shipping address to strapi
-      const order = {
-        paymentIntent: payload.paymentIntent,
-        firstname,
-        lastname,
-        address,
-        address2,
-        city,
-        state: region,
-        zip,
-        country,
-        email,
-        newsletter,
-        cart
+        // Post order and shipping address to strapi
+        const order = {
+          paymentIntent: paymentResult.paymentIntent,
+          firstname,
+          lastname,
+          address,
+          address2,
+          city,
+          state: region,
+          zip,
+          country,
+          email,
+          newsletter,
+          cart
+        }
+
+        const orderResponse = await fetch(process.env.STRAPI_ORDER_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(order)
+        })
+
+        //const orderResponse = await resp.json()
+        //console.log("Order Create Response", resp)
+
+        // TODO: Update qtyAvail in Strapi (Paintings & Tradingcards)
+
+        clearCart()
       }
-
-      const resp = await fetch(process.env.STRAPI_ORDER_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(order)
-      })
-
-      //const orderResponse = await resp.json()
-      //console.log("Order Create Response", resp)
-
-      // TODO: Update qtyAvail in Strapi (Paintings & Tradingcards)
-
-      clearCart()
     }
     setProcessing(false)
 
@@ -413,7 +415,7 @@ const CheckoutComponent = () => {
                       </div>
                     }
                     {(cart && cart.length === 0) &&
-                      <h3>Your cart is empty.</h3>
+                      <h3>Order processed</h3>
                     }
                   </div>
                 </MDBCardBody>
