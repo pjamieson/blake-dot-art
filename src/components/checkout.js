@@ -66,7 +66,7 @@ const CheckoutComponent = () => {
   useEffect(() => {
     const createPaymentIntent = async () => {
       setProcessing(true)
-      const response = await fetch(process.env.PAYMENT_INTENT_URL, {
+      const response = await fetch(`${process.env.PAYMENT_INTENT_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -131,23 +131,33 @@ const CheckoutComponent = () => {
     }
 */
     // Submit Payment
-    const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+    const paymentResult = await stripe.confirmCardPayment(`${clientSecret}`, {
       receipt_email: email,
       payment_method: {
-        card: elements.getElement(CardElement)
+        card: elements.getElement(CardElement),
+        billing_details: {
+          name: `${bfirstname} ${blastname}`,
+          address: {
+            line1: `${baddress}`,
+            line2: `${baddress2}`,
+            city: `${bcity}`,
+            state: `${bregion}`,
+            postal_code: `${bzip}`,
+            country: `${bcountry}`
+          }
+        }
       }
     })
 
     if (paymentResult.error) {
       // Show error to buyer (e.g., insufficient funds)
-      setError(`Payment failed ${paymentResult.error.message}`)
+      setError(`Payment processing failed: ${paymentResult.error.message}`)
     } else {
-      // The payment has been processed
       if (paymentResult.paymentIntent.status === 'succeeded') {
         setError(null)
         setSucceeded(true)
 
-        // Post order and shipping address to strapi
+        // Post order and shipping address to Strapi
         const order = {
           paymentIntent: paymentResult.paymentIntent,
           firstname,
@@ -175,6 +185,8 @@ const CheckoutComponent = () => {
         //console.log("Order Create Response", resp)
 
         // TODO: Update qtyAvail in Strapi (Paintings & Tradingcards)
+
+        // TODO: Add to mailing list, if opted in
 
         clearCart()
       }
@@ -254,11 +266,11 @@ const CheckoutComponent = () => {
                     <MDBRow className="country-region-zip">
                       <MDBCol lg='4' md='12' className='mb-4'>
                         <label htmlFor="bcountry" className="input-label mt-0">Country</label>
-                        <CountryDropdown id="bcountry" whitelist={countryList} priorityOptions={priorityList} className="form-control" required value={bcountry} onChange={(val) => setBCountry(val)} />
+                        <CountryDropdown id="bcountry" valueType="short" whitelist={countryList} priorityOptions={priorityList} className="form-control" required value={bcountry} onChange={(val) => setBCountry(val)} />
                       </MDBCol>
                       <MDBCol lg='4' md='6' className='mb-4'>
                         <label htmlFor="bregion" className="input-label mt-0">State/Province</label>
-                        <RegionDropdown id="bregion" className="form-control" required country={bcountry} value={bregion} onChange={(val) => setBRegion(val)}>
+                        <RegionDropdown id="bregion" valueType="short" className="form-control" required country={bcountry} countryValueType="short" value={bregion} onChange={(val) => setBRegion(val)}>
                           Country
                         </RegionDropdown>
                       </MDBCol>
@@ -298,11 +310,11 @@ const CheckoutComponent = () => {
                     <MDBRow className="country-region-zip">
                       <MDBCol lg='4' md='12'>
                         <label htmlFor="country" className="input-label mt-0">Country</label>
-                        <CountryDropdown id="country" whitelist={countryList} priorityOptions={priorityList} className="form-control" required value={country} onChange={(val) => setCountry(val)} />
+                        <CountryDropdown id="country" valueType="short" whitelist={countryList} priorityOptions={priorityList} className="form-control" required value={country} onChange={(val) => setCountry(val)} />
                       </MDBCol>
                       <MDBCol lg='4' md='6'>
                         <label htmlFor="region" className="input-label mt-0">State/Province</label>
-                        <RegionDropdown id="region" className="form-control" required country={country} value={region} onChange={(val) => setRegion(val)}>
+                        <RegionDropdown id="region" valueType="short" className="form-control" required country={country} countryValueType="short" value={region} onChange={(val) => setRegion(val)}>
                           Country
                         </RegionDropdown>
                       </MDBCol>
@@ -332,7 +344,7 @@ const CheckoutComponent = () => {
                     </MDBRow>
                     <MDBRow>
                       <MDBCol md="12">
-                        <MDBInput type="checkbox" id="newsletter" name="newsletter" label="Subscribe to Blake's mailing list" onChange={() => handleNewsletterClick()} />
+                        <MDBInput type="checkbox" id="newsletter" name="newsletter" label="Subscribe to Blake's mailing list" onChange={() => setNewsletter(!newsletter)} />
                       </MDBCol>
                     </MDBRow>
                     <hr className='mb-4' />
@@ -344,14 +356,12 @@ const CheckoutComponent = () => {
                     <MDBBtn className='float-left' color='indigo' rounded onClick={() => handleTabChange(2)}>
                       Previous
                     </MDBBtn>
-                    {(clientSecret && clientSecret.length > 0) &&
-                      <MDBBtn type="submit" id="submit" className="float-right" color='success' rounded disabled={processing || disabled || succeeded}>
-                        <span id="button-text">
-                          {processing ? (<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>)
-                           : ("Place Order")}
-                        </span>
-                      </MDBBtn>
-                    }
+                    <MDBBtn type="submit" id="submit" className="float-right" color='success' rounded disabled={!stripe || processing || disabled || succeeded}>
+                      <span id="button-text">
+                        {processing ? (<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>)
+                         : ("Place Order")}
+                      </span>
+                    </MDBBtn>
                     {/* Show any error that happens when processing the payment */}
                     {error && (
                       <div className="card-error float-right" role="alert">

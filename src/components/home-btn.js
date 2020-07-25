@@ -5,7 +5,7 @@ import { MDBBtn, MDBIcon } from "mdbreact"
 
 const HomeBtn = () => (
   <Link to="/">
-    <MDBBtn cclassName="btn btn-inquire btn-info btn-rounded">
+    <MDBBtn className="float-left" color="indigo" rounded>
       <MDBIcon icon="caret-left" className="mr-2" />
       Return to Homepage
     </MDBBtn>

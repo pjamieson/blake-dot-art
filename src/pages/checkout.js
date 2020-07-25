@@ -9,7 +9,9 @@ import CheckoutComponent from "../components/checkout"
 
 import { MDBContainer, MDBRow } from 'mdbreact'
 
-const stripePromise = loadStripe('pk_test_UFxC3WJjmrqnPjb0OPYnhyYS00zzrC0H1i')
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(`${process.env.STRIPE_PK}`)
 
 const CheckoutPage = () => {
   return (
