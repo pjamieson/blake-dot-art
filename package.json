@@ -2,7 +2,7 @@
   "name": "blake-dot-art",
   "private": true,
   "description": "A Portfolio/Gallery website built with Gatsby",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "author": "Patrick Jamieson <patrick@patrickjamieson.com>",
   "dependencies": {
     "@stripe/react-stripe-js": "^1.1.2",
