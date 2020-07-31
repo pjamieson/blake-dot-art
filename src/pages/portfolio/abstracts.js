@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
-import CardImageTitle from "../../components/card-image-title"
+import CardImageLinkTitle from "../../components/card-image-link-title"
 
 const AbstractsPortfolioPage = ({ data }) => {
   const {
@@ -18,7 +18,7 @@ const AbstractsPortfolioPage = ({ data }) => {
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {paintings.map(card => {
               return <div key={card.identifier}>
-                {card.image && <CardImageTitle card={card} /> }
+                {card.image && <CardImageLinkTitle card={card} /> }
               </div>
             })}
           </div>
@@ -42,6 +42,10 @@ export const query = graphql`
     ) {
       nodes {
         identifier
+        subgenre {
+          name
+          slug
+        }
         title
         image {
           childImageSharp {
@@ -50,6 +54,7 @@ export const query = graphql`
             }
           }
         }
+        slug
       }
     }
   }

@@ -382,6 +382,14 @@
     left: -1rem;
   }
 }
+.detail-btns {
+  animation: btnreveal 2s;
+}
+@keyframes btnreveal {
+  0% { opacity: 0; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
 
 .bold {
   font-weight: bold;

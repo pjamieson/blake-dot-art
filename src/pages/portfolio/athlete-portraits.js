@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
-import CardImageTitle from "../../components/card-image-title"
+import CardImageLinkTitle from "../../components/card-image-link-title"
 
 const AthletePortraitsPortfolioPage = ({ location, data }) => {
   const {
@@ -38,7 +38,7 @@ const AthletePortraitsPortfolioPage = ({ location, data }) => {
                 return (
                   card.sport && card.sport.name === sports[value].name ?
                    <div key={card.identifier}>
-                    {card.image && <CardImageTitle card={card} /> }
+                    {card.image && <CardImageLinkTitle card={card} /> }
                   </div>
                   : null
                 )
@@ -75,6 +75,10 @@ export const query = graphql`
     ) {
       nodes {
         identifier
+        subgenre {
+          name
+          slug
+        }
         title
         image {
           childImageSharp {
@@ -86,6 +90,7 @@ export const query = graphql`
         sport {
           name
         }
+        slug
       }
     }
   }

@@ -37,7 +37,7 @@ const CheckoutComponent = () => {
   const forceUpdate = useCallback(() => updateState({}), [])
 
   const [activePanel, setActivePanel] = useState(1)
-  const [activePanelChanged, setActivePanelChanged] = useState(false)
+  //const [activePanelChanged, setActivePanelChanged] = useState(false)
 
   const [bfirstname, setBFirstname] = useState('')
   const [blastname, setBLastname] = useState('')
@@ -84,7 +84,7 @@ const CheckoutComponent = () => {
 
   const handleTabChange = (selected) => {
     setActivePanel(selected)
-    setActivePanelChanged(true)
+    //setActivePanelChanged(true)
   }
 
   const handleSameAddressClick = () => {
@@ -99,7 +99,7 @@ const CheckoutComponent = () => {
     setSameaddr(!sameaddr)
     forceUpdate()
   }
-
+/*
   const handleNewsletterClick = () => {
     setNewsletter(!newsletter)
   }
@@ -110,7 +110,7 @@ const CheckoutComponent = () => {
     setDisabled(event.empty)
     setError(event.error ? event.error.message : "")
   }
-
+*/
   const handleSubmit = async event => {
     event.preventDefault()
     event.target.className += " was-validated"

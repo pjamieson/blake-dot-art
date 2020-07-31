@@ -1,15 +1,15 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import Img from "gatsby-image"
 import { Link, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown";
+
+import { MDBBadge } from "mdbreact"
 
 import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
 
 import { formatPrice } from "../utils/format"
-
-import { MDBBadge } from "mdbreact"
 
 const Tradingcard = ({
   data: {
@@ -44,6 +44,33 @@ const Tradingcard = ({
     price
   }
   const [inCart, setInCart] = useState(isInCart(cartItem))
+  const [processing, setProcessing] = useState(false)
+
+  // Confirm card is still available
+  const [qtyAvailNow, setQtyAvailNow] = useState(0) // none available by default
+  useEffect(() => {
+    const fetchData = async () => {
+      setProcessing(true)
+      const response = await fetch(`${process.env.STRAPI_API_URL}/tradingcards/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      const data = await response.json()
+      setQtyAvailNow(data.qty)
+      setProcessing(false)
+    }
+    fetchData()
+  }, [id])
+  //console.log("tradingcard useEffect qtyAvailNow", qtyAvailNow)
+
+  if (qtyAvailNow === 0 && inCart) {
+    // remove from cart
+    addToCart(cartItem, -1)
+    setInCart(false)
+  }
+
   return (
     <Layout>
       <div className="container page-container">
@@ -70,30 +97,41 @@ const Tradingcard = ({
                 <h2>{subtitle}</h2>
                 <ReactMarkdown source={description} />
 
-                { (price > 10) &&
-                  <div className="add-to-cart">
-                    <h3 className="price">{formatPrice(price)}</h3>
-                    {!inCart &&
-                      <button type="button" className="btn btn-add-to-cart btn-success btn-rounded" onClick={() => {
-                        addToCart(cartItem, qty)
-                        setInCart(true)
-                      }}>
-                        <i className="fas fa-cart-plus"></i>Add to Cart
+                { (processing) &&
+                  <h3>Confirming availability...</h3>
+                }
+
+                <div className="detail-btns">
+                  { (qtyAvailNow === 0) &&
+                    <h3>Sorry, this card is no longer available.</h3>
+                  }
+
+                  { (qtyAvailNow > 0 && price > 10) &&
+                    <div className="add-to-cart">
+                      <h3 className="price">{formatPrice(price)}</h3>
+                      {!inCart &&
+                        <button type="button" className="btn btn-add-to-cart btn-success btn-rounded" onClick={() => {
+                          addToCart(cartItem, qty)
+                          setInCart(true)
+                        }}>
+                          <i className="fas fa-cart-plus"></i>Add to Cart
+                        </button>
+                      }
+                    </div>
+                  }
+
+                  { (qtyAvailNow > 0 && inCart) &&
+                    <MDBBadge color="success">Added to Cart</MDBBadge>
+                  }
+
+                  { (qtyAvailNow > 0 && price <= 10) &&
+                    <div className="inquire">
+                      <button type="button" className="btn btn-inquire btn-info btn-rounded">
+                        Inquire
                       </button>
-                    }
-                  </div>
-                }
-
-                {inCart &&
-                  <MDBBadge color="success">Added to Cart</MDBBadge>
-                }
-
-                { (price <= 10) && <div className="inquire">
-                    <button type="button" className="btn btn-inquire btn-info btn-rounded">
-                      Inquire
-                    </button>
-                  </div>
-                }
+                    </div>
+                  }
+                </div>
               </div>
             </div>
           </div>
