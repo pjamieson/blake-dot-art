@@ -57,7 +57,8 @@ const Painting = ({
     const fetchData = async () => {
       setProcessing(true)
       try {
-        const response = await fetch(`https://api.blake.art/paintings/${id}`)
+        console.log('paintings useEffect process.env.STRAPI_API_URL', process.env.STRAPI_API_URL)
+        const response = await fetch(`${process.env.STRAPI_API_URL}/paintings/${id}`)
         console.log('paintings useEffect response', response)
         const data = await response.json()
         console.log('paintings useEffect data', data)
