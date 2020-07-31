@@ -69,7 +69,7 @@ const Painting = ({
     }
     fetchData()
   }, [id])
-  //console.log("painting useEffect nowAvail", nowAvail)
+  console.log("painting useEffect nowAvail", nowAvail)
 
   if (!nowAvail && inCart) {
     // remove from cart
