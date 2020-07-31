@@ -42,6 +42,7 @@ module.exports = {
         apiURL: `${process.env.STRAPI_API_URL}`,
         contentTypes: [
           "client",
+          "order",
           "painting",
           "project-2020-player",
           "sport",
