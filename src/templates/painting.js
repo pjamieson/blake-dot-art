@@ -58,7 +58,9 @@ const Painting = ({
       setProcessing(true)
       try {
         const response = await fetch(`${process.env.STRAPI_API_URL}/paintings/${id}`)
+        console.log('paintings useEffect response', response)
         const data = await response.json()
+        console.log('paintings useEffect data', data)
         setNowAvail(data.available)
       } catch (err) {
         console.log('paintings useEffect err', err)
