@@ -57,13 +57,7 @@ const Painting = ({
     const fetchData = async () => {
       setProcessing(true)
       try {
-        const response = await fetch(`${process.env.STRAPI_API_URL}/paintings/${id}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        })
+        const response = await fetch(`${process.env.STRAPI_API_URL}/paintings/${id}`)
         const data = await response.json()
         setNowAvail(data.available)
       } catch (err) {
