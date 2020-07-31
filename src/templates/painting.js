@@ -57,8 +57,9 @@ const Painting = ({
     const fetchData = async () => {
       setProcessing(true)
       try {
-        console.log('paintings useEffect process.env.STRAPI_API_URL', process.env.STRAPI_API_URL)
-        const response = await fetch(`${process.env.STRAPI_API_URL}/paintings/${id}`)
+        const STRAPI_API_URL = process.env.STRAPI_API_URL
+        console.log('paintings useEffect STRAPI_API_URL', STRAPI_API_URL)
+        const response = await fetch(`${STRAPI_API_URL}/paintings/${id}`)
         console.log('paintings useEffect response', response)
         const data = await response.json()
         console.log('paintings useEffect data', data)
@@ -70,7 +71,7 @@ const Painting = ({
     }
     fetchData()
   }, [id])
-  console.log("painting useEffect nowAvail", nowAvail)
+  //console.log("painting useEffect nowAvail", nowAvail)
 
   if (!nowAvail && inCart) {
     // remove from cart
