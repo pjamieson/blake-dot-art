@@ -56,14 +56,18 @@ const Painting = ({
   useEffect(() => {
     const fetchData = async () => {
       setProcessing(true)
-      const response = await fetch(`${process.env.STRAPI_API_URL}/paintings/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      const data = await response.json()
-      setNowAvail(data.available)
+      try {
+        const response = await fetch(`${process.env.STRAPI_API_URL}/paintings/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        const data = await response.json()
+        setNowAvail(data.available)
+      } catch (err) {
+        console.log("paintings useEffect err", err)
+      }
       setProcessing(false)
     }
     fetchData()
