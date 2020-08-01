@@ -57,11 +57,8 @@ const Painting = ({
     const fetchData = async () => {
       setProcessing(true)
       try {
-        console.log('paintings useEffect process.env.GATSBY_STRAPI_API_URL', process.env.GATSBY_STRAPI_API_URL)
         const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/paintings/${id}`)
-        console.log('paintings useEffect response', response)
         const data = await response.json()
-        console.log('paintings useEffect data', data)
         setNowAvail(data.available)
       } catch (err) {
         console.log('paintings useEffect err', err)
@@ -70,8 +67,7 @@ const Painting = ({
     }
     fetchData()
   }, [id])
-  //console.log("painting useEffect nowAvail", nowAvail)
-
+  
   if (!nowAvail && inCart) {
     // remove from cart
     addToCart(cartItem, -1)
