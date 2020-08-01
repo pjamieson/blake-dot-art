@@ -66,7 +66,7 @@ const CheckoutComponent = () => {
   useEffect(() => {
     const createPaymentIntent = async () => {
       setProcessing(true)
-      const response = await fetch(`${process.env.PAYMENT_INTENT_URL}`, {
+      const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/payment}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -118,7 +118,7 @@ const CheckoutComponent = () => {
     setProcessing(true)
 
 /*    // Pre-payment vaildation (price correct & item still available)
-    const preCheck = await fetch(process.env.VALIDATE_PAYMENT_URL, {
+    const preCheck = await fetch(process.env.GATSBY_STRAPI_API_URL/orders/validate, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -173,7 +173,7 @@ const CheckoutComponent = () => {
           cart
         }
 
-        const orderResponse = await fetch(process.env.STRAPI_ORDER_URL, {
+        const orderResponse = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

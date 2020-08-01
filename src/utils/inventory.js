@@ -2,7 +2,7 @@
 
 export const isPaintingAvail = async (id) => {
   try {
-    const response = await fetch(`${process.env.STRAPI_API_URL}/paintings/${id}`, {
+    const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/paintings/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"

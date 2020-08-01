@@ -51,7 +51,7 @@ const Tradingcard = ({
   useEffect(() => {
     const fetchData = async () => {
       setProcessing(true)
-      const response = await fetch(`${process.env.STRAPI_API_URL}/tradingcards/${id}`, {
+      const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/tradingcards/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"

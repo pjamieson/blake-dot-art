@@ -57,9 +57,8 @@ const Painting = ({
     const fetchData = async () => {
       setProcessing(true)
       try {
-        const STRAPI_API_URL = process.env.STRAPI_API_URL
-        console.log('paintings useEffect STRAPI_API_URL', STRAPI_API_URL)
-        const response = await fetch(`${STRAPI_API_URL}/paintings/${id}`)
+        console.log('paintings useEffect process.env.GATSBY_STRAPI_API_URL', process.env.GATSBY_STRAPI_API_URL)
+        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/paintings/${id}`)
         console.log('paintings useEffect response', response)
         const data = await response.json()
         console.log('paintings useEffect data', data)
