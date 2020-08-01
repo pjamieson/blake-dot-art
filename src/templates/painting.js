@@ -61,13 +61,13 @@ const Painting = ({
         const data = await response.json()
         setNowAvail(data.available)
       } catch (err) {
-        console.log('paintings useEffect err', err)
+        console.log('painting useEffect err', err)
       }
       setProcessing(false)
     }
     fetchData()
   }, [id])
-  
+
   if (!nowAvail && inCart) {
     // remove from cart
     addToCart(cartItem, -1)

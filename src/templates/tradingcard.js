@@ -51,19 +51,17 @@ const Tradingcard = ({
   useEffect(() => {
     const fetchData = async () => {
       setProcessing(true)
-      const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/tradingcards/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      const data = await response.json()
-      setQtyAvailNow(data.qty)
+      try {
+        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/tradingcards/${id}`)
+        const data = await response.json()
+        setQtyAvailNow(data.qty)
+      } catch (err) {
+        console.log('tradingcard useEffect err', err)
+      }
       setProcessing(false)
     }
     fetchData()
   }, [id])
-  //console.log("tradingcard useEffect qtyAvailNow", qtyAvailNow)
 
   if (qtyAvailNow === 0 && inCart) {
     // remove from cart

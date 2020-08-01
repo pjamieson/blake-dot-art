@@ -64,22 +64,26 @@ const CheckoutComponent = () => {
 
   // Create the PaymentIntent as soon as the component loads
   useEffect(() => {
-    const createPaymentIntent = async () => {
+    const fetchData = async () => {
       setProcessing(true)
-      const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/payment}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          cart
+      try {
+        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/payment}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            cart
+          })
         })
-      })
-      const data = await response.json()
-      setClientSecret(data.client_secret)
+        const data = await response.json()
+        setClientSecret(data.client_secret)
+      } catch (err) {
+        console.log('checkout useEffect err', err)
+      }
       setProcessing(false)
     }
-    createPaymentIntent()
+    fetchData()
   }, [cart])
 
   const handleTabChange = (selected) => {
