@@ -64,10 +64,12 @@ const CheckoutComponent = () => {
 
   // Create the PaymentIntent as soon as the component loads
   useEffect(() => {
-    const fetchData = async () => {
+    let unmounted = false
+
+    const getPaymentIntent = async () => {
       setProcessing(true)
       try {
-        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/payment}`, {
+        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/payment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -76,14 +78,21 @@ const CheckoutComponent = () => {
             cart
           })
         })
-        const data = await response.json()
-        setClientSecret(data.client_secret)
+        if (!unmounted) {
+          const data = await response.json()
+          setClientSecret(data.client_secret)
+          setProcessing(false)
+        }
       } catch (err) {
-        console.log('checkout useEffect err', err)
+        if (!unmounted) {
+          console.log('checkout useEffect err', err)
+          setProcessing(false)
+        }
       }
-      setProcessing(false)
     }
-    fetchData()
+    getPaymentIntent()
+
+    return () => { unmounted = true }
   }, [cart])
 
   const handleTabChange = (selected) => {
@@ -115,6 +124,59 @@ const CheckoutComponent = () => {
     setError(event.error ? event.error.message : "")
   }
 */
+  const setPaintingUnavailable = (id) => {
+    const fetchData = async () => {
+      try {
+        await fetch(`${process.env.GATSBY_STRAPI_API_URL}/paintings/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: '{ "available": false }'
+        })
+        //const data = await resp.json()
+        //console.log("checkout put painting data", data)
+      } catch (err) {
+        console.log("checkout put painting err", err)
+      }
+    }
+    fetchData()
+  }
+/*
+  const getCardQtyAvail = (id) => {
+    const fetchData = async () => {
+      setProcessing(true)
+      try {
+        const resp = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/tradingcards/${id}`)
+        const data = await resp.json()
+        setQtyAvailNow(data.qty)
+      } catch (err) {
+        console.log('getCardQtyAvail', err)
+      }
+      setProcessing(false)
+    }
+    fetchData()
+  }
+*/
+  const setCardQtyAvail = (id, qty) => {
+    const fetchData = async () => {
+      try {
+        await fetch(`${process.env.GATSBY_STRAPI_API_URL}/tradingcards/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: `{"qty":${qty}}`
+        })
+        //const data = await resp.json()
+        //console.log("checkout put tradingcard data", data)
+      } catch (err) {
+        console.log("checkout put tradingcard err", err)
+      }
+    }
+    fetchData()
+  }
+
   const handleSubmit = async event => {
     event.preventDefault()
     event.target.className += " was-validated"
@@ -154,6 +216,7 @@ const CheckoutComponent = () => {
     })
 
     if (paymentResult.error) {
+      console.log('paymentResult.error', paymentResult.error)
       // Show error to buyer (e.g., insufficient funds)
       setError(`Payment processing failed: ${paymentResult.error.message}`)
     } else {
@@ -177,21 +240,35 @@ const CheckoutComponent = () => {
           cart
         }
 
-        const orderResponse = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(order)
-        })
+        try {
+          await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(order)
+          })
+          //const data = await response.json()
+          //console.log("checkout post order response", data)
+        } catch (err) {
+          console.log("checkout post order error", err)
+        }
 
-        //const orderResponse = await resp.json()
-        //console.log("Order Create Response", resp)
-
-        // TODO: Update qtyAvail in Strapi (Paintings & Tradingcards)
+        // Update availability/inventory in Strapi (Paintings & Tradingcards)
+        if (cart && cart.length > 0) {
+          cart.forEach(item => {
+            if (item.itemType === "painting") {
+              setPaintingUnavailable(item.id)
+            }
+            if (item.itemType === "tradingcard") {
+              setCardQtyAvail(item.id, (item.qtyAvail - item.qty))
+            }
+          })
+        }
 
         // TODO: Add to mailing list, if opted in
 
+        // Remove now-purchased items from cart
         clearCart()
       }
     }
