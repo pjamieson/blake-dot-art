@@ -14,8 +14,6 @@ import {
   MDBStepper
 } from 'mdbreact'
 
-import CardSection from "../components/stripe-card-section"
-
 import { CartContext } from "../context/cart-context"
 
 import { cartSubtotal, cartSalesTax, cartShipping, cartTotal } from "../utils/cart"
@@ -27,6 +25,25 @@ import {
   setCardQtyAvailable
 } from "../utils/inventory"
 
+const CARD_ELEMENT_OPTIONS = {
+  style: {
+    base: {
+      color: "#212529",
+      fontFamily: 'Roboto, "Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: "antialiased",
+      fontSize: "16px",
+      fontWeight: "500",
+      "::placeholder": {
+        color: "#32325d"
+      }
+    },
+    invalid: {
+      color: "#fa755a",
+      iconColor: "#fa755a"
+    }
+  }
+}
+
 const CheckoutComponent = () => {
   const stripe = useStripe()
   const elements = useElements()
@@ -34,7 +51,7 @@ const CheckoutComponent = () => {
   const [processing, setProcessing] = useState(false)
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
-  const [disabled, setDisabled] = useState(true) // Prove purchase button should be enabled
+  const [disabled, setDisabled] = useState(false)
   const [clientSecret, setClientSecret] = useState('')
 
   const { cart, clearCart, addToCart } = useContext(CartContext)
@@ -64,6 +81,14 @@ const CheckoutComponent = () => {
   const [zip, setZip] = useState('')
   const [email, setEmail] = useState('')
   const [newsletter, setNewsletter] = useState(false)
+
+  const valid = () => {
+    if (bfirstname && blastname && baddress && bcity && bcountry && bregion && bzip && firstname && lastname && address && city && country && region && zip && email) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   const countryList = ["AU", "BS", "BE", "CA", "DK", "FI", "FR", "DE", "IE", "IT", "JP", "KR", "LU", "MX", "NL", "NZ", "NO", "PT", "PR", "ES", "SE", "CH", "GB", "US", "UM", "UT", "VG", "VI"]
   const priorityList = ["US", "CA"]
@@ -158,10 +183,6 @@ const CheckoutComponent = () => {
     setSameaddr(!sameaddr)
     forceUpdate()
   }
-/*
-  const handleNewsletterClick = () => {
-    setNewsletter(!newsletter)
-  }
 
   const handleCardChange = async (event) => {
     // Listen for changes in the CardElement
@@ -170,14 +191,14 @@ const CheckoutComponent = () => {
     setError(event.error ? event.error.message : "")
   }
 
-*/
   const handleSubmit = async event => {
     event.preventDefault()
     event.target.className += " was-validated"
 
     setProcessing(true)
+    let processingSucceeded = false
 
-/*    // Pre-payment vaildation (price correct & item still available)
+/*    // Pre-payment vaildation (price correct)
     const preCheck = await fetch(process.env.GATSBY_STRAPI_API_URL/orders/validate, {
       method: "POST",
       headers: {
@@ -190,7 +211,7 @@ const CheckoutComponent = () => {
 
     }
 */
-
+    // Just before payment submit, confirm cart contents still available
     const checkCartContent = async () => {
       if (await isCartChanged(cart)) {
         setProcessing(false)
@@ -273,12 +294,14 @@ const CheckoutComponent = () => {
 
         // Remove now-purchased items from cart
         clearCart()
+
+        processingSucceeded = true
       }
     }
     setProcessing(false)
 
     // Go to SuccessPage
-    if (succeeded) {
+    if (processingSucceeded) {
       navigate('/success/', { state: { firstname } })
     }
   }
@@ -334,7 +357,7 @@ const CheckoutComponent = () => {
                   <MDBCol md='12'>
                     <MDBRow>
                       <MDBCol md="6">
-                        <MDBInput type="text" id="bfirst" name="bfirst" label="First Name" value={bfirstname} className="mt-4" required onChange={(e) => setBFirstname(e.target.value)} />
+                        <MDBInput type="text" id="bfirst" name="bfirst" label="First Name" value={bfirstname} className="mt-4" required onChange={(event) => setBFirstname(event.target.value)} />
                       </MDBCol>
                       <MDBCol md="6">
                         <MDBInput type="text" id="blast" name="blast" label="Last Name"  value={blastname} className="mt-4" required onChange={(e) => setBLastname(e.target.value)} />
@@ -436,13 +459,16 @@ const CheckoutComponent = () => {
                     <hr className='mb-4' />
                     <MDBRow>
                       <MDBCol md='12' className='mb-3'>
-                        <CardSection />
+                        <label className="input-label mt-0">
+                          Credit card details
+                        </label>
+                        <CardElement options={CARD_ELEMENT_OPTIONS} onChange={(event) => handleCardChange(event)} />
                       </MDBCol>
                     </MDBRow>
                     <MDBBtn className='float-left' color='indigo' rounded onClick={() => handleTabChange(2)}>
                       Previous
                     </MDBBtn>
-                    <MDBBtn type="submit" id="submit" className="float-right" color='success' rounded disabled={!stripe || processing || disabled || succeeded}>
+                    <MDBBtn type="submit" id="submit" className="float-right" color='success' rounded disabled={!stripe || !valid() || processing || disabled || succeeded}>
                       <span id="button-text">
                         {processing ? (<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>)
                          : ("Place Order")}

@@ -4,7 +4,6 @@ import { MDBCard, MDBCardBody } from "mdbreact"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import HomeBtn from "../components/home-btn"
 
 const SuccessPage = ({ location }) => {
   const firstname = (location && location.state && location.state.firstname) ? location.state.firstname : ''
@@ -25,7 +24,6 @@ const SuccessPage = ({ location }) => {
                 }
               </h2>
               <p className="mb-4 lead">Order Confirmation email sent.</p>
-              <HomeBtn />
             </MDBCardBody>
           </MDBCard>
         </div>
