@@ -9,6 +9,7 @@ import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
 
+import { getCardQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
 
 const Tradingcard = ({
@@ -46,18 +47,13 @@ const Tradingcard = ({
   const [inCart, setInCart] = useState(isInCart(cartItem))
   const [processing, setProcessing] = useState(false)
 
-  // Confirm card is still available
+  // On loading page, confirm card is still available
   const [qtyAvailNow, setQtyAvailNow] = useState(0) // none available by default
   useEffect(() => {
     const fetchData = async () => {
       setProcessing(true)
-      try {
-        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/tradingcards/${id}`)
-        const data = await response.json()
-        setQtyAvailNow(data.qty)
-      } catch (err) {
-        console.log('tradingcard useEffect err', err)
-      }
+      const avail = await getCardQtyAvailable(id)
+      setQtyAvailNow(avail)
       setProcessing(false)
     }
     fetchData()

@@ -9,6 +9,7 @@ import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
 
+import { isPaintingAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
 
 const Painting = ({
@@ -51,18 +52,13 @@ const Painting = ({
   const [inCart, setInCart] = useState(isInCart(cartItem))
   const [processing, setProcessing] = useState(false)
 
-  // Confirm painting is still available
+  // On loading page, confirm painting is still available
   const [nowAvail, setNowAvail] = useState(false) // not available by default
   useEffect(() => {
     const fetchData = async () => {
       setProcessing(true)
-      try {
-        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/paintings/${id}`)
-        const data = await response.json()
-        setNowAvail(data.available)
-      } catch (err) {
-        console.log('painting useEffect err', err)
-      }
+      const avail = await isPaintingAvailable(id)
+      setNowAvail(avail)
       setProcessing(false)
     }
     fetchData()

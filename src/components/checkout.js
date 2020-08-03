@@ -20,6 +20,12 @@ import { CartContext } from "../context/cart-context"
 
 import { cartSubtotal, cartSalesTax, cartShipping, cartTotal } from "../utils/cart"
 import { formatPrice } from "../utils/format"
+import {
+  isPaintingAvailable,
+  setPaintingAvailable,
+  getCardQtyAvailable,
+  setCardQtyAvailable
+} from "../utils/inventory"
 
 const CheckoutComponent = () => {
   const stripe = useStripe()
@@ -28,10 +34,10 @@ const CheckoutComponent = () => {
   const [processing, setProcessing] = useState(false)
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(true) // Prove purchase button should be enabled
   const [clientSecret, setClientSecret] = useState('')
 
-  const { cart, clearCart } = useContext(CartContext)
+  const { cart, clearCart, addToCart } = useContext(CartContext)
 
   const [, updateState] = useState()
   const forceUpdate = useCallback(() => updateState({}), [])
@@ -62,9 +68,18 @@ const CheckoutComponent = () => {
   const countryList = ["AU", "BS", "BE", "CA", "DK", "FI", "FR", "DE", "IE", "IT", "JP", "KR", "LU", "MX", "NL", "NZ", "NO", "PT", "PR", "ES", "SE", "CH", "GB", "US", "UM", "UT", "VG", "VI"]
   const priorityList = ["US", "CA"]
 
-  // Create the PaymentIntent as soon as the component loads
+  // Check cart & create the PaymentIntent as soon as the component loads
   useEffect(() => {
+
     let unmounted = false
+
+    /* Calling from here still needs work
+    const checkCartContent = async () => {
+      if (await isCartChanged(cart)) {
+        navigate('/cart-changed/')
+      }
+    }
+    checkCartContent() */
 
     const getPaymentIntent = async () => {
       setProcessing(true)
@@ -95,6 +110,37 @@ const CheckoutComponent = () => {
     return () => { unmounted = true }
   }, [cart])
 
+  const isCartChanged = () => {
+    let cartChanged = false
+
+    if (cart && cart.length > 0) {
+      cart.forEach(item => {
+        const fetchData = async () => {
+          if (item.itemType === "painting") {
+            const avail = await isPaintingAvailable(item.id)
+            if (!avail) {
+              cartChanged = true
+              // Remove the painting from cart
+              addToCart(item, -1)
+            }
+          }
+          if (item.itemType === "tradingcard") {
+            const qtyNowAvailable = await getCardQtyAvailable(item.id)
+            if (item.qty > qtyNowAvailable) {
+              cartChanged = true
+              const changeQty = (qtyNowAvailable - item.qty)
+              // Adjust cart qty
+              addToCart(item, changeQty)
+            }
+          }
+        }
+        fetchData()
+      })
+    }
+
+    return cartChanged
+  }
+
   const handleTabChange = (selected) => {
     setActivePanel(selected)
     //setActivePanelChanged(true)
@@ -123,60 +169,8 @@ const CheckoutComponent = () => {
     setDisabled(event.empty)
     setError(event.error ? event.error.message : "")
   }
-*/
-  const setPaintingUnavailable = (id) => {
-    const fetchData = async () => {
-      try {
-        await fetch(`${process.env.GATSBY_STRAPI_API_URL}/paintings/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: '{ "available": false }'
-        })
-        //const data = await resp.json()
-        //console.log("checkout put painting data", data)
-      } catch (err) {
-        console.log("checkout put painting err", err)
-      }
-    }
-    fetchData()
-  }
-/*
-  const getCardQtyAvail = (id) => {
-    const fetchData = async () => {
-      setProcessing(true)
-      try {
-        const resp = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/tradingcards/${id}`)
-        const data = await resp.json()
-        setQtyAvailNow(data.qty)
-      } catch (err) {
-        console.log('getCardQtyAvail', err)
-      }
-      setProcessing(false)
-    }
-    fetchData()
-  }
-*/
-  const setCardQtyAvail = (id, qty) => {
-    const fetchData = async () => {
-      try {
-        await fetch(`${process.env.GATSBY_STRAPI_API_URL}/tradingcards/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: `{"qty":${qty}}`
-        })
-        //const data = await resp.json()
-        //console.log("checkout put tradingcard data", data)
-      } catch (err) {
-        console.log("checkout put tradingcard err", err)
-      }
-    }
-    fetchData()
-  }
 
+*/
   const handleSubmit = async event => {
     event.preventDefault()
     event.target.className += " was-validated"
@@ -196,6 +190,15 @@ const CheckoutComponent = () => {
 
     }
 */
+
+    const checkCartContent = async () => {
+      if (await isCartChanged(cart)) {
+        setProcessing(false)
+        navigate('/cart-changed/')
+      }
+    }
+    checkCartContent()
+
     // Submit Payment
     const paymentResult = await stripe.confirmCardPayment(`${clientSecret}`, {
       receipt_email: email,
@@ -258,10 +261,10 @@ const CheckoutComponent = () => {
         if (cart && cart.length > 0) {
           cart.forEach(item => {
             if (item.itemType === "painting") {
-              setPaintingUnavailable(item.id)
+              setPaintingAvailable(item.id, false)
             }
             if (item.itemType === "tradingcard") {
-              setCardQtyAvail(item.id, (item.qtyAvail - item.qty))
+              setCardQtyAvailable(item.id, (item.qtyAvail - item.qty))
             }
           })
         }
@@ -275,7 +278,9 @@ const CheckoutComponent = () => {
     setProcessing(false)
 
     // Go to SuccessPage
-    navigate('/success/', { state: { firstname } })
+    if (succeeded) {
+      navigate('/success/', { state: { firstname } })
+    }
   }
 
   return (

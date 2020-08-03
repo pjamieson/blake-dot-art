@@ -35,7 +35,7 @@ const IndexPage = ({ data }) => {
             <p className="lead dark-grey-text">
               <strong><em>Please note:</em></strong> Works shown in the <strong>Portfolio</strong> section have already been sold or are not for sale. Only items shown in the <strong>Gallery</strong> and <strong>Merch</strong> sections are available for purchase.
             </p>
-            <h3>Thanks for stopping by.</h3>
+            <h3>Thanks for stopping by. Stay Awesome!</h3>
           </section>
 
           <section className="gallery">
