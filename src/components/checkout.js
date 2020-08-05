@@ -170,113 +170,121 @@ const CheckoutComponent = () => {
     if (preCheck) {
 
     }
-
+*/
     // Just before payment submit, confirm cart contents are still available
-    let cartUnchanged = true
+    let cartChanged = false
     if (cart && cart.length > 0) {
-      cart.forEach(item => {
+      await Promise.all(cart.map(async item => {
         if (item.itemType === "painting") {
-          const fetchData = async () => {
-            cartUnchanged = await isPaintingAvailable(item.id)
+          const paintingAvailable = await isPaintingAvailable(item.id)
+          if (!paintingAvailable) {
+            cartChanged = true
+            addToCart(item, -1) // remove painting from cart
           }
-          fetchData()
+          return paintingAvailable // forces block to complete before continuing
         }
         if (item.itemType === "tradingcard") {
-          const fetchData = async () => {
-            cartUnchanged = (item.qty > await getCardQtyAvailable(item.id))
+          const qtyNowAvailable = await getCardQtyAvailable(item.id)
+          if (item.qty < qtyNowAvailable) {
+            cartChanged = true
+            addToCart(item, (item.qty - qtyNowAvailable)) // remove unavailable cards from cart
           }
-          fetchData()
+          return qtyNowAvailable // forces block to complete before continuing
         }
-      })
+      }))
+    } else {
+      // No cart or empty cart (Safety; shouldn't happen)
+      cartChanged = true
     }
-    if (!cartUnchanged) {
+
+    if (cartChanged) {
       setProcessing(false)
       navigate('/cart-changed/')
-    }
-*/
-    // Submit Payment
-    const paymentResult = await stripe.confirmCardPayment(`${clientSecret}`, {
-      receipt_email: email,
-      payment_method: {
-        card: elements.getElement(CardElement),
-        billing_details: {
-          name: `${bfirstname} ${blastname}`,
-          address: {
-            line1: `${baddress}`,
-            line2: `${baddress2}`,
-            city: `${bcity}`,
-            state: `${bregion}`,
-            postal_code: `${bzip}`,
-            country: `${bcountry}`
+    } else {
+      // Submit Payment
+      const paymentResult = await stripe.confirmCardPayment(`${clientSecret}`, {
+        receipt_email: email,
+        payment_method: {
+          card: elements.getElement(CardElement),
+          billing_details: {
+            name: `${bfirstname} ${blastname}`,
+            address: {
+              line1: `${baddress}`,
+              line2: `${baddress2}`,
+              city: `${bcity}`,
+              state: `${bregion}`,
+              postal_code: `${bzip}`,
+              country: `${bcountry}`
+            }
           }
         }
+      })
+
+      if (paymentResult.error) {
+        console.log('paymentResult.error', paymentResult.error)
+        // Show error to buyer (e.g., insufficient funds)
+        setError(`Payment processing failed: ${paymentResult.error.message}`)
+      } else {
+        if (paymentResult.paymentIntent.status === 'succeeded') {
+          setError(null)
+          setSucceeded(true)
+
+          // Post order and shipping address to Strapi
+          const order = {
+            paymentIntent: paymentResult.paymentIntent,
+            firstname,
+            lastname,
+            address,
+            address2,
+            city,
+            state: region,
+            zip,
+            country,
+            email,
+            newsletter,
+            cart
+          }
+
+          try {
+            await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(order)
+            })
+            //const data = await response.json()
+            //console.log("checkout post order response", data)
+          } catch (err) {
+            console.log("checkout post order error", err)
+          }
+
+          // Update availability/inventory in Strapi (Paintings & Tradingcards)
+          if (cart && cart.length > 0) {
+            cart.forEach(item => {
+              if (item.itemType === "painting") {
+                setPaintingAvailable(item.id, false)
+              }
+              if (item.itemType === "tradingcard") {
+                setCardQtyAvailable(item.id, (item.qtyAvail - item.qty))
+              }
+            })
+          }
+
+          // TODO: Add to mailing list, if opted in
+
+          // Remove now-purchased items from cart
+          clearCart()
+
+          processingSucceeded = true
+        }
       }
-    })
+      setProcessing(false)
 
-    if (paymentResult.error) {
-      console.log('paymentResult.error', paymentResult.error)
-      // Show error to buyer (e.g., insufficient funds)
-      setError(`Payment processing failed: ${paymentResult.error.message}`)
-    } else {
-      if (paymentResult.paymentIntent.status === 'succeeded') {
-        setError(null)
-        setSucceeded(true)
-
-        // Post order and shipping address to Strapi
-        const order = {
-          paymentIntent: paymentResult.paymentIntent,
-          firstname,
-          lastname,
-          address,
-          address2,
-          city,
-          state: region,
-          zip,
-          country,
-          email,
-          newsletter,
-          cart
-        }
-
-        try {
-          await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(order)
-          })
-          //const data = await response.json()
-          //console.log("checkout post order response", data)
-        } catch (err) {
-          console.log("checkout post order error", err)
-        }
-
-        // Update availability/inventory in Strapi (Paintings & Tradingcards)
-        if (cart && cart.length > 0) {
-          cart.forEach(item => {
-            if (item.itemType === "painting") {
-              setPaintingAvailable(item.id, false)
-            }
-            if (item.itemType === "tradingcard") {
-              setCardQtyAvailable(item.id, (item.qtyAvail - item.qty))
-            }
-          })
-        }
-
-        // TODO: Add to mailing list, if opted in
-
-        // Remove now-purchased items from cart
-        clearCart()
-
-        processingSucceeded = true
+      // Go to SuccessPage
+      if (processingSucceeded) {
+        navigate('/success/', { state: { firstname } })
       }
-    }
-    setProcessing(false)
-
-    // Go to SuccessPage
-    if (processingSucceeded) {
-      navigate('/success/', { state: { firstname } })
     }
   }
 
