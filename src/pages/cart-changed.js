@@ -27,7 +27,7 @@ const CartChangedPage = ({ location }) => {
               { (cart && cart.length === 0) &&
                 <div>
                   <h2 className='mt-1 text-center'>
-                    Sorry, the items that were in your cart are no longer available.
+                    Sorry, the item(s) that were in your cart are no longer available.
                     <p className="mb-4 lead">Your cart has been cleared.</p>
                   </h2>
                 </div>

@@ -95,16 +95,7 @@ const CheckoutComponent = () => {
 
   // Check cart & create the PaymentIntent as soon as the component loads
   useEffect(() => {
-
     let unmounted = false
-
-    /* Calling from here still needs work
-    const checkCartContent = async () => {
-      if (await isCartChanged(cart)) {
-        navigate('/cart-changed/')
-      }
-    }
-    checkCartContent() */
 
     const getPaymentIntent = async () => {
       setProcessing(true)
@@ -134,37 +125,6 @@ const CheckoutComponent = () => {
 
     return () => { unmounted = true }
   }, [cart])
-
-  const isCartChanged = () => {
-    let cartChanged = false
-
-    if (cart && cart.length > 0) {
-      cart.forEach(item => {
-        const fetchData = async () => {
-          if (item.itemType === "painting") {
-            const avail = await isPaintingAvailable(item.id)
-            if (!avail) {
-              cartChanged = true
-              // Remove the painting from cart
-              addToCart(item, -1)
-            }
-          }
-          if (item.itemType === "tradingcard") {
-            const qtyNowAvailable = await getCardQtyAvailable(item.id)
-            if (item.qty > qtyNowAvailable) {
-              cartChanged = true
-              const changeQty = (qtyNowAvailable - item.qty)
-              // Adjust cart qty
-              addToCart(item, changeQty)
-            }
-          }
-        }
-        fetchData()
-      })
-    }
-
-    return cartChanged
-  }
 
   const handleTabChange = (selected) => {
     setActivePanel(selected)
@@ -198,7 +158,7 @@ const CheckoutComponent = () => {
     setProcessing(true)
     let processingSucceeded = false
 
-/*    // Pre-payment vaildation (price correct)
+/*    // Pre-payment backend vaildation of prices
     const preCheck = await fetch(process.env.GATSBY_STRAPI_API_URL/orders/validate, {
       method: "POST",
       headers: {
@@ -210,16 +170,30 @@ const CheckoutComponent = () => {
     if (preCheck) {
 
     }
-*/
-    // Just before payment submit, confirm cart contents still available
-    const checkCartContent = async () => {
-      if (await isCartChanged(cart)) {
-        setProcessing(false)
-        navigate('/cart-changed/')
-      }
-    }
-    checkCartContent()
 
+    // Just before payment submit, confirm cart contents are still available
+    let cartUnchanged = true
+    if (cart && cart.length > 0) {
+      cart.forEach(item => {
+        if (item.itemType === "painting") {
+          const fetchData = async () => {
+            cartUnchanged = await isPaintingAvailable(item.id)
+          }
+          fetchData()
+        }
+        if (item.itemType === "tradingcard") {
+          const fetchData = async () => {
+            cartUnchanged = (item.qty > await getCardQtyAvailable(item.id))
+          }
+          fetchData()
+        }
+      })
+    }
+    if (!cartUnchanged) {
+      setProcessing(false)
+      navigate('/cart-changed/')
+    }
+*/
     // Submit Payment
     const paymentResult = await stripe.confirmCardPayment(`${clientSecret}`, {
       receipt_email: email,

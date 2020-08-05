@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useContext } from 'react';
-import { Link } from "gatsby"
+import React, { useEffect, useState, useCallback, useContext } from 'react';
+import { Link, navigate } from "gatsby"
 import Img from "gatsby-image"
 
 import { CartContext } from "../context/cart-context"
@@ -19,6 +19,7 @@ import {
   MDBIcon
 } from 'mdbreact';
 
+import { getCardQtyAvailable, isPaintingAvailable } from "../utils/inventory"
 import { cartSubtotal } from "../utils/cart"
 import { formatPrice } from "../utils/format"
 
@@ -26,7 +27,41 @@ const CartPage = () => {
   const { cart, addToCart } = useContext(CartContext)
 
   const [, updateState] = useState()
+
   const forceUpdate = useCallback(() => updateState({}), [])
+
+  // On loading page, confirm cart items still available
+  const [ cartChanged, setCartChanged ] = useState(false)
+  useEffect(() => {
+    if (cart && cart.length > 0) {
+      cart.forEach(item => {
+        if (item.itemType === "painting") {
+          const fetchData = async () => {
+            const nowAvailable = await isPaintingAvailable(item.id)
+            if (!nowAvailable) {
+              addToCart(item, -1)
+              setCartChanged(true)
+            }
+          }
+          fetchData()
+        }
+        if (item.itemType === "tradingcard") {
+          const fetchData = async () => {
+            const qtyNowAvailable = getCardQtyAvailable(item.id)
+            if (item.qty > qtyNowAvailable) {
+              addToCart(item, (qtyNowAvailable - item.qty))
+              setCartChanged(true)
+            }
+          }
+          fetchData()
+        }
+      })
+    }
+  }, [cart, addToCart])
+
+  if (cartChanged) {
+    navigate('/cart-changed/')
+  }
 
   return (
     <Layout>

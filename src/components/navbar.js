@@ -164,16 +164,16 @@ const Navbar = () => {
           </MDBNavbarNav>
 
           <MDBNavbarNav right>
-            {(cart && cart.length > 0) &&
-              <MDBNavItem>
-                <Link className="cart-link" to="/cart/">
-                  <MDBIcon className="cart-icon success-text" icon="shopping-cart" size="2x" />
-                  <p className="cart-count">{cart.length}</p>
-                </Link>
-              </MDBNavItem>
-            }
             <MDBNavItem>
               <SocialLinks />
+            </MDBNavItem>
+            <MDBNavItem>
+              <Link className="cart-link" to="/cart/">
+                <MDBIcon className="cart-icon success-text" icon="shopping-cart" size="2x" />
+                { (cart && cart.length > 0) &&
+                  <p className="cart-count">{cart.length}</p>
+                }
+              </Link>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>

@@ -55,6 +55,7 @@
   .social-links {
     justify-content: flex-start;
     padding: 0;
+    margin-right: 4rem;
     .social-link {
       margin-right: .2rem;
     }
@@ -68,12 +69,12 @@
   .cart-icon {
     position: absolute;
     top: .25rem;
-    right: 1rem;
+    right: .5rem;
   }
   .cart-count {
     position: absolute;
     top: -.75rem;
-    right: 1.65rem;
+    right: 1.2rem;
     color: white;
     font-size: .75rem;
     font-weight: 500;

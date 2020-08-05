@@ -53,7 +53,7 @@ const Painting = ({
   const [processing, setProcessing] = useState(false)
 
   // On loading page, confirm painting is still available
-  const [nowAvail, setNowAvail] = useState(false) // not available by default
+  const [nowAvail, setNowAvail] = useState(true) // available by default
   useEffect(() => {
     const fetchData = async () => {
       setProcessing(true)
