@@ -185,7 +185,7 @@ const CheckoutComponent = () => {
         }
         if (item.itemType === "tradingcard") {
           const qtyNowAvailable = await getCardQtyAvailable(item.id)
-          if (item.qty < qtyNowAvailable) {
+          if (item.qty > qtyNowAvailable) {
             cartChanged = true
             addToCart(item, (item.qty - qtyNowAvailable)) // remove unavailable cards from cart
           }
@@ -194,6 +194,7 @@ const CheckoutComponent = () => {
       }))
     } else {
       // No cart or empty cart (Safety; shouldn't happen)
+      console.log("submitPayment - Shouldn't happen!")
       cartChanged = true
     }
 
