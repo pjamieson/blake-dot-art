@@ -93,6 +93,11 @@ const CheckoutComponent = () => {
   const countryList = ["AU", "BS", "BE", "CA", "DK", "FI", "FR", "DE", "IE", "IT", "JP", "KR", "LU", "MX", "NL", "NZ", "NO", "PT", "PR", "ES", "SE", "CH", "GB", "US", "UM", "UT", "VG", "VI"]
   const priorityList = ["US", "CA"]
 
+  const orderSubtotal = cartSubtotal(cart)
+  const orderShipping = cartShipping(cart)
+  const orderSalesTax = cartSalesTax(cart)
+  const orderTotal = cartTotal(cart)
+
   // Check cart & create the PaymentIntent as soon as the component loads
   useEffect(() => {
     let unmounted = false
@@ -173,6 +178,7 @@ const CheckoutComponent = () => {
 */
     // Just before payment submit, confirm cart contents are still available
     let cartChanged = false
+    let items = [] // Will later be posted to Shippo
     if (cart && cart.length > 0) {
       await Promise.all(cart.map(async item => {
         if (item.itemType === "painting") {
@@ -181,6 +187,16 @@ const CheckoutComponent = () => {
             cartChanged = true
             addToCart(item, -1) // remove painting from cart
           }
+          // Save item for Shippo
+          items.push(
+            {
+              "currency": "USD",
+              "quantity": item.qty,
+              "sku": item.identifier,
+              "title": item.title,
+              "total_amount": item.price
+            }
+          )
           return paintingAvailable // forces block to complete before continuing
         }
         if (item.itemType === "tradingcard") {
@@ -189,6 +205,17 @@ const CheckoutComponent = () => {
             cartChanged = true
             addToCart(item, (item.qty - qtyNowAvailable)) // remove unavailable cards from cart
           }
+          // Save item for Shippo
+          const itemTotal = (item.qty * item.price)
+          items.push(
+            {
+              "currency": "USD",
+              "quantity": item.qty,
+              "sku": item.identifier,
+              "title": item.title,
+              "total_amount": itemTotal
+            }
+          )
           return qtyNowAvailable // forces block to complete before continuing
         }
       }))
@@ -230,7 +257,7 @@ const CheckoutComponent = () => {
           setError(null)
           setSucceeded(true)
 
-          // Post order and shipping address to Strapi
+          // POST order and shipping address to Strapi
           const order = {
             paymentIntent: paymentResult.paymentIntent,
             firstname,
@@ -258,6 +285,44 @@ const CheckoutComponent = () => {
             //console.log("checkout post order response", data)
           } catch (err) {
             console.log("checkout post order error", err)
+          }
+
+          // Also POST order shipping address to Shippo
+          const fullname = `${firstname} ${lastname}`
+          const shipment = {
+            "to_address": {
+              "object_purpose": "PURCHASE",
+              "city": city,
+              "country": country,
+              "email": email,
+              "name": fullname,
+              "state": region,
+              "street1": address,
+              "street2": address2,
+              "zip": zip
+            },
+            "items": items,
+            "order_status": "PAID",
+            "shipping_cost": orderShipping,
+            "shipping_cost_currency": "USD",
+            "shop_app": "Shippo",
+            "subtotal_price": orderSubtotal,
+            "total_price": orderTotal,
+            "total_tax": orderSalesTax,
+            "currency": "USD"
+          }
+
+          try {
+            await fetch(`${process.env.SHIPPO_API_URL}/orders`, {
+              method: "POST",
+              headers: {
+                "Authorization": `${process.env.SHIPPO_TOKEN}`,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(shipment)
+            })
+          } catch (err) {
+            console.log("checkout post shippo error", err)
           }
 
           // Update availability/inventory in Strapi (Paintings & Tradingcards)
@@ -502,20 +567,20 @@ const CheckoutComponent = () => {
                         <hr />
                         <div className="summary-totals">
                           <p>Subtotal:</p>
-                          <p>{formatPrice(cartSubtotal(cart))}</p>
+                          <p>{formatPrice(orderSubtotal)}</p>
                         </div>
                         <div className="summary-totals">
                           <p>Sales tax:</p>
-                          <p>{formatPrice(cartSalesTax(cart))}</p>
+                          <p>{formatPrice(orderSalesTax)}</p>
                         </div>
                         <div className="summary-totals">
                           <p>Shipping:</p>
-                          <p>{cartShipping(cart) ? formatPrice(cartShipping(cart)) : `Free`}</p>
+                          <p>{orderShipping > 0 ? formatPrice(orderShipping) : `Free`}</p>
                         </div>
                         <hr />
                         <div className="summary-totals">
                           <p>Total:</p>
-                          <p><strong>{formatPrice(cartTotal(cart))}</strong></p>
+                          <p><strong>{formatPrice(orderTotal)}</strong></p>
                         </div>
                       </div>
                     }
