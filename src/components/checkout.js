@@ -93,11 +93,6 @@ const CheckoutComponent = () => {
   const countryList = ["AU", "BS", "BE", "CA", "DK", "FI", "FR", "DE", "IE", "IT", "JP", "KR", "LU", "MX", "NL", "NZ", "NO", "PT", "PR", "ES", "SE", "CH", "GB", "US", "UM", "UT", "VG", "VI"]
   const priorityList = ["US", "CA"]
 
-  const orderSubtotal = cartSubtotal(cart)
-  const orderShipping = cartShipping(cart)
-  const orderSalesTax = cartSalesTax(cart)
-  const orderTotal = cartTotal(cart)
-
   // Check cart & create the PaymentIntent as soon as the component loads
   useEffect(() => {
     let unmounted = false
@@ -288,6 +283,11 @@ const CheckoutComponent = () => {
           }
 
           // Also POST order shipping address to Shippo
+          const orderSubtotal = cartSubtotal(cart)
+          const orderShipping = cartShipping(cart)
+          const orderSalesTax = cartSalesTax(cart)
+          const orderTotal = cartTotal(cart)
+
           const fullname = `${firstname} ${lastname}`
           const shipment = {
             "to_address": {
@@ -567,20 +567,20 @@ const CheckoutComponent = () => {
                         <hr />
                         <div className="summary-totals">
                           <p>Subtotal:</p>
-                          <p>{formatPrice(orderSubtotal)}</p>
+                          <p>{formatPrice(cartSubtotal(cart))}</p>
                         </div>
                         <div className="summary-totals">
                           <p>Sales tax:</p>
-                          <p>{formatPrice(orderSalesTax)}</p>
+                          <p>{formatPrice(cartSalesTax(cart))}</p>
                         </div>
                         <div className="summary-totals">
                           <p>Shipping:</p>
-                          <p>{orderShipping > 0 ? formatPrice(orderShipping) : `Free`}</p>
+                          <p>{cartShipping(cart) > 0 ? formatPrice(cartShipping(cart)) : `Free`}</p>
                         </div>
                         <hr />
                         <div className="summary-totals">
                           <p>Total:</p>
-                          <p><strong>{formatPrice(orderTotal)}</strong></p>
+                          <p><strong>{formatPrice(cartTotal(cart))}</strong></p>
                         </div>
                       </div>
                     }
