@@ -313,10 +313,10 @@ const CheckoutComponent = () => {
           }
 
           try {
-            await fetch(`${process.env.SHIPPO_API_URL}/orders`, {
+            await fetch(`${process.env.GATSBY_SHIPPO_API_URL}/orders`, {
               method: "POST",
               headers: {
-                "Authorization": `${process.env.SHIPPO_TOKEN}`,
+                "Authorization": `${process.env.GATSBY_SHIPPO_TOKEN}`,
                 "Content-Type": "application/json"
               },
               body: JSON.stringify(shipment)
