@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../../components/layout"
 import CardImageLinkTitle from "../../components/card-image-link-title"
 
-const OtherPortraitsPortfolioPage = ({ data }) => {
+const PopArtGalleryPage = ({ data }) => {
   const {
     allStrapiPainting: { nodes: paintings },
   } = data
@@ -12,8 +12,7 @@ const OtherPortraitsPortfolioPage = ({ data }) => {
   return (
     <Layout>
       <div className="container page-container">
-        <h1>Portfolio - Other Portraits</h1>
-        <h4 className="nfs">(Sold or Not for Sale)</h4>
+        <h1>Gallery - Pop Art</h1>
         <section className="gallery">
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {paintings.map(card => {
@@ -32,9 +31,8 @@ export const query = graphql`
   {
     allStrapiPainting(
       filter: {
-        subgenre: {name: {eq: "Other Portraits"}},
-        portfolio: {eq: true},
-        available: {eq: false}
+        subgenre: {name: {eq: "Pop Art"}},
+        available: {eq: true}
       },
       sort: {
         fields: order, order: ASC
@@ -55,9 +53,10 @@ export const query = graphql`
           }
         }
         slug
+        available
       }
     }
   }
 `
 
-export default OtherPortraitsPortfolioPage
+export default PopArtGalleryPage

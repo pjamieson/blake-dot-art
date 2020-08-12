@@ -8,6 +8,7 @@ import { MDBBadge } from "mdbreact"
 import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
+//import GalleryCarouselComponent from "../components/gallery-carousel"
 
 import { isPaintingAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
@@ -19,6 +20,7 @@ const Painting = ({
       identifier,
       title,
       image: { childImageSharp: { fluid }},
+      images = {},
       subgenre,
       date = {},
       size = {},
@@ -100,7 +102,11 @@ const Painting = ({
             </div>
 
             <div className="buy-or-inquire">
-              <div className="card-description">
+                <div className="card-description">
+                {/* (images && images.length > 0) &&
+                  <GalleryCarouselComponent images={images} />
+                */}
+
                 { (date && size) && <p>{date} - {size}</p> }
                 { (!(date && size) && date) && <p>{date}</p> }
                 { (!(date && size) && size) && <p>{size}</p> }

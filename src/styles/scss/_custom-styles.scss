@@ -49,6 +49,13 @@
   ul {
     margin-top: 2px;
   }
+  .nav-menu-item {
+    text-align: center;
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
   .dropdown-menu a {
     padding: 0;
   }
@@ -404,6 +411,18 @@
         margin: .25rem 0;
         line-height: 1.2;
       }
+    }
+  }
+}
+
+.buy-or-inquire {
+  .carousel {
+    margin: -7px -1rem 3rem -1rem;
+    .controls-top {
+      margin-bottom: 0;
+    }
+    .carousel-indicators li {
+      margin-bottom: -1rem;
     }
   }
 }

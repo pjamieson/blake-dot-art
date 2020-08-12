@@ -46,8 +46,7 @@ const TeamPage = ({ data }) => {
 export const query = graphql`
   {
     allStrapiTeamMember(
-      sort: {fields: order},
-      filter: {name: {ne: "Blake Jamieson"}}
+      sort: {fields: order}
     ) {
       nodes {
         id
