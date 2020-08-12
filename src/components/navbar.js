@@ -60,9 +60,6 @@ const Navbar = () => {
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/portfolio/abstracts/">Abstracts</Link>
                   </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/portfolio/hats/">Painted Objects</Link>
-                  </MDBDropdownItem>
                   <div class="dropdown-divider"></div>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/portfolio/clients/">Clients & Collectors</Link>
@@ -95,7 +92,7 @@ const Navbar = () => {
                       <Link className="menu-link" to="/gallery/abstracts/">Abstracts</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/gallery/hats/">Painted Objects</Link>
+                      <Link className="menu-link" to="/gallery/painted-objects/">Painted Objects</Link>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
@@ -116,6 +113,9 @@ const Navbar = () => {
                   <div className="d-inline">Merch</div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
+                  <MDBDropdownItem>
+                    <a className="menu-link" href="https://blakejamieson.shop/products/blake-jamieson-logo-snapback-hat" target="_blank" rel="noopener noreferrer">Logo Hats</a>
+                  </MDBDropdownItem>
                   <MDBDropdownItem>
                     <a className="menu-link" href="https://blakespuzzles.com" target="_blank" rel="noopener noreferrer">Jigsaw Puzzles</a>
                   </MDBDropdownItem>
