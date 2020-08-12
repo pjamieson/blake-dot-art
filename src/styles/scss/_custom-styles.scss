@@ -33,6 +33,12 @@
   @media (min-width: 768px) {
     padding: 0;
   }
+  .navbar-nav {
+    align-items: center;
+    .nav-link {
+      padding: 8px 10px;
+    }
+  }
   .navbar-brand {
     margin-right: .5rem;
     a {
@@ -54,6 +60,7 @@
     p {
       margin: 0;
       padding: 0;
+      line-height: 1.2;
     }
   }
   .dropdown-menu a {

@@ -121,11 +121,11 @@ const Painting = ({
 
                 <div className="detail-btns">
                   { (available && !nowAvail) &&
-                    <h3>Sorry, this painting is no longer available.</h3>
+                    <h3>Sorry, this piece is no longer available.</h3>
                   }
 
                   { (portfolio && !available && !nowAvail) &&
-                    <h3>This painting has been sold or is Not for Sale.</h3>
+                    <h3>This piece has been sold or is Not for Sale.</h3>
                   }
 
                   { (price > 100 && nowAvail) &&
