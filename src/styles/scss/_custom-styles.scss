@@ -72,9 +72,13 @@
     white-space: nowrap;
   }
   .social-links {
+    display: flex;
     justify-content: flex-start;
     padding: 0;
-    margin-right: .25;
+    @media (min-width: 960px) {
+      margin-right: 2rem;
+    }
+    list-style: none;
     .social-link {
       margin-right: .2rem;
     }
@@ -89,7 +93,14 @@
   }
 }
 .cart-link {
-  position: relative;
+  position: absolute;
+  top: .8rem;
+  right: 1.5rem;
+  @media (min-width: 768px) {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
   .cart-count {
     position: absolute;
     top: -1rem;
@@ -99,15 +110,28 @@
     font-weight: 500;
   }
 }
-.social-links {
-   list-style: none;
-   display: flex;
-   justify-content: space-between;
- }
 
-.footer-links {
-  width: 240px;
-  margin: 0 auto;
+.page-footer {
+  .social-links {
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    .nav-link {
+      padding: 0;
+    }
+  }
+  .site-links {
+    margin: .25rem auto;
+    display: flex;
+    justify-content: space-between;
+    width:250px;
+    a {
+      //margin: 0 2rem;
+    }
+  }
 }
 
 // Jumbotron
@@ -786,5 +810,13 @@
       margin: 0;
       text-align: right;
     }
+  }
+}
+
+.privacy-address {
+  p {
+    padding: 2px 1rem;
+    margin: 0;
+    line-height: 1.2;
   }
 }
