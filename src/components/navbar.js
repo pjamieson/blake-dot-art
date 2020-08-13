@@ -114,7 +114,7 @@ const Navbar = () => {
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
                   <MDBDropdownItem>
-                    <a className="menu-link" href="https://blakejamieson.shop/products/blake-jamieson-logo-snapback-hat" target="_blank" rel="noopener noreferrer">Logo Hats</a>
+                    <a className="menu-link" href="https://www.proathleteportraits.com/hats-bats-and-balls" target="_blank" rel="noopener noreferrer">Hats, Bats & Balls</a>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
                     <a className="menu-link" href="https://blakespuzzles.com" target="_blank" rel="noopener noreferrer">Jigsaw Puzzles</a>

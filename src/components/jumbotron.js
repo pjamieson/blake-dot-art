@@ -28,7 +28,7 @@ const Jumbotron = () => {
 
           <div className="actions">
             <div className="you-tube-plug">
-              <a href="https://www.youtube.com/user/BlakeJamieson/videos" className="social-link nav-link waves-effect waves-light" target="_blank" rel="noreferrer">
+              <a href="https://www.youtube.com/user/BlakeJamieson?sub_confirmation=1" className="social-link nav-link waves-effect waves-light" target="_blank" rel="noreferrer">
                 <FaYoutube className="social-icon fa-5x"></FaYoutube>
               </a>
               <div className="pitch">

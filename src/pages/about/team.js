@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { FaTwitter } from "react-icons/fa"
 
 import Layout from "../../components/layout"
+import SEO from "../../components/seo"
 
 const TeamPage = ({ data }) => {
   const {
@@ -14,6 +15,7 @@ const TeamPage = ({ data }) => {
   return (
     <Layout>
       <div className="container page-container team">
+        <SEO title="Team" />
         <h1 className="page-head">#TeamBlake</h1>
         <section className="members">
           <article className="content-container">
