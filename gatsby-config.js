@@ -5,10 +5,8 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "blake [dot] art",
-    description: "Gatsby gallery with Strapi",
+    description: "Pro Athlete Portraits & Pop Art",
     author: "Patrick Jamieson",
-    data: ["item 1", "item 2"],
-    person: { name: "Peter", age: 68 },
   },
   plugins: [
     {
