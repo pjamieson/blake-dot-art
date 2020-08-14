@@ -70,6 +70,7 @@ export const query = graphql`
             }
           }
         }
+        image_credit
         publication
         pub_date
         url
