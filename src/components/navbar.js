@@ -73,7 +73,7 @@ const Navbar = () => {
 
                 <MDBDropdownToggle nav>
                   <div className="nav-menu-item">
-                    <p className="dropdown-toggle" caret>Gallery</p>
+                    <p className="dropdown-toggle" caret="true">Gallery</p>
                     <p>(For Sale)</p>
                   </div>
                 </MDBDropdownToggle>

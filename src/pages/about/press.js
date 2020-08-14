@@ -11,6 +11,8 @@ const PressPage = ({ data }) => {
     allStrapiPress: { nodes: articles }
   } = data
 
+  let articleIndex = 0;
+
   return (
     <Layout>
       <div className="container page-container team">
@@ -20,11 +22,13 @@ const PressPage = ({ data }) => {
         <section className="members">
           <article className="content-container">
             {articles.map(article => {
-              return <div className="card team-card" key={article.id}>
-                <div className="img-container">
-                  <Img fluid={article.image.childImageSharp.fluid} className="card" />
-                  { article.image_credit && <p>{article.image_credit}</p> }
-                </div>
+              return <div className="card team-card" key={articleIndex++}>
+                { (articleIndex % 2 === 1) &&
+                  <div className="img-container">
+                    <Img fluid={article.image.childImageSharp.fluid} className="card" />
+                    { article.image_credit && <p>{article.image_credit}</p> }
+                  </div>
+                }
                 <div>
                   <h2>
                     {article.headline}
@@ -44,6 +48,12 @@ const PressPage = ({ data }) => {
                     }
                   </div>
                 </div>
+                { (articleIndex % 2 === 0) &&
+                  <div className="img-container alt">
+                    <Img fluid={article.image.childImageSharp.fluid} className="card" />
+                    { article.image_credit && <p>{article.image_credit}</p> }
+                  </div>
+                }
               </div>
             })}
           </article>
