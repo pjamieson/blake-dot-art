@@ -3,17 +3,13 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
     query GetAvailableItems {
-      paintings: allStrapiPainting(
-        sort: {
-          order: DESC, fields: order
-        }
-      ) {
+      paintings: allStrapiPainting {
         nodes {
           subgenre {
             slug
           }
+          qty
           slug
-          available
         }
       },
       p2020cards: allStrapiTradingcard(
@@ -36,7 +32,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Create painting detail pages.
   paintings.forEach((painting) => {
-    const section = painting.available ? '/gallery/' : '/portfolio/'
+    const section = painting.qty > 0 ? '/gallery/' : '/portfolio/'
     createPage({
       path: `${section}${painting.subgenre.slug}/${painting.slug}`,
       component: path.resolve(`./src/templates/painting.js`),

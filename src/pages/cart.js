@@ -19,7 +19,7 @@ import {
   MDBIcon
 } from 'mdbreact';
 
-import { getCardQtyAvailable, isPaintingAvailable } from "../utils/inventory"
+import { getCardQtyAvailable, getPaintingQtyAvailable } from "../utils/inventory"
 import { cartSubtotal } from "../utils/cart"
 import { formatPrice } from "../utils/format"
 
@@ -37,9 +37,9 @@ const CartPage = () => {
       cart.forEach(item => {
         if (item.itemType === "painting") {
           const fetchData = async () => {
-            const nowAvailable = await isPaintingAvailable(item.id)
-            if (!nowAvailable) {
-              addToCart(item, -1)
+            const qtyNowAvailable = await getPaintingQtyAvailable(item.id)
+            if (item.qty > qtyNowAvailable) {
+              addToCart(item, (qtyNowAvailable - item.qty))
               setCartChanged(true)
             }
           }
@@ -103,10 +103,7 @@ const CartPage = () => {
                             {formatPrice(item.price)}
                           </td>
                           <td className="qty-cell">
-                            {(item.qty === item.qtyAvail) &&
-                              <p className="qty">{item.qty}</p>
-                            }
-                            {(item.qty < item.qtyAvail) &&
+                            {(item.qty <= item.qtyAvail) &&
                               <div className="number-input">
                                 <button type="button" className="minus"
                                   onClick={() => {
@@ -116,7 +113,7 @@ const CartPage = () => {
                                   <i className="fa fa-chevron-down" aria-hidden="true"> </i>
                                 </button>
                                 <input type="number" value={item.qty} readOnly />
-                                <button type="button" className="plus"
+                                <button type="button" className="plus" disabled={item.qty === item.qtyAvail}
                                   onClick={() => {
                                     addToCart(item, 1)
                                     forceUpdate()

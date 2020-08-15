@@ -10,7 +10,7 @@ import { CartContext } from "../context/cart-context"
 import Layout from "../components/layout"
 //import GalleryCarouselComponent from "../components/gallery-carousel"
 
-import { isPaintingAvailable } from "../utils/inventory"
+import { getPaintingQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
 
 const Painting = ({
@@ -27,7 +27,7 @@ const Painting = ({
       medium = {},
       description = {},
       price,
-      available,
+      qty: qtyAvail,
       portfolio,
     },
   },
@@ -37,7 +37,6 @@ const Painting = ({
   const itemType = "painting"
   const subtitle = "Origial Painting by Blake Jamieson"
   const qty = 1 //initialize with 1 of item
-  const qtyAvail = 1 // there's only one of each painting available
   const cartItem = {
     itemType,
     id,
@@ -47,26 +46,23 @@ const Painting = ({
     fluid,
     qty,
     qtyAvail,
-    price,
-    available,
-    portfolio
+    price
   }
   const [inCart, setInCart] = useState(isInCart(cartItem))
   const [processing, setProcessing] = useState(false)
 
   // On loading page, confirm painting is still available
-  const [nowAvail, setNowAvail] = useState(true) // available by default
+  const [qtyAvailNow, setQtyAvailNow] = useState(1) // one available by default
   useEffect(() => {
     const fetchData = async () => {
       setProcessing(true)
-      const avail = await isPaintingAvailable(id)
-      setNowAvail(avail)
+      setQtyAvailNow(await getPaintingQtyAvailable(id))
       setProcessing(false)
     }
     fetchData()
   }, [id])
 
-  if (!nowAvail && inCart) {
+  if (qtyAvailNow === 0 && inCart) {
     // remove from cart
     addToCart(cartItem, -1)
     setInCart(false)
@@ -84,14 +80,14 @@ const Painting = ({
                 <div className="view overlay">
                   <Img className="card card-img-top" fluid={fluid} alt={title} />
                 </div>
-                { (nowAvail) &&
+                { (qtyAvail > 0) &&
                   <div className="back-btn">
                     <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action btn-danger">
                       <i className="fas fa-chevron-left"></i>
                     </Link>
                   </div>
                 }
-                { (!nowAvail) &&
+                { (qtyAvail <= 0) &&
                   <div className="back-btn">
                     <Link to={`/portfolio/${subgenre.slug}`} className="btn-floating btn-action btn-primary">
                       <i className="fas fa-chevron-left"></i>
@@ -115,20 +111,20 @@ const Painting = ({
 
                 { description && <ReactMarkdown source={description} /> }
 
-                { (available && processing) &&
+                { (qty > 0 && processing) &&
                   <h3>Confirming availability...</h3>
                 }
 
                 <div className="detail-btns">
-                  { (available && !nowAvail) &&
+                  { (qty > 0 && qtyAvail <= 0) &&
                     <h3>Sorry, this piece is no longer available.</h3>
                   }
 
-                  { (portfolio && !available && !nowAvail) &&
+                  { (portfolio && qty === 0 && qtyAvail <= 0) &&
                     <h3>This piece has been sold or is Not for Sale.</h3>
                   }
 
-                  { (price > 100 && nowAvail) &&
+                  { (price > 10 && qtyAvail > 0) &&
                     <div className="add-to-cart">
                       <h3 className="price">{formatPrice(price)}</h3>
                       {!inCart &&
@@ -142,13 +138,13 @@ const Painting = ({
                     </div>
                   }
 
-                  { (price <= 100 && nowAvail) &&
+                  { (price <= 10 && qtyAvail > 0) &&
                     <div className="inquire">
                       <button type="button" className="btn btn-inquire btn-info btn-rounded">Inquire</button>
                     </div>
                   }
 
-                  { (inCart && nowAvail) &&
+                  { (inCart && qtyAvail > 0) &&
                     <MDBBadge color="success">Added to Cart</MDBBadge>
                   }
                 </div>
@@ -186,7 +182,7 @@ export const query = graphql`
       medium
       description
       price
-      available
+      qty
       portfolio
     }
   }

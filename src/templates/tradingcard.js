@@ -50,15 +50,15 @@ const Tradingcard = ({
   // On loading page, confirm card is still available
   const [qtyAvailNow, setQtyAvailNow] = useState(1) // one available by default
   useEffect(() => {
-    const fetchData = async () => {
-      setProcessing(true)
+//    const fetchData = async () => {
+//      setProcessing(true)
       const fetchData = async () => {
         setProcessing(true)
         setQtyAvailNow(await getCardQtyAvailable(id))
         setProcessing(false)
       }
       fetchData()
-    }
+//    }
   }, [id])
 
   if (qtyAvailNow === 0 && inCart) {

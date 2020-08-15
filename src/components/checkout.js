@@ -19,8 +19,8 @@ import { CartContext } from "../context/cart-context"
 import { cartSubtotal, cartSalesTax, cartShipping, cartTotal } from "../utils/cart"
 import { formatPrice } from "../utils/format"
 import {
-  isPaintingAvailable,
-  setPaintingAvailable,
+  getPaintingQtyAvailable,
+  setPaintingQtyAvailable,
   getCardQtyAvailable,
   setCardQtyAvailable
 } from "../utils/inventory"
@@ -177,10 +177,10 @@ const CheckoutComponent = () => {
     if (cart && cart.length > 0) {
       await Promise.all(cart.map(async item => {
         if (item.itemType === "painting") {
-          const paintingAvailable = await isPaintingAvailable(item.id)
-          if (!paintingAvailable) {
+          const qtyNowAvailable = await getPaintingQtyAvailable(item.id)
+          if (item.qty > qtyNowAvailable) {
             cartChanged = true
-            addToCart(item, -1) // remove painting from cart
+            addToCart(item, (item.qty - qtyNowAvailable)) // remove unavailable paintings from cart
           }
           // Save item for Shippo
           items.push(
@@ -192,7 +192,7 @@ const CheckoutComponent = () => {
               "total_amount": item.price
             }
           )
-          return paintingAvailable // forces block to complete before continuing
+          return qtyNowAvailable // forces block to complete before continuing
         }
         if (item.itemType === "tradingcard") {
           const qtyNowAvailable = await getCardQtyAvailable(item.id)
@@ -329,7 +329,7 @@ const CheckoutComponent = () => {
           if (cart && cart.length > 0) {
             cart.forEach(item => {
               if (item.itemType === "painting") {
-                setPaintingAvailable(item.id, false)
+                setPaintingQtyAvailable(item.id, (item.qtyAvail - item.qty))
               }
               if (item.itemType === "tradingcard") {
                 setCardQtyAvailable(item.id, (item.qtyAvail - item.qty))

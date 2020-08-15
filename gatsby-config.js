@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "blake [dot] art",
-    description: "Pro Athlete Portraits & Pop Art",
+    description: "The Official Website of artist Blake Jamieson, offering original Pro Athlete Portraits and Pop Art, and autographed editions of the artist's Topps Project 2020 baseball cards.",
     author: "Patrick Jamieson",
   },
   plugins: [
