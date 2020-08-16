@@ -8,7 +8,7 @@ import { MDBBadge } from "mdbreact"
 import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
-import SEO from "../components/layout"
+import SEO from "../components/seo"
 
 import { getCardQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
