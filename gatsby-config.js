@@ -34,6 +34,7 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sass",
     "gatsby-plugin-sharp",
+    "gatsby-plugin-sitemap",
     // You can have multiple instances of gatsby-source-filesystem
     // to read source nodes from different locations on the filesystem.
     {

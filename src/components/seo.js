@@ -10,25 +10,25 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
+function SEO({ title, description, lang, meta }) {
   const { site } = useStaticQuery(
     graphql`
       query {
         site {
           siteMetadata {
-            title
-            description
             author
-            twitterUsername
             image
+            siteDesc: description
+            siteTitle: title
             siteUrl
+            twitterUsername
           }
         }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
+  const metaDescription = description || site.siteMetadata.siteDesc
 
   return (
     <Helmet
@@ -36,7 +36,7 @@ function SEO({ description, lang, meta, title }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${site.siteMetadata.siteTitle}`}
       link={[
         {
           rel: "stylesheet",
@@ -67,6 +67,10 @@ function SEO({ description, lang, meta, title }) {
           content: metaDescription,
         },
         {
+          name: `image`,
+          content: site.siteMetadata.image,
+        },
+        {
           property: `og:title`,
           content: title,
         },
@@ -80,7 +84,11 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
+        },
+        {
+          name: `twitter:site`,
+          content: site.siteMetadata.twitterUsername,
         },
         {
           name: `twitter:creator`,
@@ -88,11 +96,19 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: site.siteMetadata.siteTitle,
         },
         {
           name: `twitter:description`,
-          content: metaDescription,
+          content: site.siteMetadata.siteDesc,
+        },
+        {
+          name: `twitter:image`,
+          content: `${site.siteMetadata.siteUrl}${site.siteMetadata.image}`,
+        },
+        {
+          name: `twitter:image:alt`,
+          content: `Artist Blake Jamieson in his studio`,
         },
       ].concat(meta)}
     />
