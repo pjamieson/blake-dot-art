@@ -11,7 +11,7 @@ const CartChangedPage = ({ location }) => {
   const { cart } = useContext(CartContext)
   return (
     <Layout>
-      <SEO title="CartChanged" />
+      <SEO title="Cart Changed" />
         <div className="container page-container success">
           <h1 className="page-head">Cart Changed</h1>
           <MDBCard>

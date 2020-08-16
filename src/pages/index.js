@@ -2,11 +2,11 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 import Jumbotron from "../components/jumbotron"
 import CardImagelink from "../components/card-image-link"
 
 import blake from "../images/BlakeCrownMask.jpg"
-
 
 const IndexPage = ({ data }) => {
   const {
@@ -16,6 +16,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
+      <SEO title="Home" />
       <div className="container">
         <Jumbotron />
         <div className="container front-content">

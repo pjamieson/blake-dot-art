@@ -1,14 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import Seo from "./seo"
 import Navbar from "./navbar"
 import Footer from "./footer"
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Seo title="Home" />
       <div className="site">
         <Navbar />
         <main className="site-content">{children}</main>

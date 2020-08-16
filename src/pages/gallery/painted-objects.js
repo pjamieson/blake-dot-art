@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
+import SEO from "../../components/seo"
 import CardImageLinkTitle from "../../components/card-image-link-title"
 
 const PaintedObjectsGalleryPage = ({ data }) => {
@@ -11,6 +12,7 @@ const PaintedObjectsGalleryPage = ({ data }) => {
 
   return (
     <Layout>
+      <SEO title="Painted Objects Gallery" />
       <div className="container page-container">
         <h1>Gallery - Painted Objects</h1>
         <section className="gallery">

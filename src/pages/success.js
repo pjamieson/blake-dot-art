@@ -10,7 +10,7 @@ const SuccessPage = ({ location }) => {
 
   return (
     <Layout>
-      <SEO title="OrderProcessed" />
+      <SEO title="Order Processed" />
         <div className="container page-container success">
           <h1 className="page-head">Order Processed</h1>
           <MDBCard>

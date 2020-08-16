@@ -8,6 +8,7 @@ import { MDBBadge } from "mdbreact"
 import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
+import SEO from "../components/layout"
 
 import { getCardQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
@@ -69,6 +70,7 @@ const Tradingcard = ({
 
   return (
     <Layout>
+      <SEO title={title} />
       <div className="container page-container">
         <article className="p2020-card-details">
           <h1>{title} : Artist-Autographed Card</h1>

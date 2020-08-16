@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
+import SEO from "../../components/seo"
 import CardImageLinkTitle from "../../components/card-image-link-title"
 
 const AbstractsPortfolioPage = ({ data }) => {
@@ -11,6 +12,7 @@ const AbstractsPortfolioPage = ({ data }) => {
 
   return (
     <Layout>
+      <SEO title="Abstracts Portfolio" />
       <div className="container page-container">
         <h1>Portfolio - Abstracts</h1>
         <h4 className="nfs">(Sold or Not for Sale)</h4>

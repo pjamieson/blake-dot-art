@@ -8,6 +8,7 @@ import { MDBBadge } from "mdbreact"
 import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 //import GalleryCarouselComponent from "../components/gallery-carousel"
 
 import { getPaintingQtyAvailable } from "../utils/inventory"
@@ -71,6 +72,7 @@ const Painting = ({
 
   return (
     <Layout>
+      <SEO title={title} />
       <div className="container page-container">
         <article className="painting-details">
           <h1>{title}</h1>

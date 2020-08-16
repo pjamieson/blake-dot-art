@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
+import SEO from "../../components/seo"
 import CardTopps2020 from "../../components/card-topps2020"
 
 const ToppsProject2020Page = ({ location, data }) => {
@@ -16,6 +17,7 @@ const ToppsProject2020Page = ({ location, data }) => {
 
   return (
     <Layout>
+      <SEO title="Topps Project 2020 Cards" />
       <div className="container page-container">
         <h1 className="page-head">Topps Project 2020 Cards by Blake Jamieson</h1>
         <section className="topps">
