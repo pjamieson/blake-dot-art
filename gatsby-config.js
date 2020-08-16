@@ -8,7 +8,7 @@ module.exports = {
     description: "The Official Website of artist Blake Jamieson, offering original Pro Athlete Portraits and Pop Art, and autographed editions of the artist's Topps Project 2020 baseball cards.",
     author: "@patrickjamieson",
     twitterUsername: "@blakejamieson",
-    image: "/BlakeCrownMask.jpg",
+    image: "/BlakeCrownMask*.jpg",
     siteUrl: "https://blake.art"
   },
   plugins: [
