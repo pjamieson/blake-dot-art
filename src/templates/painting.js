@@ -19,6 +19,7 @@ const Painting = ({
       id,
       identifier,
       title,
+      subtitle,
       image: { childImageSharp: { fluid }},
       images = {},
       subgenre,
@@ -35,7 +36,7 @@ const Painting = ({
   const { isInCart, addToCart } = useContext(CartContext)
 
   const itemType = "painting"
-  const subtitle = "Origial Painting by Blake Jamieson"
+  //const subtitle = "Origial Painting by Blake Jamieson"
   const qty = 1 //initialize with 1 of item
   const cartItem = {
     itemType,
@@ -103,6 +104,8 @@ const Painting = ({
                   <GalleryCarouselComponent images={images} />
                 */}
 
+                <h3>{subtitle && subtitle.length > 0 ? subtitle : "Origial Painting by Blake Jamieson"}</h3>
+
                 { (date && size) && <p>{date} - {size}</p> }
                 { (!(date && size) && date) && <p>{date}</p> }
                 { (!(date && size) && size) && <p>{size}</p> }
@@ -167,6 +170,7 @@ export const query = graphql`
       id: strapiId
       identifier
       title
+      subtitle
       image {
         childImageSharp {
           fluid {

@@ -60,6 +60,9 @@ const Navbar = () => {
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/portfolio/abstracts/">Abstracts</Link>
                   </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/portfolio/collabs/">Collabs</Link>
+                  </MDBDropdownItem>
                   <div class="dropdown-divider"></div>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/portfolio/clients/">Clients & Collectors</Link>
@@ -90,6 +93,9 @@ const Navbar = () => {
                     </MDBDropdownItem>
                     <MDBDropdownItem>
                       <Link className="menu-link" to="/gallery/abstracts/">Abstracts</Link>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem>
+                      <Link className="menu-link" to="/gallery/collabs/">Collabs</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
                       <Link className="menu-link" to="/gallery/painted-objects/">Painted Objects</Link>
