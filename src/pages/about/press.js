@@ -15,10 +15,9 @@ const PressPage = ({ data }) => {
 
   return (
     <Layout>
-      <div className="container page-container team">
-        <SEO title="Press" />
+      <SEO title="Press" />
+      <div className="container page-container press">
         <h1 className="page-head">Press</h1>
-
         <section className="members">
           <article className="content-container">
             {articles.map(article => {

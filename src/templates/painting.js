@@ -145,7 +145,7 @@ const Painting = ({
 
                   { (price <= 10 && qtyAvail > 0) &&
                     <div className="inquire">
-                      <button type="button" className="btn btn-inquire btn-info btn-rounded">Inquire</button>
+                      <button type="button" className="btn btn-inquire btn-primary btn-rounded">Inquire</button>
                     </div>
                   }
 

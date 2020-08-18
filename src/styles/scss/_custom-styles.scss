@@ -10,7 +10,7 @@
     min-width: 320px;
     max-width: 1100px;
   }
-  .team, .cart {
+  .cart, .contact, .press, .team  {
     @media (min-width: 768px) {
       max-width: 960px;
     }
@@ -518,7 +518,7 @@
         margin: 0 1rem 0 0;
         font-size: 2rem;
       }
-      .btn-inquire, .btn-add-to-cart {
+      .btn-add-to-cart {
         padding: .8rem 1rem;
       }
     }
@@ -528,6 +528,9 @@
       justify-content: flex-start;
       align-items: center;
       padding-top: 1rem;
+      .btn-inquire {
+        margin-left: 0;
+      }
     }
   }
 }
@@ -717,6 +720,32 @@
   margin: .5rem 0;
   i {
     margin-left: .5rem;
+  }
+}
+
+.contact {
+  .card {
+    padding: 1rem;
+  }
+  .banner {
+    padding: 0;
+    margin-bottom: 1rem;
+    background-color: $primary-color
+  }
+  h2 {
+    margin: 0;
+    color: white;
+  }
+  h3 {
+    margin: 0;
+    color: white;
+  }
+  .btn-floating {
+    background-color: $primary-color;
+    cursor: default;
+  }
+  .contact-info {
+    margin-top: 0;
   }
 }
 
