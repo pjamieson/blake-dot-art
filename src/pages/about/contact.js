@@ -43,7 +43,7 @@ const ContactPage = () => {
 
     const sendEmail = async () => {
       try {
-        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/email/send`, {
+        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/email`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
