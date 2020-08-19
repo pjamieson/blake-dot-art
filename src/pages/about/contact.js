@@ -38,39 +38,33 @@ const ContactPage = () => {
   }, [])
 
   const handleSubmit = async event => {
-    console.log("Click!")
     event.preventDefault()
     event.target.className += " was-validated"
-/*
+
     const sendEmail = async () => {
       try {
-        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/email`, {
+        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/email/send`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-
+            "Authorization": `Bearer ${secureToken}`
           },
           body: JSON.stringify({
-            "identifier": `${process.env.GATSBY_EMAIL_AGENT_IDENTIFIER}`,
-            "password": `${process.env.GATSBY_EMAIL_AGENT_PASSWORD}`
+            "to": "patrick@iartx.com",
+            "from": "blake@blake.art",
+            "replyTo": "blake@blake.art",
+            "subject": "Contact Email Test",
+            "text": "Here's a bit of text....",
+            "html": "<p>Here's a bit of text....</p>"
           })
         })
         const data = await response.json()
-        //console.log('contact useEffect data', data)
-        setSecureToken(data.jwt)
+        console.log('contact sendEmail data', data)
       } catch (err) {
-        console.log('contact useEffect err', err)
+        console.log('contact sendEmail err', err)
       }
     }
     sendEmail()
-
-    await strapi.plugins['email'].services.email.send({
-      to: `patrick@iartx.com`,
-      from: `patrick@ibookx.com`,
-      subject: `Contact Email Test`,
-      text: `Here's a bit of text....`
-    })
-*/    
   }
 
   return (
@@ -122,6 +116,7 @@ const ContactPage = () => {
             </MDBRow>
             <div className="text-center">
               <MDBBtn type="submit" id="submit" color="primary">Send</MDBBtn>
+              (Not yet functioning)
             </div>
           </form>
 
@@ -136,12 +131,14 @@ const ContactPage = () => {
               </div>
               <p className="contact-info">Long Island City, NY 11101, USA</p>
             </li>
+            {/*
             <li>
               <div className="btn-floating">
                 <MDBIcon icon="phone" />
               </div>
               <p className="contact-info">+ 01 234 567 89</p>
             </li>
+            */}
             <li>
               <div className="btn-floating">
                 <MDBIcon icon="envelope" />
