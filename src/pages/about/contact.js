@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
+import { navigate } from "gatsby"
 
 import { MDBCard, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput } from "mdbreact";
 
@@ -11,6 +12,14 @@ const ContactPage = () => {
   const [email, setEmail] = useState('')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
+
+  const valid = () => {
+    if (fullname.length > 3 && email.length > 10 && subject && message.length > 10) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   // Get token for sending secure email as soon as the component loads
   const [secureToken, setSecureToken] = useState('')
@@ -43,28 +52,31 @@ const ContactPage = () => {
 
     const sendEmail = async () => {
       try {
-        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/email`, {
+        await fetch(`${process.env.GATSBY_STRAPI_API_URL}/email`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${secureToken}`
           },
           body: JSON.stringify({
-            "to": "patrick@iartx.com",
-            "from": "blake@blake.art",
-            "replyTo": "blake@blake.art",
-            "subject": "Contact Email Test",
-            "text": "Here's a bit of text....",
-            "html": "<p>Here's a bit of text....</p>"
+            "to": "contact@blake.art",
+            "from": "contact@blake.art",
+            "cc": "patrick@iartx.com",
+            "replyTo": `${email}`,
+            "subject": `${subject}`,
+            "html": `<p><strong>Name: </strong>${fullname}</p>
+            <p><strong>Email: </strong>${email}</p>
+            <p><strong>Message: </strong>${message}</p>`
           })
         })
-        const data = await response.json()
-        console.log('contact sendEmail data', data)
       } catch (err) {
         console.log('contact sendEmail err', err)
       }
     }
     sendEmail()
+
+    // Go to MessageSentPage
+    navigate('/sent/', { state: { subject } })
   }
 
   return (
@@ -115,8 +127,9 @@ const ContactPage = () => {
               </MDBCol>
             </MDBRow>
             <div className="text-center">
-              <MDBBtn type="submit" id="submit" color="primary">Send</MDBBtn>
-              (Not yet functioning)
+              <MDBBtn type="submit" id="submit" color="primary" disabled={!valid()}>
+                Send
+              </MDBBtn>
             </div>
           </form>
 
