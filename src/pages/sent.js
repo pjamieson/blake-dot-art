@@ -17,7 +17,7 @@ const MessageSentPage = ({ location }) => {
             <MDBCardBody>
               <h2 className='mt-1 text-center'>
                 {subject.length > 0 &&
-                  `Subject: ${subject}!`
+                  `Subject: ${subject}`
                 }
               </h2>
               <p className="mb-4 lead">Message sent. You will be hearing from us soon.</p>
