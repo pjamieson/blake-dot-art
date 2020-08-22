@@ -52,13 +52,13 @@ const Navbar = () => {
                     <Link className="menu-link" to="/portfolio/athlete-portraits/">Athlete Portraits</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/portfolio/felix-series/">Felix the Cat Series</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
                     <Link className="menu-link" to="/portfolio/pop-art/">Pop Art</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/portfolio/abstracts/">Abstracts</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/portfolio/prints/">Prints</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/portfolio/collabs/">Collabs</Link>
@@ -86,13 +86,13 @@ const Navbar = () => {
                       <Link className="menu-link" to="/gallery/athlete-portraits/">Athlete Portraits</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
-                      <Link className="menu-link" to="/gallery/felix-series/">Felix the Cat Series</Link>
-                    </MDBDropdownItem>
-                    <MDBDropdownItem>
                       <Link className="menu-link" to="/gallery/pop-art/">Pop Art</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
                       <Link className="menu-link" to="/gallery/abstracts/">Abstracts</Link>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem>
+                      <Link className="menu-link" to="/gallery/prints/">Prints</Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
                       <Link className="menu-link" to="/gallery/collabs/">Collabs</Link>
