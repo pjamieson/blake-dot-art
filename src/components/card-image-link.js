@@ -33,7 +33,7 @@ const CardImagelink = ({ location, card }) => {
   return (
     <div className="card" key={card.identifier}>
       <div className="view overlay">
-        <div onMouseUp={(event) => handleClick(event)} onTouchStart={(event) => handleClick(event)}>
+        <div role="button" onMouseUp={(event) => handleClick(event)} onTouchStart={(event) => handleClick(event)}>
           <Img className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
           <MDBWaves cursorPos={cursorPos} />
           <div className="mask rgba-white-slight"></div>

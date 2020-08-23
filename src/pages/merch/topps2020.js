@@ -62,14 +62,14 @@ const ToppsProject2020Page = ({ location, data }) => {
 {/*console.log("protectPlayerIndex, value", protectPlayerIndex, value)*/}
           <article className="content-container">
             { (protectPlayerIndex === value && playerProtected) &&
-              <div class="card protected-card">
-                <h5 class="card-header primary-color white-text text-center py-4">
+              <div className="card protected-card">
+                <h5 className="card-header primary-color white-text text-center py-4">
                   <strong>Password-Protected Autograph Editions</strong>
                 </h5>
-                <div class="card-body px-lg-5 pt-0">
-                  <form class="text-center" onSubmit={(e) => handleSubmit(e)}>
-                    <div class="md-form">
-                      <MDBInput type="password" id="password" class="form-control" label="Password" value={password} required onChange={(event) => setPassword(event.target.value)}/>
+                <div className="card-body px-lg-5 pt-0">
+                  <form className="text-center" onSubmit={(e) => handleSubmit(e)}>
+                    <div className="md-form">
+                      <MDBInput type="password" id="password" className="form-control" label="Password" value={password} required onChange={(event) => setPassword(event.target.value)}/>
                     </div>
                     <div className="text-center">
                       <MDBBtn type="submit" id="submit" color="primary" disabled={!valid()}>

@@ -208,7 +208,7 @@ const CheckoutComponent = () => {
               "quantity": item.qty,
               "sku": item.identifier,
               "title": item.title,
-              "total_amount": itemTotal
+              "total_price": itemTotal
             }
           )
           return qtyNowAvailable // forces block to complete before continuing
@@ -301,7 +301,7 @@ const CheckoutComponent = () => {
               "street2": address2,
               "zip": zip
             },
-            "items": items,
+            "line_items": items,
             "order_status": "PAID",
             "shipping_cost": orderShipping,
             "shipping_cost_currency": "USD",
@@ -316,7 +316,7 @@ const CheckoutComponent = () => {
             await fetch(`${process.env.GATSBY_SHIPPO_API_URL}/orders`, {
               method: "POST",
               headers: {
-                "Authorization": `${process.env.GATSBY_SHIPPO_TOKEN}`,
+                "Authorization": `ShippoToken ${process.env.GATSBY_SHIPPO_TOKEN}`,
                 "Content-Type": "application/json"
               },
               body: JSON.stringify(shipment)
