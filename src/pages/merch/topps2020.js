@@ -14,7 +14,7 @@ const ToppsProject2020Page = ({ location, data }) => {
 
   const [password, setPassword] = useState('')
 
-  const protectPlayerIndex = 5 // Mariano (count from most recent, starting at 0)
+  const protectPlayerIndex = 3 // Willie (count from most recent, starting at 0)
   const protectPassword = "sayheykid"
 
   const [playerProtected, setPlayerProtected] = useState(true)
