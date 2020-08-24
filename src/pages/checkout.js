@@ -14,6 +14,7 @@ import { MDBContainer, MDBRow } from 'mdbreact'
 const stripePromise = loadStripe(`${process.env.STRIPE_PK}`)
 
 const CheckoutPage = () => {
+  console.log("CheckoutPage STRIPE_PK", `${process.env.STRIPE_PK}`, process.env.STRIPE_PK)
   return (
     <Layout>
       <SEO title="Checkout" />
