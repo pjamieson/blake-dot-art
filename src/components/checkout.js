@@ -189,7 +189,9 @@ const CheckoutComponent = () => {
               "quantity": item.qty,
               "sku": item.identifier,
               "title": item.title,
-              "total_amount": item.price
+              "total_amount": item.price,
+              "weight": "10.0",
+              "weight_unit": "lb"
             }
           )
           return qtyNowAvailable // forces block to complete before continuing
@@ -208,7 +210,9 @@ const CheckoutComponent = () => {
               "quantity": item.qty,
               "sku": item.identifier,
               "title": item.title,
-              "total_price": itemTotal
+              "total_price": itemTotal,
+              "weight": "0.5",
+              "weight_unit": "lb"
             }
           )
           return qtyNowAvailable // forces block to complete before continuing
@@ -268,55 +272,81 @@ const CheckoutComponent = () => {
             cart
           }
 
+/*          try {
+            const order = await shippo.order.create(ctx.request.body)
+            .then(function(order){
+              console.log("shippo : %s", JSON.stringify(order))
+            })
+          } catch (err) {
+            console.log("notifyShippo err", err)
+          } */
+
           try {
-            await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders`, {
+            const order_response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"
               },
               body: JSON.stringify(order)
+            }).then(function(order_response){
+              //console.log("checkout post order response", order_response)
             })
-            //const data = await response.json()
-            //console.log("checkout post order response", data)
           } catch (err) {
             console.log("checkout post order error", err)
           }
 
-          // Also POST order shipping address to Shippo
+          // Also POST order & shipping address to Shippo
           const orderSubtotal = cartSubtotal(cart)
           const orderShipping = cartShipping(cart)
           const orderSalesTax = cartSalesTax(cart)
           const orderTotal = cartTotal(cart)
 
+          const now = new Date();
+          //console.log("now", now)
+          const datetime = now.getUTCFullYear() + "-"
+            + (now.getUTCMonth() < 9 ? "0" : "")
+            + (now.getUTCMonth()+1) + "-"
+            + (now.getUTCDate() < 10 ? "0" : "")
+            + now.getUTCDate() + " "
+            + (now.getUTCHours() < 10 ? "0" : "")
+            + now.getUTCHours() + ":"
+            + (now.getUTCMinutes() < 10 ? "0" : "")
+            + now.getUTCMinutes() + ":"
+            + (now.getUTCSeconds() < 10 ? "0" : "")
+            + now.getUTCSeconds() + " UTC"
+          //console.log("datetime", datetime)
+
           const fullname = `${firstname} ${lastname}`
+
           const shipment = {
             "to_address": {
-              "object_purpose": "PURCHASE",
-              "city": city,
-              "country": country,
-              "email": email,
               "name": fullname,
-              "state": region,
               "street1": address,
               "street2": address2,
-              "zip": zip
+              "city": city,
+              "state": region,
+              "zip": zip,
+              "country": country,
+              "email": email
             },
             "line_items": items,
             "order_status": "PAID",
+            "placed_at": datetime,
             "shipping_cost": orderShipping,
             "shipping_cost_currency": "USD",
             "shop_app": "Shippo",
             "subtotal_price": orderSubtotal,
             "total_price": orderTotal,
             "total_tax": orderSalesTax,
-            "currency": "USD"
+            "currency": "USD",
+            "weight": "1.0",
+            "weight_unit": "lb"
           }
 
           try {
-            await fetch(`${process.env.GATSBY_SHIPPO_API_URL}/orders`, {
+            await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/shipping`, {
               method: "POST",
               headers: {
-                "Authorization": `ShippoToken ${process.env.GATSBY_SHIPPO_TOKEN}`,
                 "Content-Type": "application/json"
               },
               body: JSON.stringify(shipment)
