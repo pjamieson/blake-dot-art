@@ -32,8 +32,8 @@ const ContactPage = () => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            "identifier": `${process.env.GATSBY_EMAIL_AGENT_IDENTIFIER}`,
-            "password": `${process.env.GATSBY_EMAIL_AGENT_PASSWORD}`
+            "identifier": `${process.env.EMAIL_AGENT_IDENTIFIER}`,
+            "password": `${process.env.EMAIL_AGENT_PASSWORD}`
           })
         })
         const data = await response.json()
