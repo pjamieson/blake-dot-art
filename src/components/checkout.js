@@ -99,7 +99,6 @@ const CheckoutComponent = () => {
 
     const getPaymentIntent = async () => {
       setProcessing(true)
-      console.log("checkout getPaymentIntent")
       try {
         const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/payment`, {
           method: "POST",
@@ -110,10 +109,9 @@ const CheckoutComponent = () => {
             cart
           })
         })
-        console.log("checkout getPaymentIntent try")
         if (!unmounted) {
-          console.log("checkout getPaymentIntent try !unmounted")
           const data = await response.json()
+          console.log("checkout getPaymentIntent data", data)
           setClientSecret(data.client_secret)
           setProcessing(false)
         }
