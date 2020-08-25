@@ -1,0 +1,20 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - yarn install
+    build:
+      commands:
+        - EMAIL_AGENT_IDENTIFIER=$EMAIL_AGENT_IDENTIFIER
+        - EMAIL_AGENT_PASSWORD=$EMAIL_AGENT_PASSWORD
+        - SHIPPO_TOKEN=$SHIPPO_TOKEN
+        - STRIPE_PK=$STRIPE_PK
+        - yarn run build
+  artifacts:
+    baseDirectory: public
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
