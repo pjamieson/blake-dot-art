@@ -11,10 +11,10 @@ import { MDBContainer, MDBRow } from 'mdbreact'
 
 // Make sure to call `loadStripe` outside of a component’s render
 //  to avoid recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(`${process.env.STRIPE_PK}`)
+const stripePromise = loadStripe(`${process.env.GATSBY_STRIPE_PK}`)
 
 const CheckoutPage = () => {
-  console.log("CheckoutPage STRIPE_PK", `${process.env.STRIPE_PK}`, process.env.STRIPE_PK)
+  console.log("CheckoutPage GATSBY_STRIPE_PK", `${process.env.GATSBY_STRIPE_PK}`)
   return (
     <Layout>
       <SEO title="Checkout" />
