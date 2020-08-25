@@ -10,7 +10,7 @@ import "bootstrap-css-only/css/bootstrap.min.css"
 import "mdbreact/dist/css/mdb.css"
 import "./src/styles/scss/mdb.scss"
 
-//import "@stripe/stripe-js"
+import "@stripe/stripe-js"
 
 import React from "react"
 import CartContextProvider from "./src/context/cart-context"
