@@ -125,11 +125,11 @@ const CheckoutComponent = () => {
 
     return () => { unmounted = true }
   }, [cart])
-  console.log("getPaymentIntent clientSecret", clientSecret)
 
   const handleTabChange = (selected) => {
     setActivePanel(selected)
     //setActivePanelChanged(true)
+    console.log("handleTabChange clientSecret", clientSecret)
   }
 
   const handleSameAddressClick = () => {
