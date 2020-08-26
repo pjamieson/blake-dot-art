@@ -17,7 +17,7 @@ const ToppsProject2020Page = ({ location, data }) => {
   const protectPlayerIndex = 3 // Willie (count from most recent, starting at 0)
   const protectPassword = "sayheykid"
 
-  const [playerProtected, setPlayerProtected] = useState(true)
+  const [playerProtected, setPlayerProtected] = useState(false)
 
   // If passed a player, open to that player. Otherwise open first player on list.
   const [value, setValue] = React.useState(location.state && location.state.player ?
