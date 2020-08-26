@@ -111,7 +111,7 @@ const CheckoutComponent = () => {
         })
         if (!unmounted) {
           const data = await response.json()
-          console.log("checkout getPaymentIntent data", data)
+          //console.log("checkout getPaymentIntent data", data)
           setClientSecret(data.client_secret)
           setProcessing(false)
         }
@@ -130,7 +130,7 @@ const CheckoutComponent = () => {
   const handleTabChange = (selected) => {
     setActivePanel(selected)
     //setActivePanelChanged(true)
-    console.log("handleTabChange clientSecret", clientSecret)
+    //console.log("handleTabChange clientSecret", clientSecret)
   }
 
   const handleSameAddressClick = () => {
@@ -160,19 +160,6 @@ const CheckoutComponent = () => {
     setProcessing(true)
     let processingSucceeded = false
 
-/*    // Pre-payment backend vaildation of prices
-    const preCheck = await fetch(process.env.GATSBY_STRAPI_API_URL/orders/validate, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: ""
-    })
-
-    if (preCheck) {
-
-    }
-*/
     // Just before payment submit, confirm cart contents are still available
     let cartChanged = false
     let items = [] // Will later be posted to Shippo
@@ -274,15 +261,6 @@ const CheckoutComponent = () => {
             cart
           }
 
-/*          try {
-            const order = await shippo.order.create(ctx.request.body)
-            .then(function(order){
-              console.log("shippo : %s", JSON.stringify(order))
-            })
-          } catch (err) {
-            console.log("notifyShippo err", err)
-          } */
-
           try {
             const order_response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders`, {
               method: "POST",
@@ -304,7 +282,6 @@ const CheckoutComponent = () => {
           const orderTotal = cartTotal(cart)
 
           const now = new Date();
-          //console.log("now", now)
           const datetime = now.getUTCFullYear() + "-"
             + (now.getUTCMonth() < 9 ? "0" : "")
             + (now.getUTCMonth()+1) + "-"
@@ -315,7 +292,7 @@ const CheckoutComponent = () => {
             + (now.getUTCMinutes() < 10 ? "0" : "")
             + now.getUTCMinutes() + ":"
             + (now.getUTCSeconds() < 10 ? "0" : "")
-            + now.getUTCSeconds() + " UTC"
+            + now.getUTCSeconds() // UTC
           //console.log("datetime", datetime)
 
           const fullname = `${firstname} ${lastname}`
@@ -346,12 +323,15 @@ const CheckoutComponent = () => {
           }
 
           try {
-            await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/shipping`, {
+            const shippo_resp = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/shipping`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"
               },
               body: JSON.stringify(shipment)
+            })
+            .then(function(shippo_resp){
+              return shippo_resp
             })
           } catch (err) {
             console.log("checkout post shippo error", err)
