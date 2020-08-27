@@ -37,7 +37,7 @@ const ContactPage = () => {
           })
         })
         const data = await response.json()
-        console.log('contact useEffect data', data)
+        //console.log('contact useEffect data', data)
         setSecureToken(data.jwt)
       } catch (err) {
         console.log('contact useEffect err', err)
