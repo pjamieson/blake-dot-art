@@ -261,40 +261,28 @@ const CheckoutComponent = () => {
             cart
           }
 
-          try {
-            const order_response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(order)
-            }).then(function(order_response){
-              //console.log("checkout post order response", order_response)
-            })
-          } catch (err) {
-            console.log("checkout post order error", err)
+          const addStrapiOrder = async () => {
+            try {
+              const order_response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(order)
+              })
+              return await order_response.json()
+            } catch(error) {
+              console.log("checkout post order error", error)
+            }
           }
+          const order_data = await addStrapiOrder()
+          //console.log("order_data", order_data)
 
           // Also POST order & shipping address to Shippo
           const orderSubtotal = cartSubtotal(cart)
           const orderShipping = cartShipping(cart)
           const orderSalesTax = cartSalesTax(cart)
           const orderTotal = cartTotal(cart)
-
-          const now = new Date();
-          const datetime = now.getUTCFullYear() + "-"
-            + (now.getUTCMonth() < 9 ? "0" : "")
-            + (now.getUTCMonth()+1) + "-"
-            + (now.getUTCDate() < 10 ? "0" : "")
-            + now.getUTCDate() + " "
-            + (now.getUTCHours() < 10 ? "0" : "")
-            + now.getUTCHours() + ":"
-            + (now.getUTCMinutes() < 10 ? "0" : "")
-            + now.getUTCMinutes() + ":"
-            + (now.getUTCSeconds() < 10 ? "0" : "")
-            + now.getUTCSeconds() // UTC
-          //console.log("datetime", datetime)
-
           const fullname = `${firstname} ${lastname}`
 
           const shipment = {
@@ -309,16 +297,18 @@ const CheckoutComponent = () => {
               "email": email
             },
             "line_items": items,
+            "order_number": order_data.order_id,
             "order_status": "PAID",
-            "placed_at": datetime,
+            "placed_at": order_data.order_created,
             "shipping_cost": orderShipping,
             "shipping_cost_currency": "USD",
+            "shipping_method": "USPS First Class Package",
             "shop_app": "Shippo",
             "subtotal_price": orderSubtotal,
             "total_price": orderTotal,
             "total_tax": orderSalesTax,
             "currency": "USD",
-            "weight": "1.0",
+            "weight": ".5",
             "weight_unit": "lb"
           }
 
