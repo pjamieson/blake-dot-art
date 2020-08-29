@@ -37,7 +37,6 @@ const Painting = ({
   const { isInCart, addToCart } = useContext(CartContext)
 
   const itemType = "painting"
-  //const subtitle = "Origial Painting by Blake Jamieson"
   const qty = 1 //initialize with 1 of item
   const cartItem = {
     itemType,
