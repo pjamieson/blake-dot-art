@@ -18,20 +18,22 @@ import {
   MDBNavItem,
 } from "mdbreact"
 
-import logo from "../images/blake-logo-108x70.png"
+import logo from "../images/blake-logo-108x70-amber.png"
 
 const Navbar = () => {
   const { cart } = useContext(CartContext)
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="navbar fixed-top navbar-expand-md navbar-light bg-light">
+    <div className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
       <div className="container">
 
         <MDBNavbarBrand>
           <Link to="/" className="navbar-brand">
             <img src={logo} className="logo" alt="Logo"/>
-            <strong>blake [dot] art</strong>
+            <span className="brand-name blake">BLAKE</span>
+            <span className="brand-name dot">.</span>
+            <span className="brand-name art">ART</span>
           </Link>
         </MDBNavbarBrand>
 
@@ -39,12 +41,20 @@ const Navbar = () => {
 
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
           <MDBNavbarNav left>
+            <MDBNavItem>
+              <SocialLinks />
+            </MDBNavItem>
+          </MDBNavbarNav>
+
+          <MDBNavbarNav className="menu-options" right>
 
             <MDBNavItem>
               <MDBDropdown>
 
-                <MDBDropdownToggle nav caret>
-                  <div className="d-inline">Portfolio</div>
+                <MDBDropdownToggle nav>
+                  <div className="nav-menu-item">
+                    <p>PORTFOLIO</p>
+                  </div>
                 </MDBDropdownToggle>
 
                 <MDBDropdownMenu className="dropdown-default">
@@ -76,8 +86,8 @@ const Navbar = () => {
 
                 <MDBDropdownToggle nav>
                   <div className="nav-menu-item">
-                    <p className="dropdown-toggle" caret="true">Gallery</p>
-                    <p>(For Sale)</p>
+                    <p>GALLERY</p>
+                    <p className="menu-sub">(For Sale)</p>
                   </div>
                 </MDBDropdownToggle>
 
@@ -107,16 +117,18 @@ const Navbar = () => {
             <MDBNavItem>
               <Link className="nav-link" to="/merch/topps2020/">
                 <div className="nav-menu-item">
-                  <p>Topps</p>
-                  <p>Project 2020</p>
+                  <p>TOPPS</p>
+                  <p className="menu-sub">Project 2020</p>
                 </div>
               </Link>
             </MDBNavItem>
 
             <MDBNavItem>
               <MDBDropdown>
-                <MDBDropdownToggle nav caret>
-                  <div className="d-inline">Merch</div>
+                <MDBDropdownToggle nav>
+                  <div className="nav-menu-item">
+                    <p>MERCH</p>
+                  </div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
                 <MDBDropdownItem>
@@ -134,8 +146,10 @@ const Navbar = () => {
 
             <MDBNavItem>
               <MDBDropdown>
-                <MDBDropdownToggle nav caret>
-                  <div className="d-inline">About</div>
+                <MDBDropdownToggle nav>
+                  <div className="nav-menu-item">
+                    <p>ABOUT</p>
+                  </div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
                   <MDBDropdownItem>
@@ -152,11 +166,6 @@ const Navbar = () => {
             </MDBNavItem>
           </MDBNavbarNav>
 
-          <MDBNavbarNav right>
-            <MDBNavItem>
-              <SocialLinks />
-            </MDBNavItem>
-          </MDBNavbarNav>
         </MDBCollapse>
         <Link className="cart-link" to="/cart/">
           <MDBIcon className="cart-icon success-text" icon="shopping-cart" size="2x" />
