@@ -93,6 +93,7 @@ p {
   font-family: "Boston" !important;
   &.navbar-dark {
     background-color: $blake-dark-grey !important;
+    opacity: .9;
   }
   .navbar-nav {
     .nav-link {
@@ -118,7 +119,7 @@ p {
       }
       &.dot {
         font-weight: 700;
-        color: $primary-color;
+        color: $secondary-color;
       }
     }
   }
@@ -135,8 +136,13 @@ p {
       font-family: "Boston" !important;
     }
   }
-  .dropdown-menu a {
-    padding: 0;
+  .dropdown-menu {
+    background-color: $blake-dark-grey;
+    opacity: .98;
+    a {
+      padding: 0;
+      color: white !important;
+    }
   }
   .menu-link {
     cursor: pointer;
@@ -204,7 +210,7 @@ p {
 
 // Jumbotron
 .jumbotron {
-  margin: 2rem 0 1rem 0;
+  margin: 4rem 0 1rem 0;
   text-align: center;
   overflow:hidden;
   -webkit-backface-visibility: hidden;
@@ -334,6 +340,9 @@ p {
     .featured-link {
       margin: 1rem 0 .5rem 0;
       height: fit-content;
+      button {
+        color: $blake-dark-grey;
+      }
     }
   }
 }
