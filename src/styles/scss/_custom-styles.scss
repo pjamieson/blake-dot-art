@@ -139,6 +139,9 @@ p {
   .dropdown-menu {
     background-color: $blake-dark-grey;
     opacity: .98;
+    .dropdown-item:hover {
+      background-color: black !important;
+    }
     a {
       padding: 0;
       color: white !important;
@@ -424,6 +427,7 @@ p {
   margin-top: 4rem;
   padding: 1.5rem;
   background-color: white;
+  border-radius: .25rem;
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
      -moz-animation: fadein 1s; /* Firefox < 16 */
       -ms-animation: fadein 1s; /* Internet Explorer */
@@ -815,7 +819,7 @@ p {
   h2 {
     width: 90%;
     margin: 0;
-    color: white;
+    color: white !important;
   }
   h3 {
     margin: 0;

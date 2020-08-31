@@ -119,12 +119,12 @@ const Tradingcard = ({
                   }
 
                   { (qtyAvailNow > 0 && inCart) &&
-                    <MDBBadge color="success">Added to Cart</MDBBadge>
+                    <MDBBadge color="secondary">Added to Cart</MDBBadge>
                   }
 
                   { (qtyAvailNow > 0 && price <= 10) &&
                     <div className="inquire">
-                      <button type="button" className="btn btn-inquire btn-info btn-rounded">
+                      <button type="button" className="btn btn-inquire btn-secondary btn-rounded">
                         Inquire
                       </button>
                     </div>

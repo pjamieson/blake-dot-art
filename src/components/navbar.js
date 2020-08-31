@@ -56,8 +56,7 @@ const Navbar = () => {
                     <p>PORTFOLIO</p>
                   </div>
                 </MDBDropdownToggle>
-
-                <MDBDropdownMenu className="dropdown-default">
+                <MDBDropdownMenu>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/portfolio/athlete-portraits/">Athlete Portraits</Link>
                   </MDBDropdownItem>
@@ -90,8 +89,7 @@ const Navbar = () => {
                     <p className="menu-sub">(For Sale)</p>
                   </div>
                 </MDBDropdownToggle>
-
-                  <MDBDropdownMenu className="dropdown-default">
+                  <MDBDropdownMenu>
                     <MDBDropdownItem>
                       <Link className="menu-link" to="/gallery/athlete-portraits/">Athlete Portraits</Link>
                     </MDBDropdownItem>
@@ -130,7 +128,7 @@ const Navbar = () => {
                     <p>MERCH</p>
                   </div>
                 </MDBDropdownToggle>
-                <MDBDropdownMenu className="dropdown-default">
+                <MDBDropdownMenu>
                 <MDBDropdownItem>
                   <a className="menu-link" href="https://cardart.com" target="_blank" rel="noopener noreferrer">CardArt</a>
                 </MDBDropdownItem>
@@ -151,7 +149,7 @@ const Navbar = () => {
                     <p>ABOUT</p>
                   </div>
                 </MDBDropdownToggle>
-                <MDBDropdownMenu className="dropdown-default">
+                <MDBDropdownMenu>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/about/team/">#TeamBlake</Link>
                   </MDBDropdownItem>

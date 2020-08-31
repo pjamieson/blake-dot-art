@@ -149,7 +149,7 @@ const Painting = ({
                   }
 
                   { (inCart && qtyAvail > 0) &&
-                    <MDBBadge color="success">Added to Cart</MDBBadge>
+                    <MDBBadge color="secondary">Added to Cart</MDBBadge>
                   }
                 </div>
 
