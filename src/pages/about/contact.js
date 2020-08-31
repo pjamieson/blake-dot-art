@@ -86,7 +86,7 @@ const ContactPage = () => {
       <h1 className="page-head">Contact Us</h1>
 
       <MDBCard className="banner">
-        <h2 className="text-center w-responsive mx-auto pt-3">
+        <h2 className="text-center mx-auto pt-3">
           Thoughts? Comment? Suggestion? Request?
         </h2>
         <h3 className="text-center w-responsive mx-auto pb-3">

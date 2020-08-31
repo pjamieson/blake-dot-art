@@ -4,7 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: "blake [dot] art",
+    title: "BLAKE.ART",
     description: "The Official Website of artist Blake Jamieson, offering original Pro Athlete Portraits and Pop Art, and autographed editions of the artist's Topps Project 2020 baseball cards.",
     author: "@patrickjamieson",
     twitterUsername: "@blakejamieson",
@@ -21,13 +21,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: "blake-dot-art",
+        name: "BLAKE.ART",
         short_name: "blake",
         start_url: "/",
         background_color: "#663399",
         theme_color: "#663399",
         display: "minimal-ui",
-        icon: "src/images/blake-logo-104x104.png",
+        icon: "src/images/blake-logo-104x104-amber.png",
       },
     },
     "gatsby-plugin-offline",

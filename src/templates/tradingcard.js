@@ -108,7 +108,7 @@ const Tradingcard = ({
                     <div className="add-to-cart">
                       <h3 className="price">{formatPrice(price)}</h3>
                       {!inCart &&
-                        <button type="button" className="btn btn-add-to-cart btn-success btn-rounded" onClick={() => {
+                        <button type="button" className="btn btn-add-to-cart btn-primary btn-rounded" onClick={() => {
                           addToCart(cartItem, qty)
                           setInCart(true)
                         }}>

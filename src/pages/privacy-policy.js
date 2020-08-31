@@ -218,7 +218,7 @@ const PrivacyPolicyPage = () => {
 
               <div className="privacy-address">
                 <p>Blake Jamieson</p>
-                <p>46-28 Vernon Road #203</p>
+                <p>46-28 Vernon Blvd #203</p>
                 <p>Long Island City, NY 11101</p>
                 <p>United States</p>
               </div>

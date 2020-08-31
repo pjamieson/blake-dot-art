@@ -39,11 +39,31 @@
   font-weight: 600;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+  font-family: "Stolzl" !important;
+  color: $blake-dark-grey;
+}
+h1 {
+  font-weight: 600 !important;
+  color: $primary-color !important;
+}
+h2 {
+  font-weight: 500 !important;
+  color: $blake-brown !important;
+}
+p {
+  font-weight: 400;
+  strong {
+    font-weight: 500;
+  }
+}
+
 // This makes the footer stick to the bottom of the viewport
 .site {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-color: $blake-dark-grey;
   .container {
     width: 100%;
     min-width: 320px;
@@ -56,6 +76,7 @@
   }
   .success {
     @media (min-width: 768px) {
+      margin-top: 8rem;
       max-width: 550px;
     }
   }
@@ -68,10 +89,10 @@
 // navbar
 .navbar {
   padding: 0 1rem;
-  opacity: 0.9;
-  font-family: "Boston";
-  @media (min-width: 768px) {
-    padding: 0;
+  box-shadow: none;
+  font-family: "Boston" !important;
+  &.navbar-dark {
+    background-color: $blake-dark-grey !important;
   }
   .navbar-nav {
     .nav-link {
@@ -110,6 +131,8 @@
       margin: 0;
       padding: 0;
       line-height: 1.2;
+      color: white;
+      font-family: "Boston" !important;
     }
   }
   .dropdown-menu a {
@@ -130,6 +153,7 @@
     list-style: none;
     .social-link {
       margin-right: .2rem;
+      opacity: .6;
     }
   }
   .menu-options {
@@ -149,6 +173,9 @@
     top: .7rem;
     right: 4rem;
   }
+  @media (min-width: 768px) {
+    padding: 0;
+  }
 }
 
 .cart-link {
@@ -158,7 +185,8 @@
   padding-left: 1rem;
   .success-text {
     color: $secondary-color !important;
-    border-color: $secondary-color !important;  }
+    border-color: $secondary-color !important;
+  }
   @media (min-width: 768px) {
     position: relative;
     top: 0;
@@ -167,44 +195,16 @@
   .cart-count {
     position: absolute;
     top: -1rem;
-    right: .75rem;
-    color: $primary-color;
+    right: .7rem;
+    color: white;
     font-size: .75rem;
-    font-weight: 500;
-  }
-}
-
-.press-date {
-  font-style: italic;
-  margin-top: 0;
-}
-.press-link {
-  margin-top: 1rem;
-}
-
-.page-footer {
-  .social-links {
-    padding: 0;
-    margin: 0 auto;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    width: 220px;
-    .nav-link {
-      padding: 0;
-    }
-  }
-  .site-links {
-    margin: .25rem auto;
-    display: flex;
-    justify-content: space-between;
-    width:250px;
+    font-weight: 400;
   }
 }
 
 // Jumbotron
 .jumbotron {
-  margin-top: 5rem;
+  margin: 2rem 0 1rem 0;
   text-align: center;
   overflow:hidden;
   -webkit-backface-visibility: hidden;
@@ -213,61 +213,57 @@
   box-shadow: $z-depth-1;
   border-radius: $border-radius-base;
   background-color: $white-base;
-  h1 {
-    height: 4rem;
-    margin-top: 2rem;
-    margin-bottom: 0;
-    font-family: 'Boston';
-    font-weight: 700;
-    font-size: 1.65rem;
-    letter-spacing: -0.05em;
-    @media (min-width: 414px) {
-      font-size: 2.2rem;
-    }
-    @media (min-width: 576px) {
-      height: 4.5rem;
-      margin-top: 2.5rem;
-      font-size: 3.3rem;
-    }
-    @media (min-width: 768px) {
-      font-size: 4rem;
-    }
-  }
-  h2 {
-    margin: 0;
-    font-size: 1.2rem;
-    letter-spacing: -0.05em;
-    color: #555;
-    @media (min-width: 414px) {
-      font-size: 1.5rem;
-    }
-    @media (min-width: 576px) {
-      margin-top: -.5rem;
-      font-size: 1.8rem;
-    }
-    @media (min-width: 768px) {
-      margin-top: 0rem;
-      font-size: 2rem;
-    }
-  }
   .bg-img {
-    background-image: url("../../images/Cans-Banner2.png");
+    background-image: url("../../images/blake-with-bat-dark.jpg");
     background-size: cover;
-    min-height: 15rem;
+    background-position: center;
   }
   .blake-title {
+    padding-top: 16rem;
+    height: fit-content;
     display:inline-block;
     overflow:hidden;
     white-space:nowrap;
+    h1 {
+      margin-bottom: -.5rem;
+      font-size: 2rem;
+      letter-spacing: -0.05em;
+      color: white !important;
+      @media (min-width: 414px) {
+        font-size: 2.4rem;
+      }
+      @media (min-width: 576px) {
+        font-size: 3.8rem;
+      }
+      @media (min-width: 768px) {
+        font-size: 4.5rem;
+      }
+    }
+    h2 {
+      margin-top: .25rem;
+      padding-bottom: 13rem;
+      font-size: 1rem !important;
+      letter-spacing: -0.05em;
+      text-align: right;
+      span {
+        font-family: "Boston";
+        font-weight: 300;
+      }
+      @media (min-width: 414px) {
+        font-size: 1.2rem !important;
+      }
+      @media (min-width: 576px) {
+        margin-top: -.5rem;
+        font-size: 1.35rem !important;
+      }
+      @media (min-width: 768px) {
+        margin-top: -1rem;
+        font-size: 1.5rem !important;
+      }
+    }
   }
   .blake {
     animation: blake 1s;
-  }
-  .logo {
-    height: 4rem;
-    width: auto;
-    margin: 0 -10px 0 0;
-    animation: logoreveal 50s infinite;
   }
   .tag1 {
     animation: tagreveal1 5s;
@@ -299,6 +295,8 @@
       text-align: left;
       a {
         padding-left: 0;
+        color: white;
+        opacity: .8;
       }
       .pitch {
         margin-top: 0;
@@ -306,20 +304,24 @@
           margin-top: 1rem;
         }
         h4 {
+          color: white;
+          opacity: .8;
           margin: 0;
-          font-size: 1.1rem;
+          font-size: .9rem;
           line-height: 1.2rem;
           @media (min-width: 576px) {
             font-size: 1.4rem;
             line-height: 1.6rem;
           }
           @media (min-width: 768px) {
+            font-size: 1.2rem;
             margin-top: -1rem;
-            padding-bottom: 0;
           }
         }
         p {
-          font-size: .9rem;
+          color: white;
+          opacity: .6;
+          font-size: .75rem;
           line-height: 1rem;
           margin: 0;
           @media (min-width: 576px) {
@@ -340,11 +342,6 @@
     0% { opacity: 0; }
     20% { opacity: 0; }
     100% { opacity: 1; }
-}
-
-@keyframes logoreveal {
-  0% { opacity: 0; }
-  4% { opacity: 1; }
 }
 
 @keyframes tagreveal1 {
@@ -378,6 +375,9 @@
       -ms-animation: fadein 1s; /* Internet Explorer */
        -o-animation: fadein 1s; /* Opera < 12.1 */
           animation: fadein 1s;
+  img, .card {
+    border-radius: .25rem;
+  }
   .intro-content {
     margin: -1rem 0 1rem 0;
     padding: 1.5rem 1.5rem .75rem 1.5rem;
@@ -412,8 +412,9 @@
 }
 
 .page-container {
-  margin-top: 5rem;
-  margin-bottom: .5rem;
+  margin-top: 4rem;
+  padding: 1.5rem;
+  background-color: white;
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
      -moz-animation: fadein 1s; /* Firefox < 16 */
       -ms-animation: fadein 1s; /* Internet Explorer */
@@ -457,7 +458,6 @@
 }
 
 .gallery, .p2020 {
-  padding-bottom: .5rem;
   .card {
     .btn-action {
       position: absolute;
@@ -611,35 +611,34 @@
     text-align: right;
     hr {
       border: none;
-      border-top: 4px solid grey;
+      border-top: 4px solid $blake-brown;
       margin-right: 2rem;
     }
     .std-btn {
       background: transparent;
       border-color: transparent;
-      text-transform: capitalize;
       font-size: 1.25rem;
-      letter-spacing: var(--spacing);
       margin: 0;
-      transition: var(--transition);
       cursor: pointer;
       padding: 1rem 2rem 1rem 0;
       line-height: 1;
-      color: grey;
+      color: $secondary-color;
       text-align: right;
     }
-    .active-btn {
-      color: black;
-      box-shadow: -2px 0 var(--clr-primary-5);
-    }
     .std-btn:hover {
-      color: dark-grey;
-      box-shadow: -2px 0 var(--clr-primary-5);
+      color: $blake-brown;
+    }
+    .active-btn {
+      color: $primary-color;
+      font-weight: 500;
+    }
+    .active-btn:hover {
+      color: $primary-color;
     }
   }
   .content-container {
     display: block;
-    padding-right: 1rem;
+    padding: 0;
     width: 100%;
     height: 100%;
     h2 {
@@ -674,6 +673,9 @@
       .img-container {
         padding-bottom: 0;
       }
+      &:last-of-type {
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -681,10 +683,11 @@
 .cart {
   .product-table {
     margin-bottom: 0;
-    .table-head {
+    thead {
       border-radius: 10px;
       font-weight: 500;
       color: #fafafa;
+      background-color: $blake-brown;
     }
     th {
       color: #fafafa;
@@ -777,14 +780,17 @@
   margin: 0 1rem;
 }
 
-.checkout-open {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin: .5rem 0;
-  i {
-    margin-left: .5rem;
+.contact, .checkout {
+  input[type="text"]:not(.browser-default):focus:not([readonly])+label,
+  input[type="email"]:not(.browser-default):focus:not([readonly])+label,
+  textarea.md-textarea:focus:not([readonly])+label {
+    color: $secondary-color;
+  }
+  input[type="text"]:not(.browser-default):focus:not([readonly]),
+  input[type="email"]:not(.browser-default):focus:not([readonly]),
+  textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid $secondary-color;
+    box-shadow: 0 1px 0 0 $secondary-color;
   }
 }
 
@@ -795,9 +801,10 @@
   .banner {
     padding: 0;
     margin-bottom: 1rem;
-    background-color: $primary-color
+    background-color: $blake-brown;
   }
   h2 {
+    width: 90%;
     margin: 0;
     color: white;
   }
@@ -820,7 +827,27 @@
   }
 }
 
+.checkout-open {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: .5rem 0;
+  i {
+    margin-left: .5rem;
+  }
+}
+
 .checkout {
+  .btn-indigo {
+    background-color: $primary-color !important;
+  }
+  .btn-default {
+    background-color: $secondary-color !important;
+  }
+  .steps-step .text-muted {
+    color: $grey-lighten-2 !important;
+  }
   select {
     height: 41px;
     border: none;
@@ -917,10 +944,46 @@
   }
 }
 
+.press-date {
+  font-style: italic;
+  margin-top: 0;
+}
+.press-link {
+  margin-top: 1rem;
+}
+
 .privacy-address {
   p {
     padding: 2px 1rem;
     margin: 0;
     line-height: 1.2;
+  }
+}
+
+footer.blake-footer {
+  background-color: $blake-dark-grey;
+  color: white;
+  a {
+    color: white;
+  }
+  .muted {
+    opacity: .6;
+  }
+  .social-links {
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    .nav-link {
+      padding: 0;
+    }
+  }
+  .site-links {
+    margin: .25rem auto;
+    display: flex;
+    justify-content: space-between;
+    width: 280px;
   }
 }

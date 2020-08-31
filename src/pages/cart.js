@@ -75,7 +75,7 @@ const CartPage = () => {
                 <div className="table-responsive">
                   {(cart && cart.length > 0) &&
                   <MDBTable className='product-table'>
-                    <MDBTableHead color="default-color">
+                    <MDBTableHead>
                       <tr>
                         <th scope="col"> </th>
                         <th scope="col" className="text-left">Item</th>
@@ -158,7 +158,7 @@ const CartPage = () => {
 
             <div className="checkout-open">
               {(cart && cart.length > 0) &&
-                <Link to="/checkout/" className="btn btn-success btn-rounded">
+                <Link to="/checkout/" className="btn btn-primary btn-rounded">
                   Checkout<i className="fas fa-chevron-right"></i>
                 </Link>
               }

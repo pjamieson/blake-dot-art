@@ -365,7 +365,7 @@ const CheckoutComponent = () => {
             <MDBStepper form>
               <MDBStep form>
                 <a href="#formstep1" onClick={() => handleTabChange(1)}>
-                  <MDBBtn color={activePanel === 1 ? "indigo" : "default"} circle>
+                  <MDBBtn color={activePanel === 1 ? "primary" : "default"} circle>
                     1
                   </MDBBtn>
                 </a>
@@ -377,7 +377,7 @@ const CheckoutComponent = () => {
               </MDBStep>
               <MDBStep form>
                 <a href="#formstep2" onClick={() => handleTabChange(2)}>
-                  <MDBBtn color={activePanel === 2 ? "indigo" : "default"} circle>
+                  <MDBBtn color={activePanel === 2 ? "primary" : "default"} circle>
                     2
                   </MDBBtn>
                 </a>
@@ -389,7 +389,7 @@ const CheckoutComponent = () => {
               </MDBStep>
               <MDBStep form>
                 <a href="#formstep3" onClick={() => handleTabChange(3)}>
-                  <MDBBtn color={activePanel === 3 ? "indigo" : "default"} circle>
+                  <MDBBtn color={activePanel === 3 ? "primary" : "default"} circle>
                     3
                   </MDBBtn>
                 </a>
@@ -438,7 +438,7 @@ const CheckoutComponent = () => {
                       </MDBCol>
                     </MDBRow>
 
-                    <MDBBtn color='indigo' rounded className='float-right'
+                    <MDBBtn color='primary' rounded className='float-right'
                       onClick={() => handleTabChange(2)}>
                       Next
                     </MDBBtn>
@@ -481,11 +481,11 @@ const CheckoutComponent = () => {
                         <MDBInput type="text" id="zip" name="zip" label="Zip/Postal Code" value={zip} className='zip mt-2' required onChange={(e) => setZip(e.target.value)} />
                       </MDBCol>
                     </MDBRow>
-                    <MDBBtn color='indigo' rounded className='float-left'
+                    <MDBBtn color='primary' rounded className='float-left'
                       onClick={() => handleTabChange(1)}>
                       Previous
                     </MDBBtn>
-                    <MDBBtn color='indigo' rounded className='float-right'
+                    <MDBBtn color='primary' rounded className='float-right'
                       onClick={() => handleTabChange(3)}>
                       Next
                     </MDBBtn>
@@ -515,10 +515,10 @@ const CheckoutComponent = () => {
                         <CardElement options={CARD_ELEMENT_OPTIONS} onChange={(event) => handleCardChange(event)} />
                       </MDBCol>
                     </MDBRow>
-                    <MDBBtn className='float-left' color='indigo' rounded onClick={() => handleTabChange(2)}>
+                    <MDBBtn className='float-left' color='primary' rounded onClick={() => handleTabChange(2)}>
                       Previous
                     </MDBBtn>
-                    <MDBBtn type="submit" id="submit" className="float-right" color='success' rounded disabled={!stripe || !valid() || processing || disabled || succeeded}>
+                    <MDBBtn type="submit" id="submit" className="float-right" color='primary' rounded disabled={!stripe || !valid() || processing || disabled || succeeded}>
                       <span id="button-text">
                         {processing ? (<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>)
                          : ("Place Order")}
