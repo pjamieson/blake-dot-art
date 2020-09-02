@@ -55,7 +55,7 @@ export const query = graphql`
           }
         }
         slug
-        available
+        qty
       }
     }
   }

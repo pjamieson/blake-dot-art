@@ -120,15 +120,15 @@ const Painting = ({
                 }
 
                 <div className="detail-btns">
-                  { (qty > 0 && qtyAvail <= 0) &&
+                  { (qtyAvail > 0 && qtyAvailNow <= 0) &&
                     <h3>Sorry, this piece is no longer available.</h3>
                   }
 
-                  { (portfolio && qty === 0 && qtyAvail <= 0) &&
+                  { (portfolio && qtyAvail === 0 && qtyAvailNow <= 0) &&
                     <h3>This piece has been sold or is Not for Sale.</h3>
                   }
 
-                  { (price > 10 && qtyAvail > 0) &&
+                  { (price > 10 && qtyAvailNow > 0) &&
                     <div className="add-to-cart">
                       <h3 className="price">{formatPrice(price)}</h3>
                       {!inCart &&
@@ -142,13 +142,13 @@ const Painting = ({
                     </div>
                   }
 
-                  { (price <= 10 && qtyAvail > 0) &&
+                  { (price <= 10 && qtyAvailNow > 0) &&
                     <div className="inquire">
                       <button type="button" className="btn btn-inquire btn-primary btn-rounded">Inquire</button>
                     </div>
                   }
 
-                  { (inCart && qtyAvail > 0) &&
+                  { (inCart && qtyAvailNow > 0) &&
                     <MDBBadge color="secondary">Added to Cart</MDBBadge>
                   }
                 </div>
