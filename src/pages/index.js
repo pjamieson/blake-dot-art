@@ -104,7 +104,7 @@ export const query = graphql`
             }
           }
         }
-        available
+        qty
       }
     }
   }
