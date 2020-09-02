@@ -285,6 +285,8 @@ const CheckoutComponent = () => {
           const orderTotal = cartTotal(cart)
           const fullname = `${firstname} ${lastname}`
 
+          const order_num = `B-2${order_data.order_id}`
+
           const shipment = {
             "to_address": {
               "name": fullname,
@@ -297,7 +299,7 @@ const CheckoutComponent = () => {
               "email": email
             },
             "line_items": items,
-            "order_number": order_data.order_id,
+            "order_number": order_num,
             "order_status": "PAID",
             "placed_at": order_data.order_created,
             "shipping_cost": orderShipping,
