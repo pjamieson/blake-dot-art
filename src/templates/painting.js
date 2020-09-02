@@ -24,6 +24,7 @@ const Painting = ({
       image: { childImageSharp: { fluid }},
       images = {},
       subgenre,
+      sport = {},
       date = {},
       size = {},
       medium = {},
@@ -84,12 +85,19 @@ const Painting = ({
                 </div>
                 { (qtyAvail > 0) &&
                   <div className="back-btn">
-                    <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action btn-danger">
+                    <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action btn-primary">
                       <i className="fas fa-chevron-left"></i>
                     </Link>
                   </div>
                 }
-                { (qtyAvail <= 0) &&
+                { (qtyAvail <= 0 && sport) &&
+                  <div className="back-btn">
+                    <Link to={`/portfolio/${subgenre.slug}`} state={{ sport: sport.name }} className="btn-floating btn-action btn-primary">
+                      <i className="fas fa-chevron-left"></i>
+                    </Link>
+                  </div>
+                }
+                { (qtyAvail <= 0 && !sport) &&
                   <div className="back-btn">
                     <Link to={`/portfolio/${subgenre.slug}`} className="btn-floating btn-action btn-primary">
                       <i className="fas fa-chevron-left"></i>
@@ -181,6 +189,9 @@ export const query = graphql`
       }
       subgenre {
         slug
+      }
+      sport {
+        name
       }
       date
       size
