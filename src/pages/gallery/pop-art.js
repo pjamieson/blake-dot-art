@@ -34,7 +34,7 @@ export const query = graphql`
     allStrapiPainting(
       filter: {
         subgenre: {name: {eq: "Pop Art"}},
-        available: {eq: true}
+        qty: {gt: 0}
       },
       sort: {
         fields: order, order: ASC
