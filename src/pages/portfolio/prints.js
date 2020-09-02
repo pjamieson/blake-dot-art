@@ -36,7 +36,7 @@ export const query = graphql`
       filter: {
         subgenre: {name: {eq: "Prints"}},
         portfolio: {eq: true},
-        available: {eq: false}
+        qty: {lt: 1}
       },
       sort: {
         fields: order, order: ASC
