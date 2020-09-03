@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import Img from "gatsby-image"
 
 const CardImageLinkTitle = ({ card }) => {
+  //console.log("card", card)
   const link = `/${(card.qty > 0 ? 'gallery' : 'portfolio')}/${card.subgenre.slug}/${card.slug}`
   return (
     <div className="card" key={card.identifier}>

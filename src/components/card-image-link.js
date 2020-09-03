@@ -5,7 +5,7 @@ import { MDBWaves } from "mdbreact";
 
 const CardImagelink = ({ location, card }) => {
   const [cursorPos, setCursorPos] = useState({})
-
+  //console.log("card", card)
   const menu = (card.player ? 'merch' : (card.qty > 0 ? 'gallery' : 'portfolio'))
   const link = `/${menu}/${card.player ? 'topps2020' : card.subgenre.slug}/`
 
