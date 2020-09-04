@@ -1,22 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { navigate } from "gatsby"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
+import { MDBWaves } from "mdbreact";
 
 const CardTopps2020 = ({ card }) => {
+  const [cursorPos, setCursorPos] = useState({})
   const link = `/merch/topps2020/${card.identifier}`
+
+  const handleClick = (event) => {
+    event.stopPropagation();
+    // For Waves effect - Get & Set Cursor Position
+    const cursorPos = {
+      top: event.clientY,
+      left: event.clientX,
+      time: Date.now() // time indicates particular clicks
+    };
+    setCursorPos(cursorPos);
+
+    navigate(link)
+  }
+
   return (
     <div className="card" key={card.identifier}>
 
       <div className="view overlay">
-        <div>
-          <Img className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
-          { (card.qty > 0) &&
-            <Link to={link}>
-              <div className="mask rgba-white-slight"></div>
-            </Link>
-          }
-        </div>
-        { (card.qty === 0 && card.qty !== -1) &&
+        {  (card.qty > 0) &&
+          <div role="button" onMouseUp={(event) => handleClick(event)} onTouchStart={(event) => handleClick(event)}>
+            <Img className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
+            <MDBWaves cursorPos={cursorPos} />
+            <div className="mask rgba-white-slight"></div>
+          </div>
+        }
+        { (card.qty < 1) &&
+          <div>
+            <Img className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
+          </div>
+        }
+        { (card.qty === 0) &&
           <button type="button" className="btn btn-sold btn-primary btn-rounded">Sold Out</button>
         }
       </div>
