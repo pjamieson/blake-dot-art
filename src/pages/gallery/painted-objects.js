@@ -47,6 +47,8 @@ export const query = graphql`
           slug
         }
         title
+        subtitle
+        price
         image {
           childImageSharp {
             fluid {

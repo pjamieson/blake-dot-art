@@ -485,7 +485,13 @@ p {
       margin-top: -1.5rem; // adjusts vertical position
     }
     .card-body {
-      padding: .8rem .8rem 0 .8rem;
+      padding: .8rem ;
+      h3, h4 {
+        margin: 0;
+      }
+      .card-subtitle {
+        color: $secondary-color;
+      }
     }
   }
 }

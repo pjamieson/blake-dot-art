@@ -113,7 +113,7 @@ const Painting = ({
                   <GalleryCarouselComponent images={images} />
                 */}
 
-                <h2>{subtitle && subtitle.length > 0 ? subtitle : "Original Painting by Blake Jamieson"}</h2>
+                <h2>{subtitle && subtitle.length > 0 ? subtitle : "A Blake Jamieson Original"}</h2>
 
                 { (date && size) && <p>{date} - {size}</p> }
                 { (!(date && size) && date) && <p>{date}</p> }
