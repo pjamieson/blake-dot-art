@@ -8,7 +8,7 @@ const CardTopps2020 = ({ card }) => {
   const [cursorPos, setCursorPos] = useState({})
   const link = `/topps2020/${card.identifier}`
 
-  const handleClick = (event) => {
+  const handleTouch = (event) => {
     event.stopPropagation();
     // For Waves effect - Get & Set Cursor Position
     const cursorPos = {
@@ -18,7 +18,7 @@ const CardTopps2020 = ({ card }) => {
     };
     setCursorPos(cursorPos);
 
-    navigate(link)
+    //navigate(link)
   }
 
   return (
@@ -26,7 +26,7 @@ const CardTopps2020 = ({ card }) => {
 
       <div className="view overlay">
         {  (card.qty > 0) &&
-          <div role="button" onMouseUp={(event) => handleClick(event)} onTouchStart={(event) => handleClick(event)}>
+          <div role="button" tabIndex={0} onTouchStart={(event) => handleTouch(event)} onClick={() => navigate(link)} onKeyDown={() => navigate(link)}>
             <Img className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
             <MDBWaves cursorPos={cursorPos} />
             <div className="mask rgba-white-slight"></div>
