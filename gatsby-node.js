@@ -45,7 +45,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create Project 2020 card detail pages.
   p2020cards.forEach((p2020card) => {
     createPage({
-      path: `/merch/topps2020/${p2020card.slug}`,
+      path: `/topps2020/${p2020card.slug}`,
       component: path.resolve(`./src/templates/tradingcard.js`),
       context: {
         slug: p2020card.slug,

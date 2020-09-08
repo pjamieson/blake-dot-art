@@ -113,7 +113,7 @@ const Navbar = () => {
             </MDBNavItem>
 
             <MDBNavItem>
-              <Link className="nav-link" to="/merch/topps2020/">
+              <Link className="nav-link" to="/topps2020/">
                 <div className="nav-menu-item">
                   <p>TOPPS</p>
                   <p className="menu-sub">Project 2020</p>

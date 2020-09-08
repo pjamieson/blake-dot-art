@@ -6,7 +6,7 @@ import { MDBWaves } from "mdbreact";
 
 const CardTopps2020 = ({ card }) => {
   const [cursorPos, setCursorPos] = useState({})
-  const link = `/merch/topps2020/${card.identifier}`
+  const link = `/topps2020/${card.identifier}`
 
   const handleClick = (event) => {
     event.stopPropagation();

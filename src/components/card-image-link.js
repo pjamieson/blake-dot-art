@@ -26,7 +26,7 @@ const CardImagelink = ({ location, card }) => {
       navigate(link, { state: { sport: card.sport.name } })
     }
     if (card.player) {
-      navigate(link, { state: { player: card.player.name } })
+      navigate('/topps2020', { state: { player: card.player.name } })
     }
   }
 

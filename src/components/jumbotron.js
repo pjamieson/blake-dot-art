@@ -31,7 +31,7 @@ const Jumbotron = () => {
             </div>
           </div>
           <div className="featured-link">
-            <Link to="/merch/topps2020">
+            <Link to="/topps2020">
               <MDBBtn color="secondary">
                 Project 2020 Cards
                 <MDBIcon icon="caret-right" className="ml-2" />

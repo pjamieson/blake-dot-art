@@ -81,7 +81,7 @@ const Tradingcard = ({
                   <Img className="card card-img-top" fluid={fluid} alt={title} />
                 </div>
                 <div className="back-btn">
-                  <Link to={`/merch/topps2020/`} state={{ player: player.name }} className="btn-floating btn-action btn-danger">
+                  <Link to={`/topps2020/`} state={{ player: player.name }} className="btn-floating btn-action btn-danger">
                     <i className="fas fa-chevron-left"></i>
                   </Link>
                 </div>
