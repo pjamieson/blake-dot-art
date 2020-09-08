@@ -50,6 +50,9 @@ h1 {
 h2 {
   font-weight: 500 !important;
   color: $blake-brown !important;
+  &.player-subhead {
+    margin-top: -20px;
+  }
 }
 p {
   font-weight: 400;
