@@ -12,7 +12,7 @@ const CardImageLinkTitle = ({ card }) => {
   const link = `/${(card.qty > 0 ? 'gallery' : 'portfolio')}/${card.subgenre.slug}/${card.slug}`
   const subtitle = (card.subtitle && card.subtitle.length > 0 ? card.subtitle : 'A Blake Jamieson Original')
 
-  const handleClick = (event) => {
+  const handleTouch = (event) => {
     event.stopPropagation();
     // For Waves effect - Get & Set Cursor Position
     const cursorPos = {
@@ -21,14 +21,12 @@ const CardImageLinkTitle = ({ card }) => {
       time: Date.now() // time indicates particular clicks
     };
     setCursorPos(cursorPos);
-
-    navigate(link)
   }
 
   return (
     <div className="card" key={card.identifier}>
       <div className="view overlay">
-        <div role="button" onMouseUp={(event) => handleClick(event)} onTouchStart={(event) => handleClick(event)}>
+        <div role="button" tabIndex={0} onTouchStart={(event) => handleTouch(event)} onClick={() => navigate(link)} onKeyDown={() => navigate(link)}>
           <Img className="card-img-top" fluid={card.image.childImageSharp.fluid} alt={card.title} />
           <MDBWaves cursorPos={cursorPos} />
           <div className="mask rgba-white-slight"></div>

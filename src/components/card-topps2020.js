@@ -17,8 +17,6 @@ const CardTopps2020 = ({ card }) => {
       time: Date.now() // time indicates particular clicks
     };
     setCursorPos(cursorPos);
-
-    //navigate(link)
   }
 
   return (
