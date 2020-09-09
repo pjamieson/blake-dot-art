@@ -428,7 +428,7 @@ p {
 
 .page-container {
   margin-top: 4rem;
-  padding: 1.5rem;
+  padding: 1.5rem 0;
   background-color: white;
   border-radius: .25rem;
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
@@ -441,6 +441,9 @@ p {
   }
   .lead {
     text-align: center;
+  }
+  @media (min-width: 375px) {
+    padding: 1.5rem;
   }
 }
 
@@ -904,9 +907,12 @@ p {
     text-align: center;
   }
   .payment-panel {
-    padding: 0 6rem;
+    padding: 0;
     .email {
       margin: 0 0 -1.25rem 0;
+    }
+    @media (min-width: 768px) {
+      padding: 0 6rem;
     }
     /**
     * These classes are added to your Stripe Element by default.
@@ -916,7 +922,7 @@ p {
     */
     .StripeElement {
       height: 41px;
-      padding: 10px 12px;
+      padding: 10px 2px;
       width: 100%;
       color: #32325d;
       background-color: #e8f0fe;
@@ -929,6 +935,9 @@ p {
       outline: none;
       box-shadow: none;
       transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+      @media (min-width: 640px) {
+        padding: 10px 12px;
+      }
     }
 
     .StripeElement--focus {

@@ -485,7 +485,7 @@ const CheckoutComponent = () => {
                     </MDBRow>
                     <MDBBtn color='primary' rounded className='float-left'
                       onClick={() => handleTabChange(1)}>
-                      Previous
+                      Prev
                     </MDBBtn>
                     <MDBBtn color='primary' rounded className='float-right'
                       onClick={() => handleTabChange(3)}>
@@ -518,12 +518,12 @@ const CheckoutComponent = () => {
                       </MDBCol>
                     </MDBRow>
                     <MDBBtn className='float-left' color='primary' rounded onClick={() => handleTabChange(2)}>
-                      Previous
+                      Prev
                     </MDBBtn>
                     <MDBBtn type="submit" id="submit" className="float-right" color='primary' rounded disabled={!stripe || !valid() || processing || disabled || succeeded}>
                       <span id="button-text">
                         {processing ? (<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>)
-                         : ("Place Order")}
+                         : ("Submit")}
                       </span>
                     </MDBBtn>
                     {/* Show any error that happens when processing the payment */}

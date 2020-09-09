@@ -73,6 +73,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     p2020players.forEach((p2020player) => {
       const slug = slugify(p2020player.name)
+      //console.log("slug", slug)
       createPage({
         path: `/topps2020/${slug}`,
         component: path.resolve(`./src/templates/2020player.js`),
