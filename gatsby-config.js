@@ -50,6 +50,7 @@ module.exports = {
         apiURL: `${process.env.GATSBY_STRAPI_API_URL}`,
         contentTypes: [
           "client",
+          "email",
           "order",
           "painting",
           "press",

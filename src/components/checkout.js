@@ -341,7 +341,25 @@ const CheckoutComponent = () => {
             })
           }
 
-          // TODO: Add to mailing list, if opted in
+          // Add to email list, if opted in
+          if (newsletter) {
+            const email_entry = {
+              firstname,
+              lastname,
+              email
+            }
+            try {
+              fetch(`${process.env.GATSBY_STRAPI_API_URL}/emails`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(email_entry)
+              })
+            } catch(error) {
+              console.log("checkout post email error", error)
+            }
+          } // end newsletter
 
           // Remove now-purchased items from cart
           clearCart()
