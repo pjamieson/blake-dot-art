@@ -245,6 +245,22 @@ const CheckoutComponent = () => {
           setError(null)
           setSucceeded(true)
 
+          // Update availability/inventory in Strapi (Paintings & Tradingcards)
+          try {
+            if (cart && cart.length > 0) {
+              cart.forEach(item => {
+                if (item.itemType === "painting") {
+                  setPaintingQtyAvailable(item.id, (item.qtyAvail - item.qty))
+                }
+                if (item.itemType === "tradingcard") {
+                  setCardQtyAvailable(item.id, (item.qtyAvail - item.qty))
+                }
+              })
+            }
+          } catch(error) {
+            console.log("checkout update inventory error", error)
+          }
+
           // POST order and shipping address to Strapi
           const order = {
             paymentIntent: paymentResult.paymentIntent,
@@ -328,7 +344,7 @@ const CheckoutComponent = () => {
           } catch (err) {
             console.log("checkout post shippo error", err)
           }
-
+/*
           // Update availability/inventory in Strapi (Paintings & Tradingcards)
           if (cart && cart.length > 0) {
             cart.forEach(item => {
@@ -340,7 +356,7 @@ const CheckoutComponent = () => {
               }
             })
           }
-
+*/
           // Add to email list, if opted in
           if (newsletter) {
             const email_entry = {
