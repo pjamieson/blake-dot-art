@@ -186,7 +186,7 @@ p {
     right: 4rem;
   }
   .hidden-nav-item {
-    margin-left: -10px;
+    margin: 0 -10px 0 -20px;
     color: $blake-dark-grey;
   }
   @media (min-width: 768px) {
