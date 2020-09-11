@@ -163,13 +163,13 @@ const Navbar = () => {
 
             <MDBNavItem>
               <MDBDropdown>
-                {/*
+
                 <MDBDropdownToggle nav>
-                  <div className="nav-menu-item">
-                    <p>Topps 2020 Players</p>
+                  <div className="hidden-nav-item">
+                    <p>.</p>
                   </div>
                 </MDBDropdownToggle>
-                */}
+
                 <MDBDropdownMenu>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/topps2020/dwight-gooden/">Dwight Gooden</Link>

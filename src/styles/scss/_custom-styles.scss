@@ -185,6 +185,10 @@ p {
     top: .7rem;
     right: 4rem;
   }
+  .hidden-nav-item {
+    margin-left: -10px;
+    color: $blake-dark-grey;
+  }
   @media (min-width: 768px) {
     padding: 0;
   }
@@ -194,7 +198,7 @@ p {
   position: absolute;
   top: .8rem;
   right: 1.5rem;
-  padding-left: 1rem;
+  padding-left: 0;
   .success-text {
     color: $secondary-color !important;
     border-color: $secondary-color !important;
