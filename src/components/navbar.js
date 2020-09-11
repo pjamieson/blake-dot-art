@@ -165,7 +165,7 @@ const Navbar = () => {
               <MDBDropdown>
 
                 <MDBDropdownToggle nav>
-                  <div className="hidden-nav-item">
+                  <div className="hidden-nav-item nav-menu-item">
                     <p>.</p>
                   </div>
                 </MDBDropdownToggle>
