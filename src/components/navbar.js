@@ -121,6 +121,45 @@ const Navbar = () => {
               </Link>
             </MDBNavItem>
 
+            <MDBDropdownMenu>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/dwight-gooden/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/ken-griffey-jr/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/ted-williams/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/ichiro-suzuki/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/willie-mays/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/mariano-rivera/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/mike-trout/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/mark-mcgwire/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/rickey-henderson/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/jackie-robinson/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/don-mattingly/"></Link>
+              </MDBDropdownItem>
+              <MDBDropdownItem>
+                <Link className="menu-link" to="/topps2020/nolan-ryan/"></Link>
+              </MDBDropdownItem>
+            </MDBDropdownMenu>
+
             <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav>
@@ -129,9 +168,9 @@ const Navbar = () => {
                   </div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                <MDBDropdownItem>
-                  <a className="menu-link" href="https://cardart.com" target="_blank" rel="noopener noreferrer">CardArt</a>
-                </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <a className="menu-link" href="https://cardart.com" target="_blank" rel="noopener noreferrer">CardArt</a>
+                  </MDBDropdownItem>
                   <MDBDropdownItem>
                     <a className="menu-link" href="https://www.proathleteportraits.com/hats-bats-and-balls" target="_blank" rel="noopener noreferrer">Hats, Bats & Balls</a>
                   </MDBDropdownItem>
