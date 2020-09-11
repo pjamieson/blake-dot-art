@@ -2,9 +2,9 @@ import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { MDBBtn, MDBInput } from "mdbreact"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import CardTopps2020 from "../components/card-topps2020"
+import Layout from "../../components/layout"
+import SEO from "../../components/seo"
+import CardTopps2020 from "../../components/card-topps2020"
 
 const ToppsProject2020Page = ({ location, data }) => {
   const {
