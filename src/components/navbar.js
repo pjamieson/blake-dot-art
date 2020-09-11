@@ -50,7 +50,6 @@ const Navbar = () => {
 
             <MDBNavItem>
               <MDBDropdown>
-
                 <MDBDropdownToggle nav>
                   <div className="nav-menu-item">
                     <p>PORTFOLIO</p>
@@ -78,38 +77,37 @@ const Navbar = () => {
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
-              </MDBNavItem>
+            </MDBNavItem>
 
-              <MDBNavItem>
-                <MDBDropdown>
-
-                <MDBDropdownToggle nav>
-                  <div className="nav-menu-item">
-                    <p>GALLERY</p>
-                    <p className="menu-sub">(For Sale)</p>
-                  </div>
-                </MDBDropdownToggle>
-                  <MDBDropdownMenu>
-                    <MDBDropdownItem>
-                      <Link className="menu-link" to="/gallery/athlete-portraits/">Athlete Portraits</Link>
-                    </MDBDropdownItem>
-                    <MDBDropdownItem>
-                      <Link className="menu-link" to="/gallery/pop-art/">Pop Art</Link>
-                    </MDBDropdownItem>
-                    <MDBDropdownItem>
-                      <Link className="menu-link" to="/gallery/abstracts/">Abstracts</Link>
-                    </MDBDropdownItem>
-                    <MDBDropdownItem>
-                      <Link className="menu-link" to="/gallery/prints/">Prints</Link>
-                    </MDBDropdownItem>
-                    <MDBDropdownItem>
-                      <Link className="menu-link" to="/gallery/collabs/">Collabs</Link>
-                    </MDBDropdownItem>
-                    <MDBDropdownItem>
-                      <Link className="menu-link" to="/gallery/painted-objects/">Painted Objects</Link>
-                    </MDBDropdownItem>
-                  </MDBDropdownMenu>
-                </MDBDropdown>
+            <MDBNavItem>
+              <MDBDropdown>
+              <MDBDropdownToggle nav>
+                <div className="nav-menu-item">
+                  <p>GALLERY</p>
+                  <p className="menu-sub">(For Sale)</p>
+                </div>
+              </MDBDropdownToggle>
+                <MDBDropdownMenu>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/gallery/athlete-portraits/">Athlete Portraits</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/gallery/pop-art/">Pop Art</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/gallery/abstracts/">Abstracts</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/gallery/prints/">Prints</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/gallery/collabs/">Collabs</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/gallery/painted-objects/">Painted Objects</Link>
+                  </MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
             </MDBNavItem>
 
             <MDBNavItem>
@@ -120,45 +118,6 @@ const Navbar = () => {
                 </div>
               </Link>
             </MDBNavItem>
-
-            <MDBDropdownMenu>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/dwight-gooden/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/ken-griffey-jr/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/ted-williams/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/ichiro-suzuki/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/willie-mays/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/mariano-rivera/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/mike-trout/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/mark-mcgwire/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/rickey-henderson/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/jackie-robinson/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/don-mattingly/"></Link>
-              </MDBDropdownItem>
-              <MDBDropdownItem>
-                <Link className="menu-link" to="/topps2020/nolan-ryan/"></Link>
-              </MDBDropdownItem>
-            </MDBDropdownMenu>
 
             <MDBNavItem>
               <MDBDropdown>
@@ -201,6 +160,57 @@ const Navbar = () => {
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavItem>
+
+            <MDBNavItem>
+              <MDBDropdown>
+                {/*
+                <MDBDropdownToggle nav>
+                  <div className="nav-menu-item">
+                    <p>Topps 2020 Players</p>
+                  </div>
+                </MDBDropdownToggle>
+                */}
+                <MDBDropdownMenu>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/dwight-gooden/">Dwight Gooden</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/ken-griffey-jr/">Ken Griffey, Jr.</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/ted-williams/">Ted Williams</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/ichiro-suzuki/">Ichiro Suzuki</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/willie-mays/">Willie Mays</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/mariano-rivera/">Mariano Rivera</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/mike-trout/">Mike Trout</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/mark-mcgwire/">Mark McGwire</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/rickey-henderson/">Rickey Henderson</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/jackie-robinson/">Jackie Robinson</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/don-mattingly/">Don Mattingly</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/nolan-ryan/">Nolan Ryan</Link>
+                  </MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
+            </MDBNavItem>
+
           </MDBNavbarNav>
 
         </MDBCollapse>
