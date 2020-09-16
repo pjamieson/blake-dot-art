@@ -443,34 +443,34 @@ const CheckoutComponent = () => {
                   <MDBCol md='12'>
                     <MDBRow>
                       <MDBCol md="6">
-                        <MDBInput type="text" id="bfirst" name="bfirst" label="First Name" value={bfirstname} className="mt-4" required onChange={(event) => setBFirstname(event.target.value)} />
+                        <MDBInput type="text" id="bfirst" name="bfirst" label="First Name*" value={bfirstname} className="mt-4" required onChange={(event) => setBFirstname(event.target.value)} />
                       </MDBCol>
                       <MDBCol md="6">
-                        <MDBInput type="text" id="blast" name="blast" label="Last Name"  value={blastname} className="mt-4" required onChange={(e) => setBLastname(e.target.value)} />
+                        <MDBInput type="text" id="blast" name="blast" label="Last Name*"  value={blastname} className="mt-4" required onChange={(e) => setBLastname(e.target.value)} />
                       </MDBCol>
                       <MDBCol md="6">
-                        <MDBInput type="text" id="baddress" name="baddress" label="Address" value={baddress} className="mt-0" required onChange={(e) => setBAddress(e.target.value)} />
+                        <MDBInput type="text" id="baddress" name="baddress" label="Address*" value={baddress} className="mt-0" required onChange={(e) => setBAddress(e.target.value)} />
                       </MDBCol>
                       <MDBCol md="6">
                         <MDBInput type="text" id="baddress2" name="baddress2" label="Address 2 (optional)" value={baddress2} onChange={(e) => setBAddress2(e.target.value)} />
                       </MDBCol>
                       <MDBCol md="12">
-                        <MDBInput type="text" id="bcity" name="bcity" label="City" required value={bcity} onChange={(e) => setBCity(e.target.value)} />
+                        <MDBInput type="text" id="bcity" name="bcity" label="City*" required value={bcity} onChange={(e) => setBCity(e.target.value)} />
                       </MDBCol>
                     </MDBRow>
                     <MDBRow className="country-region-zip">
                       <MDBCol lg='4' md='12' className='mb-4'>
-                        <label htmlFor="bcountry" className="input-label mt-0">Country</label>
+                        <label htmlFor="bcountry" className="input-label mt-0">Country*</label>
                         <CountryDropdown id="bcountry" valueType="short" whitelist={countryList} priorityOptions={priorityList} className="form-control" required value={bcountry} onChange={(val) => setBCountry(val)} />
                       </MDBCol>
                       <MDBCol lg='4' md='6' className='mb-4'>
-                        <label htmlFor="bregion" className="input-label mt-0">State/Province</label>
+                        <label htmlFor="bregion" className="input-label mt-0">State/Province*</label>
                         <RegionDropdown id="bregion" valueType="short" className="form-control" required country={bcountry} countryValueType="short" value={bregion} onChange={(val) => setBRegion(val)}>
                           Country
                         </RegionDropdown>
                       </MDBCol>
                       <MDBCol lg='4' md='6' className='mt-2 mb-4'>
-                        <MDBInput type="text" id="bzip" name="bzip" label="Zip/Postal Code" value={bzip} className='' required onChange={(e) => setBZip(e.target.value)} />
+                        <MDBInput type="text" id="bzip" name="bzip" label="Zip/Postal Code*" value={bzip} className='' required onChange={(e) => setBZip(e.target.value)} />
                       </MDBCol>
                     </MDBRow>
 
@@ -487,34 +487,34 @@ const CheckoutComponent = () => {
                         <MDBInput type="checkbox" id="sameaddr" name="sameaddr" label="Same as Billing Address" onChange={() => handleSameAddressClick()} />
                       </MDBCol>
                       <MDBCol md="6">
-                        <MDBInput type="text" id="bfirst" name="bfirst" label="First Name" value={firstname} className="mt-4" required onChange={(e) => setFirstname(e.target.value)} />
+                        <MDBInput type="text" id="bfirst" name="bfirst" label="First Name*" value={firstname} className="mt-4" required onChange={(e) => setFirstname(e.target.value)} />
                       </MDBCol>
                       <MDBCol md="6">
-                        <MDBInput type="text" id="blast" name="blast" label="Last Name"  value={lastname} className="mt-4" required onChange={(e) => setLastname(e.target.value)} />
+                        <MDBInput type="text" id="blast" name="blast" label="Last Name*"  value={lastname} className="mt-4" required onChange={(e) => setLastname(e.target.value)} />
                       </MDBCol>
                       <MDBCol md="6">
-                        <MDBInput type="text" id="address" name="address" label="Address" value={address} className="mt-0" required onChange={(e) => setAddress(e.target.value)} />
+                        <MDBInput type="text" id="address" name="address" label="Address*" value={address} className="mt-0" required onChange={(e) => setAddress(e.target.value)} />
                       </MDBCol>
                       <MDBCol md="6">
                         <MDBInput type="text" id="address2" name="address2" label="Address 2 (optional)" value={address2} onChange={(e) => setAddress2(e.target.value)} />
                       </MDBCol>
                       <MDBCol md="12">
-                        <MDBInput type="text" id="city" name="city" label="City" required value={city} onChange={(e) => setCity(e.target.value)} />
+                        <MDBInput type="text" id="city" name="city" label="City*" required value={city} onChange={(e) => setCity(e.target.value)} />
                       </MDBCol>
                     </MDBRow>
                     <MDBRow className="country-region-zip">
                       <MDBCol lg='4' md='12'>
-                        <label htmlFor="country" className="input-label mt-0">Country</label>
+                        <label htmlFor="country" className="input-label mt-0">Country*</label>
                         <CountryDropdown id="country" valueType="short" whitelist={countryList} priorityOptions={priorityList} className="form-control" required value={country} onChange={(val) => setCountry(val)} />
                       </MDBCol>
                       <MDBCol lg='4' md='6'>
-                        <label htmlFor="region" className="input-label mt-0">State/Province</label>
+                        <label htmlFor="region" className="input-label mt-0">State/Province*</label>
                         <RegionDropdown id="region" valueType="short" className="form-control" required country={country} countryValueType="short" value={region} onChange={(val) => setRegion(val)}>
                           Country
                         </RegionDropdown>
                       </MDBCol>
                       <MDBCol lg='4' md='6' className="mt-2">
-                        <MDBInput type="text" id="zip" name="zip" label="Zip/Postal Code" value={zip} className='zip mt-2' required onChange={(e) => setZip(e.target.value)} />
+                        <MDBInput type="text" id="zip" name="zip" label="Zip/Postal Code*" value={zip} className='zip mt-2' required onChange={(e) => setZip(e.target.value)} />
                       </MDBCol>
                     </MDBRow>
                     <MDBBtn color='primary' rounded className='float-left'
@@ -531,7 +531,7 @@ const CheckoutComponent = () => {
                   <MDBCol md='12' className="payment-panel">
                     <MDBRow>
                       <MDBCol md="12">
-                        <MDBInput type="email" id="email" name="email" label="Email" required className="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <MDBInput type="email" id="email" name="email" label="Email* (required)" required className="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                         <small className='email-note text-muted'>
                           Your email is required for communication about this order
                         </small>
@@ -546,7 +546,7 @@ const CheckoutComponent = () => {
                     <MDBRow>
                       <MDBCol md='12' className='mb-3'>
                         <label className="input-label mt-0">
-                          Credit card details
+                          Credit card details*
                         </label>
                         <CardElement options={CARD_ELEMENT_OPTIONS} onChange={(event) => handleCardChange(event)} />
                       </MDBCol>
