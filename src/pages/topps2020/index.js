@@ -23,24 +23,24 @@ const ToppsProject2020Page = ({ location, data }) => {
   const [value, setValue] = React.useState(location.state && location.state.player ?
     players.findIndex(s => s.name === location.state.player) : 0)
 
-    const valid = () => {
-      if (password.length > 3) {
-        return true
-      } else {
-        return false
-      }
+  const valid = () => {
+    if (password.length > 3) {
+      return true
+    } else {
+      return false
     }
+  }
 
-    const handleSubmit = async event => {
-      event.preventDefault()
-      event.target.className += " was-validated"
+  const handleSubmit = async event => {
+    event.preventDefault()
+    event.target.className += " was-validated"
 
-      if (password === protectPassword) {
-        setPlayerProtected(false)
-      } else {
-        setPassword('')
-      }
+    if (password === protectPassword) {
+      setPlayerProtected(false)
+    } else {
+      setPassword('')
     }
+  }
 
   return (
     <Layout>
