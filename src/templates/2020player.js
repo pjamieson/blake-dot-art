@@ -17,10 +17,10 @@ const ToppsProject2020PlayerPage = ({data}) => {
 
   const [password, setPassword] = useState('')
 
-  const protectPlayerName = "Mark McGwire"
-  const protectPassword = "87bigmac49"
+  const protectPlayerName = ""
+  const protectPassword = ""
 
-  const [playerProtected, setPlayerProtected] = useState(true)
+  const [playerProtected, setPlayerProtected] = useState(false)
 
   const valid = () => {
     if (password.length > 7) {
