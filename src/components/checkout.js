@@ -60,7 +60,6 @@ const CheckoutComponent = () => {
   const forceUpdate = useCallback(() => updateState({}), [])
 
   const [activePanel, setActivePanel] = useState(1)
-  //const [activePanelChanged, setActivePanelChanged] = useState(false)
 
   const [bfirstname, setBFirstname] = useState('')
   const [blastname, setBLastname] = useState('')
@@ -93,44 +92,69 @@ const CheckoutComponent = () => {
   const countryList = ["AU", "BS", "BE", "CA", "DK", "FI", "FR", "DE", "IE", "IT", "JP", "KR", "LU", "MX", "NL", "NZ", "NO", "PT", "PR", "ES", "SE", "CH", "GB", "US", "UM", "UT", "VG", "VI"]
   const priorityList = ["US", "CA"]
 
-  // Check cart & create the PaymentIntent as soon as the component loads
+  // On loading page, confirm cart items still available
+  const [ cartChanged, setCartChanged ] = useState(false)
   useEffect(() => {
-    let unmounted = false
+    if (cart && cart.length > 0) {
+      Promise.all(cart.map(async item => {
+        if (item.itemType === "painting") {
+          const qtyNowAvailable = await getPaintingQtyAvailable(item.id)
+          if (item.qty > qtyNowAvailable) {
+            setCartChanged(true)
+            addToCart(item, (qtyNowAvailable - item.qty)) // remove unavailable from cart
+          }
+          // Update cart availability
+          item.qtyAvail = qtyNowAvailable
 
-    const getPaymentIntent = async () => {
-      setProcessing(true)
-      try {
-        const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/payment`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            cart
-          })
-        })
-        if (!unmounted) {
-          const data = await response.json()
-          //console.log("checkout getPaymentIntent data", data)
-          setClientSecret(data.client_secret)
-          setProcessing(false)
+          return qtyNowAvailable // forces block to complete before continuing
         }
-      } catch (err) {
-        if (!unmounted) {
-          console.log('checkout useEffect err', err)
-          setProcessing(false)
+        if (item.itemType === "tradingcard") {
+          const qtyNowAvailable = await getCardQtyAvailable(item.id)
+          if (item.qty > qtyNowAvailable) {
+            setCartChanged(true)
+            addToCart(item, (qtyNowAvailable - item.qty)) // remove unavailable from cart
+          }
+          // Update cart availability
+          item.qtyAvail = qtyNowAvailable
+
+          return qtyNowAvailable // forces block to complete before continuing
         }
-      }
+      }))
+    } else {
+      // No cart or empty cart
+      setCartChanged(true)
     }
-    getPaymentIntent()
+  }, [cart, addToCart])
 
-    return () => { unmounted = true }
-  }, [cart])
+  if (cartChanged && !succeeded) {
+    navigate('/cart-changed/')
+  }
+
+  const getPaymentIntent = async () => {
+    try {
+      const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/payment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          cart
+        })
+      })
+      const data = await response.json()
+      //console.log("checkout getPaymentIntent data", data)
+      setClientSecret(data.client_secret)
+    } catch (err) {
+      console.log('checkout getPaymentIntent err', err)
+    }
+  }
 
   const handleTabChange = (selected) => {
     setActivePanel(selected)
-    //setActivePanelChanged(true)
-    //console.log("handleTabChange clientSecret", clientSecret)
+    if (activePanel === 2 && clientSecret === '') {
+      getPaymentIntent()
+      //console.log("handleTabChange clientSecret", clientSecret)
+    }
   }
 
   const handleSameAddressClick = () => {
@@ -159,17 +183,18 @@ const CheckoutComponent = () => {
 
     setProcessing(true)
     let processingSucceeded = false
+    let processPayment = true
 
     // Just before payment submit, confirm cart contents are still available
-    let cartChanged = false
     let items = [] // Will later be posted to Shippo
     if (cart && cart.length > 0) {
       await Promise.all(cart.map(async item => {
         if (item.itemType === "painting") {
           const qtyNowAvailable = await getPaintingQtyAvailable(item.id)
           if (item.qty > qtyNowAvailable) {
-            cartChanged = true
-            addToCart(item, (item.qty - qtyNowAvailable)) // remove unavailable paintings from cart
+            processPayment = false
+            setCartChanged(true)
+            addToCart(item, (qtyNowAvailable - item.qty)) // remove unavailable from cart
           }
           // Save item for Shippo
           items.push(
@@ -183,13 +208,17 @@ const CheckoutComponent = () => {
               "weight_unit": "lb"
             }
           )
+          // Update cart availability
+          item.qtyAvail = qtyNowAvailable
+
           return qtyNowAvailable // forces block to complete before continuing
         }
         if (item.itemType === "tradingcard") {
           const qtyNowAvailable = await getCardQtyAvailable(item.id)
           if (item.qty > qtyNowAvailable) {
-            cartChanged = true
-            addToCart(item, (item.qty - qtyNowAvailable)) // remove unavailable cards from cart
+            processPayment = false
+            setCartChanged(true)
+            addToCart(item, (qtyNowAvailable - item.qty)) // remove unavailable from cart
           }
           // Save item for Shippo
           const itemTotal = (item.qty * item.price)
@@ -204,19 +233,25 @@ const CheckoutComponent = () => {
               "weight_unit": "lb"
             }
           )
+          // Update cart availability
+          item.qtyAvail = qtyNowAvailable
+
           return qtyNowAvailable // forces block to complete before continuing
         }
       }))
     } else {
       // No cart or empty cart (Safety; shouldn't happen)
       console.log("submitPayment - Shouldn't happen!")
-      cartChanged = true
+      processPayment = false
+      setCartChanged(true)
     }
 
-    if (cartChanged) {
+    if (cartChanged || !processPayment) {
       setProcessing(false)
       navigate('/cart-changed/')
-    } else {
+    }
+
+    if (processPayment) {
       // Submit Payment
       const paymentResult = await stripe.confirmCardPayment(`${clientSecret}`, {
         receipt_email: email,
@@ -344,19 +379,7 @@ const CheckoutComponent = () => {
           } catch (err) {
             console.log("checkout post shippo error", err)
           }
-/*
-          // Update availability/inventory in Strapi (Paintings & Tradingcards)
-          if (cart && cart.length > 0) {
-            cart.forEach(item => {
-              if (item.itemType === "painting") {
-                setPaintingQtyAvailable(item.id, (item.qtyAvail - item.qty))
-              }
-              if (item.itemType === "tradingcard") {
-                setCardQtyAvailable(item.id, (item.qtyAvail - item.qty))
-              }
-            })
-          }
-*/
+
           // Add to email list, if opted in
           if (newsletter) {
             const email_entry = {

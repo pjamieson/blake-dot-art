@@ -34,28 +34,33 @@ const CartPage = () => {
   const [ cartChanged, setCartChanged ] = useState(false)
   useEffect(() => {
     if (cart && cart.length > 0) {
-      cart.forEach(item => {
+      Promise.all(cart.map(async item => {
         if (item.itemType === "painting") {
-          const fetchData = async () => {
-            const qtyNowAvailable = await getPaintingQtyAvailable(item.id)
-            if (item.qty > qtyNowAvailable) {
-              addToCart(item, (qtyNowAvailable - item.qty))
-              setCartChanged(true)
-            }
+          const qtyNowAvailable = await getPaintingQtyAvailable(item.id)
+          if (item.qty > qtyNowAvailable) {
+            setCartChanged(true)
+            addToCart(item, (qtyNowAvailable - item.qty)) // remove unavailable from cart
           }
-          fetchData()
+          // Update cart availability
+          item.qtyAvail = qtyNowAvailable
+
+          return qtyNowAvailable // forces block to complete before continuing
         }
         if (item.itemType === "tradingcard") {
-          const fetchData = async () => {
-            const qtyNowAvailable = getCardQtyAvailable(item.id)
-            if (item.qty > qtyNowAvailable) {
-              addToCart(item, (qtyNowAvailable - item.qty))
-              setCartChanged(true)
-            }
+          const qtyNowAvailable = await getCardQtyAvailable(item.id)
+          if (item.qty > qtyNowAvailable) {
+            setCartChanged(true)
+            addToCart(item, (qtyNowAvailable - item.qty)) // remove unavailable from cart
           }
-          fetchData()
+          // Update cart availability
+          item.qtyAvail = qtyNowAvailable
+
+          return qtyNowAvailable // forces block to complete before continuing
         }
-      })
+      }))
+    } else {
+      // No cart or empty cart
+      setCartChanged(true)
     }
   }, [cart, addToCart])
 
