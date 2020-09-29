@@ -1028,9 +1028,6 @@ footer.blake-footer {
 }
 
 .orders-report {
-  table.table th:nth-of-type(2) {
-    text-align: left;
-  }
   table.table th:nth-of-type(6),
   table.table th:nth-of-type(7),
   table.table th:nth-of-type(8),
@@ -1040,5 +1037,68 @@ footer.blake-footer {
   table.table td:nth-of-type(8),
   table.table td:nth-of-type(9) {
     text-align: right;
+  }
+}
+
+.items-report {
+  table.table th.sorting,
+  table.table th.sorting_asc,
+  table.table th.sorting_asc::after,
+  table.table th.sorting_desc,
+  table.table th.sorting_desc::after {
+    padding-right: 0;
+  }
+  table.table th:nth-of-type(1),
+  table.table td:nth-of-type(1) {
+    min-width: 160px !important;
+    max-width: 160px !important;
+  }
+  table.table th:nth-of-type(2),
+  table.table td:nth-of-type(2) {
+    min-width: 200px !important;
+    max-width: 200px !important;
+  }
+  table.table th:nth-of-type(3),
+  table.table td:nth-of-type(3) {
+    min-width: 200px !important;
+    max-width: 200px !important;
+  }
+  table.table th:nth-of-type(4),
+  table.table td:nth-of-type(4) {
+    min-width: 100px !important;
+    max-width: 100px !important;
+    text-align: right;
+  }
+  table.table th:nth-of-type(5),
+  table.table td:nth-of-type(5) {
+    min-width: 60px !important;
+    max-width: 60px !important;
+    text-align: center;
+  }
+  table.table th:nth-of-type(6),
+  table.table td:nth-of-type(6) {
+    min-width: 80px !important;
+    max-width: 80px !important;
+    text-align: center;
+  }
+  table.table th:nth-of-type(7),
+  table.table td:nth-of-type(7) {
+    min-width: 140px !important;
+    max-width: 140px !important;
+  }
+  table.table th:nth-of-type(8),
+  table.table td:nth-of-type(8) {
+    min-width: 200px !important;
+    max-width: 200px !important;
+  }
+  table.table th:nth-of-type(9),
+  table.table td:nth-of-type(9) {
+    min-width: 220px !important;
+    max-width: 220px !important;
+  }
+  table.table th:nth-of-type(10),
+  table.table td:nth-of-type(10) {
+    min-width: 260px !important;
+    max-width: 260px !important;
   }
 }

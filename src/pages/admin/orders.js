@@ -32,9 +32,11 @@ const OrdersReportPage = ({ data }) => {
     orders.forEach((card_order) => {
       const order_id = card_order.id
       const created_at = card_order.created_at
-      const lastname = card_order.lastname
-      const firstname = card_order.firstname
-      const state = card_order.state
+      const name = `${card_order.firstname} ${card_order.lastname}`
+      const temp = card_order.address2 ? `${card_order.address}
+      ${card_order.address2}` : `${card_order.address}`
+      const address = `${temp}, ${card_order.city}, ${card_order.state} ${card_order.zip} ${card_order.country}`
+      const email = card_order.email
       const items = card_order.items
       items.forEach((item) => {
         if (item.identifier === card_identifier) {
@@ -47,9 +49,9 @@ const OrdersReportPage = ({ data }) => {
               subtitle: card_subtitle,
               price: card_price,
               qty: item.qty,
-              lastname,
-              firstname,
-              state
+              name,
+              address,
+              email
             }
           )
         }
@@ -115,11 +117,6 @@ const OrdersReportPage = ({ data }) => {
         sort: 'disabled',
         width: 120,
       },
-      {
-        label: 'Item',
-        field: 'title',
-        width: 120,
-      },
     ],
     rows: orders,
   }
@@ -127,35 +124,25 @@ const OrdersReportPage = ({ data }) => {
   const datatable2 = {
     columns: [
       {
-        label: 'Order',
-        field: 'id',
-        width: 80,
-        sort: 'desc',
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'Order',
-        },
-      },
-      {
-        label: 'Order Date',
-        field: 'created_at',
-        width: 140,
-      },
-      {
         label: 'Card Identifier',
         field: 'identifier',
         width: 160,
+        sort: 'desc',
+        attributes: {
+          'aria-controls': 'DataTable',
+          'aria-label': 'Card Identifier',
+        },
       },
       {
         label: 'Title',
         field: 'title',
-        width: 160,
+        width: 200,
       },
       {
         label: 'Subtitle',
         field: 'subtitle',
         sort: 'disabled',
-        width: 160,
+        width: 200,
       },
       {
         label: 'Price',
@@ -168,22 +155,32 @@ const OrdersReportPage = ({ data }) => {
         label: 'Qty',
         field: 'qty',
         sort: 'disabled',
+        width: 60,
+      },
+      {
+        label: 'Order',
+        field: 'id',
         width: 80,
       },
       {
-        label: 'Last Name',
-        field: 'lastname',
-        width: 160,
+        label: 'Order Date',
+        field: 'created_at',
+        width: 140,
       },
       {
-        label: 'First Name',
-        field: 'firstname',
-        width: 160,
+        label: 'Name',
+        field: 'name',
+        width: 200,
       },
       {
-        label: 'State',
-        field: 'state',
-        width: 120,
+        label: 'Address',
+        field: 'address',
+        width: 220,
+      },
+      {
+        label: 'Email',
+        field: 'email',
+        width: 260,
       },
     ],
     rows: card_orders,
@@ -239,16 +236,18 @@ const OrdersReportPage = ({ data }) => {
         { (!pageProtected) &&
           <>
           <h1 className="page-head">Admin - Orders</h1>
+          <hr />
           <section className="orders-report">
             <article className="content-container">
               <h2>Orders Summary List</h2>
-              <MDBDataTableV5 hover scrollX data={datatable} exportToCSV proSelect />
+              <MDBDataTableV5 hover scrollX data={datatable} searchTop searchBottom={false} exportToCSV proSelect />
             </article>
           </section>
+          <hr />
           <section className="items-report">
             <article className="content-container">
             <h2>Items by Order List</h2>
-              <MDBDataTableV5 hover scrollX data={datatable2} exportToCSV proSelect />
+              <MDBDataTableV5 hover scrollX data={datatable2} searchTop searchBottom={false} exportToCSV />
             </article>
           </section>
           </>
@@ -265,7 +264,7 @@ export const query = graphql`
       filter: {total: {gt: 0}}
     ) {
       nodes {
-        id
+        strapiId
         created_at(formatString: "YYYY-MM-DD HH:MM:SS")
         lastname
         state
@@ -274,13 +273,6 @@ export const query = graphql`
         salestax
         shipping
         total
-        strapiId
-        card_qty {
-          qty
-          item_type
-          identifier
-          title
-        }
       }
     }
     allStrapiTradingcard(
@@ -295,7 +287,6 @@ export const query = graphql`
         orders {
           id
           created_at(formatString: "YYYY-MM-DD HH:MM:SS")
-          total
           items: card_qty {
             qty
             identifier
@@ -314,38 +305,5 @@ export const query = graphql`
     }
   }
 `
-/*
-export const query2 = graphql`
-  {
-    allStrapiTradingcard(
-      sort: {fields: identifier},
-      filter: {orders: {elemMatch: {total: {gt: 0}}}}
-    ) {
-      nodes {
-        identifier
-        title
-        subtitle
-        price
-        orders {
-          created_at(formatString: "YYYY-MM-DD HH:MM:SS")
-          total
-          items: card_qty {
-            qty
-            identifier
-          }
-          firstname
-          lastname
-          address
-          address2
-          city
-          state
-          zip
-          country
-          email
-        }
-      }
-    }
-  }
-`
-*/
+
 export default OrdersReportPage
