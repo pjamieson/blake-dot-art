@@ -11,7 +11,8 @@ import { formatPrice } from "../../utils/format"
 const OrdersReportPage = ({ data }) => {
   const {
     allStrapiOrder: { nodes: orders },
-    allStrapiTradingcard: { nodes: cards }
+    allStrapiTradingcard: { nodes: cards },
+    allStrapiPainting: { nodes: paintings }
   } = data
 
   orders.forEach(order => {
@@ -21,33 +22,43 @@ const OrdersReportPage = ({ data }) => {
     order.total = formatPrice(order.total)
   })
 
-  // Flatten query result by ignoring other cards in order
-  let card_orders = []
+  let item_orders = []
+
+  // Flatten query result by ignoring other items in order
   cards.forEach(card => {
-    const card_identifier = card.identifier
-    const card_title = card.title
-    const card_subtitle = card.subtitle
-    const card_price = formatPrice(card.price)
-    const orders = card.orders
-    orders.forEach((card_order) => {
-      const order_id = card_order.id
-      const created_at = card_order.created_at
-      const name = `${card_order.firstname} ${card_order.lastname}`
-      const temp = card_order.address2 ? `${card_order.address}
-      ${card_order.address2}` : `${card_order.address}`
-      const address = `${temp}, ${card_order.city}, ${card_order.state} ${card_order.zip} ${card_order.country}`
-      const email = card_order.email
-      const items = card_order.items
+    flattenItem(card)
+  })
+
+  // Do same for paintings.
+  paintings.forEach(painting => {
+    flattenItem(painting)
+  })
+
+  function flattenItem(item) {
+    const item_identifier = item.identifier
+    const item_title = item.title
+    const item_subtitle = item.subtitle
+    const item_price = formatPrice(item.price)
+    const orders = item.orders
+    orders.forEach((item_order) => {
+      const order_id = item_order.id
+      const created_at = item_order.created_at
+      const name = `${item_order.firstname} ${item_order.lastname}`
+      const temp = item_order.address2 ? `${item_order.address}
+      ${item_order.address2}` : `${item_order.address}`
+      const address = `${temp}, ${item_order.city}, ${item_order.state} ${item_order.zip} ${item_order.country}`
+      const email = item_order.email
+      const items = item_order.items
       items.forEach((item) => {
-        if (item.identifier === card_identifier) {
-          card_orders.push(
+        if (item.identifier === item_identifier) {
+          item_orders.push(
             {
               id: order_id,
               created_at: created_at,
-              identifier: card_identifier,
-              title: card_title,
-              subtitle: card_subtitle,
-              price: card_price,
+              identifier: item_identifier,
+              title: item_title,
+              subtitle: item_subtitle,
+              price: item_price,
               qty: item.qty,
               name,
               address,
@@ -57,7 +68,7 @@ const OrdersReportPage = ({ data }) => {
         }
       })
     })
-  })
+  }
 
   const datatable = {
     columns: [
@@ -124,13 +135,13 @@ const OrdersReportPage = ({ data }) => {
   const datatable2 = {
     columns: [
       {
-        label: 'Card Identifier',
+        label: 'Item Identifier',
         field: 'identifier',
         width: 160,
-        sort: 'desc',
+        sort: 'asc',
         attributes: {
           'aria-controls': 'DataTable',
-          'aria-label': 'Card Identifier',
+          'aria-label': 'Item Identifier',
         },
       },
       {
@@ -183,7 +194,7 @@ const OrdersReportPage = ({ data }) => {
         width: 260,
       },
     ],
-    rows: card_orders,
+    rows: item_orders,
   }
 
   const pagePassword = "sayheykid"
@@ -276,6 +287,34 @@ export const query = graphql`
       }
     }
     allStrapiTradingcard(
+      sort: {fields: identifier},
+      filter: {orders: {elemMatch: {total: {gt: 0}}}}
+    ) {
+      nodes {
+        identifier
+        title
+        subtitle
+        price
+        orders {
+          id
+          created_at(formatString: "YYYY-MM-DD HH:MM:SS")
+          items: card_qty {
+            qty
+            identifier
+          }
+          firstname
+          lastname
+          address
+          address2
+          city
+          state
+          zip
+          country
+          email
+        }
+      }
+    }
+    allStrapiPainting(
       sort: {fields: identifier},
       filter: {orders: {elemMatch: {total: {gt: 0}}}}
     ) {
