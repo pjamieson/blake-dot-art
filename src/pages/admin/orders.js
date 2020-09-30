@@ -44,8 +44,7 @@ const OrdersReportPage = ({ data }) => {
       const order_id = item_order.id
       const created_at = item_order.created_at
       const name = `${item_order.firstname} ${item_order.lastname}`
-      const temp = item_order.address2 ? `${item_order.address}
-      ${item_order.address2}` : `${item_order.address}`
+      const temp = item_order.address2 ? `${item_order.address}, ${item_order.address2}` : `${item_order.address}`
       const address = `${temp}, ${item_order.city}, ${item_order.state} ${item_order.zip} ${item_order.country}`
       const email = item_order.email
       const items = item_order.items
