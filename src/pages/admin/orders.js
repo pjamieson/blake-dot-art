@@ -44,23 +44,23 @@ const OrdersReportPage = ({ data }) => {
       const order_id = item_order.id
       const created_at = item_order.created_at
       const name = `${item_order.firstname} ${item_order.lastname}`
-      const temp = item_order.address2 ? `${item_order.address}, ${item_order.address2}` : `${item_order.address}`
-      const address = `${temp}, ${item_order.city}, ${item_order.state} ${item_order.zip} ${item_order.country}`
+      const temp = item_order.address2 ? `${item_order.address} | ${item_order.address2}` : `${item_order.address}`
+      const address = `${temp} | ${item_order.city} | ${item_order.state} ${item_order.zip} ${item_order.country}`
       const email = item_order.email
       const items = item_order.items
       items.forEach((item) => {
         if (item.identifier === item_identifier) {
           item_orders.push(
             {
-              id: order_id,
-              created_at: created_at,
               identifier: item_identifier,
               title: item_title,
               subtitle: item_subtitle,
               price: item_price,
               qty: item.qty,
+              id: order_id,
+              created_at: created_at,
               name,
-              address,
+//              address,
               email
             }
           )
@@ -182,12 +182,12 @@ const OrdersReportPage = ({ data }) => {
         field: 'name',
         width: 200,
       },
-      {
+/*      {
         label: 'Address',
         field: 'address',
         width: 220,
       },
-      {
+*/      {
         label: 'Email',
         field: 'email',
         width: 260,

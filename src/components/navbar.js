@@ -178,10 +178,16 @@ const Navbar = () => {
 
                 <MDBDropdownMenu>
                   <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/cal-ripken-jr">Cal Ripken Jr.</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps2020/sandy-koufax">Sandy Koufax</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
                     <Link className="menu-link" to="/topps2020/dwight-gooden">Dwight Gooden</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/ken-griffey-jr">Ken Griffey, Jr.</Link>
+                    <Link className="menu-link" to="/topps2020/ken-griffey-jr">Ken Griffey Jr.</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/topps2020/ted-williams">Ted Williams</Link>
