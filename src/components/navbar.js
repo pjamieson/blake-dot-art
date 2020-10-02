@@ -163,6 +163,9 @@ const Navbar = () => {
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/about/contact/">Contact</Link>
                   </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/subscribe/">Mailing List</Link>
+                  </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavItem>

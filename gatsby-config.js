@@ -25,6 +25,12 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint: 'https://blakejamieson.us5.list-manage.com/subscribe/post?u=063627aa25e9155fc458edccb&id=d3c4f161f3',
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: "BLAKE.ART",

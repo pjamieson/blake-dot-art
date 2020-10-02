@@ -57,9 +57,8 @@ const AthletePortraitsPortfolioPage = ({ location, data }) => {
 export const query = graphql`
   {
     allStrapiSport(
-      sort: {
-        order: ASC, fields: order
-      }
+      limit: 20,
+      sort: { order: ASC, fields: order }
     ) {
       nodes {
         name

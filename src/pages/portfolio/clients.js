@@ -32,9 +32,8 @@ const ClientsPage = ({ data }) => {
 export const query = graphql`
   {
     allStrapiClient(
-      sort: {
-        order: ASC, fields: order
-      }
+      limit: 200,
+      sort: { order: ASC, fields: order }
     ) {
       nodes {
         id

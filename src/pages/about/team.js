@@ -48,6 +48,7 @@ const TeamPage = ({ data }) => {
 export const query = graphql`
   {
     allStrapiTeamMember(
+      limit: 20,
       sort: {fields: order}
     ) {
       nodes {

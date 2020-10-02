@@ -66,6 +66,7 @@ const PressPage = ({ data }) => {
 export const query = graphql`
   {
     allStrapiPress (
+      limit: 200,
       filter: {show: {eq: true}},
     	sort: {order: DESC, fields: order}
     ) {

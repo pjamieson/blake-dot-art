@@ -13,12 +13,15 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       },
       p2020cards: allStrapiTradingcard(
-        filter: {qty: {gt: 0}}) {
+        filter: {qty: {gt: 0}}
+      ) {
         nodes {
           slug: identifier
         }
       },
-      p2020players: allStrapiProject2020Player {
+      p2020players: allStrapiProject2020Player(
+        limit: 20
+      ) {
         nodes {
           name
         }
