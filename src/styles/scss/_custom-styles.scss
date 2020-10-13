@@ -1038,6 +1038,17 @@ footer.blake-footer {
   }
 }
 
+.md-accordion {
+  i {
+    padding-top: .75rem;
+    font-size: 2rem;
+    color: $blake-brown !important;
+  }
+  .card-body {
+    padding-top: 0;
+  }
+}
+
 .orders-report {
   table.table th:nth-of-type(6),
   table.table th:nth-of-type(7),

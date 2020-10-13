@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { navigate } from "gatsby"
 
 import { MDBCard, MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
 
