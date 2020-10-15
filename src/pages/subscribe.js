@@ -22,32 +22,32 @@ const SubscribePage = () => {
     }
   }
 
-const handleSubmit = async event => {
-  event.preventDefault()
-  event.target.className += " was-validated"
+  const handleSubmit = async event => {
+    event.preventDefault()
+    event.target.className += " was-validated"
 
-  const listFields = {
-    FNAME: firstname,
-    LNAME: lastname
-  }
+    const listFields = {
+      FNAME: firstname,
+      LNAME: lastname
+    }
 
-  const sub_result = await addToMailchimp(email, listFields)
+    const sub_result = await addToMailchimp(email, listFields)
 
-  if (sub_result) {
-    //console.log("subscribe sub_result", sub_result)
-    const msg = sub_result.msg
-    // Go to MessageSentPage
-    if (sub_result.result === "success") {
-      setMessage(msg)
-    } else if (msg.includes("already subscribed")) {
-      setMessage(`${email} is already subscribed.`)
-    } else {
-      setMessage(msg)
+    if (sub_result) {
+      //console.log("subscribe sub_result", sub_result)
+      const msg = sub_result.msg
+      // Go to MessageSentPage
+      if (sub_result.result === "success") {
+        setMessage(msg)
+      } else if (msg.includes("already subscribed")) {
+        setMessage(`${email} is already subscribed.`)
+      } else {
+        setMessage(msg)
+      }
     }
   }
-}
 
-return (
+  return (
     <Layout>
       <SEO title="Subscribe" />
       <MDBContainer className="page-container subscribe">

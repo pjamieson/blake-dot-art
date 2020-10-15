@@ -27,7 +27,7 @@ const Jumbotron = () => {
             </a>
             <div className="pitch">
               <h4>Subscribe to my YouTube Channel</h4>
-              <p>Live Streams Mon-Fri at 10:23pm Eastern</p>
+              <p>Live Streams Mon, Wed & Fri at 10:23pm Eastern</p>
             </div>
           </div>
           <div className="featured-link">
