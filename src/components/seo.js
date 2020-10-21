@@ -79,6 +79,10 @@ function SEO({ title, description, lang, meta }) {
           content: metaDescription,
         },
         {
+          property: `og:image`,
+          content: site.siteMetadata.image,
+        },
+        {
           property: `og:type`,
           content: `website`,
         },
@@ -109,6 +113,10 @@ function SEO({ title, description, lang, meta }) {
         {
           name: `twitter:image:alt`,
           content: `Artist Blake Jamieson in his studio`,
+        },
+        {
+          name: `p:domain_verify`,
+          content: `94efc3e720284b3a882fae29bf61210c`,
         },
       ].concat(meta)}
     />
