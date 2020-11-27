@@ -297,6 +297,23 @@ p {
   .tag3 {
     animation: tagreveal3 5s;
   }
+  .front-promo {
+    margin-top: -220px;
+    animation: promoreveal 5s;
+    h3 {
+      margin-bottom: 0;
+      font-size: 2.5rem;
+      font-weight: 500;
+      //letter-spacing: -0.05em;
+      color: white !important;
+    }
+    h4 {
+      margin-top: 0;
+      font-size: 1.5rem !important;
+      //letter-spacing: -0.05em;
+      color: $blake-brown !important;
+    }
+  }
   .actions {
     display: flex;
     flex-direction: column;
@@ -391,6 +408,12 @@ p {
   0% { opacity: 0; }
   50% { opacity: 0; }
   65% { opacity: 1; }
+}
+
+@keyframes promoreveal {
+  0% { opacity: 0; }
+  60% { opacity: 0; }
+  80% { opacity: 1; }
 }
 
 .front-content {

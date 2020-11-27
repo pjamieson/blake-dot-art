@@ -21,7 +21,8 @@ const IndexPage = ({ data }) => {
         <Jumbotron />
         <div className="container front-content">
 
-          {/*<section className="intro-content">
+          {/*
+          <section className="intro-content">
             <div className="image-container">
               <img className="card" src={blake} alt="Blake wearing crown and mask" />
             </div>
@@ -37,7 +38,8 @@ const IndexPage = ({ data }) => {
               <strong><em>Please note:</em></strong> Works shown in the <strong>Portfolio</strong> section have already been sold or are not for sale. Only items shown in the <strong>Gallery</strong> and <strong>Merch</strong> sections are available for purchase.
             </p>
             <h3>Thanks for stopping by. Stay Awesome!</h3>
-          </section>*/}
+          </section>
+          */}
 
           <section className="gallery">
             <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
