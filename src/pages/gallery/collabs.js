@@ -15,7 +15,7 @@ const CollabsGalleryPage = ({ data }) => {
 
   const protectPassword = "gumclub"
 
-  const [pageProtected, setPageProtected] = useState(true)
+  const [pageProtected, setPageProtected] = useState(false)
 
   const valid = () => {
     if (password.length > 5) {
