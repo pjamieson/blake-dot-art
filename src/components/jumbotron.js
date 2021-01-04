@@ -19,10 +19,12 @@ const Jumbotron = () => {
             </h2>
           </div>
         </MDBRow>
-        <div className="front-promo">
-          <h3>Holiday Sale Now Live</h3>
-          <h4>All Paintings, Prints and Collabs are 25% Off</h4>
-        </div>
+        { false &&
+          <div className="front-promo">
+            <h3>Holiday Sale Now Live</h3>
+            <h4>All Paintings, Prints and Collabs are 25% Off</h4>
+          </div>
+        }
 
         <div className="actions">
           <div className="you-tube-plug">
