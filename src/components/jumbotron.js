@@ -24,7 +24,7 @@ const Jumbotron = () => {
             <h3>1951 Topps by Blake Jamieson - Week 1</h3>
             <h4>
               <i>Only available until January 20th at:&nbsp;</i>
-              <a href="https://www.topps.com/1951-topps-by-blake-jamieson-week-1.html" target="_blank" rel="noreferrer">Topps.com
+              <a href="https://www.topps.com/cards-collectibles/online-brands/topps-1951.html" target="_blank" rel="noreferrer">Topps.com
               </a>
             </h4>
           </div>
