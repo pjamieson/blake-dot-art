@@ -19,10 +19,14 @@ const Jumbotron = () => {
             </h2>
           </div>
         </MDBRow>
-        { false &&
+        { true &&
           <div className="front-promo">
-            <h3>Holiday Sale Now Live</h3>
-            <h4>All Paintings, Prints and Collabs are 25% Off</h4>
+            <h3>1951 Topps by Blake Jamieson - Week 1</h3>
+            <h4>
+              <i>Only available until January 20th at:&nbsp;</i>
+              <a href="https://www.topps.com/1951-topps-by-blake-jamieson-week-1.html" target="_blank" rel="noreferrer">Topps.com
+              </a>
+            </h4>
           </div>
         }
 
