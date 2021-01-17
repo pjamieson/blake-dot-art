@@ -31,6 +31,7 @@ const Painting = ({
       description = {},
       price,
       qty: qtyAvail,
+      slug,
       portfolio,
     },
   },
@@ -72,8 +73,8 @@ const Painting = ({
   }
 
   // Schema.org calculated values
-  const productUrl = `https://blake.art/gallery/${subgenre.slug}/${identifier}`
-  //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${identifier}`
+  const productUrl = `https://blake.art/gallery/${subgenre.slug}/${slug}`
+  //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${slug}`
   console.log("productUrl", productUrl)
   const productImageUrl = `https://blake.art${fluid.src}`
   //const productImageUrl = `localhost:8000${fluid.src}`
@@ -225,6 +226,7 @@ export const query = graphql`
       description
       price
       qty
+      slug
       portfolio
     }
   }
