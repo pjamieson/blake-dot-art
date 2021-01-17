@@ -75,10 +75,10 @@ const Painting = ({
   // Schema.org calculated values
   const productUrl = `https://blake.art/gallery/${subgenre.slug}/${slug}`
   //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${slug}`
-  console.log("productUrl", productUrl)
+  //console.log("productUrl", productUrl)
   const productImageUrl = `https://blake.art${fluid.src}`
   //const productImageUrl = `localhost:8000${fluid.src}`
-  console.log("productImageUrl", productImageUrl)
+  //console.log("productImageUrl", productImageUrl)
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
 
   return (
