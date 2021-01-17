@@ -22,7 +22,7 @@ const Tradingcard = ({
       title,
       subtitle = {},
       limitation = {},
-      image: { childImageSharp: { fluid }},
+      image: { childImageSharp: { fluid } },
       description = {},
       details = {},
       qty: qtyAvail,
@@ -51,15 +51,12 @@ const Tradingcard = ({
   // On loading page, confirm card is still available
   const [qtyAvailNow, setQtyAvailNow] = useState(1) // one available by default
   useEffect(() => {
-//    const fetchData = async () => {
-//      setProcessing(true)
-      const fetchData = async () => {
-        setProcessing(true)
-        setQtyAvailNow(await getCardQtyAvailable(id))
-        setProcessing(false)
-      }
-      fetchData()
-//    }
+    const fetchData = async () => {
+      setProcessing(true)
+      setQtyAvailNow(await getCardQtyAvailable(id))
+      setProcessing(false)
+    }
+    fetchData()
   }, [id])
 
   if (qtyAvailNow === 0 && inCart) {
@@ -68,11 +65,35 @@ const Tradingcard = ({
     setInCart(false)
   }
 
+  // Schema.org values
+  const productTitle = `${title} : Artist-Autographed Card`
+  const productUrl = `https://blake.art/topps2020/${identifier}`
+  const productImageUrl = `https://blake.art${fluid.src}`
+  //const productImageUrl = `localhost:8000${fluid.src}`
+  console.log("productImageUrl", productImageUrl)
+  const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
+
   return (
     <Layout>
       <SEO title={title} />
       <div className="container page-container">
         <article className="p2020-card-details">
+
+          <div itemScope itemType="http://schema.org/Product">
+            <meta itemProp="name" content={productTitle} />
+            <meta itemProp="brand" content="blake_dot_art" />
+            <meta itemProp="description" content={subtitle} />
+            <meta itemProp="productID" content={identifier} />
+            <meta itemProp="url" content={productUrl} />
+            <meta itemProp="image" content={productImageUrl} />
+            <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
+              <meta itemProp="price" content={price} />
+              <meta itemProp="priceCurrency" content="USD" />
+              <link itemProp="availability" href={productAvailability} />
+              <link itemProp="itemCondition" href="http://schema.org/NewCondition" />
+            </div>
+          </div>
+
           <h1>{title} : Artist-Autographed Card</h1>
           <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
             <div>
@@ -153,6 +174,7 @@ export const query = graphql`
       subtitle
       limitation
       image {
+        publicURL
         childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid
