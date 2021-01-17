@@ -71,11 +71,36 @@ const Painting = ({
     setInCart(false)
   }
 
+  // Schema.org calculated values
+  const productUrl = `https://blake.art/gallery/${subgenre.slug}/${identifier}`
+  //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${identifier}`
+  console.log("productUrl", productUrl)
+  const productImageUrl = `https://blake.art${fluid.src}`
+  //const productImageUrl = `localhost:8000${fluid.src}`
+  console.log("productImageUrl", productImageUrl)
+  const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
+
   return (
     <Layout>
       <SEO title={title} />
       <div className="container page-container">
         <article className="painting-details">
+
+          <div itemScope itemType="http://schema.org/Product">
+            <meta itemProp="name" content={title} />
+            <meta itemProp="brand" content="blake_dot_art" />
+            <meta itemProp="description" content={subtitle} />
+            <meta itemProp="productID" content={identifier} />
+            <meta itemProp="url" content={productUrl} />
+            <meta itemProp="image" content={productImageUrl} />
+            <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
+              <meta itemProp="price" content={price} />
+              <meta itemProp="priceCurrency" content="USD" />
+              <link itemProp="availability" href={productAvailability} />
+              <link itemProp="itemCondition" href="http://schema.org/NewCondition" />
+            </div>
+          </div>
+
           <h1>{title}</h1>
           <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
 

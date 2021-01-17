@@ -65,7 +65,7 @@ const Tradingcard = ({
     setInCart(false)
   }
 
-  // Schema.org values
+  // Schema.org calculated values
   const productTitle = `${title} : Artist-Autographed Card`
   const productUrl = `https://blake.art/topps2020/${identifier}`
   const productImageUrl = `https://blake.art${fluid.src}`
