@@ -86,19 +86,19 @@ const Tradingcard = ({
           {
             "@context": "https://schema.org",
             "@type": "Product",
-            "productID": ${identifier},
-            "name": ${productTitle},
-            "description": ${subtitle},
-            "url": ${productUrl},
-            "image": ${productImageUrl},
+            "productID": "${identifier}",
+            "name": "${productTitle}",
+            "description": "${subtitle}",
+            "url": "${productUrl}",
+            "image": "${productImageUrl}",
             "brand":"Blake Jamieson",
             "offers": [
               {
                 "@type": "Offer",
-                "price": ${price},
+                "price": "${price}",
                 "priceCurrency": "USD",
                 "itemCondition": "https://schema.org/NewCondition",
-                "availability": ${productAvailability}
+                "availability": "${productAvailability}"
               }
             ]
           }
