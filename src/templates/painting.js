@@ -93,7 +93,7 @@ const Painting = ({
             "@context": "https://schema.org",
             "@type": "Product",
             "productID": "${identifier}",
-            "category": "9 - Home & Garden > Decor > Artwork",
+            "category": "Home & Garden > Decor > Artwork",
             "name": "${title}",
             "description": "${subtitle}",
             "url": "${productUrl}",

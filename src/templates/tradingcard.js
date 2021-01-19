@@ -85,7 +85,7 @@ const Tradingcard = ({
             "@context": "https://schema.org",
             "@type": "Product",
             "productID": "${identifier}",
-            "category": "6997 - Arts & Entertainment > Hobbies & Creative Arts > Collectibles > Collectible Trading Cards",
+            "category": "Arts & Entertainment > Hobbies & Creative Arts > Collectibles > Collectible Trading Cards",
             "name": "${productTitle}",
             "description": "${subtitle}",
             "url": "${productUrl}",
