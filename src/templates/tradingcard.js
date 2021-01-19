@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
+import { Helmet } from "react-helmet"
 import Img from "gatsby-image"
 import { Link, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown";
@@ -73,27 +74,40 @@ const Tradingcard = ({
   console.log("productImageUrl", productImageUrl)
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
 
+
+
   return (
     <Layout>
       <SEO title={title} />
+
+      <Helmet>
+        <script type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "productID": ${identifier},
+            "name": ${productTitle},
+            "description": ${subtitle},
+            "url": ${productUrl},
+            "image": ${productImageUrl},
+            "brand":"Blake Jamieson",
+            "offers": [
+              {
+                "@type": "Offer",
+                "price": ${price},
+                "priceCurrency": "USD",
+                "itemCondition": "https://schema.org/NewCondition",
+                "availability": ${productAvailability}
+              }
+            ]
+          }
+        `}
+        </script>
+      </Helmet>
+
       <div className="container page-container">
         <article className="p2020-card-details">
-
-          <div itemScope itemType="http://schema.org/Product">
-            <meta itemProp="name" content={productTitle} />
-            <meta itemProp="brand" content="blake_dot_art" />
-            <meta itemProp="description" content={subtitle} />
-            <meta itemProp="productID" content={identifier} />
-            <meta itemProp="url" content={productUrl} />
-            <meta itemProp="image" content={productImageUrl} />
-            <div itemProp="offers" itemScope itemType="http://schema.org/Offer">
-              <meta itemProp="price" content={price} />
-              <meta itemProp="priceCurrency" content="USD" />
-              <link itemProp="availability" href={productAvailability} />
-              <link itemProp="itemCondition" href="http://schema.org/NewCondition" />
-            </div>
-          </div>
-
           <h1>{title} : Artist-Autographed Card</h1>
           <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
             <div>
