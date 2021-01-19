@@ -71,10 +71,8 @@ const Tradingcard = ({
   const productUrl = `https://blake.art/topps2020/${identifier}`
   const productImageUrl = `https://blake.art${fluid.src}`
   //const productImageUrl = `localhost:8000${fluid.src}`
-  console.log("productImageUrl", productImageUrl)
+  //console.log("productImageUrl", productImageUrl)
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
-
-
 
   return (
     <Layout>
@@ -87,11 +85,13 @@ const Tradingcard = ({
             "@context": "https://schema.org",
             "@type": "Product",
             "productID": "${identifier}",
+            "category": "Autographed Trading Cards",
             "name": "${productTitle}",
             "description": "${subtitle}",
             "url": "${productUrl}",
             "image": "${productImageUrl}",
             "brand":"Blake Jamieson",
+            "logo": "https://blake.art/icons/icon-72x72.png",
             "offers": [
               {
                 "@type": "Offer",
