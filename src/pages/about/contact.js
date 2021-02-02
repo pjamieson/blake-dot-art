@@ -142,7 +142,7 @@ const ContactPage = () => {
               <div className="btn-floating">
                 <MDBIcon icon="map-marker-alt" />
               </div>
-              <p className="contact-info">Long Island City, NY 11101, USA</p>
+              <p className="contact-info">Brooklyn, NY 11201, USA</p>
             </li>
             {/*
             <li>
