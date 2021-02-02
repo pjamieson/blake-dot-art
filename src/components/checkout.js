@@ -24,6 +24,7 @@ import {
   getCardQtyAvailable,
   setCardQtyAvailable
 } from "../utils/inventory"
+import { getSalesTaxRate } from "../utils/salestax"
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -80,6 +81,7 @@ const CheckoutComponent = () => {
   const [zip, setZip] = useState('')
   const [email, setEmail] = useState('')
   const [newsletter, setNewsletter] = useState(false)
+  const [salesTaxRate, setSalesTaxRate] = useState(0.00)
 
   const valid = () => {
     if (bfirstname && blastname && baddress && bcity && bcountry && bregion && bzip && firstname && lastname && address && city && country && region && zip && email) {
@@ -131,6 +133,15 @@ const CheckoutComponent = () => {
   }
 
   const getPaymentIntent = async () => {
+    // Need to get sales tax rate if NY shipping address and not already retreived
+    // (So correct charge total can be submitted when getting Stript Payment Intent)
+    let taxRate = salesTaxRate
+    if (region === "NY" && salesTaxRate === 0.00) {
+      taxRate = await getSalesTaxRate(zip)
+      await setSalesTaxRate(taxRate)
+      //console.log("checkout.js getPaymentIntent taxRate", taxRate)
+    }
+    //console.log("getPaymentIntent taxRate", taxRate)
     try {
       const response = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/payment`, {
         method: "POST",
@@ -138,6 +149,7 @@ const CheckoutComponent = () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
+          salesTaxRate: taxRate,
           cart
         })
       })
@@ -298,6 +310,7 @@ const CheckoutComponent = () => {
 
           // POST order and shipping address to Strapi
           const order = {
+            salesTaxRate,
             paymentIntent: paymentResult.paymentIntent,
             firstname,
             lastname,
@@ -332,8 +345,8 @@ const CheckoutComponent = () => {
           // Also POST order & shipping address to Shippo
           const orderSubtotal = cartSubtotal(cart)
           const orderShipping = cartShipping(cart)
-          const orderSalesTax = cartSalesTax(cart)
-          const orderTotal = cartTotal(cart)
+          const orderSalesTax = cartSalesTax(cart, salesTaxRate)
+          const orderTotal = cartTotal(cart, salesTaxRate)
           const fullname = `${firstname} ${lastname}`
 
           const order_num = `B-2${order_data.order_id}`
@@ -366,15 +379,12 @@ const CheckoutComponent = () => {
           }
 
           try {
-            const shippo_resp = await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/shipping`, {
+            await fetch(`${process.env.GATSBY_STRAPI_API_URL}/orders/shipping`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"
               },
               body: JSON.stringify(shipment)
-            })
-            .then(function(shippo_resp){
-              return shippo_resp
             })
           } catch (err) {
             console.log("checkout post shippo error", err)
@@ -632,7 +642,7 @@ const CheckoutComponent = () => {
                         </div>
                         <div className="summary-totals">
                           <p>Sales tax:</p>
-                          <p>{formatPrice(cartSalesTax(cart))}</p>
+                          <p>{formatPrice(cartSalesTax(cart, salesTaxRate))}</p>
                         </div>
                         <div className="summary-totals">
                           <p>Shipping:</p>
@@ -641,7 +651,7 @@ const CheckoutComponent = () => {
                         <hr />
                         <div className="summary-totals">
                           <p>Total:</p>
-                          <p><strong>{formatPrice(cartTotal(cart))}</strong></p>
+                          <p><strong>{formatPrice(cartTotal(cart, salesTaxRate))}</strong></p>
                         </div>
                       </div>
                     }
