@@ -10,7 +10,7 @@ import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-//import GalleryCarouselComponent from "../components/gallery-carousel"
+import GalleryCarouselComponent from "../components/gallery-carousel"
 
 import { getPaintingQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
@@ -123,6 +123,14 @@ const Painting = ({
               <div className="card" key={identifier}>
                 <div className="view overlay">
                   <Img className="card card-img-top" fluid={fluid} alt={title} />
+
+                { (images && images.length > 100) && <>
+                  <br/>
+                  <Img className="card card-img-top" fluid={images[0].formats.small.childImageSharp.fluid} alt={images[0].alternativeText} />
+                  {/*<GalleryCarouselComponent images={images} />*/}
+                  </>
+                }
+
                 </div>
                 { (qtyAvail > 0) &&
                   <div className="back-btn">
@@ -149,11 +157,7 @@ const Painting = ({
             </div>
 
             <div className="buy-or-inquire">
-                <div className="card-description">
-                {/* (images && images.length > 0) &&
-                  <GalleryCarouselComponent images={images} />
-                */}
-
+              <div className="card-description">
                 <h2>{subtitle && subtitle.length > 0 ? subtitle : "A Blake Jamieson Original"}</h2>
 
                 { (date && size) && <p>{date} - {size}</p> }
@@ -225,6 +229,18 @@ export const query = graphql`
         childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      images {
+        alternativeText
+        formats {
+          small {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid
+              }
+            }
           }
         }
       }

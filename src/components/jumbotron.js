@@ -19,7 +19,7 @@ const Jumbotron = () => {
             </h2>
           </div>
         </MDBRow>
-        { true &&
+        { false &&
           <div className="front-promo">
             <h3>1951 Topps by Blake Jamieson - Week 4</h3>
             <h4>
