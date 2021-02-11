@@ -12,7 +12,7 @@ import {
   MDBRow } from "mdbreact";
 
 const GalleryCarouselComponent = ({images}) => {
-
+  console.log("GalleryCarouselComponent images", images)
   const imgPairs = Math.ceil(images.length/2)
 
   return (
@@ -20,23 +20,16 @@ const GalleryCarouselComponent = ({images}) => {
       <MDBCarousel activeItem={1} length={Math.ceil(images.length/2)} slide={true} showControls={false} showIndicators={images.length > 2} multiItem>
         <MDBCarouselInner>
           <MDBRow>
-          { (images.length === 3) && <>
+          { (images.length ) && <>
             <MDBCarouselItem itemId="1">
               <MDBCol md="6">
                 <MDBCard className="mb-2">
-                  <Img className="card card-img-top" fluid={images[0].formats.medium.childImageSharp.fluid} alt={images[0].alternativeText} />
+                  <Img className="card card-img-top" fluid={images[0].formats.small.childImageSharp.fluid} alt={images[0].alternativeText} />
                 </MDBCard>
               </MDBCol>
               <MDBCol md="6">
                 <MDBCard className="mb-2">
-                  <Img className="card card-img-top" fluid={images[1].formats.medium.childImageSharp.fluid} alt={images[1].alternativeText} />
-                </MDBCard>
-              </MDBCol>
-            </MDBCarouselItem>
-            <MDBCarouselItem itemId="2">
-              <MDBCol md="6">
-                <MDBCard className="mb-2">
-                <Img className="card card-img-top" fluid={images[2].formats.medium.childImageSharp.fluid} alt={images[2].alternativeText} />
+                  <Img className="card card-img-top" fluid={images[1].formats.small.childImageSharp.fluid} alt={images[1].alternativeText} />
                 </MDBCard>
               </MDBCol>
             </MDBCarouselItem>

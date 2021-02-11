@@ -117,12 +117,34 @@ const Navbar = () => {
             </MDBNavItem>
 
             <MDBNavItem>
-              <Link className="nav-link" to="/topps2020/">
+              {/*<Link className="nav-link" to="/topps/project2020/">
                 <div className="nav-menu-item">
                   <p>TOPPS</p>
                   <p className="menu-sub">Project 2020</p>
                 </div>
-              </Link>
+              </Link>*/}
+              <MDBDropdown>
+                <MDBDropdownToggle nav>
+                  <div className="nav-menu-item">
+                    <p>TOPPS</p>
+                    <p className="menu-sub">Cards & Autos</p>
+                  </div>
+                </MDBDropdownToggle>
+                <MDBDropdownMenu>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/project2020/">Project 2020</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/1951/">1951</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/project70/">Project 70</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/autographs/">Autos by Mail</Link>
+                  </MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
             </MDBNavItem>
 
             <MDBNavItem>
@@ -181,64 +203,52 @@ const Navbar = () => {
 
                 <MDBDropdownMenu>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/bob-gibson">Bob Gibson</Link>
+                    <Link className="menu-link" to="/topps/project2020/bob-gibson">Bob Gibson</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/frank-thomas">Frank Thomas</Link>
+                    <Link className="menu-link" to="/topps/project2020/frank-thomas">Frank Thomas</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/tony-gwynn">Tony Gwynn</Link>
+                    <Link className="menu-link" to="/topps/project2020/tony-gwynn">Tony Gwynn</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/roberto-clemente">Roberto Clemente</Link>
+                    <Link className="menu-link" to="/topps/project2020/roberto-clemente">Roberto Clemente</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/george-brett">George Brett</Link>
+                    <Link className="menu-link" to="/topps/project2020/george-brett">George Brett</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/derek-jeter">Derek Jeter</Link>
+                    <Link className="menu-link" to="/topps/project2020/derek-jeter">Derek Jeter</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/cal-ripken-jr">Cal Ripken Jr.</Link>
+                    <Link className="menu-link" to="/topps/project2020/cal-ripken-jr">Cal Ripken Jr.</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/sandy-koufax">Sandy Koufax</Link>
+                    <Link className="menu-link" to="/topps/project2020/sandy-koufax">Sandy Koufax</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/dwight-gooden">Dwight Gooden</Link>
+                    <Link className="menu-link" to="/topps/project2020/dwight-gooden">Dwight Gooden</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/ken-griffey-jr">Ken Griffey Jr.</Link>
+                    <Link className="menu-link" to="/topps/project2020/ken-griffey-jr">Ken Griffey Jr.</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/ted-williams">Ted Williams</Link>
+                    <Link className="menu-link" to="/topps/project2020/ted-williams">Ted Williams</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/ichiro-suzuki">Ichiro Suzuki</Link>
+                    <Link className="menu-link" to="/topps/project2020/ichiro-suzuki">Ichiro Suzuki</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/willie-mays">Willie Mays</Link>
+                    <Link className="menu-link" to="/topps/project2020/willie-mays">Willie Mays</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/mariano-rivera">Mariano Rivera</Link>
+                    <Link className="menu-link" to="/topps/project2020/mariano-rivera">Mariano Rivera</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/mike-trout">Mike Trout</Link>
+                    <Link className="menu-link" to="/topps/project2020/mike-trout">Mike Trout</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/mark-mcgwire">Mark McGwire</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/rickey-henderson">Rickey Henderson</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/jackie-robinson">Jackie Robinson</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/don-mattingly">Don Mattingly</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps2020/nolan-ryan">Nolan Ryan</Link>
+                    <Link className="menu-link" to="/topps/project2020/mark-mcgwire">Mark McGwire</Link>
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>

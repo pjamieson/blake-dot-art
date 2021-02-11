@@ -12,10 +12,13 @@ exports.createPages = async ({ graphql, actions }) => {
           slug
         }
       },
-      p2020cards: allStrapiTradingcard(
+      tradingcards: allStrapiTradingcard(
         filter: {qty: {gt: 0}}
       ) {
         nodes {
+          project_2020_player {
+            name
+          }
           slug: identifier
         }
       },
@@ -36,7 +39,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const path = require('path')
   const paintings = result.data.paintings.nodes;
-  const p2020cards = result.data.p2020cards.nodes;
+  const tradingcards = result.data.tradingcards.nodes;
   const p2020players = result.data.p2020players.nodes;
 
   // Create painting detail pages.
@@ -51,18 +54,21 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  // Create Project 2020 card detail pages.
-  p2020cards.forEach((p2020card) => {
-    createPage({
-      path: `/topps2020/${p2020card.slug}`,
-      component: path.resolve(`./src/templates/tradingcard.js`),
-      context: {
-        slug: p2020card.slug,
-      },
-    })
+  // Create tradingcard detail pages
+  tradingcards.forEach((card) => {
+    if (card.project_2020_player && card.project_2020_player.name && card.project_2020_player.name.length > 1) {
+      createPage({
+        path: `/topps/project2020/${card.slug}`,
+        component: path.resolve(`./src/templates/tradingcard.js`),
+        context: {
+          slug: card.slug,
+        },
+      })
+    }
+
   })
 
-  // Create Project 2020 Player pages
+  // Create Player pages
   const slugify = text =>
   text
     .toString()
@@ -78,7 +84,7 @@ exports.createPages = async ({ graphql, actions }) => {
       const slug = slugify(p2020player.name)
       //console.log("slug", slug)
       createPage({
-        path: `/topps2020/${slug}`,
+        path: `/topps/project2020/${slug}`,
         component: path.resolve(`./src/templates/2020player.js`),
         context: {
           name: p2020player.name,

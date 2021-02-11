@@ -7,7 +7,7 @@ const CardImagelink = ({ location, card }) => {
   const [cursorPos, setCursorPos] = useState({})
   //console.log("card", card)
   const menu = (card.player ? 'merch' : (card.qty > 0 ? 'gallery' : 'portfolio'))
-  const link = `/${menu}/${card.player ? 'topps2020' : card.subgenre.slug}/`
+  const link = `/${menu}/${card.player ? 'topps/project2020' : card.subgenre.slug}/`
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -26,7 +26,7 @@ const CardImagelink = ({ location, card }) => {
       navigate(link, { state: { sport: card.sport.name } })
     }
     if (card.player) {
-      navigate('/topps2020', { state: { player: card.player.name } })
+      navigate('/topps/project2020', { state: { player: card.player.name } })
     }
   }
 

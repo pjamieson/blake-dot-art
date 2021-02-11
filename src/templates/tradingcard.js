@@ -68,7 +68,7 @@ const Tradingcard = ({
 
   // Schema.org calculated values
   const productTitle = `${title} : Artist-Autographed Card`
-  const productUrl = `https://blake.art/topps2020/${identifier}`
+  const productUrl = `https://blake.art/topps/project2020/${identifier}`
   const productImageUrl = `https://blake.art${fluid.src}`
   //const productImageUrl = `localhost:8000${fluid.src}`
   //console.log("productImageUrl", productImageUrl)
@@ -116,7 +116,7 @@ const Tradingcard = ({
                   <Img className="card card-img-top" fluid={fluid} alt={title} />
                 </div>
                 <div className="back-btn">
-                  <Link to={`/topps2020/`} state={{ player: player.name }} className="btn-floating btn-action btn-danger">
+                  <Link to={`/topps/project2020/`} state={{ player: player.name }} className="btn-floating btn-action btn-danger">
                     <i className="fas fa-chevron-left"></i>
                   </Link>
                 </div>
