@@ -4,20 +4,22 @@ import { MDBBtn, MDBInput } from "mdbreact"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import CardTopps2020 from "../../components/card-topps2020"
+import CardTopps from "../../components/card-topps"
 
 const Topps1951Page = ({ location, data }) => {
   const {
-    allStrapiProject2020Player: { nodes: players },
-    allStrapiTradingcard: { nodes: p2020cards }
+    allStrapiTopps1951Player: { nodes: players },
+    allStrapiTradingcard: { nodes: t1951cards }
   } = data
+
+  const series = "1951"
 
   const [password, setPassword] = useState('')
 
-  const protectPlayerIndex = 1 // Big Mac (count from most recent, starting at 0)
-  const protectPassword = "friday"
+  const protectPlayerIndex = 0 // 0 = Wave 1)
+  const protectPassword = "mailmonday"
 
-  const [playerProtected, setPlayerProtected] = useState(false)
+  const [playerProtected, setPlayerProtected] = useState(true)
 
   // If passed a player, open to that player. Otherwise open first player on list.
   const [value, setValue] = React.useState(location.state && location.state.player ?
@@ -49,7 +51,7 @@ const Topps1951Page = ({ location, data }) => {
         <h1 className="page-head">Topps 1951 by Blake Jamieson</h1>
         <section className="topps">
 
-          {/*<div className="btn-container">
+          {<div className="btn-container">
             <hr/>
             {players.map((player, index) => {
               return (
@@ -58,11 +60,10 @@ const Topps1951Page = ({ location, data }) => {
                 </div>
               )
             })}
-          </div>*/}
-{/*console.log("protectPlayerIndex, value", protectPlayerIndex, value)*/}
+          </div>}
+
           <article className="content-container">
-            <h2>Coming soon...</h2>
-            {/* (protectPlayerIndex === value && playerProtected) &&
+            { (protectPlayerIndex === value && playerProtected) &&
               <div className="card protected-card">
                 <h5 className="card-header primary-color white-text text-center py-4">
                   <strong>Password-Protected Autograph Editions</strong>
@@ -80,18 +81,18 @@ const Topps1951Page = ({ location, data }) => {
                   </form>
                 </div>
               </div>
-            */}
-            {/* (!playerProtected || protectPlayerIndex !== value) &&
+            }
+            { (!playerProtected || protectPlayerIndex !== value) &&
               <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
-                {p2020cards.map((card) => {
+                {t1951cards.map((card) => {
                   return (
-                    card.project_2020_player && card.project_2020_player.name === players[value].name ?
+                    card.topps_1951_player && card.topps_1951_player.name === players[value].name ?
                      <div className="p2020" key={card.identifier}>
-                      <CardTopps2020 card={card} /></div> : null
+                      <CardTopps card={card} series={series} /></div> : null
                   )
                 })}
               </div>
-            */}
+            }
           </article>
         </section>
       </div>
@@ -101,9 +102,9 @@ const Topps1951Page = ({ location, data }) => {
 
 export const query = graphql`
   {
-    allStrapiProject2020Player(
+    allStrapiTopps1951Player(
       limit: 20,
-      sort: { order: DESC, fields: order }
+      sort: { order: ASC, fields: order }
     ) {
       nodes {
         name
@@ -118,7 +119,7 @@ export const query = graphql`
       nodes {
         strapiId
         identifier
-        project_2020_player {
+        topps_1951_player {
           name
         }
         image {
