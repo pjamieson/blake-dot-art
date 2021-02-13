@@ -6,23 +6,23 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import CardTopps from "../components/card-topps"
 
-const ToppsProject2020PlayerPage = ({data}) => {
+const Topps1951PlayerPage = ({data}) => {
   const {
-    allStrapiTradingcard: { nodes: p2020cards }
+    allStrapiTradingcard: { nodes: t1951cards }
   } = data
 
-  const series = "project2020"
+  const series = "1951"
 
-  const playerName = p2020cards[0].project_2020_player.name
+  const playerName = t1951cards[0].topps_1951_player.name
 
-  const pageTitle = `${playerName} - Topps Project 2020 Cards`
+  const pageTitle = `${playerName} - Topps 1951 by Blake Jamieson`
 
   const [password, setPassword] = useState('')
 
-  const protectPlayerName = "Derek Jeter"
-  const protectPassword = "friday"
+  const protectPlayerName = "Wave 1"
+  const protectPassword = "mailmonday"
 
-  const [playerProtected, setPlayerProtected] = useState(false)
+  const [playerProtected, setPlayerProtected] = useState(true)
 
   const valid = () => {
     if (password.length > 5) {
@@ -47,8 +47,8 @@ const ToppsProject2020PlayerPage = ({data}) => {
     <Layout>
       <SEO title={pageTitle} />
       <div className="container page-container">
-        <h1 className="page-head">{p2020cards[0].title}</h1>
-        <h2 className="player-subhead">Topps Project 2020 Cards by Blake Jamieson</h2>
+        <h1 className="page-head">{t1951cards[0].title}</h1>
+        <h2 className="player-subhead">Topps 1951 Cards by Blake Jamieson</h2>
         <section className="topps">
           <article className="content-container">
             { (playerProtected && protectPlayerName === playerName) &&
@@ -72,7 +72,7 @@ const ToppsProject2020PlayerPage = ({data}) => {
             }
             { (!playerProtected || protectPlayerName !== playerName) &&
               <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
-                {p2020cards.map((card) => {
+                {t1951cards.map((card) => {
                   return (
                     <div className="p2020" key={card.identifier}>
                       <CardTopps card={card} series={series} />
@@ -89,15 +89,15 @@ const ToppsProject2020PlayerPage = ({data}) => {
 }
 
 export const query = graphql`
-query Get2020PlayerTradingcards($name: String) {
+query Get1951PlayerTradingcards($name: String) {
   allStrapiTradingcard(
-    filter: {project_2020_player: {name: {eq: $name}}},
+    filter: {topps_1951_player: {name: {eq: $name}}},
     sort: {order: ASC, fields: order}
   ) {
     nodes {
       strapiId
       identifier
-      project_2020_player {
+      topps_1951_player {
         name
       }
       image {
@@ -116,4 +116,4 @@ query Get2020PlayerTradingcards($name: String) {
 }
 `
 
-export default ToppsProject2020PlayerPage
+export default Topps1951PlayerPage

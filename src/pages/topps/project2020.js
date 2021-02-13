@@ -4,13 +4,15 @@ import { MDBBtn, MDBInput } from "mdbreact"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-import CardTopps2020 from "../../components/card-topps2020"
+import CardTopps from "../../components/card-topps"
 
 const ToppsProject2020Page = ({ location, data }) => {
   const {
     allStrapiProject2020Player: { nodes: players },
     allStrapiTradingcard: { nodes: p2020cards }
   } = data
+
+  const series = "project2020"
 
   const [password, setPassword] = useState('')
 
@@ -86,7 +88,7 @@ const ToppsProject2020Page = ({ location, data }) => {
                   return (
                     card.project_2020_player && card.project_2020_player.name === players[value].name ?
                      <div className="p2020" key={card.identifier}>
-                      <CardTopps2020 card={card} /></div> : null
+                      <CardTopps card={card} series={series} /></div> : null
                   )
                 })}
               </div>

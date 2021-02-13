@@ -16,10 +16,11 @@ import { formatPrice } from "../utils/format"
 
 const Tradingcard = ({
   data: {
-    p2020card: {
+    tradingcard: {
       id,
       identifier,
-      project_2020_player: player,
+      project_2020_player = {},
+      topps_1951_player = {},
       title,
       subtitle = {},
       limitation = {},
@@ -66,9 +67,13 @@ const Tradingcard = ({
     setInCart(false)
   }
 
+  const series = project_2020_player ? `project2020` : (topps_1951_player ? `1951` : ``)
+  const player = project_2020_player ? project_2020_player.name :
+  (topps_1951_player ? topps_1951_player.name : ``)
+
   // Schema.org calculated values
   const productTitle = `${title} : Artist-Autographed Card`
-  const productUrl = `https://blake.art/topps/project2020/${identifier}`
+  const productUrl = `https://blake.art/topps/${series}/${identifier}`
   const productImageUrl = `https://blake.art${fluid.src}`
   //const productImageUrl = `localhost:8000${fluid.src}`
   //console.log("productImageUrl", productImageUrl)
@@ -116,7 +121,7 @@ const Tradingcard = ({
                   <Img className="card card-img-top" fluid={fluid} alt={title} />
                 </div>
                 <div className="back-btn">
-                  <Link to={`/topps/project2020/`} state={{ player: player.name }} className="btn-floating btn-action btn-danger">
+                  <Link to={`/topps/${series}/`} state={{ player: player }} className="btn-floating btn-action btn-danger">
                     <i className="fas fa-chevron-left"></i>
                   </Link>
                 </div>
@@ -178,10 +183,13 @@ export default Tradingcard
 
 export const query = graphql`
   query GetSingleTradingcard($slug: String) {
-    p2020card: strapiTradingcard(identifier: {eq: $slug}) {
+    tradingcard: strapiTradingcard(identifier: {eq: $slug}) {
       id: strapiId
       identifier
       project_2020_player {
+        name
+      }
+      topps_1951_player {
         name
       }
       title

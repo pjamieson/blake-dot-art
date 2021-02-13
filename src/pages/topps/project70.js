@@ -4,7 +4,7 @@ import React, { useState } from "react"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
-//import CardTopps2020 from "../../components/card-topps2020"
+//import CardTopps from "../../components/card-topps"
 
 const ToppsProject70Page = ({ location, data }) => {
 

@@ -69,7 +69,7 @@ module.exports = {
           `product`,
           `product-category`,
           `project-2020-player`,
-          `project70-player`,
+          `project-70-player`,
           `sport`,
           `subgenre`,
           `team-member`,

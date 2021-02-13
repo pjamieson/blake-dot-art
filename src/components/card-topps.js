@@ -4,10 +4,9 @@ import { Link } from "gatsby"
 import Img from "gatsby-image"
 import { MDBWaves } from "mdbreact";
 
-const CardTopps2020 = ({ card }) => {
+const CardTopps = ({ card, series }) => {
   const [cursorPos, setCursorPos] = useState({})
-  const link = `/topps/project2020/${card.identifier}`
-
+  const link = `/topps/${series}/${card.identifier}`
   const handleTouch = (event) => {
     event.stopPropagation();
     // For Waves effect - Get & Set Cursor Position
@@ -58,4 +57,4 @@ const CardTopps2020 = ({ card }) => {
   )
 }
 
-export default CardTopps2020;
+export default CardTopps;

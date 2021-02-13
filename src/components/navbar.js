@@ -203,6 +203,9 @@ const Navbar = () => {
 
                 <MDBDropdownMenu>
                   <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/1951/wave-1">1951 - Wave 1</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
                     <Link className="menu-link" to="/topps/project2020/bob-gibson">Bob Gibson</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
