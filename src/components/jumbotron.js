@@ -41,9 +41,9 @@ const Jumbotron = () => {
             </div>
           </div>
           <div className="featured-link">
-            <Link to="/topps/project2020">
+            <Link to="/topps/1951">
               <MDBBtn color="secondary">
-                Project 2020 Cards
+                Topps 1951 Cards
                 <MDBIcon icon="caret-right" className="ml-2" />
               </MDBBtn>
             </Link>

@@ -22,7 +22,7 @@ const Topps1951PlayerPage = ({data}) => {
   const protectPlayerName = "Wave 1"
   const protectPassword = "mailmonday"
 
-  const [playerProtected, setPlayerProtected] = useState(true)
+  const [playerProtected, setPlayerProtected] = useState(false)
 
   const valid = () => {
     if (password.length > 5) {
