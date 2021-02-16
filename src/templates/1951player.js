@@ -47,8 +47,8 @@ const Topps1951PlayerPage = ({data}) => {
     <Layout>
       <SEO title={pageTitle} />
       <div className="container page-container">
-        <h1 className="page-head">{t1951cards[0].title}</h1>
-        <h2 className="player-subhead">Topps 1951 Cards by Blake Jamieson</h2>
+        <h1 className="page-head">Topps 1951 Cards by Blake Jamieson</h1>
+        <h2 className="player-subhead">{playerName}</h2>
         <section className="topps">
           <article className="content-container">
             { (playerProtected && protectPlayerName === playerName) &&
