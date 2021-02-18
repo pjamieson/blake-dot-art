@@ -22,7 +22,9 @@ import {
   getPaintingQtyAvailable,
   setPaintingQtyAvailable,
   getCardQtyAvailable,
-  setCardQtyAvailable
+  setCardQtyAvailable,
+  getProductQtyAvailable,
+  setProductQtyAvailable
 } from "../utils/inventory"
 import { getSalesTaxRate } from "../utils/salestax"
 
@@ -121,6 +123,17 @@ const CheckoutComponent = () => {
 
           return qtyNowAvailable // forces block to complete before continuing
         }
+        if (item.itemType === "product") {
+          const qtyNowAvailable = await getProductQtyAvailable(item.id)
+          if (item.qty > qtyNowAvailable) {
+            setCartChanged(true)
+            addToCart(item, (qtyNowAvailable - item.qty)) // remove unavailable from cart
+          }
+          // Update cart availability
+          item.qtyAvail = qtyNowAvailable
+
+          return qtyNowAvailable // forces block to complete before continuing
+        }
       }))
     } else {
       // No cart or empty cart
@@ -133,13 +146,14 @@ const CheckoutComponent = () => {
   }
 
   const getPaymentIntent = async () => {
+    //console.log("getPaymentIntent cart", cart)
     // Need to get sales tax rate if NY shipping address and not already retreived
     // (So correct charge total can be submitted when getting Stript Payment Intent)
     let taxRate = salesTaxRate
     if (region === "NY" && salesTaxRate === 0.00) {
       taxRate = await getSalesTaxRate(zip)
       await setSalesTaxRate(taxRate)
-      //console.log("checkout.js getPaymentIntent taxRate", taxRate)
+      //console.log("checkout getPaymentIntent taxRate", taxRate)
     }
     //console.log("getPaymentIntent taxRate", taxRate)
     try {
@@ -154,7 +168,7 @@ const CheckoutComponent = () => {
         })
       })
       const data = await response.json()
-      //console.log("checkout getPaymentIntent data", data)
+      console.log("checkout getPaymentIntent data", data)      
       setClientSecret(data.client_secret)
     } catch (err) {
       console.log('checkout getPaymentIntent err', err)
@@ -250,6 +264,30 @@ const CheckoutComponent = () => {
 
           return qtyNowAvailable // forces block to complete before continuing
         }
+        if (item.itemType === "product") {
+          const qtyNowAvailable = await getProductQtyAvailable(item.id)
+          if (item.qty > qtyNowAvailable) {
+            processPayment = false
+            setCartChanged(true)
+            addToCart(item, (qtyNowAvailable - item.qty)) // remove unavailable from cart
+          }
+          // Save item for Shippo
+          items.push(
+            {
+              "currency": "USD",
+              "quantity": item.qty,
+              "sku": item.identifier,
+              "title": item.title,
+              "total_amount": item.price,
+              "weight": "1.0",
+              "weight_unit": "lb"
+            }
+          )
+          // Update cart availability
+          item.qtyAvail = qtyNowAvailable
+
+          return qtyNowAvailable // forces block to complete before continuing
+        }
       }))
     } else {
       // No cart or empty cart (Safety; shouldn't happen)
@@ -301,6 +339,9 @@ const CheckoutComponent = () => {
                 }
                 if (item.itemType === "tradingcard") {
                   setCardQtyAvailable(item.id, (item.qtyAvail - item.qty))
+                }
+                if (item.itemType === "product") {
+                  setProductQtyAvailable(item.id, (item.qtyAvail - item.qty))
                 }
               })
             }

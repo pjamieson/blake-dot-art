@@ -12,6 +12,16 @@ exports.createPages = async ({ graphql, actions }) => {
           slug
         }
       },
+      products: allStrapiProduct {
+        nodes {
+          product_category {
+            name
+            slug
+          }
+          qty
+          slug: identifier
+        }
+      },
       tradingcards: allStrapiTradingcard(
         filter: {qty: {gt: 0}}
       ) {
@@ -23,6 +33,14 @@ exports.createPages = async ({ graphql, actions }) => {
             name
           }
           slug: identifier
+        }
+      },
+      pcategories: allStrapiProductCategory(
+        limit: 20
+      ) {
+        nodes {
+          name
+          slug
         }
       },
       p2020players: allStrapiProject2020Player(
@@ -49,7 +67,9 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const path = require('path')
   const paintings = result.data.paintings.nodes;
+  const products = result.data.products.nodes;
   const tradingcards = result.data.tradingcards.nodes;
+  const pcategories = result.data.pcategories.nodes;
   const p2020players = result.data.p2020players.nodes;
   const t1951players = result.data.t1951players.nodes;
 
@@ -61,6 +81,18 @@ exports.createPages = async ({ graphql, actions }) => {
       component: path.resolve(`./src/templates/painting.js`),
       context: {
         slug: painting.slug,
+      },
+    })
+  })
+
+  // Create product detail pages.
+  products.forEach((product) => {
+    //console.log("*****product*****", product)
+    createPage({
+      path: `/product/${product.product_category.slug}/${product.slug}`,
+      component: path.resolve(`./src/templates/product.js`),
+      context: {
+        slug: product.slug,
       },
     })
   })
@@ -104,6 +136,17 @@ exports.createPages = async ({ graphql, actions }) => {
     .replace(/[^\w-]+/g, '')
     .replace(/--+/g, '-')
 
+  pcategories.forEach((pcategory) => {
+    //console.log("************************pcategory slug*******************", pcategory.slug)
+    createPage({
+      path: `/product/${pcategory.slug}/`,
+      component: path.resolve(`./src/templates/pcategory.js`),
+      context: {
+        name: pcategory.slug,
+      },
+    })
+  })
+
   p2020players.forEach((p2020player) => {
     const slug = slugify(p2020player.name)
     //console.log("slug", slug)
@@ -129,3 +172,42 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
 }
+
+// Need to create a localFile___NODE for content types with multiple images
+// See: https://stackoverflow.com/questions/62745591/how-to-query-multiple-images-in-gatsby-from-strapi-using-graphql
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
+
+exports.onCreateNode = async ({
+  node,
+  actions,
+  store,
+  cache,
+  createNodeId,
+ }) => {
+   const { createNode } = actions;
+
+   let itemImages = node.images
+
+   if (node.internal.type !== null && node.internal.type === "StrapiProduct") {
+     if (itemImages.length > 0) {
+       // itemImages.forEach(el => console.log(el))
+       const images = await Promise.all(
+         itemImages.map(el =>
+           createRemoteFileNode({
+             url: `${process.env.GATSBY_STRAPI_API_URL}${el.url}`,
+             parentNodeId: node.id,
+             store,
+             cache,
+             createNode,
+             createNodeId,
+           })
+         )
+       )
+
+      itemImages.forEach((image, i) => {
+        image.localFile___NODE = images[i].id
+      })
+
+    }
+  }
+};

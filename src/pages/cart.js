@@ -19,7 +19,11 @@ import {
   MDBIcon
 } from 'mdbreact';
 
-import { getCardQtyAvailable, getPaintingQtyAvailable } from "../utils/inventory"
+import {
+  getPaintingQtyAvailable,
+  getCardQtyAvailable,
+  getProductQtyAvailable
+} from "../utils/inventory"
 import { cartSubtotal } from "../utils/cart"
 import { formatPrice } from "../utils/format"
 
@@ -48,6 +52,17 @@ const CartPage = () => {
         }
         if (item.itemType === "tradingcard") {
           const qtyNowAvailable = await getCardQtyAvailable(item.id)
+          if (item.qty > qtyNowAvailable) {
+            setCartChanged(true)
+            addToCart(item, (qtyNowAvailable - item.qty)) // remove unavailable from cart
+          }
+          // Update cart availability
+          item.qtyAvail = qtyNowAvailable
+
+          return qtyNowAvailable // forces block to complete before continuing
+        }
+        if (item.itemType === "product") {
+          const qtyNowAvailable = await getProductQtyAvailable(item.id)
           if (item.qty > qtyNowAvailable) {
             setCartChanged(true)
             addToCart(item, (qtyNowAvailable - item.qty)) // remove unavailable from cart
