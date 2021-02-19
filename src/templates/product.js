@@ -34,23 +34,6 @@ const Product = ({
 }) => {
   const { isInCart, addToCart } = useContext(CartContext)
 
-  const itemType = "product"
-  const subt = subtitle ? subtitle : "A Blake Jamieson Exclusive"
-  const qty = 1 //initialize with 1 of item
-  const cartItem = {
-    itemType,
-    id,
-    identifier,
-    title,
-    subtitle: subt,
-    fluid: fluid0,
-    qty,
-    qtyAvail,
-    price
-  }
-  const [inCart, setInCart] = useState(isInCart(cartItem))
-  const [processing, setProcessing] = useState(false)
-
   let imageset = []
   let imagendx = 0
   images.forEach(img => {
@@ -64,8 +47,25 @@ const Product = ({
     imagendx = imagendx + 1
   })
   // Remove the primary (first) image. It does not appear in the optional images set.
-  const fluid0 = imageset.shift()
+  const image0 = imageset.shift()
   //console.log("product.js imageset", imageset)
+
+  const itemType = "product"
+  const subt = subtitle ? subtitle : "A Blake Jamieson Exclusive"
+  const qty = 1 //initialize with 1 of item
+  const cartItem = {
+    itemType,
+    id,
+    identifier,
+    title,
+    subtitle: subt,
+    fluid: image0.fluid,
+    qty,
+    qtyAvail,
+    price
+  }
+  const [inCart, setInCart] = useState(isInCart(cartItem))
+  const [processing, setProcessing] = useState(false)
 
   // On loading page, confirm product is still available
   const [qtyAvailNow, setQtyAvailNow] = useState(1) // one available by default
@@ -88,7 +88,7 @@ const Product = ({
   const productUrl = `https://blake.art/product/${product_category.slug}/${identifier}`
   //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${slug}`
   //console.log("productUrl", productUrl)
-  const productImageUrl = `https://blake.art${fluid0.src}`
+  const productImageUrl = `https://blake.art${image0.fluid.src}`
   //const productImageUrl = `localhost:8000${fluid.src}`
   //console.log("productImageUrl", productImageUrl)
   //console.log("productImageUrl", productImageUrl)
@@ -133,7 +133,7 @@ const Product = ({
 
             <div>
               <div className="view overlay">
-                <Img className="card card-img-top" fluid={fluid0} alt={title} />
+                <Img className="card card-img-top" fluid={image0.fluid} alt={title} />
               </div>
 
               { (imageset.length > 0) &&
@@ -198,8 +198,8 @@ const Product = ({
 export default Product
 
 export const query = graphql`
-query GetSingleProduct($identifier: String) {
-  product: strapiProduct(identifier: {eq: $identifier}) {
+query GetSingleProduct($slug: String) {
+  product: strapiProduct(identifier: {eq: $slug}) {
     id: strapiId
     identifier
     title: name

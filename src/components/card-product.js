@@ -5,8 +5,11 @@ import Img from "gatsby-image"
 import { MDBWaves } from "mdbreact";
 
 const CardProduct = ({ product, category }) => {
+  //console.log("CardProduct product", product)
+  //console.log("CardProduct category", category)
   const [cursorPos, setCursorPos] = useState({})
   const link = `/product/${product.product_category.slug}/${product.identifier}`
+  //console.log("CardProduct link", link)
   const handleTouch = (event) => {
     event.stopPropagation();
     // For Waves effect - Get & Set Cursor Position
