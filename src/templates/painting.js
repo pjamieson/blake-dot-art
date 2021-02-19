@@ -134,35 +134,35 @@ const Painting = ({
           <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
 
             <div>
-                <div className="view overlay">
-                  <Img className="card card-img-top" fluid={fluid} alt={title} />
+              <div className="view overlay">
+                <Img className="card card-img-top" fluid={fluid} alt={title} />
+              </div>
+
+              { (imageset.length > 0) &&
+                <ImageSet imageset={imageset} />
+              }
+
+              { (qtyAvail > 0) &&
+                <div className="back-btn">
+                  <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action btn-primary">
+                    <i className="fas fa-chevron-left"></i>
+                  </Link>
                 </div>
-
-                { (images && images.length > 0) &&
-                  <ImageSet imageset={imageset} />
-                }
-
-                { (qtyAvail > 0) &&
-                  <div className="back-btn">
-                    <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action btn-primary">
-                      <i className="fas fa-chevron-left"></i>
-                    </Link>
-                  </div>
-                }
-                { (qtyAvail <= 0 && sport) &&
-                  <div className="back-btn">
-                    <Link to={`/portfolio/${subgenre.slug}`} state={{ sport: sport.name }} className="btn-floating btn-action btn-primary">
-                      <i className="fas fa-chevron-left"></i>
-                    </Link>
-                  </div>
-                }
-                { (qtyAvail <= 0 && !sport) &&
-                  <div className="back-btn">
-                    <Link to={`/portfolio/${subgenre.slug}`} className="btn-floating btn-action btn-primary">
-                      <i className="fas fa-chevron-left"></i>
-                    </Link>
-                  </div>
-                }
+              }
+              { (qtyAvail <= 0 && sport) &&
+                <div className="back-btn">
+                  <Link to={`/portfolio/${subgenre.slug}`} state={{ sport: sport.name }} className="btn-floating btn-action btn-primary">
+                    <i className="fas fa-chevron-left"></i>
+                  </Link>
+                </div>
+              }
+              { (qtyAvail <= 0 && !sport) &&
+                <div className="back-btn">
+                  <Link to={`/portfolio/${subgenre.slug}`} className="btn-floating btn-action btn-primary">
+                    <i className="fas fa-chevron-left"></i>
+                  </Link>
+                </div>
+              }
             </div>
 
             <div className="buy-or-inquire">
