@@ -12,7 +12,6 @@ import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-//import GalleryCarouselComponent from "../components/gallery-carousel"
 
 import { getProductQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"

@@ -68,7 +68,7 @@ const Painting = ({
     )
     imagendx = imagendx + 1
   })
-  console.log("painting.js imageset", imageset)
+  //console.log("painting.js imageset", imageset)
 
   // On loading page, confirm painting is still available
   const [qtyAvailNow, setQtyAvailNow] = useState(1) // one available by default

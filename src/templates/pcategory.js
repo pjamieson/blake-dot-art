@@ -16,7 +16,7 @@ const ProductCategoryPage = ({data}) => {
 
   const pageTitle = categoryName
 
-  const [categoryProtected, setCategoryProtected] = useState(true)
+  const [categoryProtected, setCategoryProtected] = useState(false)
 
   const [password, setPassword] = useState('')
 
