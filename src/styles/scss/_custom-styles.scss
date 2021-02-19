@@ -537,6 +537,9 @@ p {
       }
     }
   }
+  .imageset {
+    margin-top: 1em;
+  }
 }
 
 .p2020 {
@@ -619,8 +622,8 @@ p {
   }
   .back-btn {
     position: absolute;
-    bottom: 1.5rem;
-    left: 0;
+    bottom: -1.5em;
+    left: -5px;
   }
   .card-details {
     padding: 1rem 1rem 0 1rem;
@@ -657,6 +660,26 @@ p {
       padding-top: 1rem;
       .btn-inquire {
         margin-left: 0;
+      }
+    }
+  }
+}
+.painting-details {
+  .carousel {
+    margin-top: 1em;;
+    .controls-top {
+      margin-bottom: .25rem;
+    }
+    .carousel-inner {
+      padding: 0;
+      .carousel-indicators {
+        margin-bottom: 0;
+      }
+    }
+    .row {
+      .col-md-6 {
+        padding-right: 6px;
+        padding-left: 6px;
       }
     }
   }

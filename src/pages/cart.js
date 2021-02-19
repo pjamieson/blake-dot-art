@@ -35,6 +35,7 @@ const CartPage = () => {
   const forceUpdate = useCallback(() => updateState({}), [])
 
   // On loading page, confirm cart items still available
+  const [ cartEmpty, setCartEmpty ] = useState(false)
   const [ cartChanged, setCartChanged ] = useState(false)
   useEffect(() => {
     if (cart && cart.length > 0) {
@@ -74,8 +75,7 @@ const CartPage = () => {
         }
       }))
     } else {
-      // No cart or empty cart
-      setCartChanged(true)
+      setCartEmpty(true)
     }
   }, [cart, addToCart])
 
@@ -171,7 +171,7 @@ const CartPage = () => {
                     </MDBTableBody>
                   </MDBTable>
                   }
-                  {(cart && cart.length === 0) && <h3>Your cart is empty.</h3>}
+                  {(cartEmpty) && <h3>Your cart is empty.</h3>}
                 </div>
               </MDBCardBody>
             </MDBCard>

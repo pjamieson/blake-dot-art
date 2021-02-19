@@ -188,7 +188,7 @@ exports.onCreateNode = async ({
 
    let itemImages = node.images
 
-   if (node.internal.type !== null && node.internal.type === "StrapiProduct") {
+   if (node.internal.type !== null && (node.internal.type === "StrapiProduct" || node.internal.type === "StrapiPainting")) {
      if (itemImages.length > 0) {
        // itemImages.forEach(el => console.log(el))
        const images = await Promise.all(

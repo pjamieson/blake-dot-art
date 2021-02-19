@@ -10,7 +10,7 @@ import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import GalleryCarouselComponent from "../components/gallery-carousel"
+import ImageSet from "../components/image-set"
 
 import { getPaintingQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
@@ -55,6 +55,20 @@ const Painting = ({
   }
   const [inCart, setInCart] = useState(isInCart(cartItem))
   const [processing, setProcessing] = useState(false)
+
+  let imageset = []
+  let imagendx = 0
+  images.forEach(img => {
+    imageset.push(
+      {
+        "key": imagendx,
+        "title": title,
+        "fluid": img.localFile.childImageSharp.fluid
+      }
+    )
+    imagendx = imagendx + 1
+  })
+  console.log("painting.js imageset", imageset)
 
   // On loading page, confirm painting is still available
   const [qtyAvailNow, setQtyAvailNow] = useState(1) // one available by default
@@ -120,18 +134,14 @@ const Painting = ({
           <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
 
             <div>
-              <div className="card" key={identifier}>
                 <div className="view overlay">
                   <Img className="card card-img-top" fluid={fluid} alt={title} />
+                </div>
 
-                { (images && images.length > 100) && <>
-                  <br/>
-                  <Img className="card card-img-top" fluid={images[0].formats.small.childImageSharp.fluid} alt={images[0].alternativeText} />
-                  {/*<GalleryCarouselComponent images={images} />*/}
-                  </>
+                { (images && images.length > 0) &&
+                  <ImageSet imageset={imageset} />
                 }
 
-                </div>
                 { (qtyAvail > 0) &&
                   <div className="back-btn">
                     <Link to={`/gallery/${subgenre.slug}`} className="btn-floating btn-action btn-primary">
@@ -153,7 +163,6 @@ const Painting = ({
                     </Link>
                   </div>
                 }
-              </div>
             </div>
 
             <div className="buy-or-inquire">
@@ -233,13 +242,10 @@ export const query = graphql`
         }
       }
       images {
-        alternativeText
-        formats {
-          small {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid
-              }
+        localFile {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
             }
           }
         }
