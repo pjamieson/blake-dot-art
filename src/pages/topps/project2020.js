@@ -103,7 +103,7 @@ const ToppsProject2020Page = ({ location, data }) => {
 export const query = graphql`
   {
     allStrapiProject2020Player(
-      limit: 20,
+      limit: 40,
       sort: { order: DESC, fields: order }
     ) {
       nodes {
@@ -112,6 +112,9 @@ export const query = graphql`
     },
     allStrapiTradingcard(
       limit: 300,
+      filter: {
+        project_2020_player: {id: {gt: 0}}
+      },
       sort: {
         order: ASC, fields: order
       }

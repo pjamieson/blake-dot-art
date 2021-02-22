@@ -112,6 +112,9 @@ export const query = graphql`
     },
     allStrapiTradingcard(
       limit: 300,
+      filter: {
+        topps_1951_player: {id: {gt: 0}}
+      },
       sort: {
         order: ASC, fields: order
       }

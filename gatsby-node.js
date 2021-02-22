@@ -32,6 +32,9 @@ exports.createPages = async ({ graphql, actions }) => {
           topps_1951_player {
             name
           }
+          project_70_player {
+            name
+          }
           slug: identifier
         }
       },
@@ -44,7 +47,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       },
       p2020players: allStrapiProject2020Player(
-        limit: 20
+        limit: 30
       ) {
         nodes {
           name
@@ -52,6 +55,13 @@ exports.createPages = async ({ graphql, actions }) => {
       },
       t1951players: allStrapiTopps1951Player(
         limit: 60
+      ) {
+        nodes {
+          name
+        }
+      },
+      p70players: allStrapiProject70Player(
+        limit: 30
       ) {
         nodes {
           name
@@ -72,6 +82,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const pcategories = result.data.pcategories.nodes;
   const p2020players = result.data.p2020players.nodes;
   const t1951players = result.data.t1951players.nodes;
+  const p70players = result.data.p70players.nodes;
 
   // Create painting detail pages.
   paintings.forEach((painting) => {
@@ -122,6 +133,17 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     }
 
+    if (card.project_70_player && card.project_70_player.name && card.project_70_player.name.length > 1) {
+      createPage({
+        path: `/topps/project70/${card.slug}`,
+        component: path.resolve(`./src/templates/tradingcard.js`),
+        context: {
+          series: `project70`,
+          slug: card.slug,
+        },
+      })
+    }
+
   })
 
   // Create Player pages
@@ -167,6 +189,18 @@ exports.createPages = async ({ graphql, actions }) => {
       component: path.resolve(`./src/templates/1951player.js`),
       context: {
         name: t1951player.name,
+      },
+    })
+  })
+
+  p70players.forEach((p70player) => {
+    const slug = slugify(p70player.name)
+    //console.log("slug", slug)
+    createPage({
+      path: `/topps/project70/${slug}`,
+      component: path.resolve(`./src/templates/p70player.js`),
+      context: {
+        name: p70player.name,
       },
     })
   })
