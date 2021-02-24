@@ -162,7 +162,7 @@ const Product = ({
                     <h3>This item has been sold or is Not for Sale.</h3>
                   }
 
-                  { (price > 10 && qtyAvailNow > 0) &&
+                  { (price > 5 && qtyAvailNow > 0) &&
                     <div className="add-to-cart">
                       <h3 className="price">{formatPrice(price)}</h3>
                       {!inCart &&
@@ -176,7 +176,7 @@ const Product = ({
                     </div>
                   }
 
-                  { (price <= 10 && qtyAvailNow > 0) &&
+                  { (price <= 5 && qtyAvailNow > 0) &&
                     <div className="inquire">
                       <button type="button" className="btn btn-inquire btn-primary btn-rounded">Inquire</button>
                     </div>
