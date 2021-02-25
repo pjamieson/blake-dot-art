@@ -104,7 +104,7 @@ export const query = graphql`
   {
     allStrapiTopps1951Player(
       limit: 20,
-      sort: { order: ASC, fields: order }
+      sort: { order: DESC, fields: order }
     ) {
       nodes {
         name
