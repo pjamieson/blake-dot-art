@@ -21,10 +21,11 @@ const Tradingcard = ({
       identifier,
       project_2020_player = {},
       topps_1951_player = {},
+      project_70_player = {},
       title,
       subtitle = {},
       limitation = {},
-      image: { childImageSharp: { fluid } },
+      image: { childImageSharp: { fluid }, internal: { file } },
       description = {},
       details = {},
       qty: qtyAvail,
@@ -67,16 +68,25 @@ const Tradingcard = ({
     setInCart(false)
   }
 
-  const series = project_2020_player ? `project2020` : (topps_1951_player ? `1951` : ``)
-  const player = project_2020_player ? project_2020_player.name :
-  (topps_1951_player ? topps_1951_player.name : ``)
+  let series = ""
+  if (project_2020_player) series = `project2020`
+  if (topps_1951_player) series = `1951`
+  if (project_70_player) series = `project2020`
+
+  let player = ""
+  if (project_2020_player) player = project_2020_player.name
+  if (topps_1951_player) player = topps_1951_player.name
+  if (project_70_player) player = project_70_player.name
 
   // Schema.org calculated values
   const productTitle = `${title} : Artist-Autographed Card`
+
   const productUrl = `https://blake.art/topps/${series}/${identifier}`
-  const productImageUrl = `https://blake.art${fluid.src}`
-  //const productImageUrl = `localhost:8000${fluid.src}`
-  //console.log("productImageUrl", productImageUrl)
+
+  //console.log("tradingcard.js file", file)
+  const productImageUrl = file.substring(6, file.length - 1)
+  //console.log("tradingcard.js productImageUrl", productImageUrl)
+
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
 
   return (
@@ -192,11 +202,16 @@ export const query = graphql`
       topps_1951_player {
         name
       }
+      project_70_player {
+        name
+      }
       title
       subtitle
       limitation
       image {
-        publicURL
+        internal {
+          file: description
+        }
         childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid

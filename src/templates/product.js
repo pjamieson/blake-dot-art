@@ -41,7 +41,8 @@ const Product = ({
       {
         "key": imagendx,
         "title": title,
-        "fluid": img.localFile.childImageSharp.fluid
+        "fluid": img.localFile.childImageSharp.fluid,
+        "file": img.localFile.internal.file
       }
     )
     imagendx = imagendx + 1
@@ -88,10 +89,11 @@ const Product = ({
   const productUrl = `https://blake.art/product/${product_category.slug}/${identifier}`
   //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${slug}`
   //console.log("productUrl", productUrl)
-  const productImageUrl = `https://blake.art${image0.fluid.src}`
-  //const productImageUrl = `localhost:8000${fluid.src}`
-  //console.log("productImageUrl", productImageUrl)
-  //console.log("productImageUrl", productImageUrl)
+
+  //console.log("product.js file", image0.file)
+  const productImageUrl = image0.file.substring(6, image0.file.length - 1)
+  //console.log("product.js productImageUrl", productImageUrl)
+
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
 
   return (
@@ -210,6 +212,9 @@ query GetSingleProduct($slug: String) {
           fluid {
             ...GatsbyImageSharpFluid
           }
+        }
+        internal {
+          file: description
         }
       }
     }

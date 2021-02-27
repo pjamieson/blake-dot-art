@@ -22,7 +22,7 @@ const Painting = ({
       identifier,
       title,
       subtitle,
-      image: { childImageSharp: { fluid }},
+      image: { childImageSharp: { fluid }, internal: { file } },
       images = {},
       subgenre,
       sport = {},
@@ -91,9 +91,11 @@ const Painting = ({
   const productUrl = `https://blake.art/gallery/${subgenre.slug}/${slug}`
   //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${slug}`
   //console.log("productUrl", productUrl)
-  const productImageUrl = `https://blake.art${fluid.src}`
-  //const productImageUrl = `localhost:8000${fluid.src}`
-  //console.log("productImageUrl", productImageUrl)
+
+  //console.log("painting.js file", file)
+  const productImageUrl = file.substring(6, file.length - 1)
+  //console.log("painting.js productImageUrl", productImageUrl)
+
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
 
   return (
@@ -235,6 +237,9 @@ export const query = graphql`
       title
       subtitle
       image {
+        internal {
+          file: description
+        }
         childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid
