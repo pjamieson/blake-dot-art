@@ -228,7 +228,7 @@ exports.onCreateNode = async ({
        const images = await Promise.all(
          itemImages.map(el =>
            createRemoteFileNode({
-             url: `${process.env.GATSBY_STRAPI_API_URL}${el.url}`,
+             url: (el.provider === "local" ? `${process.env.GATSBY_STRAPI_API_URL}${el.url}` : `${el.url}`),
              parentNodeId: node.id,
              store,
              cache,
