@@ -6,8 +6,31 @@ import { MDBWaves } from "mdbreact";
 const CardImagelink = ({ location, card }) => {
   const [cursorPos, setCursorPos] = useState({})
   //console.log("card", card)
-  const menu = (card.player ? 'merch' : (card.qty > 0 ? 'gallery' : 'portfolio'))
-  const link = `/${menu}/${card.player ? 'topps/project2020' : card.subgenre.slug}/`
+
+  const isTradingcard = (card.project_2020_player || card.topps_1951_player || card.project_70_player)
+
+  const isProduct = card.product_category
+
+  const menu = (isTradingcard ? 'topps' : (isProduct ? 'product' : (card.qty > 0 ? 'gallery' : 'portfolio')))
+
+  let toppsSeries = ""
+  let player = ""
+  if (card.project_2020_player) {
+    toppsSeries = "project2020"
+    player = card.project_2020_player.name
+  }
+  if (card.topps_1951_player) {
+    toppsSeries = "1951"
+    player = card.topps_1951_player.name
+  }
+  if (card.project_70_player) {
+    toppsSeries = "project70"
+    player = card.project_70_player.name
+  }
+
+  const submenu = (isProduct ? card.product_category : (toppsSeries.length > 0 ? toppsSeries : card.subgenre.slug))
+
+  const link = `/${menu}/${submenu}/`
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -19,14 +42,19 @@ const CardImagelink = ({ location, card }) => {
     };
     setCursorPos(cursorPos);
 
-    if (!card.sport && !card.player) {
+    if (isProduct) {
+      navigate(link)
+    }
+    if (!isTradingcard && !card.sport) {
+      // Non-sport painting
       navigate(link)
     }
     if (card.sport) {
+      // Sport/Athlete painting
       navigate(link, { state: { sport: card.sport.name } })
     }
-    if (card.player) {
-      navigate('/topps/project2020', { state: { player: card.player.name } })
+    if (isTradingcard) {
+      navigate(link, { state: { player: player } })
     }
   }
 

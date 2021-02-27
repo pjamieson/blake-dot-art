@@ -10,7 +10,8 @@ import CardImagelink from "../components/card-image-link"
 
 const IndexPage = ({ data }) => {
   const {
-    allStrapiTradingcard: { nodes: p2020cards },
+    allStrapiTradingcard: { nodes: tradingcards },
+    allStrapiProduct: { nodes: products },
     allStrapiPainting: { nodes: paintings },
   } = data
 
@@ -43,9 +44,14 @@ const IndexPage = ({ data }) => {
 
           <section className="gallery">
             <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
-              {p2020cards.map(p2020card => {
-                return <div key={p2020card.identifier}>
-                  <CardImagelink card={p2020card} />
+              {tradingcards.map(tradingcard => {
+                return <div key={tradingcard.identifier}>
+                  <CardImagelink card={tradingcard} />
+                </div>
+              })}
+              {products.map(product => {
+                return <div key={product.identifier}>
+                  <CardImagelink card={product} />
                 </div>
               })}
               {paintings.map(card => {
@@ -70,13 +76,41 @@ export const query = graphql`
     ) {
       nodes {
         identifier
-        player: project_2020_player {
+        project_2020_player {
+          name
+        }
+        topps_1951_player {
+          name
+        }
+        project_70_player {
           name
         }
         image {
           childImageSharp {
             fluid {
               ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    },
+    allStrapiProduct(
+      filter: {
+        feature: {eq: true}
+      }
+    ) {
+      nodes {
+        identifier
+        product_category {
+          name
+          slug
+        }
+        images {
+          localFile {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid
+              }
             }
           }
         }
