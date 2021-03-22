@@ -1,22 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Img from "gatsby-image"
-import { MDBWaves } from "mdbreact";
 
 const ImageSet = ({ location, imageset }) => {
-  const [cursorPos, setCursorPos] = useState({})
-  //console.log("ImageSet imageset", imageset)
-
-  const handleClick = (event) => {
-    event.stopPropagation();
-    // For Waves effect - Get & Set Cursor Position
-    const cursorPos = {
-      top: event.clientY,
-      left: event.clientX,
-      time: Date.now() // time indicates particular clicks
-    };
-    setCursorPos(cursorPos);
-  }
-
   return (
     <div>
       <section className="gallery">

@@ -53,9 +53,9 @@ const SubscribePage = () => {
       <MDBContainer className="page-container subscribe">
         <h1 className="page-head">Mailing List</h1>
         <MDBCard className="banner">
-          <h2 className="text-center mx-auto pt-3">
+          {/*<h2 className="text-center mx-auto pt-3">
             Subscribe to Blake's Mailing List
-          </h2>
+          </h2>*/}
           <h3 className="text-center w-responsive mx-auto pb-3">
             Be among the first to receive news and special offers.
           </h3>
