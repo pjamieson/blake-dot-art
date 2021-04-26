@@ -168,7 +168,7 @@ const CheckoutComponent = () => {
         })
       })
       const data = await response.json()
-      console.log("checkout getPaymentIntent data", data)      
+      //console.log("checkout getPaymentIntent data", data)      
       setClientSecret(data.client_secret)
     } catch (err) {
       console.log('checkout getPaymentIntent err', err)
