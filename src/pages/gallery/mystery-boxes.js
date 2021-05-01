@@ -5,16 +5,16 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import CardImageLinkTitle from "../../components/card-image-link-title"
 
-const PaintedObjectsGalleryPage = ({ data }) => {
+const MysteryBoxesGalleryPage = ({ data }) => {
   const {
     allStrapiPainting: { nodes: paintings },
   } = data
 
   return (
     <Layout>
-      <SEO title="Painted Objects Gallery" />
+      <SEO title="Mystery Boxes Gallery" />
       <div className="container page-container">
-        <h1>Gallery - Painted Objects</h1>
+        <h1>Gallery - Mystery Boxes</h1>
         <section className="gallery">
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {paintings.map(card => {
@@ -33,7 +33,7 @@ export const query = graphql`
   {
     allStrapiPainting(
       filter: {
-        subgenre: {name: {eq: "Painted Objects"}},
+        subgenre: {name: {eq: "Mystery Boxes"}},
         qty: {gt: 0}
       },
       sort: {
@@ -63,4 +63,4 @@ export const query = graphql`
   }
 `
 
-export default PaintedObjectsGalleryPage
+export default MysteryBoxesGalleryPage

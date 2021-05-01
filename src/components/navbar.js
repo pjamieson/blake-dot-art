@@ -110,7 +110,7 @@ const Navbar = () => {
                     <Link className="menu-link" to="/gallery/collabs/">Collabs</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/gallery/painted-objects/">Painted Objects</Link>
+                    <Link className="menu-link" to="/gallery/mystery-boxes/">Mystery Boxes</Link>
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
