@@ -141,7 +141,7 @@ const ProductPage = ({
 
             <div>
               <div className="">
-                <GatsbyImage className="img-fluid rounded" image={getImage(image0.localFile.childImageSharp.gatsbyImageData)} alt={title} />
+                <GatsbyImage className="img-fluid rounded" image={image0.gatsbyImage} alt={title} />
               </div>
 
               { (imageset.length > 0) &&

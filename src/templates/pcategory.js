@@ -102,9 +102,11 @@ query GetCategoryProducts($slug: String) {
       images {
         localFile {
           childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
-            }
+            gatsbyImageData(
+              width: 600
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+            )
           }
         }
       }
