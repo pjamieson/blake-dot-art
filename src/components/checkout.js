@@ -93,7 +93,7 @@ const CheckoutComponent = () => {
     }
   }
 
-  const countryList = ["AU", "BS", "BE", "CA", "DK", "FI", "FR", "DE", "IE", "IT", "JP", "KR", "LU", "MX", "NL", "NZ", "NO", "PT", "PR", "ES", "SE", "CH", "GB", "US", "UM", "UT", "VG", "VI"]
+  const countryList = ["AU", "BS", "BE", "CA", "DK", "FI", "FR", "DE", "IE", "IT", "JP", "KR", "LU", "MX", "NL", "NZ", "NO", "PT", "PR", "SG", "ES", "SE", "CH", "GB", "US", "UM", "UT", "VG", "VI"]
   const priorityList = ["US", "CA"]
 
   // On loading page, confirm cart items still available

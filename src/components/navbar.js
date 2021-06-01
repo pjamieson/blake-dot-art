@@ -132,13 +132,13 @@ const Navbar = () => {
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/">Project 2020</Link>
+                    <Link className="menu-link" to="/topps/project70/">Project 70</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/topps/1951/">1951</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project70/">Project 70</Link>
+                    <Link className="menu-link" to="/topps/project2020/">Project 2020</Link>
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
@@ -199,77 +199,20 @@ const Navbar = () => {
                 </MDBDropdownToggle>
 
                 <MDBDropdownMenu>
+                <MDBDropdownItem>
+                  <Link className="menu-link" to="/topps/project70/jarred-kelenic/">Jarred Kelenic</Link>
+                </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project70/rickey-henderson">Rickey Henderson</Link>
+                    <Link className="menu-link" to="/topps/project70/rickey-henderson/">Rickey Henderson</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project70/buster-posey">Buster Posey</Link>
+                    <Link className="menu-link" to="/topps/project70/buster-posey/">Buster Posey</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project70/ronald-acuna-jr">Ronald Acuña Jr</Link>
+                    <Link className="menu-link" to="/topps/project70/ronald-acuna-jr/">Ronald Acuña Jr</Link>
                   </MDBDropdownItem>
                   <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project70/andrew-mccutchen">Andrew McCutchen</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/1951/wave-4">1951 - Wave 4</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/1951/wave-3">1951 - Wave 3</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/1951/wave-2">1951 - Wave 2</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/1951/wave-1">1951 - Wave 1</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/bob-gibson">Bob Gibson</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/frank-thomas">Frank Thomas</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/tony-gwynn">Tony Gwynn</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/roberto-clemente">Roberto Clemente</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/george-brett">George Brett</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/derek-jeter">Derek Jeter</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/cal-ripken-jr">Cal Ripken Jr.</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/sandy-koufax">Sandy Koufax</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/dwight-gooden">Dwight Gooden</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/ken-griffey-jr">Ken Griffey Jr.</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/ted-williams">Ted Williams</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/ichiro-suzuki">Ichiro Suzuki</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/willie-mays">Willie Mays</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/mariano-rivera">Mariano Rivera</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/mike-trout">Mike Trout</Link>
-                  </MDBDropdownItem>
-                  <MDBDropdownItem>
-                    <Link className="menu-link" to="/topps/project2020/mark-mcgwire">Mark McGwire</Link>
+                    <Link className="menu-link" to="/topps/project70/andrew-mccutchen/">Andrew McCutchen</Link>
                   </MDBDropdownItem>
                   {/*<MDBDropdownItem>
                     <Link className="menu-link" to="/product/autograph/">Autos by Mail</Link>

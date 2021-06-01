@@ -2,24 +2,26 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
-import SEO from "../../components/seo"
-import CardImageTitle from "../../components/card-image-title"
+import Seo from "../../components/seo"
+import CardImageCaption from "../../components/card-image-caption"
 
 const ClientsPage = ({ data }) => {
   const {
     allStrapiClient: { nodes: clients },
   } = data
 
+  const seo_description = "Photographs of selected celebrity clients and collectors of portraits by the artist Blake Jamieson, with the subjects holding their portraits."
+
   return (
     <Layout>
-      <SEO title="Clients & Collectors" />
+      <Seo title="Clients & Collectors" description={seo_description} />
       <div className="container page-container">
         <h1>Clients & Collectors</h1>
         <section className="gallery">
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
             {clients.map(card => {
               return <div key={card.id}>
-                {card.image && <CardImageTitle card={card} /> }
+                {card.image && <CardImageCaption card={card} /> }
               </div>
             })}
           </div>
@@ -38,9 +40,13 @@ export const query = graphql`
       nodes {
         id
         image {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 400
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+              )
             }
           }
         }

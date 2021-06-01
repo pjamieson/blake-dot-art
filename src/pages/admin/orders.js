@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import { MDBBtn, MDBCard, MDBCardBody, MDBCollapse, MDBCollapseHeader, MDBContainer, MDBDataTableV5, MDBIcon, MDBInput } from "mdbreact"
 
 import Layout from "../../components/layout"
-import SEO from "../../components/seo"
+import Seo from "../../components/seo"
 
 import { formatPrice } from "../../utils/format"
 
@@ -226,7 +226,7 @@ const OrdersReportPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Admin - Orders" />
+      <Seo title="Admin - Orders" />
       <div className="container page-container">
         { (pageProtected) &&
           <div className="card protected-card">

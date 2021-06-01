@@ -2,8 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../../components/layout"
-import SEO from "../../components/seo"
-import CardImageLinkTitle from "../../components/card-image-link-title"
+import Seo from "../../components/seo"
+import CardImageCaptionLink from "../../components/card-image-caption-link"
 
 const MysteryBoxesGalleryPage = ({ data }) => {
   const {
@@ -12,14 +12,14 @@ const MysteryBoxesGalleryPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Mystery Boxes Gallery" />
+      <Seo title="Mystery Boxes Gallery" />
       <div className="container page-container">
         <h1>Gallery - Mystery Boxes</h1>
         <section className="gallery">
           <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
-            {paintings.map(card => {
-              return <div key={card.identifier}>
-                {card.image && <CardImageLinkTitle card={card} /> }
+          {paintings.map(painting => {
+            return <div key={painting.identifier}>
+              {painting.image && <CardImageCaptionLink item={painting} caption_format="Gallery" /> }
               </div>
             })}
           </div>
@@ -50,9 +50,13 @@ export const query = graphql`
         subtitle
         price
         image {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 600
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+              )
             }
           }
         }

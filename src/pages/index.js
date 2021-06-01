@@ -2,9 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import Jumbotron from "../components/jumbotron"
-import CardImagelink from "../components/card-image-link"
+import FeaturedImagelink from "../components/featured-image-link"
 
 //import blake from "../images/BlakeCrownMask.jpg"
 
@@ -17,7 +17,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <Seo title="Home" />
       <div className="container">
         <Jumbotron />
         <div className="container front-content">
@@ -46,17 +46,17 @@ const IndexPage = ({ data }) => {
             <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
               {tradingcards.map(tradingcard => {
                 return <div key={tradingcard.identifier}>
-                  <CardImagelink card={tradingcard} />
+                  <FeaturedImagelink item={tradingcard} />
                 </div>
               })}
               {products.map(product => {
                 return <div key={product.identifier}>
-                  <CardImagelink card={product} />
+                  <FeaturedImagelink item={product} />
                 </div>
               })}
-              {paintings.map(card => {
-                return <div key={card.identifier}>
-                  {card.image && <CardImagelink card={card} />}
+              {paintings.map(painting => {
+                return <div key={painting.identifier}>
+                  {painting.image && <FeaturedImagelink item={painting} />}
                 </div>
               })}
             </div>
@@ -76,6 +76,7 @@ export const query = graphql`
     ) {
       nodes {
         identifier
+        title
         project_2020_player {
           name
         }
@@ -86,9 +87,13 @@ export const query = graphql`
           name
         }
         image {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 400
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+              )
             }
           }
         }
@@ -101,6 +106,7 @@ export const query = graphql`
     ) {
       nodes {
         identifier
+        title: name
         product_category {
           name
           slug
@@ -108,9 +114,11 @@ export const query = graphql`
         images {
           localFile {
             childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid
-              }
+              gatsbyImageData(
+                width: 400
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+              )
             }
           }
         }
@@ -126,6 +134,7 @@ export const query = graphql`
     ) {
       nodes {
         identifier
+        title
         subgenre {
           name
           slug
@@ -134,9 +143,13 @@ export const query = graphql`
           name
         }
         image {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 400
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+              )
             }
           }
         }

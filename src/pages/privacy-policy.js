@@ -3,12 +3,12 @@ import React from 'react';
 import { MDBCard, MDBCardBody } from "mdbreact"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 const PrivacyPolicyPage = () => {
   return (
     <Layout>
-      <SEO title="Privacy Policy" />
+      <Seo title="Privacy Policy" />
         <div className="container page-container team">
           <h1 className="page-head">Privacy Policy</h1>
           <MDBCard>

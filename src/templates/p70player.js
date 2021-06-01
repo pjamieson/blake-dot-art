@@ -3,15 +3,13 @@ import { graphql } from "gatsby"
 import { MDBBtn, MDBInput } from "mdbreact"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
-import CardTopps from "../components/card-topps"
+import Seo from "../components/seo"
+import CardImageCaptionLink from "../components/card-image-caption-link"
 
 const ToppsProject70PlayerPage = ({data}) => {
   const {
     allStrapiTradingcard: { nodes: p70cards }
   } = data
-
-  const series = "project70"
 
   const playerName = p70cards[0].project_70_player.name
 
@@ -45,12 +43,12 @@ const ToppsProject70PlayerPage = ({data}) => {
 
   return (
     <Layout>
-      <SEO title={pageTitle} />
+      <Seo title={pageTitle} />
       <div className="container page-container">
         <h1 className="page-head">{p70cards[0].title}</h1>
         <h2 className="player-subhead">Topps Project 70 Cards by Blake Jamieson</h2>
         <section className="topps">
-          <article className="content-container">
+          <article className="content-container gallery">
             { (playerProtected && protectPlayerName === playerName) &&
               <div className="card protected-card">
                 <h5 className="card-header primary-color white-text text-center py-4">
@@ -71,11 +69,11 @@ const ToppsProject70PlayerPage = ({data}) => {
               </div>
             }
             { (!playerProtected || protectPlayerName !== playerName) &&
-              <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
+              <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-4@m" uk-grid="masonry: true">
                 {p70cards.map((card) => {
                   return (
-                    <div className="p2020" key={card.identifier}>
-                      <CardTopps card={card} series={series} />
+                    <div key={card.identifier}>
+                      <CardImageCaptionLink item={card} caption_format="Card" />
                     </div>
                   )
                 })}
@@ -101,9 +99,13 @@ query GetP70PlayerTradingcards($name: String) {
         name
       }
       image {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
+        localFile {
+          childImageSharp {
+            gatsbyImageData(
+              width: 600
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+            )
           }
         }
       }

@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { MDBCard, MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 import addToMailchimp from 'gatsby-plugin-mailchimp'
 
@@ -49,7 +49,7 @@ const SubscribePage = () => {
 
   return (
     <Layout>
-      <SEO title="Subscribe" />
+      <Seo title="Subscribe" />
       <MDBContainer className="page-container subscribe">
         <h1 className="page-head">Mailing List</h1>
         <MDBCard className="banner">

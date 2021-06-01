@@ -3,16 +3,14 @@ import { graphql } from "gatsby"
 import { MDBBtn, MDBInput } from "mdbreact"
 
 import Layout from "../../components/layout"
-import SEO from "../../components/seo"
-import CardTopps from "../../components/card-topps"
+import Seo from "../../components/seo"
+import CardImageCaptionLink from "../../components/card-image-caption-link"
 
 const ToppsProject2020Page = ({ location, data }) => {
   const {
     allStrapiProject2020Player: { nodes: players },
     allStrapiTradingcard: { nodes: p2020cards }
   } = data
-
-  const series = "project2020"
 
   const [password, setPassword] = useState('')
 
@@ -22,7 +20,7 @@ const ToppsProject2020Page = ({ location, data }) => {
   const [playerProtected, setPlayerProtected] = useState(false)
 
   // If passed a player, open to that player. Otherwise open first player on list.
-  const [value, setValue] = React.useState(location.state && location.state.player ?
+  const [ndx, setNdx] = useState(location.state && location.state.player ?
     players.findIndex(s => s.name === location.state.player) : 0)
 
   const valid = () => {
@@ -44,9 +42,11 @@ const ToppsProject2020Page = ({ location, data }) => {
     }
   }
 
+  const seo_description = "Illustrates artist-autographed Topps Project 2020 baseball cards by Blake Jamieson offered for sale, sorted by player."
+
   return (
     <Layout>
-      <SEO title="Topps Project 2020 Cards" />
+      <Seo title="Topps Project 2020 Cards" description={seo_description} />
       <div className="container page-container">
         <h1 className="page-head">Topps Project 2020 Cards by Blake Jamieson</h1>
         <section className="topps">
@@ -56,14 +56,14 @@ const ToppsProject2020Page = ({ location, data }) => {
             {players.map((player, index) => {
               return (
                 <div key={index}>
-                  <button className={`std-btn ${index === value && "active-btn"}`} onClick={() => setValue(index)}>{player.name}</button>
+                  <button className={`std-btn ${index === ndx && "active-btn"}`} onClick={() => setNdx(index)}>{player.name}</button>
                 </div>
               )
             })}
           </div>
-{/*console.log("protectPlayerIndex, value", protectPlayerIndex, value)*/}
-          <article className="content-container">
-            { (protectPlayerIndex === value && playerProtected) &&
+          {/*console.log("protectPlayerIndex, ndx", protectPlayerIndex, ndx)*/}
+          <article className="content-container gallery">
+            { (protectPlayerIndex === ndx && playerProtected) &&
               <div className="card protected-card">
                 <h5 className="card-header primary-color white-text text-center py-4">
                   <strong>Password-Protected Autograph Editions</strong>
@@ -82,13 +82,13 @@ const ToppsProject2020Page = ({ location, data }) => {
                 </div>
               </div>
             }
-            { (!playerProtected || protectPlayerIndex !== value) &&
+            { (!playerProtected || protectPlayerIndex !== ndx) &&
               <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
                 {p2020cards.map((card) => {
                   return (
-                    card.project_2020_player && card.project_2020_player.name === players[value].name ?
-                     <div className="p2020" key={card.identifier}>
-                      <CardTopps card={card} series={series} /></div> : null
+                    card.project_2020_player && card.project_2020_player.name === players[ndx].name ?
+                     <div key={card.identifier}>
+                      <CardImageCaptionLink item={card} caption_format="Card" /></div> : null
                   )
                 })}
               </div>
@@ -126,9 +126,13 @@ export const query = graphql`
           name
         }
         image {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 400
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+              )
             }
           }
         }

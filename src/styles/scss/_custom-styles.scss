@@ -513,24 +513,33 @@ p {
   cursor: pointer;
 }
 
-.gallery, .p2020 {
+.gallery {
   .card {
+    .btn-sold {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: .5rem 1rem;
+      cursor: default;
+    }
     .btn-action {
       position: absolute;
       right: 0;
-    }
-  }
-}
-
-.gallery {
-  .card {
-    .btn-action {
       margin-top: -1.5rem; // adjusts vertical position
     }
     .card-body {
       padding: .8rem ;
-      h3, h4 {
+      h3, h4, h5 {
         margin: 0;
+        text-align: center;
+      }
+      .card-title, .card-subtitle {
+        padding-bottom: .25rem;
+        line-height: 1.2;
+      }
+      .card-title {
+        padding-top: .6rem;
+        line-height: 1.2;
       }
       .card-subtitle {
         color: $secondary-color;
@@ -542,57 +551,9 @@ p {
   }
 }
 
-.p2020 {
-  margin-bottom: 1rem;
-  .card {
-    padding-bottom: .5rem;
-    height: 100%;
-    .btn-sold {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      padding: .5rem 1rem;
-      cursor: default;
-    }
-    .btn-action {
-      margin-top: -3rem; // adjusts vertical position
-    }
-    .card-body {
-      text-align: center;
-      padding: 0 .5rem;
-      margin: 0;
-      h4 {
-        padding: 0;
-        margin: -.2rem 0 0 0;
-        line-height: 1.2;
-      }
-      h5 {
-        padding: 0;
-        margin: .25rem 0;
-        line-height: 1.2;
-      }
-      p {
-        margin: .25rem 0;
-        line-height: 1.2;
-      }
-    }
-  }
-}
 .protected-card {
   width: 50%;
   margin: 2rem auto;
-}
-
-.buy-or-inquire {
-  .carousel {
-    margin: -7px -1rem 3rem -1rem;
-    .controls-top {
-      margin-bottom: 0;
-    }
-    .carousel-indicators li {
-      margin-bottom: -1rem;
-    }
-  }
 }
 
 .painting-detail {
@@ -613,17 +574,19 @@ p {
   font-weight: bold;
 }
 
-.painting-details,
-.p2020-card-details {
+.item-details {
   height: 100%;
   p {
     margin: 0 0 .8rem 0;
     line-height: 1.25;
   }
-  .back-btn {
+  .back-btn, back-btn-card {
     position: absolute;
     bottom: -1.5em;
     left: -5px;
+  }
+  .back-btn-card {
+    bottom: .5em;
   }
   .card-details {
     padding: 1rem 1rem 0 1rem;
@@ -660,26 +623,6 @@ p {
       padding-top: 1rem;
       .btn-inquire {
         margin-left: 0;
-      }
-    }
-  }
-}
-.painting-details {
-  .carousel {
-    margin-top: 1em;;
-    .controls-top {
-      margin-bottom: .25rem;
-    }
-    .carousel-inner {
-      padding: 0;
-      .carousel-indicators {
-        margin-bottom: 0;
-      }
-    }
-    .row {
-      .col-md-6 {
-        padding-right: 6px;
-        padding-left: 6px;
       }
     }
   }
@@ -1173,5 +1116,17 @@ footer.blake-footer {
   table.table td:nth-of-type(10) {
     min-width: 260px !important;
     max-width: 260px !important;
+  }
+}
+
+.img-hover-zoom {
+  transition: transform .25s ease;
+  margin: 2px;
+  a {
+    padding: 0;
+    margin: -2px -2px -8px -2px;
+  }
+  &:hover {
+    transform: scale(1.05);
   }
 }

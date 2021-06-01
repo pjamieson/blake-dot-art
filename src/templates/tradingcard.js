@@ -1,6 +1,8 @@
+// Template for Tradingcard detail pages - created in gatsby-node.js
+
 import React, { useContext, useState, useEffect } from "react"
 import { Helmet } from "react-helmet"
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 import { Link, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown";
 
@@ -9,7 +11,7 @@ import { MDBBadge } from "mdbreact"
 import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 import { getCardQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
@@ -25,7 +27,7 @@ const Tradingcard = ({
       title,
       subtitle = {},
       limitation = {},
-      image: { childImageSharp: { fluid }, internal: { file } },
+      image,
       description = {},
       details = {},
       qty: qtyAvail,
@@ -35,18 +37,30 @@ const Tradingcard = ({
 }) => {
   const { isInCart, addToCart } = useContext(CartContext)
 
+  let series = ""
+  if (project_2020_player) series = `project2020`
+  if (topps_1951_player) series = `1951`
+  if (project_70_player) series = `project70`
+
+  let player = ""
+  if (project_2020_player) player = project_2020_player.name
+  if (topps_1951_player) player = topps_1951_player.name
+  if (project_70_player) player = project_70_player.name
+
   const itemType = "tradingcard"
   const qty = 1 //initialize with 1 of item
+  const item_slug = `/topps/${series}/${identifier}/`
   const cartItem = {
     itemType,
     id,
     identifier,
     title,
     subtitle,
-    fluid,
+    image,
     qty,
     qtyAvail,
-    price
+    price,
+    item_slug
   }
   const [inCart, setInCart] = useState(isInCart(cartItem))
   const [processing, setProcessing] = useState(false)
@@ -68,30 +82,20 @@ const Tradingcard = ({
     setInCart(false)
   }
 
-  let series = ""
-  if (project_2020_player) series = `project2020`
-  if (topps_1951_player) series = `1951`
-  if (project_70_player) series = `project2020`
-
-  let player = ""
-  if (project_2020_player) player = project_2020_player.name
-  if (topps_1951_player) player = topps_1951_player.name
-  if (project_70_player) player = project_70_player.name
-
   // Schema.org calculated values
   const productTitle = `${title} : Artist-Autographed Card`
 
-  const productUrl = `https://blake.art/topps/${series}/${identifier}`
+  const productUrl = `https://blake.art${item_slug}`
 
   //console.log("tradingcard.js file", file)
-  const productImageUrl = file.substring(6, file.length - 1)
+  const productImageUrl = image.url
   //console.log("tradingcard.js productImageUrl", productImageUrl)
 
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
 
   return (
     <Layout>
-      <SEO title={title} />
+      <Seo title={title} />
 
       <Helmet>
         <script type="application/ld+json">
@@ -122,15 +126,13 @@ const Tradingcard = ({
       </Helmet>
 
       <div className="container page-container">
-        <article className="p2020-card-details">
+        <article className="item-details">
           <h1>{title} : Artist-Autographed Card</h1>
           <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
             <div>
               <div className="card" key={id}>
-                <div className="view overlay">
-                  <Img className="card card-img-top" fluid={fluid} alt={title} />
-                </div>
-                <div className="back-btn">
+                <GatsbyImage className="img-fluid rounded" image={image.localFile.childImageSharp.gatsbyImageData} alt={title} />
+                <div className="back-btn-card">
                   <Link to={`/topps/${series}/`} state={{ player: player }} className="btn-floating btn-action btn-danger">
                     <i className="fas fa-chevron-left"></i>
                   </Link>
@@ -193,7 +195,8 @@ export default Tradingcard
 
 export const query = graphql`
   query GetSingleTradingcard($slug: String) {
-    tradingcard: strapiTradingcard(identifier: {eq: $slug}) {
+    tradingcard: strapiTradingcard(
+      identifier: {eq: $slug}) {
       id: strapiId
       identifier
       project_2020_player {
@@ -209,14 +212,16 @@ export const query = graphql`
       subtitle
       limitation
       image {
-        internal {
-          file: description
-        }
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
+        localFile {
+          childImageSharp {
+            gatsbyImageData(
+              width: 600
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+            )
           }
         }
+        url
       }
       description
       details

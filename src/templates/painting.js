@@ -1,6 +1,8 @@
+// Template for Painting detail pages - created in gatsby-node.js
+
 import React, { useState, useContext, useEffect } from "react"
 import { Helmet } from "react-helmet"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Link, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown";
 
@@ -9,20 +11,20 @@ import { MDBBadge } from "mdbreact"
 import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import ImageSet from "../components/image-set"
 
 import { getPaintingQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
 
-const Painting = ({
+const PaintingPage = ({
   data: {
     painting: {
       id,
       identifier,
       title,
       subtitle,
-      image: { childImageSharp: { fluid }, internal: { file } },
+      image,
       images = {},
       subgenre,
       sport = {},
@@ -39,36 +41,40 @@ const Painting = ({
 }) => {
   const { isInCart, addToCart } = useContext(CartContext)
 
+  //console.log("painting.js images", images)
+  let imageset = []
+  let key = 0
+  images.forEach(img => {
+    imageset.push({
+      key,
+      title,
+      "url": img.url,
+      "gatsbyImage": getImage(img.localFile.childImageSharp.gatsbyImageData)
+    })
+    key = key + 1
+  })
+  //console.log("painting.js imageset", imageset)
+
   const itemType = "painting"
   const subt = subtitle ? subtitle : "A Blake Jamieson Original"
   const qty = 1 //initialize with 1 of item
+  const item_slug = `/gallery/${subgenre.slug}/${slug}/`
   const cartItem = {
     itemType,
     id,
     identifier,
     title,
     subtitle: subt,
-    fluid,
+    image,
+    url: image.url,
     qty,
     qtyAvail,
-    price
+    price,
+    item_slug
   }
   const [inCart, setInCart] = useState(isInCart(cartItem))
   const [processing, setProcessing] = useState(false)
 
-  let imageset = []
-  let imagendx = 0
-  images.forEach(img => {
-    imageset.push(
-      {
-        "key": imagendx,
-        "title": title,
-        "fluid": img.localFile.childImageSharp.fluid
-      }
-    )
-    imagendx = imagendx + 1
-  })
-  //console.log("painting.js imageset", imageset)
 
   // On loading page, confirm painting is still available
   const [qtyAvailNow, setQtyAvailNow] = useState(1) // one available by default
@@ -87,20 +93,23 @@ const Painting = ({
     setInCart(false)
   }
 
+  const seo_description = `Images of and details about the original painting “${title}” by Blake Jamieson.`
+  //console.log("painting.js seo_description", seo_description)
+
   // Schema.org calculated values
-  const productUrl = `https://blake.art/gallery/${subgenre.slug}/${slug}`
+  const productUrl = `https://blake.art${item_slug}`
   //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${slug}`
   //console.log("productUrl", productUrl)
 
   //console.log("painting.js file", file)
-  const productImageUrl = file.substring(6, file.length - 1)
+  const productImageUrl = image.url
   //console.log("painting.js productImageUrl", productImageUrl)
 
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
 
   return (
     <Layout>
-      <SEO title={title} />
+      <Seo title={title} description={seo_description} />
 
       <Helmet>
         <script type="application/ld+json">
@@ -131,13 +140,13 @@ const Painting = ({
       </Helmet>
 
       <div className="container page-container">
-        <article className="painting-details">
+        <article className="item-details">
           <h1>{title}</h1>
           <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
 
             <div>
-              <div className="view overlay">
-                <Img className="card card-img-top" fluid={fluid} alt={title} />
+              <div className="">
+                <GatsbyImage className="img-fluid rounded" image={getImage(image.localFile.childImageSharp.gatsbyImageData)} alt={title} />
               </div>
 
               { (imageset.length > 0) &&
@@ -227,7 +236,7 @@ const Painting = ({
   )
 }
 
-export default Painting
+export default PaintingPage
 
 export const query = graphql`
   query GetSinglePainting($slug: String) {
@@ -237,21 +246,24 @@ export const query = graphql`
       title
       subtitle
       image {
-        internal {
-          file: description
-        }
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
+        localFile {
+          childImageSharp {
+            gatsbyImageData(
+              width: 600
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+            )
           }
         }
       }
       images {
         localFile {
           childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
-            }
+            gatsbyImageData(
+              width: 600
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+            )
           }
         }
       }

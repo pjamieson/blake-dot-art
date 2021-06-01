@@ -6,6 +6,7 @@ import { MDBBtn, MDBCol, MDBIcon, MDBJumbotron, MDBRow } from "mdbreact"
 import { FaYoutube } from "react-icons/fa"
 
 const Jumbotron = () => {
+  const player = "Buster Posey" // used by Project70 link button
   return (
     <MDBJumbotron style={{ padding: 0 }}>
       <MDBCol className="bg-img text-center">
@@ -41,9 +42,9 @@ const Jumbotron = () => {
             </div>
           </div>
           <div className="featured-link">
-            <Link to="/topps/1951">
+            <Link to="/topps/project70/" state={{ player: player }}>
               <MDBBtn color="secondary">
-                Topps 1951 Cards
+                Topps Project70 Cards
                 <MDBIcon icon="caret-right" className="ml-2" />
               </MDBBtn>
             </Link>

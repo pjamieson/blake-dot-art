@@ -1,10 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import ReactMarkdown from "react-markdown";
 
 import Layout from "../../components/layout"
-import SEO from "../../components/seo"
+import Seo from "../../components/seo"
 
 const PressPage = ({ data }) => {
   const {
@@ -15,7 +15,7 @@ const PressPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Press" />
+      <Seo title="Press" />
       <div className="container page-container press">
         <h1 className="page-head">Press</h1>
         <section className="members">
@@ -24,7 +24,7 @@ const PressPage = ({ data }) => {
               return <div className="card team-card" key={articleIndex++}>
                 { (articleIndex % 2 === 1) &&
                   <div className="img-container">
-                    <Img fluid={article.image.childImageSharp.fluid} className="card" />
+                    <GatsbyImage className="img-fluid rounded" image={getImage(article.image.localFile.childImageSharp.gatsbyImageData)} alt="Artist photo from article" />
                     { article.image_credit && <p>{article.image_credit}</p> }
                   </div>
                 }
@@ -49,7 +49,7 @@ const PressPage = ({ data }) => {
                 </div>
                 { (articleIndex % 2 === 0) &&
                   <div className="img-container alt">
-                    <Img fluid={article.image.childImageSharp.fluid} className="card" />
+                    <GatsbyImage className="img-fluid rounded" image={getImage(article.image.localFile.childImageSharp.gatsbyImageData)} alt="Artist photo from article" />
                     { article.image_credit && <p>{article.image_credit}</p> }
                   </div>
                 }
@@ -74,9 +74,13 @@ export const query = graphql`
         headline
         tease
         image {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 600
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+              )
             }
           }
         }

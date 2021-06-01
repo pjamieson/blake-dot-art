@@ -3,8 +3,8 @@ import { graphql } from "gatsby"
 import { MDBBtn, MDBInput } from "mdbreact"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
-import CardProduct from "../components/card-product"
+import Seo from "../components/seo"
+import CardImageCaptionLink from "../components/card-image-caption-link"
 
 const ProductCategoryPage = ({data}) => {
   const {
@@ -44,7 +44,7 @@ const ProductCategoryPage = ({data}) => {
 
   return (
     <Layout>
-      <SEO title={pageTitle} />
+      <Seo title={pageTitle} />
       <div className="container page-container">
         <h1 className="page-head">{categoryName}</h1>
         <section className="topps">
@@ -72,8 +72,8 @@ const ProductCategoryPage = ({data}) => {
               <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
                 {products.map((product) => {
                   return (
-                    <div className="p2020" key={product.identifier}>
-                      <CardProduct product={product} category={categorySlug} />
+                    <div key={product.identifier}>
+                      <CardImageCaptionLink item={product} caption_format="Product" />
                     </div>
                   )
                 })}

@@ -1,11 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import ReactMarkdown from "react-markdown";
 import { FaTwitter } from "react-icons/fa"
 
 import Layout from "../../components/layout"
-import SEO from "../../components/seo"
+import Seo from "../../components/seo"
 
 const TeamPage = ({ data }) => {
   const {
@@ -15,14 +15,14 @@ const TeamPage = ({ data }) => {
   return (
     <Layout>
       <div className="container page-container team">
-        <SEO title="Team" />
+        <Seo title="Team" />
         <h1 className="page-head">#TeamBlake</h1>
         <section className="members">
           <article className="content-container">
             {members.map(member => {
               return <div className="card team-card" key={member.id}>
                 <div className="img-container">
-                  <Img fluid={member.image.childImageSharp.fluid} className="card" />
+                  <GatsbyImage className="img-fluid rounded" image={getImage(member.image.localFile.childImageSharp.gatsbyImageData)} alt="Artist photo from article" />
                   { member.image_credit && <p>{member.image_credit}</p> }
                 </div>
                 <div>
@@ -55,9 +55,13 @@ export const query = graphql`
         id
         name
         image {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 600
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+              )
             }
           }
         }

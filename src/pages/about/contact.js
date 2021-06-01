@@ -4,7 +4,7 @@ import { navigate } from "gatsby"
 import { MDBCard, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput } from "mdbreact";
 
 import Layout from "../../components/layout"
-import SEO from "../../components/seo"
+import Seo from "../../components/seo"
 
 const ContactPage = () => {
 
@@ -81,7 +81,7 @@ const ContactPage = () => {
 
   return (
   <Layout>
-    <SEO title="Contact Us" />
+    <Seo title="Contact Us" />
     <MDBContainer className="page-container contact">
       <h1 className="page-head">Contact Us</h1>
 

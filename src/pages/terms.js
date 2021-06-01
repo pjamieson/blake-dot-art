@@ -3,12 +3,12 @@ import React from 'react';
 import { MDBCard, MDBCardBody } from "mdbreact"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 const TermsPage = () => {
   return (
     <Layout>
-      <SEO title="Terms and Conditions" />
+      <Seo title="Terms and Conditions" />
         <div className="container page-container team">
           <h1 className="page-head">Terms and Conditions</h1>
           <MDBCard>

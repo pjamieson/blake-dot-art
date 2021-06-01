@@ -1,22 +1,22 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { Link, navigate } from "gatsby"
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 import { CartContext } from "../context/cart-context"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 import {
-  MDBContainer,
-  MDBRow,
+  MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBBtn,
+  MDBContainer,
+  MDBIcon,
+  MDBRow,
   MDBTable,
   MDBTableBody,
-  MDBTableHead,
-  MDBIcon
+  MDBTableHead
 } from 'mdbreact';
 
 import {
@@ -85,7 +85,7 @@ const CartPage = () => {
 
   return (
     <Layout>
-      <SEO title="Cart" />
+      <Seo title="Cart" />
       <div className="container page-container">
         <MDBContainer className="cart">
           <h1 className="page-head">Cart</h1>
@@ -109,7 +109,11 @@ const CartPage = () => {
                       {cart.map(item => {
                         return <tr key={item.identifier}>
                           <td className="img-cell">
-                            <Img className="cart-image" fluid={item.fluid} alt={item.title}/>
+                            <div className="img-hover-zoom">
+                              <a href={`${item.item_slug}`}>
+                                <GatsbyImage className="img-fluid rounded" image={item.image.localFile.childImageSharp.gatsbyImageData} alt={item.title} />
+                              </a>
+                            </div>
                           </td>
                           <td className="item-cell">
                             <div className="cart-item">

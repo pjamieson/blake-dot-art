@@ -30,6 +30,7 @@ module.exports = {
         endpoint: 'https://blakejamieson.us5.list-manage.com/subscribe/post?u=063627aa25e9155fc458edccb&id=d3c4f161f3',
       },
     },
+    "gatsby-plugin-image",
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -55,12 +56,21 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
+      __key: "images",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "pages",
+        path: "./src/pages/",
+      },
+      __key: "pages",
     },
     {
       resolve: `gatsby-source-strapi`,
       options: {
         apiURL: `${process.env.GATSBY_STRAPI_API_URL}`,
-        contentTypes: [
+        collectionTypes: [
           `client`,
           `email`,
           `order`,
