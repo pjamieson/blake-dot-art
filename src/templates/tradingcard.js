@@ -87,8 +87,7 @@ const Tradingcard = ({
 
   const productUrl = `https://blake.art${item_slug}`
 
-  //console.log("tradingcard.js file", file)
-  const productImageUrl = image.url
+  const productImageUrl = image.localFile.url
   //console.log("tradingcard.js productImageUrl", productImageUrl)
 
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
@@ -220,8 +219,8 @@ export const query = graphql`
               formats: [AUTO, WEBP]
             )
           }
+          url
         }
-        url
       }
       description
       details

@@ -101,8 +101,7 @@ const PaintingPage = ({
   //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${slug}`
   //console.log("productUrl", productUrl)
 
-  //console.log("painting.js file", file)
-  const productImageUrl = image.url
+  const productImageUrl = image.localFile.url
   //console.log("painting.js productImageUrl", productImageUrl)
 
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
@@ -254,6 +253,7 @@ export const query = graphql`
               formats: [AUTO, WEBP]
             )
           }
+          url
         }
       }
       images {
