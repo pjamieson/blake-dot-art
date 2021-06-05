@@ -119,7 +119,7 @@ const PaintingPage = ({
             "productID": "${identifier}",
             "category": "Home & Garden > Decor > Artwork",
             "name": "${title}",
-            "description": "${subtitle}",
+            "description": "${subtitle ? subtitle : `A Blake Jamieson Original Painting`}",
             "url": "${productUrl}",
             "image": "${productImageUrl}",
             "brand":"Blake Jamieson",
