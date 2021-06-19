@@ -17,10 +17,10 @@ const ToppsProject70PlayerPage = ({data}) => {
 
   const [password, setPassword] = useState('')
 
-  const protectPlayerName = "Buster Posey"
-  const protectPassword = "buster"
+  const protectPlayerName = "Rickey Henderson"
+  const protectPassword = "oakland"
 
-  const [playerProtected, setPlayerProtected] = useState(false)
+  const [playerProtected, setPlayerProtected] = useState(true)
 
   const valid = () => {
     if (password.length > 5) {
