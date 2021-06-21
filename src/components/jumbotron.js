@@ -6,7 +6,7 @@ import { MDBBtn, MDBCol, MDBIcon, MDBJumbotron, MDBRow } from "mdbreact"
 import { FaYoutube } from "react-icons/fa"
 
 const Jumbotron = () => {
-  const player = "Buster Posey" // used by Project70 link button
+  const player = "Rickey Henderson" // used by Project70 link button
   return (
     <MDBJumbotron style={{ padding: 0 }}>
       <MDBCol className="bg-img text-center">
