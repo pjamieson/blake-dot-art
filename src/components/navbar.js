@@ -199,9 +199,12 @@ const Navbar = () => {
                 </MDBDropdownToggle>
 
                 <MDBDropdownMenu>
-                <MDBDropdownItem>
-                  <Link className="menu-link" to="/topps/project70/jarred-kelenic/">Jarred Kelenic</Link>
-                </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/project70/randy-arozarena/">Randy Arozarena</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/project70/jarred-kelenic/">Jarred Kelenic</Link>
+                  </MDBDropdownItem>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/topps/project70/rickey-henderson/">Rickey Henderson</Link>
                   </MDBDropdownItem>

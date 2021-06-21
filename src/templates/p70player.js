@@ -17,8 +17,8 @@ const ToppsProject70PlayerPage = ({data}) => {
 
   const [password, setPassword] = useState('')
 
-  const protectPlayerName = "Rickey Henderson"
-  const protectPassword = "oakland"
+  const protectPlayerName = "Jarred Kelenic"
+  const protectPassword = "rookie"
 
   const [playerProtected, setPlayerProtected] = useState(true)
 

@@ -15,7 +15,7 @@ const ToppsProject70Page = ({ location, data }) => {
   const [password, setPassword] = useState('')
 
   const protectPlayerIndex = 1 // Rickey (count from most recent, starting at 0)
-  const protectPassword = "oakland"
+  const protectPassword = "rookie"
 
   const [playerProtected, setPlayerProtected] = useState(true)
 
