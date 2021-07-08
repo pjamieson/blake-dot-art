@@ -48,7 +48,7 @@ const ToppsProject70Page = ({ location, data }) => {
     <Layout>
       <Seo title="Topps Project 70 Cards" description={seo_description} />
       <div className="container page-container">
-        <h1 className="page-head">Topps Project 70 Cards by Blake Jamieson</h1>
+        <h1 className="page-head">Topps Project70 Cards by Blake Jamieson</h1>
         <section className="topps">
 
           <div className="btn-container">

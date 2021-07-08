@@ -3,7 +3,7 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Helmet } from "react-helmet"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { Link, graphql } from "gatsby"
+import { Link, navigate, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown";
 
 import { MDBBadge } from "mdbreact"
@@ -93,6 +93,8 @@ const PaintingPage = ({
     setInCart(false)
   }
 
+  const img = getImage(image.localFile.childImageSharp.gatsbyImageData)
+
   const seo_description = `Images of and details about the original painting “${title}” by Blake Jamieson.`
   //console.log("painting.js seo_description", seo_description)
 
@@ -145,7 +147,7 @@ const PaintingPage = ({
 
             <div>
               <div className="">
-                <GatsbyImage className="img-fluid rounded" image={getImage(image.localFile.childImageSharp.gatsbyImageData)} alt={title} />
+                <GatsbyImage className="img-fluid rounded" image={img} alt={title} />
               </div>
 
               { (imageset.length > 0) &&
@@ -214,15 +216,22 @@ const PaintingPage = ({
                     </div>
                   }
 
-                  { (price <= 10 && qtyAvailNow > 0) &&
-                    <div className="inquire">
-                      <button type="button" className="btn btn-inquire btn-primary btn-rounded">Inquire</button>
-                    </div>
-                  }
-
                   { (inCart && qtyAvailNow > 0) &&
                     <MDBBadge color="secondary">Added to Cart</MDBBadge>
                   }
+
+                  <div className="inquire">
+                    <button type="button" className="btn btn-inquire btn-primary btn-rounded" onClick={() => {
+                      navigate('/inquire/', {
+                        state: {
+                          title,
+                          sku: identifier,
+                          image: img
+                        }
+                      })
+                    }}>Inquire</button>
+                  </div>
+
                 </div>
 
               </div>

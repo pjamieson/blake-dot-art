@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react"
 import { navigate } from "gatsby"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 import { MDBCard, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput } from "mdbreact";
 
-import Layout from "../../components/layout"
-import Seo from "../../components/seo"
+import Layout from "../components/layout"
+import Seo from "../components/seo"
 
-const ContactPage = () => {
+const InquirePage = ({ location }) => {
+  const title = (location && location.state && location.state.title) ? location.state.title : ''
+
+  const subj = (location && location.state && location.state.title && location.state.sku) ? `${location.state.title} (${location.state.sku})` : ''
+
+  const item_img = (location && location.state && location.state.image) ? location.state.image : ''
 
   const [fullname, setFullname] = useState('')
   const [email, setEmail] = useState('')
-  const [subject, setSubject] = useState('')
-  const [message, setMessage] = useState('')
+  const [subject, setSubject] = useState(subj)
+  const [message, setMessage] = useState("Please tell me more about this item. Specifically, I'd like to know ")
 
   const valid = () => {
-    if (fullname.length > 3 && email.length > 10 && subject && message.length > 10) {
+    if (fullname.length > 3 && email.length > 10 && message.length > 10) {
       return true
     } else {
       return false
@@ -64,9 +70,10 @@ const ContactPage = () => {
             "cc": "patrick@iartx.com",
             "replyTo": `${email}`,
             "subject": `${subject}`,
-            "html": `<p><strong>Contact Message</p>
+            "html": `<p><strong>Item Inquiry</p>
             <p><strong>From Name: </strong>${fullname}</p>
             <p><strong>From Email: </strong>${email}</p>
+            <p><strong>Item: </strong>${subj}</p>
             <p><strong>Message: </strong>${message}</p>`
           })
         })
@@ -82,20 +89,23 @@ const ContactPage = () => {
 
   return (
   <Layout>
-    <Seo title="Contact Us" />
+    <Seo title="Inquire" />
     <MDBContainer className="page-container contact">
-      <h1 className="page-head">Contact Us</h1>
+      <h1 className="page-head">Inquire</h1>
 
       <MDBCard className="banner">
-        <h2 className="text-center mx-auto pt-3">
-          Thoughts? Comment? Suggestion? Request?
-        </h2>
+        <h2 className="text-center mx-auto pt-3">{title}</h2>
         <h3 className="text-center w-responsive mx-auto pb-3">
-          Don't keep it to yourself. We'd love to hear from you!
+          Let us know what you'd like to know....
         </h3>
       </MDBCard>
 
       <MDBRow>
+        <MDBCol md="4" className="text-center">
+          <MDBCard>
+            <GatsbyImage className="img-fluid rounded" image={item_img} alt={title} />
+          </MDBCard>
+        </MDBCol>
         <MDBCol md="8" className="md-0 mb-5">
           <MDBCard>
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -136,32 +146,6 @@ const ContactPage = () => {
 
           </MDBCard>
         </MDBCol>
-        <MDBCol md="4" className="text-center">
-          <MDBCard>
-          <ul className="list-unstyled mb-0">
-            <li>
-              <div className="btn-floating">
-                <MDBIcon icon="map-marker-alt" />
-              </div>
-              <p className="contact-info">Brooklyn, NY 11201, USA</p>
-            </li>
-            {/*
-            <li>
-              <div className="btn-floating">
-                <MDBIcon icon="phone" />
-              </div>
-              <p className="contact-info">+ 01 234 567 89</p>
-            </li>
-            */}
-            <li>
-              <div className="btn-floating">
-                <MDBIcon icon="envelope" />
-              </div>
-              <p className="contact-info">contact@blake.art</p>
-            </li>
-          </ul>
-          </MDBCard>
-        </MDBCol>
       </MDBRow>
 
     </MDBContainer>
@@ -169,4 +153,4 @@ const ContactPage = () => {
 )
 }
 
-export default ContactPage
+export default InquirePage
