@@ -203,7 +203,7 @@ const Navbar = () => {
                   <Link className="menu-link" to="/topps/project70/kris-bryant/">Kris Bryant</Link>
                 </MDBDropdownItem>
                 <MDBDropdownItem>
-                  <Link className="menu-link" to="/topps/project70/brett-phillips/">Bret Phillips</Link>
+                  <Link className="menu-link" to="/topps/project70/brett-phillips/">Brett Phillips</Link>
                 </MDBDropdownItem>
                 <MDBDropdownItem>
                   <Link className="menu-link" to="/topps/project70/2021-all-star-game/">2021 All Star Game</Link>
