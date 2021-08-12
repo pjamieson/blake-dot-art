@@ -199,6 +199,18 @@ const Navbar = () => {
                 </MDBDropdownToggle>
 
                 <MDBDropdownMenu>
+                <MDBDropdownItem>
+                  <Link className="menu-link" to="/topps/project70/kris-bryant/">Kris Bryant</Link>
+                </MDBDropdownItem>
+                <MDBDropdownItem>
+                  <Link className="menu-link" to="/topps/project70/brett-phillips/">Bret Phillips</Link>
+                </MDBDropdownItem>
+                <MDBDropdownItem>
+                  <Link className="menu-link" to="/topps/project70/2021-all-star-game/">2021 All Star game</Link>
+                </MDBDropdownItem>
+                <MDBDropdownItem>
+                  <Link className="menu-link" to="/topps/project70/brooks-robinson/">Brooks Robinson</Link>
+                </MDBDropdownItem>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/topps/project70/randy-arozarena/">Randy Arozarena</Link>
                   </MDBDropdownItem>
