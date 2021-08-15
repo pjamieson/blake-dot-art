@@ -20,7 +20,7 @@ const ToppsProject70PlayerPage = ({data}) => {
   const protectPlayerName = "Jarred Kelenic"
   const protectPassword = "rookie"
 
-  const [playerProtected, setPlayerProtected] = useState(true)
+  const [playerProtected, setPlayerProtected] = useState(false)
 
   const valid = () => {
     if (password.length > 5) {
