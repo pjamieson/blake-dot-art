@@ -34,8 +34,6 @@
 
 // CORE
 @import "core/mixins";
-// Your custom variables
-@import "custom-variables";
 @import "core/colors";
 @import "core/variables";
 @import "core/global";
@@ -72,6 +70,9 @@
 @import "addons/hierarchical-display";
 @import "addons/flags";
 @import "addons/rating";
+
+// Your custom variables
+@import "custom-variables";
 
 // Your custom styles
 @import "custom-styles";
