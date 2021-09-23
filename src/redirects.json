@@ -1,0 +1,13 @@
+// redirects.json
+// Accessed from gatsby-node.js
+
+[
+	{
+		 "fromPath": "/gallery/athlete-portraits/2020-nolan-ryan-1969/",
+		 "toPath": "/portfolio/athlete-portraits/2020-nolan-ryan-1969/"
+	},
+	{
+		 "fromPath": "/topps2020/*",
+		 "toPath": "/topps/project2020/"
+	},
+]

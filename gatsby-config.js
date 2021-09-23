@@ -19,6 +19,7 @@ module.exports = {
         pixelId: "346895069791060",
       },
     },
+    `gatsby-plugin-gatsby-cloud`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
