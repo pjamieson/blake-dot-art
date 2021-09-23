@@ -15,8 +15,13 @@
      "isPermanent": true
 	},
 	{
-		 "fromPath": "/gallery/mystery-boxes/mystery-box-001/",
+		 "fromPath": "/gallery/mystery-boxes/*",
 		 "toPath": "/gallery/mystery-boxes/",
      "isPermanent": true
+	},
+  {
+		 "fromPath": "/*",
+		 "toPath": "/index.html",
+     "statusCode": 404
 	}
 ]
