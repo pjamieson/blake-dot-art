@@ -6,5 +6,5 @@
 	{
 		 "fromPath": "/topps2020/*",
 		 "toPath": "/topps/project2020/"
-	},
+	}
 ]
