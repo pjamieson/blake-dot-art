@@ -1,10 +1,22 @@
 [
 	{
 		 "fromPath": "/gallery/athlete-portraits/2020-nolan-ryan-1969/",
-		 "toPath": "/portfolio/athlete-portraits/2020-nolan-ryan-1969/"
+		 "toPath": "/portfolio/athlete-portraits/2020-nolan-ryan-1969/",
+     "isPermanent": true
 	},
 	{
 		 "fromPath": "/topps2020/*",
-		 "toPath": "/topps/project2020/"
+		 "toPath": "/topps/project2020/",
+     "isPermanent": true
+	},
+  {
+		 "fromPath": "/merch/topps2020/",
+		 "toPath": "/topps/project2020/",
+     "isPermanent": true
+	},
+	{
+		 "fromPath": "/gallery/mystery-boxes/mystery-box-001/",
+		 "toPath": "/gallery/mystery-boxes/",
+     "isPermanent": true
 	}
 ]
