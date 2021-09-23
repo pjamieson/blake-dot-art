@@ -1,6 +1,3 @@
-// redirects.json
-// Accessed from gatsby-node.js
-
 [
 	{
 		 "fromPath": "/gallery/athlete-portraits/2020-nolan-ryan-1969/",
