@@ -20,7 +20,6 @@ function SEO({ title, description, lang, meta }) {
             image
             siteDesc: description
             siteTitle: title
-            siteThemeColor: theme_color
             siteUrl
             twitterUsername
           }
