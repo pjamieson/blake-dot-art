@@ -6,7 +6,7 @@ import { MDBBtn, MDBCol, MDBIcon, MDBJumbotron, MDBRow } from "mdbreact"
 import { FaYoutube } from "react-icons/fa"
 
 const Jumbotron = () => {
-  const player = "Rickey Henderson" // used by Project70 link button
+  const player = "Joey Votto" // used by Project70 link button
   return (
     <MDBJumbotron style={{ padding: 0 }}>
       <MDBCol className="bg-img text-center">
@@ -38,7 +38,9 @@ const Jumbotron = () => {
             </a>
             <div className="pitch">
               <h4>Subscribe to my YouTube Channel</h4>
-              <p>Live Streams Mon, Wed & Fri at 10:23pm Eastern</p>
+              { false &&
+                <p>Live Streams Mon, Wed & Fri at 10:23pm Eastern</p>
+              }
             </div>
           </div>
           <div className="featured-link">
