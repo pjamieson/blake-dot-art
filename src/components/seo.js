@@ -69,7 +69,7 @@ function SEO({ title, description, lang, meta }) {
         },
         {
           name: `theme-color`,
-          content: site.siteMetadata.siteThemeColor,
+          content: `#282828`,
         },
         {
           name: `image`,

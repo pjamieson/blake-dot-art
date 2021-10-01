@@ -6,7 +6,6 @@ module.exports = {
   siteMetadata: {
     title: "BLAKE.ART",
     description: "The Official Website of artist Blake Jamieson, offering original Pro Athlete Portraits and Pop Art, and autographed editions of Topps baseball cards created by the artist.",
-    theme_color: "#282828",
     author: "@patrickjamieson",
     twitterUsername: "@blakejamieson",
     image: "/static/BlakeCrownMask-95feca21dd9d7e285f52f75d8ca79c8a.jpg",
