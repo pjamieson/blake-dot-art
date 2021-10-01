@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Helmet } from "react-helmet"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -19,54 +18,51 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Seo title="Home" />
-      <Helmet>
-        <meta name="theme-color" content="#282828" />
-        <div className="container">
-          <Jumbotron />
-          <div className="container front-content">
+      <div className="container">
+        <Jumbotron />
+        <div className="container front-content">
 
-            {/*
-            <section className="intro-content">
-              <div className="image-container">
-                <img className="card" src={blake} alt="Blake wearing crown and mask" />
-              </div>
-              <h2>Welcome to blake [dot] art!</h2>
-              <h3>My name is Blake. I paint. Mostly.</h3>
-              <p className="lead dark-grey-text">
-                Scroll down for a quick look at representative examples of my work. Tap or click on an image on this page to go directly to the <strong>Portfolio</strong> or <strong>Gallery</strong> that piece comes from.
-              </p>
-              <p className="lead dark-grey-text">
-                Explore the menu links above for a more granular breakdown of my subjects and styles, with each linked page offering more examples.
-              </p>
-              <p className="lead dark-grey-text">
-                <strong><em>Please note:</em></strong> Works shown in the <strong>Portfolio</strong> section have already been sold or are not for sale. Only items shown in the <strong>Gallery</strong> and <strong>Merch</strong> sections are available for purchase.
-              </p>
-              <h3>Thanks for stopping by. Stay Awesome!</h3>
-            </section>
-            */}
+          {/*
+          <section className="intro-content">
+            <div className="image-container">
+              <img className="card" src={blake} alt="Blake wearing crown and mask" />
+            </div>
+            <h2>Welcome to blake [dot] art!</h2>
+            <h3>My name is Blake. I paint. Mostly.</h3>
+            <p className="lead dark-grey-text">
+              Scroll down for a quick look at representative examples of my work. Tap or click on an image on this page to go directly to the <strong>Portfolio</strong> or <strong>Gallery</strong> that piece comes from.
+            </p>
+            <p className="lead dark-grey-text">
+              Explore the menu links above for a more granular breakdown of my subjects and styles, with each linked page offering more examples.
+            </p>
+            <p className="lead dark-grey-text">
+              <strong><em>Please note:</em></strong> Works shown in the <strong>Portfolio</strong> section have already been sold or are not for sale. Only items shown in the <strong>Gallery</strong> and <strong>Merch</strong> sections are available for purchase.
+            </p>
+            <h3>Thanks for stopping by. Stay Awesome!</h3>
+          </section>
+          */}
 
-            <section className="gallery">
-              <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
-                {tradingcards.map(tradingcard => {
-                  return <div key={tradingcard.identifier}>
-                    <FeaturedImagelink item={tradingcard} />
-                  </div>
-                })}
-                {products.map(product => {
-                  return <div key={product.identifier}>
-                    <FeaturedImagelink item={product} />
-                  </div>
-                })}
-                {paintings.map(painting => {
-                  return <div key={painting.identifier}>
-                    {painting.image && <FeaturedImagelink item={painting} />}
-                  </div>
-                })}
-              </div>
-            </section>
-          </div>
+          <section className="gallery">
+            <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
+              {tradingcards.map(tradingcard => {
+                return <div key={tradingcard.identifier}>
+                  <FeaturedImagelink item={tradingcard} />
+                </div>
+              })}
+              {products.map(product => {
+                return <div key={product.identifier}>
+                  <FeaturedImagelink item={product} />
+                </div>
+              })}
+              {paintings.map(painting => {
+                return <div key={painting.identifier}>
+                  {painting.image && <FeaturedImagelink item={painting} />}
+                </div>
+              })}
+            </div>
+          </section>
         </div>
-      </Helmet>
+      </div>
     </Layout>
   )
 }
