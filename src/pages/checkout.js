@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import CheckoutComponent from "../components/checkout"
 
-import { MDBContainer, MDBRow } from 'mdbreact'
+import { MDBContainer, MDBRow } from "mdb-react-ui-kit"
 
 // Make sure to call `loadStripe` outside of a component’s render
 //  to avoid recreating the `Stripe` object on every render.

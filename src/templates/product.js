@@ -6,7 +6,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Link, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown";
 
-import { MDBBadge } from "mdbreact"
+import { MDBBadge } from "mdb-react-ui-kit"
 
 import { CartContext } from "../context/cart-context"
 

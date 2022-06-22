@@ -3,30 +3,32 @@ import { Link } from "gatsby"
 
 import { CartContext } from "../context/cart-context"
 
-import SocialLinks from "../constants/sociallinks"
+//import SocialLinks from "../constants/sociallinks"
 
 import {
   MDBCollapse,
+  MDBContainer,
   MDBDropdown,
   MDBDropdownItem,
   MDBDropdownMenu,
   MDBDropdownToggle,
   MDBIcon,
-  MDBNavbarNav,
+  MDBNavbar,
   MDBNavbarBrand,
-  MDBNavbarToggler,
-  MDBNavItem,
-} from "mdbreact"
+  MDBNavbarItem,
+  MDBNavbarNav,
+  MDBNavbarToggler
+} from "mdb-react-ui-kit"
 
 import logo from "../images/blake-logo-108x70-amber.png"
 
 const Navbar = () => {
   const { cart } = useContext(CartContext)
-  const [isOpen, setIsOpen] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(false)
 
   return (
-    <div className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
-      <div className="container">
+    <MDBNavbar sticky expand="md" dark bgColor="dark">
+      <MDBContainer fluid>
 
         <MDBNavbarBrand>
           <Link to="/" className="navbar-brand">
@@ -37,22 +39,31 @@ const Navbar = () => {
           </Link>
         </MDBNavbarBrand>
 
-        <MDBNavbarToggler onClick={() => setIsOpen(!isOpen)} />
+        <MDBNavbarToggler
+          aria-controls='navbarSupportedContent'
+          aria-expanded='false'
+          aria-label='Toggle navigation'
+          onClick={() => setIsCollapsed(!isCollapsed)}
+        >
+          <MDBIcon icon='bars' fas />
+        </MDBNavbarToggler>
 
-        <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
+        <MDBCollapse navbar show={isCollapsed}>
+
           <MDBNavbarNav left>
-            <MDBNavItem>
-              <SocialLinks />
-            </MDBNavItem>
+            <MDBNavbarItem>
+              {/*<SocialLinks />*/}
+            </MDBNavbarItem>
           </MDBNavbarNav>
 
-          <MDBNavbarNav className="menu-options" right>
-
-            <MDBNavItem>
+          <MDBNavbarNav right>
+          <div className="menu-items">
+            <MDBNavbarItem>
               <MDBDropdown>
-                <MDBDropdownToggle nav>
+                <MDBDropdownToggle>
                   <div className="nav-menu-item">
                     <p>PORTFOLIO</p>
+                    <p className="menu-sub "></p>
                   </div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
@@ -80,16 +91,16 @@ const Navbar = () => {
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
-            </MDBNavItem>
+            </MDBNavbarItem>
 
-            <MDBNavItem>
+            <MDBNavbarItem>
               <MDBDropdown>
-              <MDBDropdownToggle nav>
-                <div className="nav-menu-item">
-                  <p>GALLERY</p>
-                  <p className="menu-sub">(For Sale)</p>
-                </div>
-              </MDBDropdownToggle>
+                <MDBDropdownToggle>
+                  <div className="nav-menu-item">
+                    <p>GALLERY</p>
+                    <p className="menu-sub">(For Sale)</p>
+                  </div>
+                </MDBDropdownToggle>
                 <MDBDropdownMenu>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/gallery/athlete-portraits/">Athlete Portraits</Link>
@@ -114,17 +125,11 @@ const Navbar = () => {
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
-            </MDBNavItem>
+            </MDBNavbarItem>
 
-            <MDBNavItem>
-              {/*<Link className="nav-link" to="/topps/project2020/">
-                <div className="nav-menu-item">
-                  <p>TOPPS</p>
-                  <p className="menu-sub">Project 2020</p>
-                </div>
-              </Link>*/}
+            <MDBNavbarItem>
               <MDBDropdown>
-                <MDBDropdownToggle nav>
+                <MDBDropdownToggle>
                   <div className="nav-menu-item">
                     <p>TOPPS</p>
                     <p className="menu-sub">Cards & Autos</p>
@@ -142,13 +147,14 @@ const Navbar = () => {
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
-            </MDBNavItem>
+            </MDBNavbarItem>
 
-            <MDBNavItem>
+            <MDBNavbarItem>
               <MDBDropdown>
-                <MDBDropdownToggle nav>
+                <MDBDropdownToggle>
                   <div className="nav-menu-item">
                     <p>MERCH</p>
+                    <p className="menu-sub "></p>
                   </div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
@@ -163,13 +169,14 @@ const Navbar = () => {
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
-            </MDBNavItem>
+            </MDBNavbarItem>
 
-            <MDBNavItem>
+            <MDBNavbarItem>
               <MDBDropdown>
-                <MDBDropdownToggle nav>
+                <MDBDropdownToggle>
                   <div className="nav-menu-item">
                     <p>ABOUT</p>
+                    <p className="menu-sub "></p>
                   </div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
@@ -187,30 +194,28 @@ const Navbar = () => {
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
-            </MDBNavItem>
-
-            <MDBNavItem>
+            </MDBNavbarItem>
+{/*
+            <MDBNavbarItem>
               <MDBDropdown>
-
-                <MDBDropdownToggle nav>
+                <MDBDropdownToggle>
                   <div className="hidden-nav-item nav-menu-item">
                     <p>.</p>
                   </div>
                 </MDBDropdownToggle>
-
                 <MDBDropdownMenu>
-                <MDBDropdownItem>
-                  <Link className="menu-link" to="/topps/project70/kris-bryant/">Kris Bryant</Link>
-                </MDBDropdownItem>
-                <MDBDropdownItem>
-                  <Link className="menu-link" to="/topps/project70/brett-phillips/">Brett Phillips</Link>
-                </MDBDropdownItem>
-                <MDBDropdownItem>
-                  <Link className="menu-link" to="/topps/project70/2021-all-star-game/">2021 All Star Game</Link>
-                </MDBDropdownItem>
-                <MDBDropdownItem>
-                  <Link className="menu-link" to="/topps/project70/brooks-robinson/">Brooks Robinson</Link>
-                </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/project70/kris-bryant/">Kris Bryant</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/project70/brett-phillips/">Brett Phillips</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/project70/2021-all-star-game/">2021 All Star Game</Link>
+                  </MDBDropdownItem>
+                  <MDBDropdownItem>
+                    <Link className="menu-link" to="/topps/project70/brooks-robinson/">Brooks Robinson</Link>
+                  </MDBDropdownItem>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/topps/project70/randy-arozarena/">Randy Arozarena</Link>
                   </MDBDropdownItem>
@@ -229,13 +234,11 @@ const Navbar = () => {
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/topps/project70/andrew-mccutchen/">Andrew McCutchen</Link>
                   </MDBDropdownItem>
-                  {/*<MDBDropdownItem>
-                    <Link className="menu-link" to="/product/autograph/">Autos by Mail</Link>
-                  </MDBDropdownItem>*/}
                 </MDBDropdownMenu>
               </MDBDropdown>
-            </MDBNavItem>
-
+            </MDBNavbarItem>
+*/}
+          </div>
           </MDBNavbarNav>
 
         </MDBCollapse>
@@ -245,8 +248,9 @@ const Navbar = () => {
             <p className="cart-count">{cart.length}</p>
           }
         </Link>
-      </div>
-    </div>
+
+      </MDBContainer>
+    </MDBNavbar>
   )
 }
 

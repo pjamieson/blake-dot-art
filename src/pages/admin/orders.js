@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
-import { MDBBtn, MDBCard, MDBCardBody, MDBCollapse, MDBCollapseHeader, MDBContainer, MDBDataTableV5, MDBIcon, MDBInput } from "mdbreact"
+import { MDBBtn, MDBCard, MDBCardBody, MDBCollapse, MDBContainer, MDBDatatable, MDBIcon, MDBInput } from "mdb-react-ui-kit"
 
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
@@ -199,7 +199,12 @@ const OrdersReportPage = ({ data }) => {
 
   const [enteredPassword, setEnteredPassword] = useState('')
   const [pageProtected, setPageProtected] = useState(true)
-  const [collapseID, setCollapseID] = useState('')
+
+  const [showFirstElement, setShowFirstElement] = useState(false);
+  const [showSecondElement, setShowSecondElement] = useState(false);
+
+  const toggleFirstElement = () => setShowFirstElement(!showFirstElement);
+  const toggleSecondElement = () => setShowSecondElement(!showSecondElement);
 
   const valid = () => {
     if (enteredPassword.length > 8) {
@@ -218,10 +223,6 @@ const OrdersReportPage = ({ data }) => {
     } else {
       setEnteredPassword('')
     }
-  }
-
-  const handleCollapseClick = (collapseClicked) => {
-    setCollapseID(collapseClicked === collapseID ? '' : collapseClicked)
   }
 
   return (
@@ -254,15 +255,15 @@ const OrdersReportPage = ({ data }) => {
           <MDBContainer className="md-accordion mt-3">
 
             <MDBCard className="mt-3">
-              <MDBCollapseHeader tagClassName="d-flex justify-content-between" onClick={() => handleCollapseClick('collapse1')}>
+              <MDBBtn className="collapse-header" tagClassName="d-flex justify-content-between" onClick={toggleFirstElement}>
                 <h2>Orders Summary List</h2>
-                <MDBIcon icon={collapseID === 'collapse1' ? 'angle-up' : 'angle-down'} />
-              </MDBCollapseHeader>
-              <MDBCollapse id='collapse1' isOpen={collapseID}>
+                <MDBIcon icon={showFirstElement ? 'angle-up' : 'angle-down'} />
+              </MDBBtn>
+              <MDBCollapse show={showFirstElement}>
                 <MDBCardBody>
                   <section className="orders-report">
                     <article className="content-container">
-                      <MDBDataTableV5 hover scrollX data={datatable} searchTop searchBottom={false} exportToCSV proSelect />
+                      <MDBDatatable advancedData hover data={datatable} search />
                     </article>
                   </section>
                 </MDBCardBody>
@@ -270,17 +271,15 @@ const OrdersReportPage = ({ data }) => {
             </MDBCard>
 
             <MDBCard className="mt-3">
-              <MDBCollapseHeader tagClassName="d-flex justify-content-between" onClick={() => handleCollapseClick('collapse2')}>
+              <MDBBtn className="collapse-header" tagClassName="d-flex justify-content-between" onClick={toggleSecondElement}>
                 <h2>Items by Order List</h2>
-                <MDBIcon
-                icon={collapseID === 'collapse2' ? 'angle-up' : 'angle-down'}
-              />
-              </MDBCollapseHeader>
-              <MDBCollapse id='collapse2' isOpen={collapseID}>
+                <MDBIcon icon={showSecondElement ? 'angle-up' : 'angle-down'} />
+              </MDBBtn>
+              <MDBCollapse show={showSecondElement}>
                 <MDBCardBody>
                   <section className="items-report">
                     <article className="content-container">
-                      <MDBDataTableV5 hover scrollX data={datatable2} searchTop searchBottom={false} exportToCSV />
+                      <MDBDatatable advancedData hover data={datatable2} search />
                     </article>
                   </section>
                 </MDBCardBody>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { navigate } from "gatsby"
 
-import { MDBCard, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput } from "mdbreact";
+import { MDBCard, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput } from "mdb-react-ui-kit";
 
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"

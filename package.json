@@ -1,63 +1,83 @@
 {
   "name": "blake-dot-art",
+  "version": "3.0.0",
   "private": true,
   "description": "A Portfolio/Gallery website built with Gatsby",
-  "version": "2.0.2",
   "author": "Patrick Jamieson <patrick@patrickjamieson.com>",
   "dependencies": {
-    "@babel/core": "^7.15.5",
     "@popperjs/core": "^2.10.1",
     "@stripe/react-stripe-js": "1.4.1",
     "@stripe/stripe-js": "1.17.1",
-    "babel-preset-gatsby": "^1.14.0",
-    "bootstrap": "5.0.2",
-    "gatsby": "^3.14.0",
-    "gatsby-plugin-advanced-sitemap": "^2.0.0",
+    "gatsby": "^3.14.6",
+    "gatsby-plugin-advanced-sitemap": "^2.1.0",
     "gatsby-plugin-facebook-pixel": "^1.0.8",
-    "gatsby-plugin-gatsby-cloud": "^3.2.0",
     "gatsby-plugin-google-analytics": "^3.14.0",
     "gatsby-plugin-image": "^1.14.0",
     "gatsby-plugin-mailchimp": "^5.2.2",
     "gatsby-plugin-manifest": "^3.14.0",
     "gatsby-plugin-offline": "^4.14.0",
     "gatsby-plugin-react-helmet": "4.14.0",
+    "gatsby-plugin-react-helmet-canonical-urls": "^1.4.0",
     "gatsby-plugin-sass": "^4.14.0",
     "gatsby-plugin-sharp": "^3.14.0",
     "gatsby-source-filesystem": "^3.14.0",
-    "gatsby-source-strapi": "^1.0.2",
+    "gatsby-source-strapi": "^1.0.3",
     "gatsby-transformer-sharp": "^3.14.0",
-    "mdbreact": "git+https://oauth2:yayBkZHbysdtkJvvF5sK@git.mdbootstrap.com/mdb/react/re-pro.git",
+    "mdb-react-ui-kit": "./mdb-react-ui-kit-3.0.0.tgz",
     "react": "^17.0.2",
-    "react-country-region-selector": "^2.1.0",
+    "react-country-region-selector": "^3.4.0",
     "react-dom": "^17.0.2",
     "react-helmet": "6.1.0",
     "react-icons": "^4.2.0",
     "react-markdown": "^5.0.3",
-    "sass": "^1.34.0",
     "serialize-javascript": "^3.0.0"
   },
   "devDependencies": {
-    "prettier": "^2.0.5"
+    "@babel/core": "^7.15.5",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/plugin-proposal-class-properties": "7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/node": "^14.14.10",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "eslint": "^8.17.0",
+    "prettier": "^2.0.5",
+    "prop-types": "^15.8.1",
+    "sass": "^1.34.0",
+    "typescript": "^4.1.3"
   },
   "resolutions": {
     "graphql": "^15.4.0",
-    "graphql-compose": "^7.25.0"
+    "graphql-compose": "^7.25.0",
+    "webpack": "^5.24.2"
   },
-  "keywords": [
-    "gatsby"
-  ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "yarn run develop",
+    "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "clean": "gatsby clean"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/pjamieson/blake-dot-art.git"
-  }
+  },
+  "keywords": [
+    "javascript",
+    "react",
+    "gatsby",
+    "strapi",
+    "stripe",
+    "shippo",
+    "bootstrap",
+    "material-design",
+    "material-design-for-bootstrap",
+    "mdb",
+    "mdbootstrap",
+    "ui-kit"
+  ]
 }

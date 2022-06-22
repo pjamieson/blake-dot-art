@@ -13,14 +13,17 @@ const Footer = () => {
           <Link className="" to="/privacy-policy/">Privacy Policy</Link>
           <Link className="" to="/terms/">Terms & Conditions</Link>
         </div>
-        <div>
-          <span className="muted">Created by{" "}</span>
-          <a href="https://patrickjamieson.com" target="_blank" rel="noopener noreferrer">
-            Patrick Jamieson
-          </a>{" "}
-          <span className="muted">- Copyright © {new Date().getFullYear()} Blake Jamieson LLC. All rights reserved. - </span>
-          <Link className="" to="/admin/orders"> Stay Awesome!</Link>
+        <div className="bottom-line">
+          <div>
+            <span className="muted">Created by&nbsp;</span>
+            <a href="https://patrickjamieson.com" target="_blank" rel="noopener noreferrer">
+              Patrick Jamieson
+            </a>
+          </div>
+          <span className="muted">&nbsp;&nbsp;Copyright © {new Date().getFullYear()} Blake Jamieson LLC.&nbsp;&nbsp;</span>
+          <span className="muted">All rights reserved.</span>
         </div>
+        <Link className="" to="/admin/orders">Stay Awesome!</Link>
       </div>
     </footer>
   )

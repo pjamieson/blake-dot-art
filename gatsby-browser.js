@@ -5,12 +5,11 @@
  */
 
 // Global style files for MDBReact
-import "@fortawesome/fontawesome-free/css/all.min.css"
-import "bootstrap-css-only/css/bootstrap.min.css"
-import "mdbreact/dist/css/mdb.css"
-import "./src/styles/scss/mdb.scss"
+import "./src/styles/fontawesome/css/all.min.css"
+import "mdb-react-ui-kit/dist/css/mdb.min.css"
+import "./src/styles/scss/mdb-pro.scss"
 
-import "@stripe/stripe-js"
+//import "@stripe/stripe-js"
 
 import React from "react"
 import CartContextProvider from "./src/context/cart-context"

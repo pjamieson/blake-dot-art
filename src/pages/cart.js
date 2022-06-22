@@ -17,7 +17,7 @@ import {
   MDBTable,
   MDBTableBody,
   MDBTableHead
-} from 'mdbreact';
+} from "mdb-react-ui-kit";
 
 import {
   getPaintingQtyAvailable,

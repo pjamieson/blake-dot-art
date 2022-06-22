@@ -19,7 +19,6 @@ module.exports = {
         pixelId: "346895069791060",
       },
     },
-    `gatsby-plugin-gatsby-cloud`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
@@ -47,15 +46,21 @@ module.exports = {
     },
     "gatsby-plugin-offline",
     "gatsby-plugin-react-helmet",
+    {
+      resolve: "gatsby-plugin-react-helmet-canonical-urls",
+      options: {
+        siteUrl: "https://blake.art",
+      },
+    },
     "gatsby-plugin-sass",
     "gatsby-plugin-sharp",
     // You can have multiple instances of gatsby-source-filesystem
     // to read source nodes from different locations on the filesystem.
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: "images",
+        path: "./src/images",
       },
       __key: "images",
     },

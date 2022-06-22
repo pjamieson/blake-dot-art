@@ -1,4 +1,5 @@
-const redirects = require("./redirects.json")
+const redirects = require("./redirects.json");
+
 exports.createPages = async ({ graphql, actions }) => {
 
   const { createRedirect } = actions

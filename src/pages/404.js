@@ -1,6 +1,6 @@
 import React from "react"
 
-import { MDBContainer } from "mdbreact"
+import { MDBContainer } from "mdb-react-ui-kit"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 

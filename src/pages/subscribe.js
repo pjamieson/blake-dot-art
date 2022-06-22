@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-import { MDBCard, MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
+import { MDBCard, MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdb-react-ui-kit";
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -52,14 +52,16 @@ const SubscribePage = () => {
       <Seo title="Subscribe" />
       <MDBContainer className="page-container subscribe">
         <h1 className="page-head">Mailing List</h1>
+
         <MDBCard className="banner">
-          {/*<h2 className="text-center mx-auto pt-3">
+          <h2 className="text-center mx-auto pt-3">
             Subscribe to Blake's Mailing List
-          </h2>*/}
-          <h3 className="text-center w-responsive mx-auto pb-3">
+          </h2>
+          <h3 className="text-center mx-auto pb-2">
             Be among the first to receive news and special offers.
           </h3>
         </MDBCard>
+        
         <MDBCard>
           <form onSubmit={(e) => handleSubmit(e)}>
             <MDBRow>

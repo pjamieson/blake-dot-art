@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { navigate } from "gatsby"
+
 import { GatsbyImage } from "gatsby-plugin-image"
 
-import { MDBCard, MDBContainer, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBInput } from "mdbreact";
+import { MDBBtn, MDBCard, MDBCol, MDBContainer, MDBInput, MDBRow, MDBTextArea } from "mdb-react-ui-kit";
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -16,7 +17,6 @@ const InquirePage = ({ location }) => {
 
   const [fullname, setFullname] = useState('')
   const [email, setEmail] = useState('')
-  const [subject, setSubject] = useState(subj)
   const [message, setMessage] = useState("Please tell me more about this item. Specifically, I'd like to know ")
 
   const valid = () => {
@@ -69,7 +69,7 @@ const InquirePage = ({ location }) => {
             "from": "contact@blake.art",
             "cc": "patrick@iartx.com",
             "replyTo": `${email}`,
-            "subject": `${subject}`,
+            "subject": `${subj}`,
             "html": `<p><strong>Item Inquiry</p>
             <p><strong>From Name: </strong>${fullname}</p>
             <p><strong>From Email: </strong>${email}</p>
@@ -84,13 +84,13 @@ const InquirePage = ({ location }) => {
     sendEmail()
 
     // Go to MessageSentPage
-    navigate('/sent/', { state: { subject } })
+    navigate('/sent/', { state: { subj } })
   }
 
   return (
   <Layout>
     <Seo title="Inquire" />
-    <MDBContainer className="page-container contact">
+    <MDBContainer className="page-container inquire">
       <h1 className="page-head">Inquire</h1>
 
       <MDBCard className="banner">
@@ -112,12 +112,45 @@ const InquirePage = ({ location }) => {
             <MDBRow>
               <MDBCol md="6">
                 <div className="md-form mb-0">
-                  <MDBInput type="text" id="contact-name" label="Your name" value={fullname} className="mt-4" required onChange={(event) => setFullname(event.target.value)} />
+                  <MDBInput
+                    type="text"
+                    id="contact-name"
+                    wrapperClass="mb-3 me-1"
+                    value={fullname}
+                    onChange={(e) => setFullname(e.target.value)}
+                    label="Your Name*"
+                    validation="invalid"
+                    invalid
+                    required
+                  />
                 </div>
               </MDBCol>
               <MDBCol md="6">
                 <div className="md-form mb-0">
-                  <MDBInput type="email" id="contact-email" label="Your email" value={email} className="mt-4" required onChange={(event) => setEmail(event.target.value)}
+                <MDBInput
+                  type="email"
+                  id="contact-email"
+                  wrapperClass="mb-3 me-1"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  label="Your Email*"
+                  validation="invalid"
+                  invalid
+                  required
+                />
+                </div>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol md="12">
+                <div className="md-form mb-0">
+                  <MDBInput
+                    type="text"
+                    id="contact-subject"
+                    wrapperClass="mb-3 me-1"
+                    value={subj}
+                    label="Subject*"
+                    disabled
                   />
                 </div>
               </MDBCol>
@@ -125,15 +158,14 @@ const InquirePage = ({ location }) => {
             <MDBRow>
               <MDBCol md="12">
                 <div className="md-form mb-0">
-                  <MDBInput type="text" id="contact-subject" label="Subject" value={subject} className="mt-4" required onChange={(event) => setSubject(event.target.value)} />
-                </div>
-              </MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol md="12">
-                <div className="md-form mb-0">
-                  <MDBInput type="textarea" id="contact-message" label="Your message" value={message} className="mt-4" required onChange={(event) => setMessage(event.target.value)}
-                  />
+                <MDBTextArea
+                  id="contact-message"
+                  label="Your message"
+                  value={message}
+                  className="mt-4"
+                  rows={4}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
                 </div>
               </MDBCol>
             </MDBRow>
@@ -147,7 +179,6 @@ const InquirePage = ({ location }) => {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-
     </MDBContainer>
   </Layout>
 )

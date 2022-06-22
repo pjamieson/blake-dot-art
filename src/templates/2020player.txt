@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
-import { MDBBtn, MDBInput } from "mdbreact"
+import { MDBBtn, MDBInput } from "mdb-react-ui-kit"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"

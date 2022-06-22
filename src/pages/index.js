@@ -18,7 +18,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Seo title="Home" />
-      <div className="container">
+      <div className="container site-container">
         <Jumbotron />
         <div className="container front-content">
 
@@ -43,7 +43,7 @@ const IndexPage = ({ data }) => {
           */}
 
           <section className="gallery">
-            <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid="masonry: true">
+            <div className="uk-grid-small uk-child-width-1-2@s uk-child-width-1-3@m uk-text-center" uk-grid="masonry: true">
               {tradingcards.map(tradingcard => {
                 return <div key={tradingcard.identifier}>
                   <FeaturedImagelink item={tradingcard} />
