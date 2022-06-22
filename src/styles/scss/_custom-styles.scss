@@ -44,6 +44,9 @@
   font-display: block;
 }
 
+body {
+  background-color: $blake-dark-grey;
+}
 h1, h2, h3, h4, h5, h6, p {
   font-family: "Stolzl" !important;
   color: $blake-dark-grey;
@@ -367,7 +370,7 @@ p {
   border-radius: .4rem;
   background-color: $white-base;
   @media (min-width: 1280px) {
-    height: 556.6px; // stop growth at max width
+    height: 51.3vw; // stop growth at max width
   }
   .social-links {
     display: flex;
@@ -414,14 +417,18 @@ p {
         font-size: 3.5rem;
       }
       @media (min-width: 640px) { // UIkit grid breakpoint to 2 gallery columns
-        //padding-top: 27%;
+        padding-top: 30%;
       }
       @media (min-width: 768px) {
-        //padding-top: 25%;
-        font-size: 4.5rem;
+        padding-top: 33%;
+        font-size: 4rem;
       }
       @media (min-width: 1024px) { // Nest Hub
-        padding-top: 33%;
+        padding-top: 40%;
+        font-size: 4.5rem;
+      }
+      @media (min-width: 1280px) { // Nest Hub
+        padding-top: 47%;
       }
     }
     h2 {
