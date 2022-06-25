@@ -1,12 +1,12 @@
 import React from 'react';
 import { navigate } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { getImageUrl } from "../utils/image-url"
 
 const FeaturedImagelink = ({ item }) => {
   //console.log("FeaturedImagelink item", item)
 
   // Use the primary image, the first of the images set
-  const image = (item && item.image) ? getImage(item.image.localFile.childImageSharp.gatsbyImageData) : getImage(item.images[0].localFile.childImageSharp.gatsbyImageData)
+  const image_src = getImageUrl(item.image, "medium")
 
   const isTradingcard = (item.project_2020_player || item.topps_1951_player || item.project_70_player)
 
@@ -56,7 +56,7 @@ const FeaturedImagelink = ({ item }) => {
   return (
     <div className="img-hover-zoom">
       <div role="button" tabIndex="0" onClick={() => handleClick()} onKeyDown={(event) => handleKeyDown(event)}>
-        <GatsbyImage className="img-fluid rounded" image={image} alt={item.title} />
+        <img src={image_src} className="img-fluid rounded" alt={item.title} />
       </div>
     </div>
   )

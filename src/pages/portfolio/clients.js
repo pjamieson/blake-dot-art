@@ -40,15 +40,26 @@ export const query = graphql`
       nodes {
         id
         image {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                width: 400
-                placeholder: BLURRED
-                formats: [AUTO, WEBP]
-              )
+          formats {
+            large {
+              url
+            }
+            medium {
+              url
+            }
+            small {
+              url
+            }
+            thumbnail {
+              url
             }
           }
+          height
+          localFile {
+            publicURL
+          }
+          width
+          url
         }
         title: caption
       }

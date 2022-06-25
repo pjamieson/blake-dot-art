@@ -100,15 +100,26 @@ query GetCategoryProducts($slug: String) {
       strapiId
       identifier
       images {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(
-              width: 600
-              placeholder: BLURRED
-              formats: [AUTO, WEBP]
-            )
+        formats {
+          large {
+            url
+          }
+          medium {
+            url
+          }
+          small {
+            url
+          }
+          thumbnail {
+            url
           }
         }
+        height
+        localFile {
+          publicURL
+        }
+        width
+        url
       }
       title: name
       subtitle: subhead

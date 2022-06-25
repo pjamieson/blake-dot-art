@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { Link, navigate } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image"
 
 import { CartContext } from "../context/cart-context"
 
@@ -88,7 +87,7 @@ const CartPage = () => {
       <Seo title="Cart" />
       <div className="container page-container">
         <MDBContainer className="cart">
-          <h1 className="page-head">Cart</h1>
+          <h1>Cart</h1>
           <MDBRow center>
             <MDBCard className='w-100'>
               <MDBCardBody>
@@ -111,13 +110,13 @@ const CartPage = () => {
                           <td className="img-cell">
                             <div className="img-hover-zoom">
                               <a href={`${item.item_slug}`}>
-                                <GatsbyImage className="img-fluid rounded" image={item.image.localFile.childImageSharp.gatsbyImageData} alt={item.title} />
+                                <img className="img-fluid rounded" src={item.imageUrl} alt={item.title} />
                               </a>
                             </div>
                           </td>
                           <td className="item-cell">
                             <div className="cart-item">
-                              <h4 className='mt-3' key={item.identifier}>
+                              <h4 className="mt-3 mb-0" key={item.sku}>
                                 {item.title}
                               </h4>
                               <p className='text-muted'>{item.subtitle}</p>
@@ -180,7 +179,7 @@ const CartPage = () => {
               </MDBCardBody>
             </MDBCard>
 
-            <div className="checkout-open">
+            <div className="open-checkout-btn">
               {(cart && cart.length > 0) &&
                 <Link to="/checkout/" className="btn btn-primary btn-rounded">
                   Checkout<i className="fas fa-chevron-right"></i>

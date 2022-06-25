@@ -17,7 +17,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <Seo title="Home" />
+      <Seo title="Home" description="The official home page of the artist Blake Jamieson" />
       <div className="container site-container">
         <Jumbotron />
         <div className="container front-content">
@@ -87,15 +87,26 @@ export const query = graphql`
           name
         }
         image {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                width: 400
-                placeholder: BLURRED
-                formats: [AUTO, WEBP]
-              )
+          formats {
+            large {
+              url
+            }
+            medium {
+              url
+            }
+            small {
+              url
+            }
+            thumbnail {
+              url
             }
           }
+          height
+          localFile {
+            publicURL
+          }
+          width
+          url
         }
       }
     },
@@ -112,15 +123,26 @@ export const query = graphql`
           slug
         }
         images {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                width: 400
-                placeholder: BLURRED
-                formats: [AUTO, WEBP]
-              )
+          formats {
+            large {
+              url
+            }
+            medium {
+              url
+            }
+            small {
+              url
+            }
+            thumbnail {
+              url
             }
           }
+          height
+          localFile {
+            publicURL
+          }
+          width
+          url
         }
       }
     },
@@ -143,15 +165,26 @@ export const query = graphql`
           name
         }
         image {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                width: 400
-                placeholder: BLURRED
-                formats: [AUTO, WEBP]
-              )
+          formats {
+            large {
+              url
+            }
+            medium {
+              url
+            }
+            small {
+              url
+            }
+            thumbnail {
+              url
             }
           }
+          height
+          localFile {
+            publicURL
+          }
+          width
+          url
         }
         qty
       }

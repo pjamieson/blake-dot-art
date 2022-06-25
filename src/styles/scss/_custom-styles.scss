@@ -168,9 +168,7 @@ p {
   }
   .navbar-brand {
     margin-right: 0;
-    a {
-      text-decoration: none;
-    }
+    text-decoration: none;
     .logo {
       max-height: 40px;
       padding-right: .4rem;
@@ -265,6 +263,10 @@ p {
     right: 1.5rem;
     padding: 0 1rem;
   }
+}
+.dropdown-divider {
+  margin: 0.5rem 1rem;
+  border-top: 1px solid rgba(255,255,255,.8);
 }
 
 .collapse.show.navbar-collapse,
@@ -866,6 +868,12 @@ p {
       padding-left: 0;
     }
   }
+  .img-hover-zoom {
+    border-radius: 6px;
+    img {
+      border-radius: 6px;
+    }
+  }
   .card {
     .btn-sold {
       position: absolute;
@@ -904,6 +912,12 @@ p {
         font-size: 15px;
       }
     }
+    &.client-card {
+      border-radius: 6px;
+      img {
+        border-radius: 6px 6px 0 0;
+      }
+    }
   }
   .imageset {
     margin-top: 1em;
@@ -933,6 +947,7 @@ p {
   font-weight: bold;
 }
 
+// Item Detail Pages (Art, Cards, Products)
 .item-details {
   height: 100%;
   padding: 0 .25rem;
@@ -955,57 +970,110 @@ p {
       font-size: 2.5rem;
     }
   }
-  p {
-    margin: 0 0 .8rem 0;
-    line-height: 1.25;
-  }
-  .back-btn {
-    position: absolute;
-    bottom: -1.5em;
-    left: -5px;
-    text-align: center;
-    .fas {
-      padding: 4px 0 0 0;
-    }
-  }
-  .back-btn-card {
-    bottom: .5em;
-  }
-  .card-details {
-    padding: 1rem 1rem 0 1rem;
-  }
-  .buy-or-inquire {
-    @media (min-width: 640px) {
-      padding-right: 2rem;
-    }
-    .card-description {
-      padding: 0 1rem;
-    }
-    .add-to-cart {
-      display: flex;
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    @media (min-width: 640px) { // UIkit grid breakpoint to 2 gallery columns
       flex-direction: row;
-      justify-content:flex-start;
-      align-items: center;
-      padding-top: 1rem;
-      i {
-        padding-right: .5rem;
+    }
+    .item-gallery {
+      flex-grow: 1;
+      @media (min-width: 640px) { // UIkit grid breakpoint to 2 gallery columns
+        width: 50%;
       }
-      .price {
-        margin: 0 1rem 0 0;
-        font-size: 2rem;
+      .gallery-image-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        img {
+          width: calc(50% - .25rem);
+        }
       }
-      .btn-add-to-cart {
-        padding: .8rem 1rem;
+      .lightbox-container {
+        p {
+          margin: 1.5rem 0 .5rem 0;
+          padding: 0;
+          line-height: 1.1;
+          font-style: italic;
+          text-align: center;
+        }
+        .lightbox {
+          margin: 0 0 0 -.5rem;
+          .card {
+            padding: 0;
+            margin: 0 0 .5rem .5rem;
+            width: calc(100% / 3 - .5rem);
+            img {
+              border-radius: 0.5rem;
+            }
+          }
+        }
+      }
+      .back-btn {
+        margin: 2rem 0;
+        text-align: center;
+        .fas {
+          padding: 4px 0 0 0;
+        }
       }
     }
-    .inquire {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      padding-top: 1rem;
-      .btn-inquire {
-        margin-left: 0;
+    .item-description {
+      @media (min-width: 640px) { // UIkit grid breakpoint to 2 gallery columns
+        margin-left: 1rem;
+        width: 50%;
+        max-width: 450px;
+      }
+      @media (min-width: 960px) {
+        margin-left: 2rem;
+      }
+      .details {
+        padding: 0;
+        h2 {
+          font-size: 1.4rem;
+          line-height: 1.1;
+          @media (min-width: 360px) { // iPhone 12, most Androids
+            font-size: 1.5rem;
+          }
+          @media (min-width: 412px) {
+            font-size: 1.7rem;
+          }
+          &.padded-header {
+            padding-top: 2rem;
+          }
+        }
+        p {
+          margin: 0 0 .8rem 0;
+          line-height: 1.25;
+        }
+        .subtitle {
+          margin: -12px 0 2rem 0;
+          font-size: 1.1rem;
+          @media (min-width: 412px) {
+            font-size: 1.25rem;
+          }
+        }
+      }
+      .price-action {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content:flex-end;
+        .price {
+          margin: 0;
+          padding: 0 1rem;
+          font-size: 1.5rem;
+        }
+        .btn-add-to-cart {
+          padding: .8rem 1rem;
+          i {
+            padding-right: .5rem;
+          }
+        }
+        .btn-inquire {
+        }
       }
     }
   }

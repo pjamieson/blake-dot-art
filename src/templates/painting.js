@@ -2,7 +2,7 @@
 
 import React, { useState, useContext, useEffect } from "react"
 import { Helmet } from "react-helmet"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+
 import { Link, navigate, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown";
 
@@ -10,23 +10,24 @@ import { MDBBadge } from "mdb-react-ui-kit"
 
 import { CartContext } from "../context/cart-context"
 
+import ImageSet from "../components/image-set"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import ImageSet from "../components/image-set"
 
-import { getPaintingQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
+import { getImageUrl } from "../utils/image-url"
+import { getPaintingQtyAvailable } from "../utils/inventory"
 
 const PaintingPage = ({
   data: {
     painting: {
       id,
-      identifier,
+      sku,
       title,
-      subtitle,
-      image,
+      subtitle = {},
+      image = {},
       images = {},
-      subgenre,
+      subgenre = {},
       sport = {},
       date = {},
       size = {},
@@ -41,20 +42,6 @@ const PaintingPage = ({
 }) => {
   const { isInCart, addToCart } = useContext(CartContext)
 
-  //console.log("painting.js images", images)
-  let imageset = []
-  let key = 0
-  images.forEach(img => {
-    imageset.push({
-      key,
-      title,
-      "url": img.url,
-      "gatsbyImage": getImage(img.localFile.childImageSharp.gatsbyImageData)
-    })
-    key = key + 1
-  })
-  //console.log("painting.js imageset", imageset)
-
   const itemType = "painting"
   const subt = subtitle ? subtitle : "A Blake Jamieson Original"
   const qty = 1 //initialize with 1 of item
@@ -62,19 +49,18 @@ const PaintingPage = ({
   const cartItem = {
     itemType,
     id,
-    identifier,
+    identifier: sku,
+    item_slug,
     title,
     subtitle: subt,
     image,
-    url: image.url,
+    imageUrl: getImageUrl(image, "small"),
     qty,
     qtyAvail,
-    price,
-    item_slug
+    price
   }
   const [inCart, setInCart] = useState(isInCart(cartItem))
   const [processing, setProcessing] = useState(false)
-
 
   // On loading page, confirm painting is still available
   const [qtyAvailNow, setQtyAvailNow] = useState(1) // one available by default
@@ -93,44 +79,41 @@ const PaintingPage = ({
     setInCart(false)
   }
 
-  const img = getImage(image.localFile.childImageSharp.gatsbyImageData)
-
-  const seo_description = `Images of and details about the original painting “${title}” by Blake Jamieson.`
-  //console.log("painting.js seo_description", seo_description)
-
   // Schema.org calculated values
+  const seo_description = `Images of and details about the original painting “${title}” by Blake Jamieson.`
   const productUrl = `https://blake.art${item_slug}`
-  //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${slug}`
-  //console.log("productUrl", productUrl)
-
-  const productImageUrl = image.localFile.url
-  //console.log("painting.js productImageUrl", productImageUrl)
-
-  const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
+  const productImageUrl = (image ? getImageUrl(image, "small") : (images[0] ? getImageUrl(images[0], "small") : ""))
+  const productAvailability = qtyAvailNow > 0 ? "http://schema.org/LimitedAvailability" : "http://schema.org/SoldOut"
 
   return (
     <Layout>
       <Seo title={title} description={seo_description} />
-
       <Helmet>
         <script type="application/ld+json">
         {`
           {
             "@context": "https://schema.org",
             "@type": "Product",
-            "productID": "${identifier}",
+            "productID": "${sku}",
+            "sku": "${sku}",
             "category": "Home & Garden > Decor > Artwork",
             "name": "${title}",
-            "description": "${subtitle ? subtitle : `A Blake Jamieson Original Painting`}",
+            "description": "${subt}",
             "url": "${productUrl}",
-            "image": "${productImageUrl}",
-            "brand":"Blake Jamieson",
+            "image": [
+              "${productImageUrl}"
+            ],
+            "brand": {
+              "@type": "Brand"
+              "name": "Blake Jamieson"
+            },
             "logo": "https://blake.art/icons/icon-72x72.png",
             "offers": [
               {
                 "@type": "Offer",
-                "price": "${price}",
+                "url": "${productUrl}",
                 "priceCurrency": "USD",
+                "price": "${price}",
                 "itemCondition": "https://schema.org/NewCondition",
                 "availability": "${productAvailability}"
               }
@@ -140,19 +123,13 @@ const PaintingPage = ({
         </script>
       </Helmet>
 
-      <div className="container page-container">
+      <div className="page-container">
         <article className="item-details">
           <h1>{title}</h1>
-          <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
+          <div className="details-container">
+            <div className="item-gallery">
 
-            <div>
-              <div className="">
-                <GatsbyImage className="img-fluid rounded" image={img} alt={title} />
-              </div>
-
-              { (imageset.length > 0) &&
-                <ImageSet imageset={imageset} />
-              }
+              <ImageSet title={title} subtitle={subt} image={image} images={images} />
 
               { (qtyAvail > 0) &&
                 <div className="back-btn">
@@ -175,11 +152,13 @@ const PaintingPage = ({
                   </Link>
                 </div>
               }
-            </div>
+            </div> {/* item-gallery */}
 
-            <div className="buy-or-inquire">
-              <div className="card-description">
-                <h2>{subtitle && subtitle.length > 0 ? subtitle : "A Blake Jamieson Original"}</h2>
+            <div className="item-description">
+              <div className="details">
+                <h2 className="padded-header">
+                  {subtitle && subtitle.length > 0 ? subtitle : "A Blake Jamieson Original"}
+                </h2>
 
                 { (date && size) && <p>{date} - {size}</p> }
                 { (!(date && size) && date) && <p>{date}</p> }
@@ -192,54 +171,51 @@ const PaintingPage = ({
                 { (qty > 0 && processing) &&
                   <h3>Confirming availability...</h3>
                 }
-
-                <div className="detail-btns">
+                <div className="inventory-msg">
                   { (qtyAvail > 0 && qtyAvailNow <= 0) &&
                     <h3>Sorry, this piece is no longer available.</h3>
                   }
 
-                  { (portfolio && qtyAvail === 0 && qtyAvailNow <= 0) &&
+                  { (qtyAvail === 0 && qtyAvailNow <= 0) &&
                     <h3>This piece has been sold or is Not for Sale.</h3>
                   }
-
-                  { (price > 10 && qtyAvailNow > 0) &&
-                    <div className="add-to-cart">
-                      <h3 className="price">{formatPrice(price)}</h3>
-                      {!inCart &&
-                        <button type="button" className="btn btn-add-to-cart btn-primary btn-rounded" onClick={() => {
-                          addToCart(cartItem, qty)
-                          setInCart(true)
-                        }}>
-                          <i className="fas fa-cart-plus"></i>Add to Cart
-                        </button>
-                      }
-                    </div>
+                </div>
+              </div> {/* details */}
+              <div className="price-action">
+                {qtyAvail > 0 && qtyAvailNow > 0 &&
+                  <h3 className="price">{formatPrice(price)}</h3>
+                }
+                <div>
+                  { (price > 10 && qtyAvail > 0 && qtyAvailNow > 0 && !inCart) &&
+                    <button type="button" className="btn btn-add-to-cart btn-primary btn-rounded" onClick={() => {
+                      addToCart(cartItem, qty)
+                      setInCart(true)
+                    }}>
+                      <i className="fas fa-cart-plus"></i>Add to Cart
+                    </button>
                   }
-
                   { (inCart && qtyAvailNow > 0) &&
                     <MDBBadge color="secondary">Added to Cart</MDBBadge>
                   }
-
+                </div>
+                { !inCart &&
                   <div className="inquire">
                     <button type="button" className="btn btn-inquire btn-primary btn-rounded" onClick={() => {
                       navigate('/inquire/', {
                         state: {
                           title,
-                          sku: identifier,
-                          image: img
+                          sku,
+                          image_src: productImageUrl
                         }
                       })
                     }}>Inquire</button>
                   </div>
-
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </article>
-      </div>
+                }
+              </div> {/* price-action */}
+            </div> {/* item-description */}
+          </div> {/* details-container */}
+        </article> {/* item-details */}
+      </div> {/* page-container */}
     </Layout>
   )
 }
@@ -250,31 +226,52 @@ export const query = graphql`
   query GetSinglePainting($slug: String) {
     painting: strapiPainting(slug: {eq: $slug}) {
       id: strapiId
-      identifier
+      sku: identifier
       title
       subtitle
       image {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(
-              width: 600
-              placeholder: BLURRED
-              formats: [AUTO, WEBP]
-            )
+        formats {
+          large {
+            url
           }
-          url
+          medium {
+            url
+          }
+          small {
+            url
+          }
+          thumbnail {
+            url
+          }
         }
+        height
+        localFile {
+          publicURL
+        }
+        width
+        url
       }
       images {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(
-              width: 600
-              placeholder: BLURRED
-              formats: [AUTO, WEBP]
-            )
+        formats {
+          large {
+            url
+          }
+          medium {
+            url
+          }
+          small {
+            url
+          }
+          thumbnail {
+            url
           }
         }
+        height
+        localFile {
+          publicURL
+        }
+        width
+        url
       }
       subgenre {
         slug

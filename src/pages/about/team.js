@@ -1,11 +1,13 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+
 import ReactMarkdown from "react-markdown";
 import { FaTwitter } from "react-icons/fa"
 
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
+
+import { getImageUrl } from "../../utils/image-url"
 
 const TeamPage = ({ data }) => {
   const {
@@ -22,7 +24,11 @@ const TeamPage = ({ data }) => {
             {members.map(member => {
               return <div className="card team-card" key={member.id}>
                 <div className="img-container">
-                  <GatsbyImage className="img-fluid rounded" image={getImage(member.image.localFile.childImageSharp.gatsbyImageData)} alt="Artist photo from article" />
+
+                  <img className="img-fluid rounded"
+                    src={getImageUrl(member.image, "medium")}
+                    alt={member.name} />
+
                   { member.image_credit && <p>{member.image_credit}</p> }
                 </div>
                 <div>
@@ -55,15 +61,26 @@ export const query = graphql`
         id
         name
         image {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                width: 600
-                placeholder: BLURRED
-                formats: [AUTO, WEBP]
-              )
+          formats {
+            large {
+              url
+            }
+            medium {
+              url
+            }
+            small {
+              url
+            }
+            thumbnail {
+              url
             }
           }
+          height
+          localFile {
+            publicURL
+          }
+          width
+          url
         }
         image_credit
         twitter_url

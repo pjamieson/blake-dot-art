@@ -31,7 +31,6 @@ module.exports = {
         endpoint: 'https://blakejamieson.us5.list-manage.com/subscribe/post?u=063627aa25e9155fc458edccb&id=d3c4f161f3',
       },
     },
-    "gatsby-plugin-image",
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -53,7 +52,6 @@ module.exports = {
       },
     },
     "gatsby-plugin-sass",
-    "gatsby-plugin-sharp",
     // You can have multiple instances of gatsby-source-filesystem
     // to read source nodes from different locations on the filesystem.
     {
@@ -95,6 +93,5 @@ module.exports = {
         queryLimit: 1000,
       },
     },
-    "gatsby-transformer-sharp",
   ],
 }

@@ -1,14 +1,14 @@
 import React from 'react';
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { getImageUrl } from "../utils/image-url"
 
 const CardImageCaption = ({ card }) => {
 
-  const image = getImage(card.image.localFile.childImageSharp.gatsbyImageData)
+  const image_url = getImageUrl(card.image, "medium")
 
   return (
-    <div className="card">
+    <div className="card client-card">
 
-      <GatsbyImage className="img-fluid rounded" image={image} alt={card.title} />
+      <img className="img-fluid" src={image_url} alt={card.title} />
 
       <div className="card-body">
         <h4 className="card-title">{card.title}</h4>

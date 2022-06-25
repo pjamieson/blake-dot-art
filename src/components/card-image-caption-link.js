@@ -1,19 +1,20 @@
 import React from "react";
 import { Link } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 import { formatPrice } from "../utils/format"
+import { getImageUrl } from "../utils/image-url"
 
 const CardImageCaptionLink = ({ item, caption_format }) => {
   //console.log("CardImageCaptionLink item", item)
 
   // Use the primary image, the first of the images set
-  const image = item.image ? getImage(item.image.localFile.childImageSharp.gatsbyImageData) : getImage(item.images[0].localFile.childImageSharp.gatsbyImageData)
+  const image_url = ( item.image ? getImageUrl(item.image, "medium") : ( item.images[0] ? getImageUrl(item.images[0], "medium") : "" ) )
 
   let series = ""
   let line2 = ""
   let line3 = ""
   let link = ""
+  let alt_text = ""
 
   if (caption_format === "Card") {
     if (item.project_2020_player) {
@@ -29,13 +30,16 @@ const CardImageCaptionLink = ({ item, caption_format }) => {
     line2 = item.subtitle && item.subtitle.length > 0 ? item.subtitle : "A Blake Jamieson Original"
     line3 = formatPrice(item.price)
     link = `/${(item.qty > 0 ? 'gallery' : 'portfolio')}/${item.subgenre.slug}/${item.slug}/`
+    alt_text = `The artwork ${item.title} by Blake Jamieson`
   } else if (caption_format === "Card") {
     line2 = item.subtitle && item.subtitle.length > 0 ? item.subtitle : "A Sports Art Card"
     line3 = item.limitation
     link = `/topps/${series}/${item.identifier}`
+    alt_text = `The card ${item.title} by Blake Jamieson`
   } else if (caption_format === "Product") {
     line2 = item.subtitle && item.subtitle.length > 0 ? item.subtitle : ""
     link = `/product/${item.product_category.slug}/${item.identifier}`
+    alt_text = `The item ${item.title} from Blake Jamieson`
   }
 
   const doLink = ((caption_format === "Card" && item.qty < 1)
@@ -46,13 +50,13 @@ const CardImageCaptionLink = ({ item, caption_format }) => {
       { (doLink) &&
         <div className="card img-hover-zoom">
           <a href={link} className="ripple">
-            <GatsbyImage className="img-fluid rounded" image={image} alt={item.title} />
+            <img className="img-fluid" src={image_url} alt={alt_text} />
           </a>
         </div>
       }
       { (!doLink) &&
         <>
-          <GatsbyImage className="img-fluid rounded" image={image} alt={item.title} />
+          <img className="img-fluid" src={image_url} alt={alt_text} />
           <button type="button" className="btn btn-sold btn-primary btn-rounded">Sold Out</button>
         </>
       }

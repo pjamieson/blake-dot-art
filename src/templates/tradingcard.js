@@ -2,25 +2,27 @@
 
 import React, { useContext, useState, useEffect } from "react"
 import { Helmet } from "react-helmet"
-import { GatsbyImage } from "gatsby-plugin-image"
-import { Link, graphql } from "gatsby"
+
+import { Link, navigate, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown";
 
 import { MDBBadge } from "mdb-react-ui-kit"
 
 import { CartContext } from "../context/cart-context"
 
+import ImageSet from "../components/image-set"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-import { getCardQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
+import { getImageUrl } from "../utils/image-url"
+import { getCardQtyAvailable } from "../utils/inventory"
 
 const Tradingcard = ({
   data: {
     tradingcard: {
       id,
-      identifier,
+      sku,
       project_2020_player = {},
       topps_1951_player = {},
       project_70_player = {},
@@ -28,6 +30,7 @@ const Tradingcard = ({
       subtitle = {},
       limitation = {},
       image,
+      image2 = {},
       description = {},
       details = {},
       qty: qtyAvail,
@@ -49,18 +52,19 @@ const Tradingcard = ({
 
   const itemType = "tradingcard"
   const qty = 1 //initialize with 1 of item
-  const item_slug = `/topps/${series}/${identifier}/`
+  const item_slug = `/topps/${series}/${sku}/`
   const cartItem = {
     itemType,
     id,
-    identifier,
+    identifier: sku,
+    item_slug,
     title,
     subtitle,
     image,
+    imageUrl: getImageUrl(image, "small"),
     qty,
     qtyAvail,
-    price,
-    item_slug
+    price
   }
   const [inCart, setInCart] = useState(isInCart(cartItem))
   const [processing, setProcessing] = useState(false)
@@ -83,32 +87,32 @@ const Tradingcard = ({
   }
 
   // Schema.org calculated values
+  const seo_description = `Images of and details about the trading card “${title}” by Blake Jamieson.`
   const productTitle = `${title} : Artist-Autographed Card`
-
   const productUrl = `https://blake.art${item_slug}`
-
-  const productImageUrl = image.localFile.url
-  //console.log("tradingcard.js productImageUrl", productImageUrl)
-
+  const productImageUrl = getImageUrl(image, "small")
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
 
   return (
     <Layout>
-      <Seo title={title} />
-
+      <Seo title={title} description={seo_description} />
       <Helmet>
         <script type="application/ld+json">
         {`
           {
             "@context": "https://schema.org",
             "@type": "Product",
-            "productID": "${identifier}",
+            "productID": "${sku}",
+            "sku": "${sku}",
             "category": "Arts & Entertainment > Hobbies & Creative Arts > Collectibles > Collectible Trading Cards",
             "name": "${productTitle}",
             "description": "${subtitle}",
             "url": "${productUrl}",
             "image": "${productImageUrl}",
-            "brand":"Blake Jamieson",
+            "brand": {
+              "@type": "Brand"
+              "name": "Blake Jamieson"
+            },
             "logo": "https://blake.art/icons/icon-72x72.png",
             "offers": [
               {
@@ -124,37 +128,87 @@ const Tradingcard = ({
         </script>
       </Helmet>
 
-      <div className="container page-container">
+      <div className="page-container">
         <article className="item-details">
           <h1>{title} : Artist-Autographed Card</h1>
-          <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
-            <div>
-              <div className="card" key={id}>
-                <GatsbyImage className="img-fluid rounded" image={image.localFile.childImageSharp.gatsbyImageData} alt={title} />
-                <div className="back-btn-card">
-                  <Link to={`/topps/${series}/`} state={{ player: player }} className="btn-floating btn-action btn-danger">
-                    <i className="fas fa-chevron-left"></i>
-                  </Link>
-                </div>
+          <div className="details-container">
+            <div className="item-gallery">
+
+              <ImageSet title={title} subtitle={subtitle} image={image} images={[image2]} />
+
+              <div className="back-btn">
+                <Link to={`/topps/${series}/`} state={{ player: player }} className="btn-floating btn-action btn-primary">
+                  <i className="fas fa-chevron-left"></i>
+                </Link>
               </div>
+
               <aside className="card-details">
                 <ReactMarkdown source={details} />
               </aside>
-            </div>
-            <div className="buy-or-inquire">
-              <div className="card-description">
-                <h2>{subtitle}</h2>
-                <ReactMarkdown source={description} />
 
-                { (processing) &&
+            </div> {/* item-gallery */}
+
+            <div className="item-description">
+              <div className="details">
+                <h2 className="padded-header">
+                  {subtitle && subtitle.length > 0 ? subtitle : "A Blake Jamieson Original"}
+                </h2>
+
+                { description && <ReactMarkdown source={description} /> }
+
+                { (qty > 0 && processing) &&
                   <h3>Confirming availability...</h3>
                 }
-
-                <div className="detail-btns">
-                  { (qtyAvailNow === 0) &&
+                <div className="inventory-msg">
+                  { (qtyAvail > 0 && qtyAvailNow <= 0) &&
                     <h3>Sorry, this card is no longer available.</h3>
                   }
 
+                  { (qtyAvail === 0 && qtyAvailNow <= 0) &&
+                    <h3>This card has been sold or is Not for Sale.</h3>
+                  }
+                </div>
+              </div> {/* details */}
+              <div className="price-action">
+                {qtyAvail > 0 && qtyAvailNow > 0 &&
+                  <h3 className="price">{formatPrice(price)}</h3>
+                }
+                <div>
+                  { (price > 10 && qtyAvail > 0 && qtyAvailNow > 0 && !inCart) &&
+                    <button type="button" className="btn btn-add-to-cart btn-primary btn-rounded" onClick={() => {
+                      addToCart(cartItem, qty)
+                      setInCart(true)
+                    }}>
+                      <i className="fas fa-cart-plus"></i>Add to Cart
+                    </button>
+                  }
+                  { (inCart && qtyAvailNow > 0) &&
+                    <MDBBadge color="secondary">Added to Cart</MDBBadge>
+                  }
+                </div>
+                { !inCart &&
+                  <div className="inquire">
+                    <button type="button" className="btn btn-inquire btn-primary btn-rounded" onClick={() => {
+                      navigate('/inquire/', {
+                        state: {
+                          title,
+                          sku,
+                          image_src: productImageUrl
+                        }
+                      })
+                    }}>Inquire</button>
+                  </div>
+                }
+              </div> {/* price-action */}
+            </div> {/* item-description */}
+          </div> {/* details-container */}
+        </article> {/* item-details */}
+      </div> {/* page-container */}
+    </Layout>
+  )
+}
+
+/*
                   { (qtyAvailNow > 0 && price > 10) &&
                     <div className="add-to-cart">
                       <h3 className="price">{formatPrice(price)}</h3>
@@ -189,7 +243,7 @@ const Tradingcard = ({
     </Layout>
   )
 }
-
+*/
 export default Tradingcard
 
 export const query = graphql`
@@ -197,7 +251,7 @@ export const query = graphql`
     tradingcard: strapiTradingcard(
       identifier: {eq: $slug}) {
       id: strapiId
-      identifier
+      sku: identifier
       project_2020_player {
         name
       }
@@ -211,16 +265,48 @@ export const query = graphql`
       subtitle
       limitation
       image {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(
-              width: 600
-              placeholder: BLURRED
-              formats: [AUTO, WEBP]
-            )
+        formats {
+          large {
+            url
           }
-          url
+          medium {
+            url
+          }
+          small {
+            url
+          }
+          thumbnail {
+            url
+          }
         }
+        height
+        localFile {
+          publicURL
+        }
+        width
+        url
+      }
+      image2 {
+        formats {
+          large {
+            url
+          }
+          medium {
+            url
+          }
+          small {
+            url
+          }
+          thumbnail {
+            url
+          }
+        }
+        height
+        localFile {
+          publicURL
+        }
+        width
+        url
       }
       description
       details

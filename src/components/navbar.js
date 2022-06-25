@@ -14,7 +14,6 @@ import {
   MDBDropdownToggle,
   MDBIcon,
   MDBNavbar,
-  MDBNavbarBrand,
   MDBNavbarItem,
   MDBNavbarNav,
   MDBNavbarToggler
@@ -30,14 +29,12 @@ const Navbar = () => {
     <MDBNavbar sticky expand="md" dark bgColor="dark">
       <MDBContainer fluid>
 
-        <MDBNavbarBrand>
-          <Link to="/" className="navbar-brand">
-            <img src={logo} className="logo" alt="Logo"/>
-            <span className="brand-name blake">BLAKE</span>
-            <span className="brand-name dot">.</span>
-            <span className="brand-name art">ART</span>
-          </Link>
-        </MDBNavbarBrand>
+        <Link to="/" className="navbar-brand">
+          <img src={logo} className="logo" alt="Logo"/>
+          <span className="brand-name blake">BLAKE</span>
+          <span className="brand-name dot">.</span>
+          <span className="brand-name art">ART</span>
+        </Link>
 
         <MDBNavbarToggler
           aria-controls='navbarSupportedContent'
@@ -85,7 +82,7 @@ const Navbar = () => {
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/portfolio/collabs/">Collabs</Link>
                   </MDBDropdownItem>
-                  <div class="dropdown-divider"></div>
+                  <div className="dropdown-divider"></div>
                   <MDBDropdownItem>
                     <Link className="menu-link" to="/portfolio/clients/">Clients & Collectors</Link>
                   </MDBDropdownItem>

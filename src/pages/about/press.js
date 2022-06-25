@@ -1,10 +1,12 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+
 import ReactMarkdown from "react-markdown";
 
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
+
+import { getImageUrl } from "../../utils/image-url"
 
 const PressPage = ({ data }) => {
   const {
@@ -24,7 +26,11 @@ const PressPage = ({ data }) => {
               return <div className="card team-card" key={articleIndex++}>
                 { (articleIndex % 2 === 1) &&
                   <div className="img-container">
-                    <GatsbyImage className="img-fluid rounded" image={getImage(article.image.localFile.childImageSharp.gatsbyImageData)} alt="Artist photo from article" />
+
+                    <img className="img-fluid rounded"
+                      src={getImageUrl(article.image, "medium")}
+                      alt="Blake Jamieson in his studio" />
+
                     { article.image_credit && <p>{article.image_credit}</p> }
                   </div>
                 }
@@ -49,7 +55,11 @@ const PressPage = ({ data }) => {
                 </div>
                 { (articleIndex % 2 === 0) &&
                   <div className="img-container alt">
-                    <GatsbyImage className="img-fluid rounded" image={getImage(article.image.localFile.childImageSharp.gatsbyImageData)} alt="Artist photo from article" />
+
+                    <img className="img-fluid rounded"
+                      src={getImageUrl(article.image, "medium")}
+                      alt="Blake Jamieson in his studio" />
+
                     { article.image_credit && <p>{article.image_credit}</p> }
                   </div>
                 }
@@ -74,15 +84,26 @@ export const query = graphql`
         headline
         tease
         image {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                width: 600
-                placeholder: BLURRED
-                formats: [AUTO, WEBP]
-              )
+          formats {
+            large {
+              url
+            }
+            medium {
+              url
+            }
+            small {
+              url
+            }
+            thumbnail {
+              url
             }
           }
+          height
+          localFile {
+            publicURL
+          }
+          width
+          url
         }
         image_credit
         publication

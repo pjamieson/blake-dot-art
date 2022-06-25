@@ -2,7 +2,7 @@
 
 import React, { useState, useContext, useEffect } from "react"
 import { Helmet } from "react-helmet"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+
 import { Link, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown";
 
@@ -10,10 +10,11 @@ import { MDBBadge } from "mdb-react-ui-kit"
 
 import { CartContext } from "../context/cart-context"
 
+import ImageSet from "../components/image-set"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import ImageSet from "../components/image-set"
 
+import { getImageUrl } from "../utils/image-url"
 import { getProductQtyAvailable } from "../utils/inventory"
 import { formatPrice } from "../utils/format"
 
@@ -21,7 +22,7 @@ const ProductPage = ({
   data: {
     product: {
       id,
-      identifier,
+      sku,
       title,
       subtitle,
       images,
@@ -34,39 +35,22 @@ const ProductPage = ({
 }) => {
   const { isInCart, addToCart } = useContext(CartContext)
 
-  let imageset = []
-  let key = 0
-  images.forEach(img => {
-    imageset.push({
-      key,
-      title,
-      "url": img.url,
-      "gatsbyImage": getImage(img.localFile.childImageSharp.gatsbyImageData)
-    })
-    key = key + 1
-  })
-  //console.log("painting.js imageset", imageset)
-
-  // Remove the primary (first) image. It does not appear in the optional images set.
-  const image0 = imageset.shift()
-  //console.log("product.js imageset", imageset)
-
   const itemType = "product"
   const subt = subtitle ? subtitle : "A Blake Jamieson Exclusive"
   const qty = 1 //initialize with 1 of item
-  const item_slug = `/product/${product_category.slug}/${identifier}`
+  const item_slug = `/product/${product_category.slug}/${sku}`
   const cartItem = {
     itemType,
     id,
-    identifier,
+    identifier: sku,
+    item_slug,
     title,
     subtitle: subt,
-    image: image0,
-    url: image0.url,
+    image: images[0],
+    imageUrl: getImageUrl(images[0], "small"),
     qty,
     qtyAvail,
-    price,
-    item_slug
+    price
   }
   const [inCart, setInCart] = useState(isInCart(cartItem))
   const [processing, setProcessing] = useState(false)
@@ -92,12 +76,12 @@ const ProductPage = ({
   //console.log("painting.js seo_description", seo_description)
 
   // Schema.org calculated values
-  const productUrl = `https://blake.art/product/${product_category.slug}/${identifier}`
+  const productUrl = `https://blake.art/product/${product_category.slug}/${sku}`
   //const productUrl = `localhost:8000/gallery/${subgenre.slug}/${slug}`
   //console.log("productUrl", productUrl)
 
   //console.log("product.js file", image0.file)
-  const productImageUrl = image0.url
+  const productImageUrl = getImageUrl(images[0], "small")
   //console.log("product.js productImageUrl", productImageUrl)
 
   const productAvailability = qtyAvailNow > 0 ? "http://schema.org/InStock" : "http://schema.org/OutOfStock"
@@ -112,7 +96,7 @@ const ProductPage = ({
           {
             "@context": "https://schema.org",
             "@type": "Product",
-            "productID": "${identifier}",
+            "productID": "${sku}",
             "category": "Home & Garden > Decor > Artwork",
             "title": "${title}",
             "description": "${subtitle}",
@@ -140,13 +124,8 @@ const ProductPage = ({
           <div className="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
 
             <div>
-              <div className="">
-                <GatsbyImage className="img-fluid rounded" image={image0.gatsbyImage} alt={title} />
-              </div>
 
-              { (imageset.length > 0) &&
-                <ImageSet imageset={imageset} />
-              }
+              <ImageSet title={title} subtitle={subt} images={images} />
 
               <div className="back-btn">
                 <Link to={`/product/${product_category.slug}`} className="btn-floating btn-action btn-primary">
@@ -209,19 +188,30 @@ export const query = graphql`
 query GetSingleProduct($slug: String) {
   product: strapiProduct(identifier: {eq: $slug}) {
     id: strapiId
-    identifier
+    sku: identifier
     title: name
     subtitle: subhead
     images {
-      localFile {
-        childImageSharp {
-          gatsbyImageData(
-            width: 600
-            placeholder: BLURRED
-            formats: [AUTO, WEBP]
-          )
+      formats {
+        large {
+          url
+        }
+        medium {
+          url
+        }
+        small {
+          url
+        }
+        thumbnail {
+          url
         }
       }
+      height
+      localFile {
+        publicURL
+      }
+      width
+      url
     }
     product_category {
       name

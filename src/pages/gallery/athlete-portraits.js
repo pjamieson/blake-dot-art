@@ -52,15 +52,26 @@ export const query = graphql`
         subtitle
         price
         image {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                width: 600
-                placeholder: BLURRED
-                formats: [AUTO, WEBP]
-              )
+          formats {
+            large {
+              url
+            }
+            medium {
+              url
+            }
+            small {
+              url
+            }
+            thumbnail {
+              url
             }
           }
+          height
+          localFile {
+            publicURL
+          }
+          width
+          url
         }
         slug
         qty

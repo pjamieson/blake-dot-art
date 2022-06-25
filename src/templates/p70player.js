@@ -1,3 +1,5 @@
+/* Not currently used - Was to provide direct external link & on hidden menu */
+
 import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit"
@@ -73,7 +75,7 @@ const ToppsProject70PlayerPage = ({data}) => {
                 {p70cards.map((card) => {
                   return (
                     <div key={card.identifier}>
-                      <CardImageCaptionLink item={card} caption_format="Card" />
+                      {card.image && <CardImageCaptionLink item={card} caption_format="Card" /> }
                     </div>
                   )
                 })}
@@ -93,21 +95,31 @@ query GetP70PlayerTradingcards($name: String) {
     sort: {order: ASC, fields: order}
   ) {
     nodes {
-      strapiId
       identifier
       project_70_player {
         name
       }
       image {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(
-              width: 600
-              placeholder: BLURRED
-              formats: [AUTO, WEBP]
-            )
+        formats {
+          large {
+            url
+          }
+          medium {
+            url
+          }
+          small {
+            url
+          }
+          thumbnail {
+            url
           }
         }
+        height
+        localFile {
+          publicURL
+        }
+        width
+        url
       }
       title
       subtitle
