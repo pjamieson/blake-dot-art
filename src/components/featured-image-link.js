@@ -6,7 +6,7 @@ const FeaturedImagelink = ({ item }) => {
   //console.log("FeaturedImagelink item", item)
 
   // Use the primary image, the first of the images set
-  const image_src = getImageUrl(item.image, "medium")
+  const image_url = getImageUrl(item.image, "medium")
 
   const isTradingcard = (item.project_2020_player || item.topps_1951_player || item.project_70_player)
 
@@ -56,7 +56,7 @@ const FeaturedImagelink = ({ item }) => {
   return (
     <div className="img-hover-zoom">
       <div role="button" tabIndex="0" onClick={() => handleClick()} onKeyDown={(event) => handleKeyDown(event)}>
-        <img src={image_src} className="img-fluid rounded" alt={item.title} />
+        <img src={image_url} className="img-fluid rounded" alt={item.title} />
       </div>
     </div>
   )
