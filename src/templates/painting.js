@@ -105,7 +105,7 @@ const PaintingPage = ({
               "${productImageUrl}"
             ],
             "brand": {
-              "@type": "Brand"
+              "@type": "Brand",
               "name": "Blake Jamieson"
             },
             "logo": "https://blake.art/icons/icon-72x72.png",
