@@ -26,6 +26,14 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [
+          "G-91S771DEKS",
+        ],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-mailchimp',
       options: {
         endpoint: 'https://blakejamieson.us5.list-manage.com/subscribe/post?u=063627aa25e9155fc458edccb&id=d3c4f161f3',
