@@ -104,7 +104,9 @@ export const query = graphql`
   {
     allStrapiProject2020Player(
       limit: 40,
-      filter: {id: {gt: 21}},
+      filter: {
+        order: {gt: 20}
+      },
       sort: { order: DESC, fields: order }
     ) {
       nodes {
