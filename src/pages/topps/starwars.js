@@ -42,7 +42,7 @@ const ToppsStarWarsPage = ({ location, data }) => {
     }
   }
 
-  const seo_description = "Illustrates artist-autographed Topps Project 2020 baseball cards by Blake Jamieson offered for sale, sorted by player."
+  const seo_description = "Illustrates artist-autographed Topps Star Wars trading  cards by Blake Jamieson offered for sale, sorted by character."
 
   return (
     <Layout>
