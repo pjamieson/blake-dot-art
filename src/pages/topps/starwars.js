@@ -116,7 +116,7 @@ export const query = graphql`
     allStrapiTradingcard(
       limit: 300,
       filter: {
-        project_2020_player: {identifier: {gt: 50}}
+        project_2020_player: {order: {gt: 50}}
       },
       sort: {
         order: ASC, fields: order
@@ -127,6 +127,7 @@ export const query = graphql`
         identifier
         project_2020_player {
           name
+          order
         }
         image {
           formats {

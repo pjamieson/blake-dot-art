@@ -39,6 +39,7 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           project_2020_player {
             name
+            order
           }
           topps_1951_player {
             name
@@ -108,9 +109,20 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create tradingcard detail pages
   tradingcards.forEach((card) => {
 
-    if (card.project_2020_player && card.project_2020_player.name && card.project_2020_player.name.length > 1) {
+    if (card.project_2020_player && card.project_2020_player.order < 50 && card.project_2020_player.name && card.project_2020_player.name.length > 1) {
       createPage({
         path: `/topps/project2020/${card.slug}/`,
+        component: path.resolve(`./src/templates/tradingcard.js`),
+        context: {
+          series: `project2020`,
+          slug: card.slug,
+        },
+      })
+    }
+
+    if (card.project_2020_player && card.project_2020_player.order > 50 && card.project_2020_player.name && card.project_2020_player.name.length > 1) {
+      createPage({
+        path: `/topps/starwars/${card.slug}/`,
         component: path.resolve(`./src/templates/tradingcard.js`),
         context: {
           series: `project2020`,
