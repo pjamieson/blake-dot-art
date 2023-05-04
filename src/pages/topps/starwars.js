@@ -6,7 +6,7 @@ import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 import CardImageCaptionLink from "../../components/card-image-caption-link"
 
-const ToppsProject2020Page = ({ location, data }) => {
+const ToppsStarWarsPage = ({ location, data }) => {
   const {
     allStrapiProject2020Player: { nodes: players },
     allStrapiTradingcard: { nodes: p2020cards }
@@ -46,9 +46,9 @@ const ToppsProject2020Page = ({ location, data }) => {
 
   return (
     <Layout>
-      <Seo title="Topps Project 2020 Cards" description={seo_description} />
+      <Seo title="Topps Star Wars Cards" description={seo_description} />
       <div className="container page-container">
-        <h1 className="page-head">Topps Project 2020 Cards by Blake Jamieson</h1>
+        <h1 className="page-head">Topps Star Wars Cards by Blake Jamieson</h1>
         <section className="topps">
 
           <div className="btn-container">
@@ -105,7 +105,7 @@ export const query = graphql`
     allStrapiProject2020Player(
       limit: 40,
       filter: {
-        order: {lt: 50}
+        order: {gt: 50}
       },
       sort: { order: DESC, fields: order }
     ) {
@@ -116,7 +116,7 @@ export const query = graphql`
     allStrapiTradingcard(
       limit: 300,
       filter: {
-        project_2020_player: {id: {lt: 50}}
+        project_2020_player: {id: {gt: 50}}
       },
       sort: {
         order: ASC, fields: order
@@ -159,4 +159,5 @@ export const query = graphql`
   }
 `
 
-export default ToppsProject2020Page
+export default ToppsStarWarsPage
+
