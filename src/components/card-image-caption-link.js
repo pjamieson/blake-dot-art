@@ -19,6 +19,9 @@ const CardImageCaptionLink = ({ item, caption_format }) => {
   if (caption_format === "Card") {
     if (item.project_2020_player) {
       series = "project2020"
+      if (item.project_2020_player.order > 50) {
+        series = "starwars"
+      }
     } else if (item.topps_1951_player) {
       series = "1951"
     } else if (item.project_70_player) {
