@@ -46,9 +46,9 @@ const ToppsProject2020Page = ({ location, data }) => {
 
   return (
     <Layout>
-      <Seo title="Topps Project 2020 Cards" description={seo_description} />
+      <Seo title="Topps Star Wars Cards" description={seo_description} />
       <div className="container page-container">
-        <h1 className="page-head">Topps Project 2020 Cards by Blake Jamieson</h1>
+        <h1 className="page-head">Topps Star Wars Cards by Blake Jamieson</h1>
         <section className="topps">
 
           <div className="btn-container">
@@ -113,7 +113,7 @@ export const query = graphql`
     allStrapiTradingcard(
       limit: 300,
       filter: {
-        project_2020_player: {id: {gt: 0}}
+        project_2020_player: {id: {gt: 21}}
       },
       sort: {
         order: ASC, fields: order
