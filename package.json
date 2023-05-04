@@ -11,6 +11,7 @@
     "gatsby": "^3.14.6",
     "gatsby-plugin-advanced-sitemap": "^2.1.0",
     "gatsby-plugin-facebook-pixel": "^1.0.8",
+    "gatsby-plugin-google-analytics": "^3.14.0",
     "gatsby-plugin-google-gtag": "^3.14.0",
     "gatsby-plugin-mailchimp": "^5.2.2",
     "gatsby-plugin-manifest": "^3.14.0",
