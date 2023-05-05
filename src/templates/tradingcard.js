@@ -42,7 +42,7 @@ const Tradingcard = ({
 
   let series = ""
   if (project_2020_player) series = `project2020`
-  if (project_2020_player && project_2020_player.id > 50) series = `starwars`
+  if (project_2020_player && project_2020_player.order > 50) series = `starwars`
   if (topps_1951_player) series = `1951`
   if (project_70_player) series = `project70`
 
@@ -256,6 +256,7 @@ export const query = graphql`
       sku: identifier
       project_2020_player {
         name
+        order
       }
       topps_1951_player {
         name
