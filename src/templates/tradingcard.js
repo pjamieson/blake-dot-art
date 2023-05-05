@@ -42,6 +42,7 @@ const Tradingcard = ({
 
   let series = ""
   if (project_2020_player) series = `project2020`
+  if (project_2020_player && project_2020_player.id > 50) series = `starwars`
   if (topps_1951_player) series = `1951`
   if (project_70_player) series = `project70`
 
@@ -131,7 +132,7 @@ const Tradingcard = ({
 
       <div className="page-container">
         <article className="item-details">
-          <h1>{title} : Artist-Autographed Card</h1>
+          <h1>{title} {series != `starwars` && ": Artist-Autographed Card]"</h1>
           <div className="details-container">
             <div className="item-gallery">
 
