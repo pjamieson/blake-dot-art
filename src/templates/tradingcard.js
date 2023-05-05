@@ -132,7 +132,7 @@ const Tradingcard = ({
 
       <div className="page-container">
         <article className="item-details">
-          <h1>{title} {series != `starwars` && ": Artist-Autographed Card]"</h1>
+          <h1>{title}</h1>
           <div className="details-container">
             <div className="item-gallery">
 
