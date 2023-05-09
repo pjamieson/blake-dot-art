@@ -75,7 +75,7 @@ const CardImageCaptionLink = ({ item, caption_format }) => {
       <div className="card-body">
         <h4 className="card-title">{item.title}</h4>
         <h5 className="card-subtitle">{line2}</h5>
-        { ((caption_format !== "Portfolio") && (caption_format !== "Product")) &&
+        { ((caption_format !== "Portfolio") && (caption_format !== "Product" && item.price > 0)) &&
           <h5>{line3}</h5>
         }
       </div>
