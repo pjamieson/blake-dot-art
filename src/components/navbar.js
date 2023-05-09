@@ -148,7 +148,7 @@ const Navbar = () => {
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>
-
+{/*
             <MDBNavbarItem>
               <MDBDropdown>
                 <MDBDropdownToggle>
@@ -170,7 +170,7 @@ const Navbar = () => {
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>
-
+*/}
             <MDBNavbarItem>
               <MDBDropdown>
                 <MDBDropdownToggle>
