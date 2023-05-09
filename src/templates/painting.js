@@ -183,7 +183,7 @@ const PaintingPage = ({
                 </div>
               </div> {/* details */}
               <div className="price-action">
-                {qtyAvail > 0 && qtyAvailNow > 0 &&
+                {qtyAvail > 0 && qtyAvailNow > 0 && price > 0 &&
                   <h3 className="price">{formatPrice(price)}</h3>
                 }
                 <div>
